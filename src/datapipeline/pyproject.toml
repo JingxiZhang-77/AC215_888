@@ -1,0 +1,10 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Milestone2"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "google-genai>=1.39.1",
+    "pandas"
+]
