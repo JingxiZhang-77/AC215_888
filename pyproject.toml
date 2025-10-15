@@ -1,0 +1,44 @@
+[project]
+name = "medical-severity-classification"
+version = "0.1.0"
+description = "LLM-based classification of hospital safety incidents."
+authors = [
+    { name = "Zilong Wang", email = "zilongwang@hsph.harvard.edu" },
+    { name = "Alice Zhang", email = "yue_zhang@hsph.harvard.edu" },
+    { name = "Bruce Zhou", email = "huiyuan_zhou@hsph.harvard.edu" },
+    { name = "Jingxi Zhang", email = "jingxizhang@hsph.harvard.edu" }
+]
+requires-python = ">=3.11,<3.13"
+
+# === Core dependencies ===
+dependencies = [
+    # Data and ML utilities
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scikit-learn>=1.3.0",
+
+    # For PDF parsing / document processing
+    "pypdf>=4.0.0",
+    "PyMuPDF>=1.24.0",
+
+    # For API calls (choose one depending on model)
+    "google-generativeai>=0.8.2",  # Gemini / Vertex AI client
+
+    # General-purpose utils
+    "tqdm",
+    "requests",
+
+    # Optional: LangChain-style chunking or embeddings
+    "semantic-chunker>=0.3.0",
+]
+
+# === Optional: Development tools ===
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ipython",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
