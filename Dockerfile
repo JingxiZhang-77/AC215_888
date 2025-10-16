@@ -21,10 +21,10 @@ RUN set -ex; \
 
 # Switch to non-root user and working directory
 USER app
-WORKDIR /src
+WORKDIR /app
 
 # Copy source code and dependency definitions
-COPY --chown=app:app . ./
+COPY --chown=app:app . /app
 
 # Install Python dependencies via uv (reads pyproject.toml)
 RUN uv sync
