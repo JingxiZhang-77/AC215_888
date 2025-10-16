@@ -227,8 +227,10 @@ python safety_event_classifier.py -f prompt_tests/prompt_chaining_test.xlsx
 
 This file will appear automatically under `outputs/`.
 
-## RAG Implementation
+## (TODO) RAG Pipeline
 
-Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
+This project features a Retrieval-Augmented Generation (RAG) Data Pipeline designed to process the Press Ganey Handbook. The pipeline splits the document into semantic chunks, generates vector embeddings, and indexes them for real-time similarity search. The core data processing logic is implemented in the script: `src/datapipeline/experimental/guideline.py`.
+
+Our next step is to integrate this RAG component into the `prompt_utils.py`. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its classification.
 
 ---
