@@ -47,24 +47,14 @@ def generate_data(input_prompt):
     df.to_excel("outputs/medical_incidents.xlsx", index=False)
     print("Sucessfully store the data at outputs folder")
 
-def main():
-
-    parser = argparse.ArgumentParser(description="Generate medical incident examples.")
-    parser.add_argument(
-        "--count",
-        type=int,
-        default=5,
-        help="Number of incident examples to generate (default: 5)",
-    )
-
-    args = parser.parse_args()
-
+def main(args):
+    print(f"Now the program will generate {args} data")
     prompt = f"""
         You are a medical safety analyst.
 
         There are different levels of medical safety incidents. Ranked by seriousness, they are serious safety events (SSE), precursor safety events (PSE), near miss safety events (NME), and no safety events (NSE).
 
-        Please generate {args.count} examples of medical safety incidents across different levels of safety events in different departments,
+        Please generate {args} examples of medical safety incidents across different levels of safety events in different departments,
         including internal medicine, surgery, ob/gyn/nicu, radiology/imaging, and outpatient/ER.
 
         Each event description should be NO LESS THAN 60 words, detailed and realistic, either personal or based on real historical public cases. Need to describe what hospital did lead to the incidents and the reason behind the story.
@@ -78,7 +68,7 @@ def main():
         1. [Department Name]: [Detailed incident description...]
         2. [Department Name]: [Detailed incident description...]
         ...
-        {args.count}. [Department Name]: [Detailed incident description...]
+        {args}. [Department Name]: [Detailed incident description...]
 
         SSE Example:
         A patient was admitted to the critical care unit with congestive heart failure and later has a new complaint of chest pain persisting over several hours. Tylenol is administered but does not decrease the patient's pain scale rating. The Resident orders a laboratory work-up. An EKG shows that the patient is experiencing an acute ST-elevation myocardial infarction. The attending cardiologist is called, but does not respond to multiple pages. The nurse does not escalate the patient's emergent condition to other physicians or the rapid response team. The patient continues to decompensate, codes and expires.
@@ -98,4 +88,14 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    
+    parser = argparse.ArgumentParser(description="Generate medical incident examples.")
+    parser.add_argument(
+        "-generate",
+        type=int,
+        default=5,
+        help="Number of incident examples to generate (default: 5)",
+    )
+
+    args = parser.parse_args()
+    main(args.generate)
