@@ -12,27 +12,33 @@ requires-python = ">=3.11,<3.13"
 
 # === Core dependencies ===
 dependencies = [
-    # Data and ML utilities
+    # --- Data processing ---
     "pandas>=2.0.0",
     "numpy>=1.24.0",
+    "openpyxl>=3.1.0",
+    "tqdm",
+
+    # --- Machine Learning / Analytics ---
     "scikit-learn>=1.3.0",
 
-    # For PDF parsing / document processing
+    # --- File and PDF handling ---
     "pypdf>=4.0.0",
-    "PyMuPDF>=1.24.0",
-
-    # For API calls (choose one depending on model)
-    "google-generativeai>=0.8.2",  # Gemini / Vertex AI client
-
-    # General-purpose utils
-    "tqdm",
+    "PyMuPDF>=1.24.0",   # provides fitz
+    "semantic-chunker==0.2.0",  # stable version
+    "semantic-splitter>=0.2.1", # for SemanticChunker
     "requests",
 
-    # Optional: LangChain-style chunking or embeddings
-    "semantic-chunker>=0.3.0",
+    # --- Google / Vertex AI ---
+    "google-generativeai>=0.8.2",
+    "google-cloud-aiplatform>=1.63.0",
+    "google-cloud-storage>=2.17.0",
+
+    # --- General-purpose utilities ---
+    "argparse",
+    "shutilwhich",  # safer for shutil usage
+    "glob2",
 ]
 
-# === Optional: Development tools ===
 [project.optional-dependencies]
 dev = [
     "pytest",
@@ -42,3 +48,4 @@ dev = [
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
