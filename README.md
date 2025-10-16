@@ -229,7 +229,7 @@ This file will appear automatically under `outputs/`.
 
 ## (TODO) RAG Pipeline
 
-This project features a Retrieval-Augmented Generation (RAG) Data Pipeline designed to process the Press Ganey Handbook. The pipeline splits the document into semantic chunks, generates vector embeddings, and indexes them for real-time similarity search. The core data processing logic is implemented in the script: `src/datapipeline/experimental/guideline.py`.
+This project features a **Retrieval-Augmented Generation (RAG)** Data Pipeline designed to process the Press Ganey Handbook. The pipeline splits the document into semantic chunks, generates vector embeddings, and indexes them for real-time similarity search. The core data processing logic is implemented in the script: `src/datapipeline/experimental/guideline.py`.
 
 Our next step is to integrate this RAG component into the `prompt_utils.py`. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its classification.
 
