@@ -1,9 +1,10 @@
-import pandas as pd
+import argparse
 import json
-from prompt_chaining import read_incidents, prompt1, prompt2, prompt3
+import pandas as pd
+from prompt_utils import read_incidents, prompt1, prompt2, prompt3
 
-FILE_PATH = "<incident_data_file>"  # Update as needed
-LIMIT = None  # Optionally set a limit on number of incidents
+FILE_PATH = "prompt_tests/prompt1_test.xlsx"  # Update as needed
+LIMIT = 2  # Optionally set a limit on number of incidents
 
 # Define output codes for clarity
 NSE = "NSE"
@@ -81,7 +82,23 @@ def classify_events(file_path, limit=None):
     return df
 
 if __name__ == "__main__":
-    df_output = classify_events(FILE_PATH, LIMIT)
+    parser = argparse.ArgumentParser(description="Classify safety events from an incidents file.")
+    parser.add_argument(
+        "-f",
+        "--file",
+        default=FILE_PATH,
+        help="Path to the incidents source file.",
+    )
+    parser.add_argument(
+        "-n",
+        "--limit",
+        type=int,
+        default=LIMIT,
+        help="Optional limit on the number of incidents to process.",
+    )
+    args = parser.parse_args()
+
+    df_output = classify_events(args.file, args.limit)
     print(df_output)
     df_output.to_csv("chaining_output.csv", index=False, encoding='utf-8')
     with open("chaining_output.json", "w", encoding="utf-8") as f:

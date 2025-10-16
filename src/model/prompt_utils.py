@@ -1,19 +1,21 @@
 """
-Module that implements the three prompts which are chained together with conditional branching based on the answers.
+Module that implements the three prompts for classifying safety events using a
+chain of responsibility pattern. Each prompt is encapsulated in its own function,
+allowing for modular testing and potential reuse in different contexts.
 """
 
-import os
-import io
 import argparse
-import shutil
-import glob
-import sys
+import builtins
 import csv
-from google import genai
-from google.genai import types
-from google.genai.types import Content, Part, GenerationConfig, ToolConfig
-from google.genai import errors
+import glob
+import os
+import shutil
+import sys
 import time
+
+from google import genai
+from google.genai import errors, types
+from google.genai.types import Content, GenerationConfig, Part, ToolConfig
 
 try:
     import openpyxl  # type: ignore
@@ -100,7 +102,7 @@ def generate_yes_no_response(contents):
     return normalized
 
 # Prompt 1: Determine Deviation from GAPS
-def prompt1(file_path, limit=None):
+def prompt1(file_path, limit=None, print=True):
     """
     Render the GAPS-deviation classification prompt for each incident in the file.
 
@@ -139,13 +141,14 @@ def prompt1(file_path, limit=None):
         # Generate the response from the LLM
         normalized = generate_yes_no_response(rendered_prompt)
         outcome = normalized == "yes"
-        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        if print:
+            builtins.print(f"Incident report {idx}: {'Deviation from GAPS occurred' if outcome else 'No deviation from GAPS occurred'}")
         results.append(outcome)
     return results
 
 # Prompt 2: (if GAPS deviation is "Yes")
 # This answers "Did the deviation reach the patient?"
-def prompt2(file_path, limit=None):
+def prompt2(file_path, limit=None, print=True):
     """
     Render the prompt for determining if the deviation reached the patient.
 
@@ -176,13 +179,14 @@ def prompt2(file_path, limit=None):
         # Generate the response from the LLM
         normalized = generate_yes_no_response(rendered_prompt)
         outcome = normalized == "yes"
-        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        if print:
+            builtins.print(f"Incident report {idx}: {'Deviation reached the patient' if outcome else 'Deviation did not reach the patient'}")
         results.append(outcome)
     return results
 
 # Prompt 3: (if Deviation reached patient is "Yes")
 # This answers "Did the deviation cause moderate to severe harm or death?"
-def prompt3(file_path, limit=None):
+def prompt3(file_path, limit=None, print=True):
     """
     Render the prompt for determining if the deviation caused moderate to severe harm or death.
 
@@ -213,7 +217,8 @@ def prompt3(file_path, limit=None):
         # Generate the response from the LLM
         normalized = generate_yes_no_response(rendered_prompt)
         outcome = normalized == "yes"
-        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        if print:
+            builtins.print(f"Incident report {idx}: {'Deviation caused moderate to severe harm or death' if outcome else 'Deviation did not cause harm or death'}")
         results.append(outcome)
     return results
 

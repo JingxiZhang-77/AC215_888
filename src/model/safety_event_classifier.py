@@ -1,23 +1,20 @@
 import os 
 import pandas as pd
 import json
-from prompt_chaining import (
+import argparse
+from prompt_utils import (
     prompt1_single_incident,
     prompt2_single_incident,
     prompt3_single_incident
 )
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))  
-INPUT_DIR = os.path.join(BASE_DIR, "prompt_tests")
-OUTPUT_DIR = BASE_DIR
+OUTPUT_DIR = os.path.join(BASE_DIR, "outputs")
 
-FILE_PATH = os.path.join(INPUT_DIR, "Prompt_Chaining_Test.xlsx")
+DEFAULT_INPUT_FILE = os.path.join(BASE_DIR, "prompt_tests", "prompt_chaining_test.xlsx")
 OUTPUT_CSV = os.path.join(OUTPUT_DIR, "chaining_output.csv")
 OUTPUT_JSON = os.path.join(OUTPUT_DIR, "chaining_output.json")
-
-# FILE_PATH = "incident_data.xlsx"  # update this path as needed
-# OUTPUT_CSV = "chaining_output.csv"
-# OUTPUT_JSON = "chaining_output.json"
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def process_incidents_rowwise(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -126,10 +123,9 @@ def process_incidents_rowwise(df: pd.DataFrame) -> pd.DataFrame:
 
     return pd.DataFrame(results)
 
-
-if __name__ == "__main__":
+def main(input_file: str) -> None:
     try:
-        df = pd.read_excel(FILE_PATH)
+        df = pd.read_excel(input_file)
         print(f"Processing {len(df)} incidents...")
 
         results_df = process_incidents_rowwise(df)
@@ -142,6 +138,18 @@ if __name__ == "__main__":
 
         print(f"\nResults saved to '{OUTPUT_CSV}' and '{OUTPUT_JSON}'.")
     except FileNotFoundError:
-        print(f"Error: The file at {FILE_PATH} was not found. Please check the path.")
+        print(f"Error: The file at {input_file} was not found. Please check the path.")
     except Exception as e:
         print(f"An error occurred during execution: {e}")
+
+if __name__ == "__main__":
+
+    parser = argparse.ArgumentParser(description="Run the safety event classifier prompt chain.")
+    parser.add_argument(
+        "-f",
+        "--file",
+        default=DEFAULT_INPUT_FILE,
+        help="Path to the input file.",
+    )
+    args = parser.parse_args()
+    main(args.file)

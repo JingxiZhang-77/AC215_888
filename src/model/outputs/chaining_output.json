@@ -1,0 +1,50 @@
+[
+  {
+    "incident": "A patient with tuberculosis receiving isoniazid therapy under directly observed treatment developed acute hepatitis after 3 months. Liver enzymes were monitored monthly and were normal until the week prior. The medication was discontinued immediately, but the patient developed hepatic failure requiring transfer for transplant evaluation.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "Yes",
+    "harm_level_check": "No",
+    "final_classification_code": "PSE",
+    "rationale": "Deviation reached the patient with no or minimal harm."
+  },
+  {
+    "incident": "A patient was admitted to the critical care unit with congestive heart failure and later has a new complaint of chest pain persisting over several hours. Tylenol is administered but does not decrease the patient’s pain scale rating. The Resident orders a laboratory work-up. An EKG shows that the patient is experiencing an acute ST-elevation myocardial infarction. The attending cardiologist is called, but does not respond to multiple pages. The nurse does not escalate the patient’s emergent condition to other physicians or the rapid response team. The patient continues to decompensate, codes and expires.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "Yes",
+    "harm_level_check": "Yes",
+    "final_classification_code": "SSE",
+    "rationale": "Deviation reached the patient and caused moderate/severe harm or death."
+  },
+  {
+    "incident": "An anesthesiologist prepared syringes containing lidocaine and epinephrine in similar clear syringes without labels. Before administration, the nurse anesthetist questioned which syringe contained which medication. The anesthesiologist realized the mix-up risk, labeled both syringes correctly, and no wrong drug was given.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "No",
+    "harm_level_check": "N/A",
+    "final_classification_code": "NME",
+    "rationale": "Deviation occurred but did not reach the patient."
+  },
+  {
+    "incident": "A 65-year-old man with COPD was receiving long-term IV antibiotics through a PICC line. The dressing was not changed for over 10 days, and the line was accessed multiple times without proper aseptic technique. He developed chills, hypotension, and positive blood cultures for MRSA. Despite antibiotics and line removal, he developed endocarditis and died 2 weeks later.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "Yes",
+    "harm_level_check": "Yes",
+    "final_classification_code": "SSE",
+    "rationale": "Deviation reached the patient and caused moderate/severe harm or death."
+  },
+  {
+    "incident": "A 50-year-old man presented to the emergency department with mild chest discomfort. An ECG was obtained and automatically interpreted as “possible ischemia.” The attending physician did not review the tracing before discharge, assuming the pain was musculoskeletal. The patient was called back the next morning after radiology over-read confirmed minor ST changes. He was asymptomatic and later diagnosed with stable angina, started on medication.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "Yes",
+    "harm_level_check": "No",
+    "final_classification_code": "PSE",
+    "rationale": "Deviation reached the patient with no or minimal harm."
+  },
+  {
+    "incident": "A patient was receiving care in an OB Clinic. This patient had a history of insulin dependent gestational diabetes. Although the clinic did instruct the patient in how to care for the problem, she was known to have some behavioral health and social issues and was inconsistent in self-care and didn’t always keep her visits. They discussed options to more safely care for this patient but hadn’t implemented a plan of care. Ultimately the patient delivered the infant via c section, but there was unfortunately a fetal demise.",
+    "gaps_deviation_check": "Yes",
+    "reached_patient_check": "Yes",
+    "harm_level_check": "Yes",
+    "final_classification_code": "SSE",
+    "rationale": "Deviation reached the patient and caused moderate/severe harm or death."
+  }
+]
