@@ -62,10 +62,6 @@ python data_generation.py
 This will use Genimi to generate medical incidents data
 
 
-## RAG Implementation
-
-Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
-
 ## Model Classification
 
 In the terminal, navigate to the project root and build the image:
@@ -114,12 +110,13 @@ This file will appear automatically under `/src`.
 
 ---
 
-## How It Works Internally
+## RAG Implementation
 
-| Component | Function |
-|------------|-----------|
-| `main.py` | Entry point — manages all pipeline stages |
-| `ingestion.py` | Accepts text input | 
-| `llm_classify.py` | Sends request to Gemini or OpenAI and parses model response |
-| `report.py` | Saves classification result as JSON |
+Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
+
+
+## Screenshot of running instances 
+
+
+## Evidence it works end-to-end
 
