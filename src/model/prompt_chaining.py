@@ -218,6 +218,56 @@ def prompt3(file_path, limit=None):
     return results
 
 
+def prompt1_single_incident(incident_text: str) -> bool:
+    PROMPT_TEMPLATE_GAPS_DEVIATION = """
+    You are a hospital safety officer. Analyze the following incident to determine if there was a **deviation from Generally Accepted Performance Standards (GAPS)** in healthcare.
+
+    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
+
+    --- Considerations ---
+    A deviation from GAPS is when a difference is detected between expected and actual performance. Consider the following when identifying deviations from GAPS:
+    - Nationally recognized best practices and standards of care in Canada
+    - Industry-imposed practice mandates and requirements
+    - Professional practice standards
+    - Organization's obligation to best protect the patient from harm
+
+    --- Classify the incident below ---
+    Incident: {incident}
+    Deviation from GAPS:
+    """
+    rendered_prompt = PROMPT_TEMPLATE_GAPS_DEVIATION.format(incident=incident_text)
+    normalized = generate_yes_no_response(rendered_prompt)
+    return normalized == "yes"
+
+def prompt2_single_incident(incident_text: str) -> bool:
+    PROMPT_TEMPLATE_DEVIATION_REACHED = """
+    You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred, determine if this **deviation reached the patient**. An incident is considered to have "reached the patient" when the patient is directly exposed to the harm or potential harm.
+
+    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
+
+    --- Classify the incident below ---
+    Incident: {incident}
+    Deviation reached patient:
+    """
+    rendered_prompt = PROMPT_TEMPLATE_DEVIATION_REACHED.format(incident=incident_text)
+    normalized = generate_yes_no_response(rendered_prompt)
+    return normalized == "yes"
+
+def prompt3_single_incident(incident_text: str) -> bool:
+    PROMPT_TEMPLATE_HARM_LEVEL = """
+        You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred and reached the patient, determine if this **deviation caused moderate to severe harm or death**.
+
+        Respond with ONLY one of the following words: "Yes" or "No". Do not provide any explanation, examples, or extra words.
+
+        --- Classify the incident below ---
+        Incident: {incident}
+        Moderate to severe harm or death caused?:
+    """
+    rendered_prompt = PROMPT_TEMPLATE_HARM_LEVEL.format(incident=incident_text)
+    normalized = generate_yes_no_response(rendered_prompt)
+    return normalized == "yes"
+
+
 def main(args=None):
     print("Args:", args)
 
