@@ -79,7 +79,7 @@ Or
 
 You can specify how many incident examples to generate by using the --generate argument
 ```bash
-python data_generation.py -g 100
+python data_generation.py --generate 100
 ```
 This will use Genimi to generate 100 medical incidents data
 
