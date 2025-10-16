@@ -25,6 +25,7 @@ The dataset contains 100 detailed examples of medical safety incidents and 100 G
 - Outpatient / Emergency (ER)
 
 The dataset is designed to simulate real-world hospital safety events.
+
 After generation, each case is manually reviewed and labeled into one of four safety event levels:
 - SSE (Serious Safety Event)
 - PSE (Precursor Safety Event)
@@ -62,7 +63,7 @@ You need to mount two folders into the container:
 
 ```bash
 docker run --rm -ti \
-  -v "$(pwd)\project_folder:/app" \
+  -v "$(pwd):/app" \
   -v "$(pwd)/../../secrets:/secrets" \
   data_generation
 ```
