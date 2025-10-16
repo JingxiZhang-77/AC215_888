@@ -1,11 +1,18 @@
 [project]
-name = "app"
+name = "data-generation"
 version = "0.1.0"
-description = "Milestone2"
-readme = "README.md"
-requires-python = ">=3.12"
+description = "Generates synthetic hospital safety incident data for LLM training and evaluation."
+authors = [
+    { name = "Zilong Wang", email = "zilongwang@hsph.harvard.edu" },
+    { name = "Alice Zhang", email = "yue_zhang@hsph.harvard.edu" },
+    { name = "Bruce Zhou", email = "huiyuan_zhou@hsph.harvard.edu" },
+    { name = "Jingxi Zhang", email = "jingxizhang@hsph.harvard.edu" }
+]
+requires-python = ">=3.11,<3.12"
+
+# === Core dependencies ===
 dependencies = [
-    "google-genai>=1.39.1",
-    "pandas",
-    "openpyxl"
+    "google-genai>=1.43.0",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.3",
 ]
