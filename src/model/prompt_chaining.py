@@ -8,11 +8,17 @@ import argparse
 import shutil
 import glob
 import sys
+import csv
 from google import genai
 from google.genai import types
 from google.genai.types import Content, Part, GenerationConfig, ToolConfig
 from google.genai import errors
 import time
+
+try:
+    import openpyxl  # type: ignore
+except ImportError:
+    openpyxl = None
 
 # GCP configuration
 GCP_PROJECT = "apcomp215-group88"
@@ -26,22 +32,81 @@ llm_client = genai.Client(
     vertexai=True, project=GCP_PROJECT, location=GCP_LOCATION)
 #############################################################################
 
+def read_incidents(file_path, limit=None):
+    if not os.path.exists(file_path) or not os.path.isfile(file_path):
+        raise FileNotFoundError(f"File not found: {file_path}")
+    if limit is None:
+        max_incidents = float("inf")
+    else:
+        if limit <= 0:
+            raise ValueError("Limit must be a positive integer.")
+        max_incidents = limit
+    ext = os.path.splitext(file_path)[1].lower()
+    incidents = []
+
+    def should_stop():
+        return len(incidents) >= max_incidents
+
+    if ext == ".txt":
+        with open(file_path, "r", encoding="utf-8") as f:
+            for line in f:
+                text = line.strip()
+                if text:
+                    incidents.append(text)
+                    if should_stop():
+                        break
+    elif ext == ".csv":
+        with open(file_path, "r", encoding="utf-8", newline="") as f:
+            reader = csv.reader(f)
+            for row in reader:
+                row_text = " ".join(value for value in (cell.strip() for cell in row) if value)
+                if row_text:
+                    incidents.append(row_text)
+                    if should_stop():
+                        break
+    elif ext == ".xlsx":
+        if openpyxl is None:
+            raise ImportError("openpyxl is required to read .xlsx files.")
+        workbook = openpyxl.load_workbook(file_path, read_only=True, data_only=True)
+        try:
+            worksheet = workbook.active
+            for row in worksheet.iter_rows(values_only=True):
+                row_values = [str(cell).strip() for cell in row if cell not in (None, "")]
+                if row_values:
+                    incidents.append(" ".join(row_values))
+                    if should_stop():
+                        break
+        finally:
+            workbook.close()
+    else:
+        raise ValueError(f"Unsupported file format: {ext}")
+    if not incidents:
+        raise ValueError(f"No incident data found in {file_path}.")
+    return incidents
+
+def generate_yes_no_response(contents):
+    response = llm_client.models.generate_content(
+        model=GENERATIVE_MODEL,
+        contents=contents,
+    )
+    candidate_text = getattr(response, "text", "")
+    if not candidate_text and getattr(response, "candidates", None):
+        candidate_text = "".join(
+            getattr(part, "text", "") for part in response.candidates[0].content.parts
+        )
+    normalized = candidate_text.strip().lower()
+    if normalized not in {"yes", "no"}:
+        raise ValueError(f"Unexpected LLM response: {candidate_text or 'empty'}")
+    return normalized
+
 # Prompt 1: Determine Deviation from GAPS
-def prompt1(file_path):
+def prompt1(file_path, limit=None):
     """
-    Render the GAPS-deviation classification prompt for a single incident.
+    Render the GAPS-deviation classification prompt for each incident in the file.
 
     Args:
         file_path: Path to the text file containing the incident description.
     """
-
-    # Validate file_path
-    if not os.path.exists(file_path) or not os.path.isfile(file_path):
-        raise FileNotFoundError("File not found: {}".format(file_path))
-
-    # Read the incident text from the file
-    with open(file_path, "r", encoding="utf-8") as f:
-        incident_text = f.read().strip()
 
     # TODO(Bruce): Should we add an example prompt here to guide the LLM?
     PROMPT_TEMPLATE_GAPS_DEVIATION = """
@@ -61,33 +126,26 @@ def prompt1(file_path):
         Deviation from GAPS:
     """.strip().strip("\n")
 
-    # Render the prompt with the incident text
-    rendered_prompt = PROMPT_TEMPLATE_GAPS_DEVIATION.format(incident=incident_text)
+    # Validate file_path
+    if not os.path.exists(file_path) or not os.path.isfile(file_path):
+        raise FileNotFoundError("File not found: {}".format(file_path))
 
-    # Generate the response from the LLM
-    response = llm_client.models.generate_content(
-        model=GENERATIVE_MODEL,
-        contents=rendered_prompt,
-    )
-    candidate_text = getattr(response, "text", "")
-    if not candidate_text and getattr(response, "candidates", None):
-        candidate_text = "".join(
-            getattr(part, "text", "") for part in response.candidates[0].content.parts
-        )
-    candidate_text = candidate_text.strip().lower()
-    if candidate_text == "yes":
-        # For test purposes, print the response
-        print("Prompt 1 Response: Yes")
-        return True
-    if candidate_text == "no":
-        # For test purposes, print the response
-        print("Prompt 1 Response: No")
-        return False
-    raise ValueError(f"Unexpected LLM response: {candidate_text or 'empty'}")
+    # Read the incident text from the file
+    incidents = read_incidents(file_path, limit)
+    results = []
+    for idx, incident_text in enumerate(incidents, start=1):
+        rendered_prompt = PROMPT_TEMPLATE_GAPS_DEVIATION.format(incident=incident_text)
+
+        # Generate the response from the LLM
+        normalized = generate_yes_no_response(rendered_prompt)
+        outcome = normalized == "yes"
+        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        results.append(outcome)
+    return results
 
 # Prompt 2: (if GAPS deviation is "Yes")
 # This answers "Did the deviation reach the patient?"
-def prompt2(file_path):
+def prompt2(file_path, limit=None):
     """
     Render the prompt for determining if the deviation reached the patient.
 
@@ -95,51 +153,36 @@ def prompt2(file_path):
         file_path: Path to the text file containing the incident description.
     """
 
+    PROMPT_TEMPLATE_DEVIATION_REACHED = """
+    You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred, determine if this **deviation reached the patient**. An incident is considered to have "reached the patient" when the patient is directly exposed to the harm or potential harm.
+
+    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
+
+    --- Classify the incident below ---
+    Incident: {incident}
+    Deviation reached patient:
+""".strip().strip("\n")
+    
     # Validate file_path
     if not os.path.exists(file_path) or not os.path.isfile(file_path):
         raise FileNotFoundError("File not found: {}".format(file_path))
 
     # Read the incident text from the file
-    with open(file_path, "r", encoding="utf-8") as f:
-        incident_text = f.read().strip()
+    incidents = read_incidents(file_path, limit)
+    results = []
+    for idx, incident_text in enumerate(incidents, start=1):
+        rendered_prompt = PROMPT_TEMPLATE_DEVIATION_REACHED.format(incident=incident_text)
 
-    PROMPT_TEMPLATE_DEVIATION_REACHED = """
-        You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred, determine if this **deviation reached the patient**. An incident is considered to have "reached the patient" when the patient is directly exposed to the harm or potential harm.
-
-        Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
-
-        --- Classify the incident below ---
-        Incident: {incident}
-        Deviation reached patient:
-    """.strip().strip("\n")
-
-    # Render the prompt with the incident text
-    rendered_prompt = PROMPT_TEMPLATE_DEVIATION_REACHED.format(incident=incident_text)
-
-    # Generate the response from the LLM
-    response = llm_client.models.generate_content(
-        model=GENERATIVE_MODEL,
-        contents=rendered_prompt,
-    )
-    candidate_text = getattr(response, "text", "")
-    if not candidate_text and getattr(response, "candidates", None):
-        candidate_text = "".join(
-            getattr(part, "text", "") for part in response.candidates[0].content.parts
-        )
-    candidate_text = candidate_text.strip().lower()
-    if candidate_text == "yes":
-        # For test purposes, print the response
-        print("Prompt 2 Response: Yes")
-        return True
-    if candidate_text == "no":
-        # For test purposes, print the response
-        print("Prompt 2 Response: No")
-        return False
-    raise ValueError(f"Unexpected LLM response: {candidate_text or 'empty'}")
+        # Generate the response from the LLM
+        normalized = generate_yes_no_response(rendered_prompt)
+        outcome = normalized == "yes"
+        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        results.append(outcome)
+    return results
 
 # Prompt 3: (if Deviation reached patient is "Yes")
 # This answers "Did the deviation cause moderate to severe harm or death?"
-def prompt3(file_path):
+def prompt3(file_path, limit=None):
     """
     Render the prompt for determining if the deviation caused moderate to severe harm or death.
 
@@ -162,31 +205,17 @@ def prompt3(file_path):
         raise FileNotFoundError("File not found: {}".format(file_path))
 
     # Read the incident text from the file
-    with open(file_path, "r", encoding="utf-8") as f:
-        incident_text = f.read().strip()
+    incidents = read_incidents(file_path, limit)
+    results = []
+    for idx, incident_text in enumerate(incidents, start=1):
+        rendered_prompt = PROMPT_TEMPLATE_HARM_LEVEL.format(incident=incident_text)
 
-    rendered_prompt = PROMPT_TEMPLATE_HARM_LEVEL.format(incident=incident_text)
-
-    # Generate the response from the LLM
-    response = llm_client.models.generate_content(
-        model=GENERATIVE_MODEL,
-        contents=rendered_prompt,
-    )
-    candidate_text = getattr(response, "text", "")
-    if not candidate_text and getattr(response, "candidates", None):
-        candidate_text = "".join(
-            getattr(part, "text", "") for part in response.candidates[0].content.parts
-        )
-    candidate_text = candidate_text.strip().lower()
-    if candidate_text == "yes":
-        # For test purposes, print the response
-        print("Prompt 3 Response: Yes")
-        return True
-    if candidate_text == "no":
-        # For test purposes, print the response
-        print("Prompt 3 Response: No")
-        return False
-    raise ValueError(f"Unexpected LLM response: {candidate_text or 'empty'}")
+        # Generate the response from the LLM
+        normalized = generate_yes_no_response(rendered_prompt)
+        outcome = normalized == "yes"
+        print(f"Incident report {idx}: {'Yes' if outcome else 'No'}")
+        results.append(outcome)
+    return results
 
 
 def main(args=None):
@@ -197,7 +226,7 @@ def main(args=None):
             print("error: -f/--file is required when using -prompt1", file=sys.stderr)
             return
         try:
-            prompt1(args.file)
+            prompt1(args.file, args.limit)
         except Exception as e:
             print("error: failed to render prompt1: {}".format(e), file=sys.stderr)
             return
@@ -207,7 +236,7 @@ def main(args=None):
             print("error: -f/--file is required when using -prompt2", file=sys.stderr)
             return
         try:
-            prompt2(args.file)
+            prompt2(args.file, args.limit)
         except Exception as e:
             print("error: failed to render prompt2: {}".format(e), file=sys.stderr)
             return
@@ -217,7 +246,7 @@ def main(args=None):
             print("error: -f/--file is required when using -prompt3", file=sys.stderr)
             return
         try:
-            prompt3(args.file)
+            prompt3(args.file, args.limit)
         except Exception as e:
             print("error: failed to render prompt3: {}".format(e), file=sys.stderr)
             return
@@ -251,7 +280,19 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f",
         "--file",
-        help="Path to the input text file",
+        type=str,
+        required=True,
+        metavar="file_path",
+        help="Path to the input incident file (txt, csv, xlsx)",
+    )
+
+    parser.add_argument(
+        "-n",
+        "--limit",
+        type=int,
+        default=None,
+        metavar="number_of_rows",
+        help="Number of incident rows to read from the file (defaults to all rows)",
     )
 
     args = parser.parse_args()
