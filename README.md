@@ -60,7 +60,7 @@ docker build -t data_generation -f Dockerfile .
 You need to mount two folders into the container:
 - Project folder → contains your Python code. This is typically your currently working directory since we have asked you to `cd` into `src/datapipeline`.
 - Secrets folder → contains your credentials (e.g., llm-service-account.json). You can choose to store it anywhere you want but by default we assume you stored it under `AC215_888/secrets`.
-
+- For Windows use `${PWD}`
 ```bash
 docker run --rm -ti \
   -v "$(pwd):/app" \
