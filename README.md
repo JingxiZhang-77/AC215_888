@@ -1,13 +1,25 @@
-# AC215 - Milestone2 
+# AC215 - Milestone2
+
 ## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
+
 ## Group Name
 AC215_888
-## Project
+
+## Project Goal
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
+
+## Milestone 2
+In this milestone, we completed the implementation of two important components of our project:
+
+1. Data Generation
+2. Safety event classification
+
+
 
 
 ## Data Generation
+
 The dataset contains 100 detailed examples of medical safety incidents and 100 Gemini simulate data. Each entry represents a realistic clinical incident across various hospital departments, including:
 - Internal Medicine
 - Surgery
@@ -24,7 +36,7 @@ After generation, each case is manually reviewed and labeled into one of four sa
 
 These labeled data are then used to fine-tune LLMs, enabling hospitals to better identify, classify, and prevent safety incidents — ultimately helping healthcare systems reduce medical errors and improve patient outcomes.
 
-#### Prerequisites:
+### Prerequisites:
 
 Before running the program, make sure you have:
 
@@ -32,9 +44,13 @@ Before running the program, make sure you have:
 
 - A valid Google service account key (e.g. llm-service-account.json)
 
-- Your own local copy of the source code(src/datapipline)
+- Your should change your working directory into `src\datapipeline` by typing the command line below in your terminal
 
-#### Step 1. Build the Docker Image
+```bash
+cd src/datapipeline
+```
+
+### Step 1. Build the Docker Image
 
 Run this command from the folder containing your `Dockerfile`:
 
@@ -42,7 +58,7 @@ Run this command from the folder containing your `Dockerfile`:
 docker build -t project_data -f Dockerfile .
 ```
 
-#### Step 2. Run the Docker Container
+### Step 2. Run the Docker Container
 You need to mount two folders into the container:
 - Project folder → contains your Python code
 - Secrets folder → contains your credentials (e.g., llm-service-account.json)
@@ -54,45 +70,66 @@ docker run --rm -ti `
   project
 ```
 
-#### Step 3. Run the Python Script
+### Step 3. Run the Python Script
 Inside the container, run:
 ```bash
 python data_generation.py
 ```
 This will use Genimi to generate medical incidents data
 
+## Safety Event Classification
 
-## RAG Implementation
+### Prerequisites 
 
-Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
+Before running the program, make sure you have:
 
-## Model Classification
+- Docker Desktop installed and running
 
-In the terminal, navigate to the project root and build the image:
+- A valid Google service account key (e.g. llm-service-account.json). This service account should at least have Vertex AI access.
+
+- Your should change your working directory to `src/model` by typing the command line below in your terminal
+
 ```bash
-docker build -t med-severity .
+cd src/model
 ```
+
+### Step 1. Build the Docker Image
+Run this command from the folder containing the `Dockerfile`:
+
+```bash
+docker build -t prompt_chaining -f Dockerfile .
+```
+
 This will:
 1. Install Python 3.11 + system dependencies  
 2. Create a non-root user (`app`)  
-3. Copy project files into `/src`  
+3. Copy project files from  `/src/model`
 4. Install dependencies via `uv sync`
 
-And then, we can run the the Pipeline:
+### Step 2. Run the Docker Container
+You need to mount two folders into the container:
+- Project folder → contains your Python code. This is typically your currently working directory since we have asked you to `cd` into `src/model`
+- Secrets folder → contains your credentials (e.g., llm-service-account.json). You can choose to store it anywhere you want but by default we assume you stored it under `AC215_888/secrets`.
+
+Example command lines:
+
 ```bash
-docker run -it med-severity
+docker run --rm -ti \
+  -v "$(pwd):/app" \
+  -v "$(pwd)/../../secrets:/secrets" \
+  prompt_chaining
 ```
 
-You’ll see:
-```
-Enter a medical safety incident description (or press Enter to use sample_input.txt):
-```
+### Step 3. Run the Python Scripts
 
-- Type or paste your description and press Enter  
-  → Example:  
-  ```
-  A nurse administered the wrong antibiotic but corrected the dose immediately.
-  ```
+In this milestone, we have implemented two features for the purpose of our project.
+
+1. **`prompt_utils.py`**
+  Thi
+
+
+
+
 
 **Output Example:**
 ```
@@ -111,6 +148,10 @@ Example:
 ```
 
 This file will appear automatically under `/src`.
+
+## RAG Implementation
+
+Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
 
 ---
 
