@@ -1,13 +1,18 @@
 # AC215 - Milestone2 
-### Team Members
+## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
-### Group Name
-AC215-888
-### Project
+## Group Name
+AC215_888
+## Project
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
-### Milestone2
+
 
 ## Data
+
+
+## RAG Implementation
+
+
 
 ## Running Dockerfile
 In the terminal, navigate to the project root and build the image:
