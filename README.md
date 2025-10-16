@@ -2,11 +2,10 @@
 ## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
 ## Group Name
-AC215-888
+AC215_888
 ## Project
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
 
-## Milestone2
 
 ## Data
 The dataset contains 100 detailed examples of medical safety incidents and 100 Gemini simulate data. Each entry represents a realistic clinical incident across various hospital departments, including:
@@ -61,6 +60,11 @@ Inside the container, run:
 python data_generation.py
 ```
 This will use Genimi to generate medical incidents data
+
+
+
+## RAG Implementation
+
 
 
 ## Running Dockerfile
