@@ -23,7 +23,7 @@ RUN set -ex; \
 USER app
 WORKDIR /app
 COPY --chown=app:app . /app
-COPY --chown=app:app src/model/prompt_test /app/src/model/prompt_test
+
 
 # Install Python dependencies via uv (reads pyproject.toml)
 RUN uv sync
