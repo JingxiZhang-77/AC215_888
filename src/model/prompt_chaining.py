@@ -3,6 +3,7 @@ Module that implements the three prompts which are chained together with conditi
 """
 
 import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/secrets/application_default_credentials.json"
 import io
 import argparse
 import shutil
