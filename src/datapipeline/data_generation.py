@@ -17,15 +17,15 @@ def generate_data(input_prompt):
     pattern = r"\*\*(.*?)\*\*: (.*?)\n"
     matches = re.findall(pattern, paragraph)
     df = pd.DataFrame(matches, columns=["Department", "Incident Description"])
-    os.makedirs("Data", exist_ok=True)
-    df.to_excel("Data/medical_incidents.xlsx", index=False)
+    os.makedirs("TestData", exist_ok=True)
+    df.to_excel("TestData/medical_incidents.xlsx", index=False)
     print("Sucessfully store the data at Data folder")
     
 def main():
     prompt = """
         You are a medical safety analyst.
 
-        Please generate 100 examples of medical safety incidents across different departments,
+        Please generate 20 examples of medical safety incidents across different departments,
         including internal medicine, surgery, ob/gyn/nicu, radiology/imaging, and outpatient/ER.
 
         Each event description should be NO LESS THAN 60 words, detailed and realistic, either personal or based on real historical public cases. Need to describe what hospital did lead to the incidents and the reason behind the story.

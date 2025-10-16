@@ -1,13 +1,67 @@
 # AC215 - Milestone2 
-### Team Members
+## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
-### Group Name
+## Group Name
 AC215-888
-### Project
+## Project
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
-### Milestone2
+
+## Milestone2
 
 ## Data
+The dataset contains 100 detailed examples of medical safety incidents and 100 Gemini simulate data. Each entry represents a realistic clinical incident across various hospital departments, including:
+- Internal Medicine
+- Surgery
+- OB/GYN & NICU
+- Radiology / Imaging
+- Outpatient / Emergency (ER)
+
+The dataset is designed to simulate real-world hospital safety events.
+After generation, each case is manually reviewed and labeled into one of four safety event levels:
+- SSE (Serious Safety Event)
+- PSE (Precursor Safety Event)
+- NME (Near Miss Event)
+- NSE (No Safety Event)
+
+These labeled data are then used to fine-tune LLMs, enabling hospitals to better identify, classify, and prevent safety incidents — ultimately helping healthcare systems reduce medical errors and improve patient outcomes.
+
+#### Prerequisites:
+
+Before running the program, make sure you have:
+
+- Docker Desktop installed and running
+
+- A valid Google service account key (e.g. llm-service-account.json)
+
+- Your own local copy of the source code(src/datapipline)
+
+#### Step 1. Build the Docker Image
+
+Run this command from the folder containing your `Dockerfile`:
+
+```bash
+docker build -t project_data -f Dockerfile .
+```
+
+#### Step 2. Run the Docker Container
+You need to mount two folders into the container:
+- Project folder → contains your Python code
+- Secrets folder → contains your credentials (e.g., llm-service-account.json)
+
+```bash
+docker run --rm -ti `
+  -v "YourPath\project_folder:/app" `
+  -v "YourPath\secrets_folder:/app/secrets" `
+  project
+```
+
+#### Step 3. Run the Python Script
+Inside the container, run:
+```bash
+python data_generation.py
+```
+This will use Genimi to generate medical incidents data
+
 
 ## Running Dockerfile
 In the terminal, navigate to the project root and build the image:
