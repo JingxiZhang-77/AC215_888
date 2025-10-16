@@ -8,7 +8,7 @@ from prompt_chaining import (
 )
 
 BASE_DIR = os.path.join(os.path.dirname(__file__))  
-INPUT_DIR = os.path.join(BASE_DIR, "prompt_test")
+INPUT_DIR = os.path.join(BASE_DIR, "prompt_tests")
 OUTPUT_DIR = BASE_DIR
 
 FILE_PATH = os.path.join(INPUT_DIR, "Prompt_Chaining_Test.xlsx")
