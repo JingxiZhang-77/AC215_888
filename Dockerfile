@@ -33,4 +33,4 @@ RUN uv sync
 # Entrypoint — automatically run your main script on startup
 # ==========================================================
 
-ENTRYPOINT ["python", "src/model/execution2.py"]
+ENTRYPOINT ["uv", "run", "python", "src/model/execution2.py"]
