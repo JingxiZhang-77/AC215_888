@@ -1,3 +1,4 @@
+import os 
 import pandas as pd
 import json
 from prompt_chaining import (
@@ -6,9 +7,17 @@ from prompt_chaining import (
     prompt3_single_incident
 )
 
-FILE_PATH = "incident_data.xlsx"  # update this path as needed
-OUTPUT_CSV = "chaining_output.csv"
-OUTPUT_JSON = "chaining_output.json"
+BASE_DIR = os.path.join(os.path.dirname(__file__))  
+INPUT_DIR = os.path.join(BASE_DIR, "prompt_test")
+OUTPUT_DIR = BASE_DIR
+
+FILE_PATH = os.path.join(INPUT_DIR, "Prompt_Chaining_Test.xlsx")
+OUTPUT_CSV = os.path.join(OUTPUT_DIR, "chaining_output.csv")
+OUTPUT_JSON = os.path.join(OUTPUT_DIR, "chaining_output.json")
+
+# FILE_PATH = "incident_data.xlsx"  # update this path as needed
+# OUTPUT_CSV = "chaining_output.csv"
+# OUTPUT_JSON = "chaining_output.json"
 
 def process_incidents_rowwise(df: pd.DataFrame) -> pd.DataFrame:
     """
