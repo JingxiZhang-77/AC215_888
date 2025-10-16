@@ -7,7 +7,7 @@ AC215_888
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
 
 
-## Data
+## Data Generation
 The dataset contains 100 detailed examples of medical safety incidents and 100 Gemini simulate data. Each entry represents a realistic clinical incident across various hospital departments, including:
 - Internal Medicine
 - Surgery
@@ -62,12 +62,12 @@ python data_generation.py
 This will use Genimi to generate medical incidents data
 
 
-
 ## RAG Implementation
 
 Our next step is to integrate RAG component into Prompt 1. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its final classification.
 
-## Running Dockerfile
+## Model Classification
+
 In the terminal, navigate to the project root and build the image:
 ```bash
 docker build -t med-severity .
