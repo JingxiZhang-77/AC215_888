@@ -148,8 +148,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f",
         "--file",
+        metavar="file_path",
         default=DEFAULT_INPUT_FILE,
-        help="Path to the input file.",
+        help="Path to the input incident file",
     )
+    
     args = parser.parse_args()
+
     main(args.file)
