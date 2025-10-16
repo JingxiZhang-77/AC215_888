@@ -91,7 +91,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Generate medical incident examples.")
     parser.add_argument(
-        "-generate",
+        "--generate",
         type=int,
         default=5,
         help="Number of incident examples to generate (default: 5)",

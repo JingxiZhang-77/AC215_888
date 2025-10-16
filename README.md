@@ -64,16 +64,25 @@ You need to mount two folders into the container:
 ```bash
 docker run --rm -ti \
   -v "$(pwd):/app" \
-  -v "$(pwd)/../../secrets:/secrets" \
+  -v "{Your secrets path}:/app/secrets" \
   data_generation
 ```
 
 ### Step 3. Run the Python Script
-Inside the container, run:
+Inside the container, run the script with the default number of examples (5):
 ```bash
 python data_generation.py
 ```
-This will use Genimi to generate medical incidents data
+This will use Genimi to generate 5 medical incidents data
+
+Or
+
+You can specify how many incident examples to generate by using the --generate argument
+```bash
+python data_generation.py -g 100
+```
+This will use Genimi to generate 100 medical incidents data
+
 
 ## Safety Event Classification
 
