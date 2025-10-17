@@ -244,5 +244,7 @@ This project features a **Retrieval-Augmented Generation (RAG)** Data Pipeline d
 Our next step is to integrate this RAG component into the `prompt_utils.py`. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its classification.
 
 ## Screenshot of running instances 
+![running file](sc1.png)
+![running instances](sc2.png)
 
 
