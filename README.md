@@ -1,4 +1,4 @@
-# AC215 - Milestone2
+# AC215 - Milestone3
 
 ## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
@@ -8,6 +8,13 @@ AC215_888
 
 ## Project Goal
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
+
+
+## Milestone 3
+
+In this milestone, we focused on preparing our Milestone 3 presentation, consolidating the project materials, visualizations, and slides. All related files and deliverables have been organized under the /reports/Milestone3_Presentation.pdf directory for easy access and review.
+
+
 
 ## Milestone 2
 In this milestone, we completed the implementation of two important components of our project:
