@@ -12,7 +12,7 @@ Design and build a web-based tool that uses large language models to help hospit
 
 ## Milestone 3
 
-In this milestone, we focused on preparing our Milestone 3 presentation, consolidating the project materials, visualizations, and slides. All related files and deliverables have been organized under the /reports/Milestone3_Presentation.pdf directory for easy access and review.
+In this milestone, we focused on preparing our Milestone 3 presentation, consolidating the project materials, visualizations, and slides. All related files and deliverables have been organized under the `/reports/Milestone3_Presentation.pdf` directory for easy access and review.
 
 
 
