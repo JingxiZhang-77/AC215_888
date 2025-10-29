@@ -8,6 +8,7 @@ import argparse
 import builtins
 import csv
 import glob
+import json
 import os
 import shutil
 import sys
@@ -86,20 +87,74 @@ def read_incidents(file_path, limit=None):
         raise ValueError(f"No incident data found in {file_path}.")
     return incidents
 
-def generate_yes_no_response(contents):
+def _get_text_response(response) -> str:
+    candidate_text = getattr(response, "text", "")
+    if candidate_text:
+        return candidate_text
+
+    candidates = getattr(response, "candidates", None)
+    if not candidates:
+        return ""
+
+    first_candidate = candidates[0]
+    parts = getattr(first_candidate.content, "parts", [])
+    if not parts:
+        return ""
+
+    return "".join(getattr(part, "text", "") or "" for part in parts)
+
+
+def _strip_code_fence(text: str) -> str:
+    stripped = text.strip()
+    if stripped.startswith("```"):
+        lines = stripped.splitlines()
+        # Drop opening fence
+        lines = lines[1:]
+        for idx, line in enumerate(lines):
+            if line.strip().startswith("```"):
+                lines = lines[:idx]
+                break
+        stripped = "\n".join(lines).strip()
+    return stripped
+
+
+def _generate_boolean_response(prompt_text: str, schema_field: str) -> bool:
+    schema = types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            schema_field: types.Schema(
+                type=types.Type.BOOLEAN,
+                description=f"Boolean decision for field '{schema_field}'.",
+            )
+        },
+        required=[schema_field],
+        additional_properties=False,
+    )
+
     response = llm_client.models.generate_content(
         model=GENERATIVE_MODEL,
-        contents=contents,
+        contents=prompt_text,
+        generation_config=GenerationConfig(
+            temperature=0.0,
+            response_mime_type="application/json",
+            response_schema=schema,
+        ),
     )
-    candidate_text = getattr(response, "text", "")
-    if not candidate_text and getattr(response, "candidates", None):
-        candidate_text = "".join(
-            getattr(part, "text", "") for part in response.candidates[0].content.parts
+
+    raw_text = _strip_code_fence(_get_text_response(response))
+
+    try:
+        payload = json.loads(raw_text)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"LLM response is not valid JSON: {raw_text}") from exc
+
+    decision = payload.get(schema_field)
+    if not isinstance(decision, bool):
+        raise ValueError(
+            f"Expected boolean field '{schema_field}' in response payload: {payload}"
         )
-    normalized = candidate_text.strip().lower()
-    if normalized not in {"yes", "no"}:
-        raise ValueError(f"Unexpected LLM response: {candidate_text or 'empty'}")
-    return normalized
+
+    return decision
 
 # Prompt 1: Determine Deviation from GAPS
 def prompt1(file_path, limit=None, print=True):
@@ -114,8 +169,6 @@ def prompt1(file_path, limit=None, print=True):
     PROMPT_TEMPLATE_GAPS_DEVIATION = """
         You are a hospital safety officer. Analyze the following incident to determine if there was a **deviation from Generally Accepted Performance Standards (GAPS)** in healthcare.
 
-        Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
-
         --- Considerations ---
         A deviation from GAPS is when a difference is detected between expected and actual performance. Consider the following when identifying deviations from GAPS:
         - Nationally recognized best practices and standards of care in Canada
@@ -123,9 +176,23 @@ def prompt1(file_path, limit=None, print=True):
         - Professional practice standards
         - Organization's obligation to best protect the patient from harm
 
+        Provide your decision as JSON that satisfies this schema:
+        ```json
+        {
+            "type": "object",
+            "properties": {
+                "deviation_from_gaps": {
+                    "type": "boolean",
+                    "description": "True when the incident shows a deviation from GAPS."
+                }
+            },
+            "required": ["deviation_from_gaps"],
+            "additionalProperties": false
+        }
+        ```
+
         --- Classify the incident below ---
         Incident: {incident}
-        Deviation from GAPS:
     """.strip().strip("\n")
 
     # Validate file_path
@@ -138,9 +205,7 @@ def prompt1(file_path, limit=None, print=True):
     for idx, incident_text in enumerate(incidents, start=1):
         rendered_prompt = PROMPT_TEMPLATE_GAPS_DEVIATION.format(incident=incident_text)
 
-        # Generate the response from the LLM
-        normalized = generate_yes_no_response(rendered_prompt)
-        outcome = normalized == "yes"
+        outcome = _generate_boolean_response(rendered_prompt, "deviation_from_gaps")
         if print:
             builtins.print(f"Incident report {idx}: {'Deviation from GAPS occurred' if outcome else 'No deviation from GAPS occurred'}")
         results.append(outcome)
@@ -159,11 +224,23 @@ def prompt2(file_path, limit=None, print=True):
     PROMPT_TEMPLATE_DEVIATION_REACHED = """
     You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred, determine if this **deviation reached the patient**. An incident is considered to have "reached the patient" when the patient is directly exposed to the harm or potential harm.
 
-    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
+    Provide your decision as JSON that satisfies this schema:
+    ```json
+    {
+        "type": "object",
+        "properties": {
+            "reached_patient": {
+                "type": "boolean",
+                "description": "True when the deviation reached the patient."
+            }
+        },
+        "required": ["reached_patient"],
+        "additionalProperties": false
+    }
+    ```
 
     --- Classify the incident below ---
     Incident: {incident}
-    Deviation reached patient:
 """.strip().strip("\n")
     
     # Validate file_path
@@ -176,9 +253,7 @@ def prompt2(file_path, limit=None, print=True):
     for idx, incident_text in enumerate(incidents, start=1):
         rendered_prompt = PROMPT_TEMPLATE_DEVIATION_REACHED.format(incident=incident_text)
 
-        # Generate the response from the LLM
-        normalized = generate_yes_no_response(rendered_prompt)
-        outcome = normalized == "yes"
+        outcome = _generate_boolean_response(rendered_prompt, "reached_patient")
         if print:
             builtins.print(f"Incident report {idx}: {'Deviation reached the patient' if outcome else 'Deviation did not reach the patient'}")
         results.append(outcome)
@@ -197,11 +272,23 @@ def prompt3(file_path, limit=None, print=True):
     PROMPT_TEMPLATE_HARM_LEVEL = """
         You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred and reached the patient, determine if this **deviation caused moderate to severe harm or death**.
 
-        Respond with ONLY one of the following words: "Yes" or "No". Do not provide any explanation, examples, or extra words.
+        Provide your decision as JSON that satisfies this schema:
+        ```json
+        {
+            "type": "object",
+            "properties": {
+                "caused_moderate_or_severe_harm": {
+                    "type": "boolean",
+                    "description": "True when the deviation caused moderate/severe harm or death."
+                }
+            },
+            "required": ["caused_moderate_or_severe_harm"],
+            "additionalProperties": false
+        }
+        ```
 
         --- Classify the incident below ---
         Incident: {incident}
-        Moderate to severe harm or death caused?:
     """.strip().strip("\n")
 
     # Validate file_path
@@ -214,9 +301,9 @@ def prompt3(file_path, limit=None, print=True):
     for idx, incident_text in enumerate(incidents, start=1):
         rendered_prompt = PROMPT_TEMPLATE_HARM_LEVEL.format(incident=incident_text)
 
-        # Generate the response from the LLM
-        normalized = generate_yes_no_response(rendered_prompt)
-        outcome = normalized == "yes"
+        outcome = _generate_boolean_response(
+            rendered_prompt, "caused_moderate_or_severe_harm"
+        )
         if print:
             builtins.print(f"Incident report {idx}: {'Deviation caused moderate to severe harm or death' if outcome else 'Deviation did not cause harm or death'}")
         results.append(outcome)
@@ -227,8 +314,6 @@ def prompt1_single_incident(incident_text: str) -> bool:
     PROMPT_TEMPLATE_GAPS_DEVIATION = """
     You are a hospital safety officer. Analyze the following incident to determine if there was a **deviation from Generally Accepted Performance Standards (GAPS)** in healthcare.
 
-    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
-
     --- Considerations ---
     A deviation from GAPS is when a difference is detected between expected and actual performance. Consider the following when identifying deviations from GAPS:
     - Nationally recognized best practices and standards of care in Canada
@@ -236,41 +321,78 @@ def prompt1_single_incident(incident_text: str) -> bool:
     - Professional practice standards
     - Organization's obligation to best protect the patient from harm
 
+    Provide your decision as JSON that satisfies this schema:
+    ```json
+    {
+        "type": "object",
+        "properties": {
+            "deviation_from_gaps": {
+                "type": "boolean",
+                "description": "True when the incident shows a deviation from GAPS."
+            }
+        },
+        "required": ["deviation_from_gaps"],
+        "additionalProperties": false
+    }
+    ```
+
     --- Classify the incident below ---
     Incident: {incident}
-    Deviation from GAPS:
     """
     rendered_prompt = PROMPT_TEMPLATE_GAPS_DEVIATION.format(incident=incident_text)
-    normalized = generate_yes_no_response(rendered_prompt)
-    return normalized == "yes"
+    return _generate_boolean_response(rendered_prompt, "deviation_from_gaps")
 
 def prompt2_single_incident(incident_text: str) -> bool:
     PROMPT_TEMPLATE_DEVIATION_REACHED = """
     You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred, determine if this **deviation reached the patient**. An incident is considered to have "reached the patient" when the patient is directly exposed to the harm or potential harm.
 
-    Respond with ONLY one of the following words: "Yes" or "No". Do NOT provide any explanation, examples, or extra words.
+    Provide your decision as JSON that satisfies this schema:
+    ```json
+    {
+        "type": "object",
+        "properties": {
+            "reached_patient": {
+                "type": "boolean",
+                "description": "True when the deviation reached the patient."
+            }
+        },
+        "required": ["reached_patient"],
+        "additionalProperties": false
+    }
+    ```
 
     --- Classify the incident below ---
     Incident: {incident}
-    Deviation reached patient:
     """
     rendered_prompt = PROMPT_TEMPLATE_DEVIATION_REACHED.format(incident=incident_text)
-    normalized = generate_yes_no_response(rendered_prompt)
-    return normalized == "yes"
+    return _generate_boolean_response(rendered_prompt, "reached_patient")
 
 def prompt3_single_incident(incident_text: str) -> bool:
     PROMPT_TEMPLATE_HARM_LEVEL = """
         You are a hospital safety officer. Given that a deviation from Generally Accepted Performance Standards (GAPS) occurred and reached the patient, determine if this **deviation caused moderate to severe harm or death**.
 
-        Respond with ONLY one of the following words: "Yes" or "No". Do not provide any explanation, examples, or extra words.
+        Provide your decision as JSON that satisfies this schema:
+        ```json
+        {
+            "type": "object",
+            "properties": {
+                "caused_moderate_or_severe_harm": {
+                    "type": "boolean",
+                    "description": "True when the deviation caused moderate/severe harm or death."
+                }
+            },
+            "required": ["caused_moderate_or_severe_harm"],
+            "additionalProperties": false
+        }
+        ```
 
         --- Classify the incident below ---
         Incident: {incident}
-        Moderate to severe harm or death caused?:
     """
     rendered_prompt = PROMPT_TEMPLATE_HARM_LEVEL.format(incident=incident_text)
-    normalized = generate_yes_no_response(rendered_prompt)
-    return normalized == "yes"
+    return _generate_boolean_response(
+        rendered_prompt, "caused_moderate_or_severe_harm"
+    )
 
 
 def main(args=None):
