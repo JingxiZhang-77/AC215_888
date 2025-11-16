@@ -10,7 +10,6 @@ from typing import Dict, Any
 
 from models.schemas import (
     UserLogin,
-    UserRegister,
     TokenResponse,
     PasswordResetRequest,
     PasswordReset
@@ -30,115 +29,11 @@ users_db: Dict[str, Dict[str, Any]] = {
         "role": "admin",
         "department": "internal_medicine",
         "created_at": datetime.utcnow().isoformat()
-    },
-    "doctor1": {
-        "username": "doctor1",
-        "email": "doctor1@hospital.com",
-        "password_hash": hash_password("doctor123"),
-        "role": "doctor",
-        "department": "surgery",
-        "created_at": datetime.utcnow().isoformat()
-    },
-    "nurse1": {
-        "username": "nurse1",
-        "email": "nurse1@hospital.com",
-        "password_hash": hash_password("nurse123"),
-        "role": "nurse",
-        "department": "ob_gyn_nicu",
-        "created_at": datetime.utcnow().isoformat()
-    },
-    "viewer1": {
-        "username": "viewer1",
-        "email": "viewer1@hospital.com",
-        "password_hash": hash_password("viewer123"),
-        "role": "viewer",
-        "department": "radiology_imaging",
-        "created_at": datetime.utcnow().isoformat()
     }
 }
 
 # Password reset tokens (replace with Redis/database in production)
 reset_tokens: Dict[str, Dict[str, Any]] = {}
-
-
-@router.post(
-    "/register",
-    response_model=TokenResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Register new user"
-)
-async def register(user_data: UserRegister):
-    """
-    Register a new user account
-    
-    Request body:
-    ```json
-    {
-        "username": "jdoe",
-        "email": "jdoe@hospital.com",
-        "password": "password123",
-        "role": "viewer"
-    }
-    ```
-    
-    Default role: viewer
-    Available roles: admin, doctor, nurse, viewer
-    """
-    try:
-        # Check if username exists
-        if user_data.username in users_db:
-            raise HTTPException(
-                status_code=400,
-                detail="Username already exists"
-            )
-        
-        # Check if email exists
-        for user in users_db.values():
-            if user["email"] == user_data.email:
-                raise HTTPException(
-                    status_code=400,
-                    detail="Email already registered"
-                )
-        
-        # Create user
-        users_db[user_data.username] = {
-            "username": user_data.username,
-            "email": user_data.email,
-            "password_hash": hash_password(user_data.password),
-            "role": user_data.role.value,
-            "department": user_data.department.value if user_data.department else "unspecified",
-            "created_at": datetime.utcnow().isoformat(),
-            "last_login": None
-        }
-        
-        logger.info(f"New user registered: {user_data.username} (role: {user_data.role})")
-        
-        # Create access token
-        token_data = {
-            "username": user_data.username,
-            "role": user_data.role.value
-        }
-        access_token = create_access_token(token_data)
-        
-        return TokenResponse(
-            access_token=access_token,
-            token_type="bearer",
-            expires_in=settings.JWT_EXPIRATION_HOURS * 3600,
-            user={
-                "username": user_data.username,
-                "email": user_data.email,
-                "role": user_data.role.value
-            }
-        )
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Registration error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Registration failed"
-        )
 
 
 @router.post(
@@ -183,7 +78,9 @@ async def login(credentials: UserLogin):
         # Create access token
         token_data = {
             "username": user["username"],
-            "role": user["role"]
+            "role": user["role"],
+            "email": user["email"],
+            "department": user.get("department")
         }
         access_token = create_access_token(token_data)
         
@@ -194,7 +91,8 @@ async def login(credentials: UserLogin):
             user={
                 "username": user["username"],
                 "email": user["email"],
-                "role": user["role"]
+                "role": user["role"],
+                "department": user.get("department")
             }
         )
         

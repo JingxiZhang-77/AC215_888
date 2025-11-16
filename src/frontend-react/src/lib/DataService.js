@@ -66,14 +66,6 @@ const DataService = {
     },
 
     /**
-     * User registration
-     */
-    register: async function (userData) {
-      const response = await api.post('/auth/register', userData);
-      return response.data;
-    },
-
-    /**
      * Password reset request
      */
     forgotPassword: async function (username, email) {

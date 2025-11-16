@@ -39,15 +39,13 @@ export default function LoginPage() {
       // Store token
       setAuthToken(response.access_token);
       
-      // Fetch full user data from /auth/verify endpoint
-      const userData = await DataService.Auth.verifyToken();
-      
-      // Store user data
+      // Persist user profile returned by login response
+      const profile = response.user || {};
       setUserData({
-        username: userData.username,
-        email: userData.email,
-        role: userData.role,
-        department: userData.department,
+        username: profile.username || formData.username,
+        email: profile.email || '',
+        role: profile.role || 'viewer',
+        department: profile.department || '',
       });
 
       // Redirect to home
@@ -75,6 +73,13 @@ export default function LoginPage() {
 
         <form onSubmit={handleSubmit}>
           <CardContent className="space-y-4">
+            <div className="p-3 rounded-md bg-muted">
+              <p className="text-sm font-semibold">Testing credentials</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Use <span className="font-mono font-semibold">admin</span> / <span className="font-mono font-semibold">admin123</span> to explore the MVP.
+              </p>
+            </div>
+
             {error && (
               <div className="flex items-center gap-2 p-3 rounded-md bg-destructive/10 text-destructive text-sm">
                 <AlertCircle className="w-4 h-4" />
@@ -121,13 +126,6 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
-
-            <div className="text-center text-sm text-muted-foreground">
-              Don't have an account?{' '}
-              <Link href="/register" className="text-primary hover:underline">
-                Register here
-              </Link>
-            </div>
           </CardFooter>
         </form>
       </Card>
