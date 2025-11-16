@@ -1,27 +1,27 @@
 """
-Audio-to-Text Transcription Service with Multi-Language Support
+Audio Transcription and Translation Service
 
-Converts audio files to text using Google Cloud Speech-to-Text API.
-Supports English, Mandarin, Cantonese, French, and Spanish.
-Includes automatic translation to English for non-English audio.
+Multi-language audio transcription with automatic translation to English.
+Supports: English, Mandarin, Cantonese, French, Spanish
 
 Author: AC215_888 Team
 Date: January 2025
 """
 
 import os
+import io
 import tempfile
+from typing import Tuple, Dict, Any
 from google.cloud import speech_v1p1beta1 as speech
 from google.cloud import translate_v2 as translate
 from pydub import AudioSegment
-import io
 import sys
 
-# GCP configuration
-GCP_PROJECT = os.environ.get("GCP_PROJECT", "apcomp215-group88")
-GCP_LOCATION = os.environ.get("GCP_LOCATION", "us-central1")
+from utils.logger import logger
+from utils.config import settings
 
-# Supported languages (restricted to 5)
+
+# Language configuration
 SUPPORTED_LANGUAGES = {
     "en-US": {"name": "English", "needs_translation": False},
     "zh-CN": {"name": "Mandarin (Simplified)", "needs_translation": True},
@@ -31,52 +31,29 @@ SUPPORTED_LANGUAGES = {
 }
 
 
-class AudioTranscriber:
+class AudioService:
     """
-    Handle audio transcription using Google Cloud Speech-to-Text
-    with multi-language support and automatic translation.
+    Service for audio transcription and translation
+    
+    Handles multi-language audio input with automatic translation to English
+    for downstream classification.
     """
     
     def __init__(self):
-        """Initialize the Speech and Translation clients"""
+        """Initialize Speech and Translation clients"""
         self.speech_client = speech.SpeechClient()
         self.translate_client = translate.Client()
+        logger.info("Audio service initialized")
     
-    def convert_audio_to_wav(self, audio_file_path: str) -> bytes:
+    def validate_language(self, language_code: str) -> str:
         """
-        Convert audio file to WAV format suitable for Speech API
+        Validate and normalize language code
         
         Args:
-            audio_file_path: Path to the audio file
+            language_code: Input language code
             
         Returns:
-            WAV audio data as bytes
-        """
-        try:
-            # Load audio file
-            audio = AudioSegment.from_file(audio_file_path)
-            
-            # Convert to mono, 16kHz, 16-bit WAV
-            audio = audio.set_channels(1)
-            audio = audio.set_frame_rate(16000)
-            audio = audio.set_sample_width(2)  # 16-bit
-            
-            # Export to bytes
-            wav_io = io.BytesIO()
-            audio.export(wav_io, format="wav")
-            wav_io.seek(0)
-            
-            return wav_io.read()
-            
-        except Exception as e:
-            raise Exception(f"Error converting audio file: {str(e)}")
-    
-    def validate_language(self, language_code: str) -> None:
-        """
-        Validate language code is supported
-        
-        Args:
-            language_code: Language code to validate
+            Validated language code
             
         Raises:
             ValueError: If language not supported
@@ -87,21 +64,61 @@ class AudioTranscriber:
                 f"Language '{language_code}' not supported. "
                 f"Supported languages: {supported}"
             )
+        return language_code
     
-    def transcribe_audio(self, audio_content: bytes, language_code: str = "en-US") -> tuple:
+    def convert_audio_to_wav(self, audio_file_path: str) -> Tuple[bytes, float]:
+        """
+        Convert audio file to WAV format suitable for Speech API
+        
+        Args:
+            audio_file_path: Path to the audio file
+            
+        Returns:
+            Tuple of (WAV audio bytes, duration in seconds)
+        """
+        try:
+            logger.info(f"Converting audio file: {audio_file_path}")
+            
+            # Load audio file (supports mp3, wav, m4a, flac, ogg, etc.)
+            audio = AudioSegment.from_file(audio_file_path)
+            
+            # Get duration
+            duration_seconds = len(audio) / 1000.0
+            
+            # Convert to mono, 16kHz, 16-bit WAV (optimal for Speech API)
+            audio = audio.set_channels(1)
+            audio = audio.set_frame_rate(16000)
+            audio = audio.set_sample_width(2)  # 16-bit
+            
+            # Export to bytes
+            wav_io = io.BytesIO()
+            audio.export(wav_io, format="wav")
+            wav_io.seek(0)
+            
+            logger.info(f"Audio converted successfully. Duration: {duration_seconds:.2f}s")
+            return wav_io.read(), duration_seconds
+            
+        except Exception as e:
+            logger.error(f"Audio conversion error: {e}")
+            raise Exception(f"Error converting audio file: {str(e)}")
+    
+    def transcribe_audio(
+        self, 
+        audio_content: bytes, 
+        language_code: str = "en-US"
+    ) -> Tuple[str, float]:
         """
         Transcribe audio content to text
         
         Args:
             audio_content: Audio data in bytes (WAV format)
-            language_code: Language code for transcription (default: en-US)
+            language_code: Language code for transcription
             
         Returns:
             Tuple of (transcribed text, confidence score)
         """
         try:
-            # Validate language
-            self.validate_language(language_code)
+            logger.info(f"Transcribing audio in {language_code}")
             
             audio = speech.RecognitionAudio(content=audio_content)
             
@@ -117,7 +134,7 @@ class AudioTranscriber:
             # Perform transcription
             response = self.speech_client.recognize(config=config, audio=audio)
             
-            # Combine all transcripts and calculate confidence
+            # Combine all transcripts and calculate average confidence
             transcript_parts = []
             confidences = []
             
@@ -130,9 +147,11 @@ class AudioTranscriber:
             transcript = " ".join(transcript_parts)
             avg_confidence = sum(confidences) / len(confidences) if confidences else 0.0
             
+            logger.info(f"Transcription complete. Confidence: {avg_confidence:.2f}")
             return transcript, avg_confidence
             
         except Exception as e:
+            logger.error(f"Transcription error: {e}")
             raise Exception(f"Error transcribing audio: {str(e)}")
     
     def translate_to_english(self, text: str, source_language: str) -> str:
@@ -150,29 +169,35 @@ class AudioTranscriber:
             # Extract language code without region (zh-CN -> zh)
             source_lang = source_language.split('-')[0]
             
+            logger.info(f"Translating from {source_lang} to English")
+            
             result = self.translate_client.translate(
                 text,
                 source_language=source_lang,
                 target_language='en'
             )
             
-            return result['translatedText']
+            translated_text = result['translatedText']
+            logger.info("Translation complete")
+            
+            return translated_text
             
         except Exception as e:
+            logger.error(f"Translation error: {e}")
             raise Exception(f"Error translating text: {str(e)}")
     
-    def transcribe_file(
+    def transcribe_and_translate(
         self, 
         audio_file_path: str, 
         language_code: str = "en-US",
         auto_translate: bool = True
-    ) -> dict:
+    ) -> Dict[str, Any]:
         """
-        Transcribe an audio file to text with optional translation
+        Transcribe audio file and optionally translate to English
         
         Args:
             audio_file_path: Path to audio file
-            language_code: Language code (default: en-US)
+            language_code: Language of the audio
             auto_translate: Automatically translate non-English to English
             
         Returns:
@@ -182,17 +207,18 @@ class AudioTranscriber:
                 "original_language": str,
                 "was_translated": bool,
                 "confidence": float,
+                "duration_seconds": float,
                 "original_transcript": str (if translated)
             }
         """
         # Validate language
-        self.validate_language(language_code)
+        language_code = self.validate_language(language_code)
         lang_info = SUPPORTED_LANGUAGES[language_code]
         
-        # Convert audio to appropriate format
-        wav_content = self.convert_audio_to_wav(audio_file_path)
+        # Convert audio to WAV format
+        wav_content, duration = self.convert_audio_to_wav(audio_file_path)
         
-        # Transcribe
+        # Transcribe audio
         transcript, confidence = self.transcribe_audio(wav_content, language_code)
         
         # Prepare result
@@ -201,26 +227,51 @@ class AudioTranscriber:
             "original_language": lang_info["name"],
             "original_language_code": language_code,
             "was_translated": False,
-            "confidence": confidence
+            "confidence": confidence,
+            "duration_seconds": duration
         }
         
-        # Translate if needed
+        # Translate if needed and requested
         if lang_info["needs_translation"] and auto_translate and transcript:
-            print(f"Non-English transcript detected, translating to English...")
+            logger.info("Non-English transcript detected, translating to English")
             result["original_transcript"] = transcript
             result["transcript"] = self.translate_to_english(transcript, language_code)
             result["was_translated"] = True
+            logger.info("Translation complete")
         
         return result
+    
+    def transcribe_file(
+        self, 
+        audio_file_path: str, 
+        language_code: str = "en-US"
+    ) -> str:
+        """
+        Simple transcription without translation (backward compatibility)
+        
+        Args:
+            audio_file_path: Path to audio file
+            language_code: Language code
+            
+        Returns:
+            Transcribed text
+        """
+        wav_content, _ = self.convert_audio_to_wav(audio_file_path)
+        transcript, _ = self.transcribe_audio(wav_content, language_code)
+        return transcript
+
+
+# Global service instance
+audio_service = AudioService()
 
 
 def transcribe_audio_file(
     audio_file_path: str, 
     language_code: str = "en-US",
     auto_translate: bool = True
-) -> dict:
+) -> Dict[str, Any]:
     """
-    Convenience function to transcribe an audio file
+    Convenience function to transcribe and translate an audio file
     
     Args:
         audio_file_path: Path to the audio file
@@ -228,10 +279,13 @@ def transcribe_audio_file(
         auto_translate: Automatically translate to English
         
     Returns:
-        Dictionary with transcription results
+        Transcription result dictionary
     """
-    transcriber = AudioTranscriber()
-    return transcriber.transcribe_file(audio_file_path, language_code, auto_translate)
+    return audio_service.transcribe_and_translate(
+        audio_file_path, 
+        language_code, 
+        auto_translate
+    )
 
 
 if __name__ == "__main__":
@@ -256,11 +310,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     try:
-        print(f"\n{'='*60}")
-        print(f"Transcribing: {args.audio_file}")
+        print(f"\nTranscribing: {args.audio_file}")
         print(f"Language: {SUPPORTED_LANGUAGES[args.language]['name']}")
-        print(f"Auto-translate: {not args.no_translate}")
-        print(f"{'='*60}\n")
+        print(f"Auto-translate: {not args.no_translate}\n")
         
         result = transcribe_audio_file(
             args.audio_file,
@@ -268,8 +320,9 @@ if __name__ == "__main__":
             auto_translate=not args.no_translate
         )
         
+        print("=" * 60)
         print("TRANSCRIPTION RESULT")
-        print(f"{'='*60}")
+        print("=" * 60)
         
         if result["was_translated"]:
             print(f"\nOriginal ({result['original_language']}):")
@@ -280,7 +333,8 @@ if __name__ == "__main__":
         
         print(result['transcript'])
         print(f"\nConfidence: {result['confidence']:.2%}")
-        print(f"{'='*60}\n")
+        print(f"Duration: {result['duration_seconds']:.2f} seconds")
+        print("=" * 60)
         
     except Exception as e:
         print(f"\n❌ Error: {e}", file=sys.stderr)
