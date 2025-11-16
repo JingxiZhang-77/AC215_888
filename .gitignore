@@ -4,5 +4,6 @@ lecture_tutorials/
 docker-volumes/
 outputs/
 secrets/
+**/secrets/
 _old/
 __pycache__
