@@ -76,6 +76,29 @@ src/frontend-react/
 
 ## Installation
 
+### Option 1: Docker Deployment (Recommended)
+
+1. **Build and run the container**
+   ```bash
+   ./docker-shell.sh
+   ```
+
+2. **Inside the container, install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application**
+   
+   Open http://localhost:3001 in your browser
+
+### Option 2: Local Installation
+
 1. **Install Dependencies**
    ```bash
    npm install
@@ -99,6 +122,19 @@ src/frontend-react/
    ```
    
    The application will be available at http://localhost:3001
+
+## Test Accounts
+
+Pre-configured test accounts for immediate use:
+
+| Username | Password | Role | Department | Access Level |
+|----------|----------|------|------------|--------------|
+| admin | admin123 | Admin | Internal Medicine | Full system access |
+| doctor1 | doctor123 | Doctor | Surgery | Classify, batch, audio |
+| nurse1 | nurse123 | Nurse | OB/GYN/NICU | Classify, batch, audio |
+| viewer1 | viewer123 | Viewer | Radiology/Imaging | Read-only |
+
+You can also create new accounts via the registration page.
 
 ## Development
 
@@ -193,11 +229,11 @@ The Docker image uses a multi-stage build:
 
 ## Classification Codes
 
-The system uses a 4-level classification system:
-- **NSE** (No Safety Event) - No deviation detected
-- **NME** (No Medical Event) - Deviation didn't reach patient
-- **NHE** (No Harm Event) - Reached patient but no harm
-- **HE** (Harmful Event) - Patient experienced harm
+The system uses a 4-level classification system (ranked by descending level of seriousness):
+- **SSE** (Serious Safety Event) - Deviation reached the patient and caused moderate/severe harm or death
+- **PSE** (Precursor Safety Event) - Deviation reached the patient with no or minimal harm
+- **NME** (Near Miss Event) - Deviation occurred but did not reach the patient
+- **NSE** (No Safety Event) - No deviation from Generally Accepted Performance Standards (GAPS)
 
 ## Supported Languages
 

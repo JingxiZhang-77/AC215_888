@@ -257,7 +257,7 @@ All backend API features are exposed in the frontend:
 
 Custom Tailwind theme with:
 - HSL color variables
-- Custom classification code colors (NSE, NME, NHE, HE)
+- Custom classification code colors (NSE, NME, PSE, SSE)
 - Role badge styles (admin, doctor, nurse, viewer)
 - Consistent spacing and typography
 - Dark mode support (configurable)

@@ -10,22 +10,23 @@ RUN apt-get update && apt-get install -y \
 
 # Install UV package manager
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
-ENV PATH="/root/.cargo/bin:${PATH}"
+# uv installs to /root/.local/bin by default
+ENV PATH="/root/.local/bin:${PATH}"
 
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY pyproject.toml .
-COPY docker-entrypoint.sh .
+# Copy project metadata and entrypoint early (for layer caching)
+COPY pyproject.toml ./
+COPY docker-entrypoint.sh ./
 RUN chmod +x docker-entrypoint.sh
+
+# Copy full application source
+COPY . .
 
 # Create virtual environment and install dependencies
 RUN uv venv
-RUN uv pip install --no-cache-dir -r pyproject.toml
-
-# Copy application code
-COPY . .
+ENV PATH="/app/.venv/bin:${PATH}"
 
 # Expose API port
 EXPOSE 9000

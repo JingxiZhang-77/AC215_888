@@ -55,14 +55,14 @@ The Safety Event Classification API provides a comprehensive backend service for
 - **Automatic Translation**: Non-English → English
 
 ### 🏥 Classification System
-- **GAPS Deviation Check**: Identifies deviations from standards
+- **GAPS Deviation Check**: Identifies deviations from Generally Accepted Performance Standards
 - **Patient Reach Assessment**: Determines if incident reached patient
 - **Harm Level Evaluation**: Assesses actual patient harm
-- **Classification Codes**:
-  - `NSE`: No Safety Event (no deviation)
-  - `NME`: No Medical Event (deviation didn't reach patient)
-  - `NHE`: No Harm Event (reached patient, no harm)
-  - `HE`: Harmful Event (patient harmed)
+- **Classification Codes** (ranked by descending level of seriousness):
+  - `SSE`: Serious Safety Event (moderate/severe harm or death)
+  - `PSE`: Precursor Safety Event (reached patient, no/minimal harm)
+  - `NME`: Near Miss Event (deviation didn't reach patient)
+  - `NSE`: No Safety Event (no deviation from GAPS)
 
 ### 🏢 Department Tracking
 - Internal Medicine
@@ -115,6 +115,17 @@ src/api/
 - **Google Cloud credentials** (for LLM and audio services)
 - **Secrets**: `secrets/llm-service-account.json`
 
+### Test Accounts
+
+The system comes pre-configured with 4 test accounts:
+
+| Username | Password | Role | Department | Access Level |
+|----------|----------|------|------------|--------------|
+| `admin` | `admin123` | Admin | Internal Medicine | Full access (all endpoints) |
+| `doctor1` | `doctor123` | Doctor | Surgery | Classification, batch, audio |
+| `nurse1` | `nurse123` | Nurse | OB/GYN/NICU | Classification, batch, audio |
+| `viewer1` | `viewer123` | Viewer | Radiology/Imaging | Read-only access |
+
 ### Option 1: Docker (Recommended)
 
 ```bash
@@ -128,7 +139,18 @@ sh docker-shell.sh
 uvicorn main:app --host 0.0.0.0 --port 9000 --reload
 ```
 
-### Option 2: Local Development
+**Verify Installation:**
+```bash
+# Check API health
+curl http://localhost:9000/api/health
+
+# Test login with admin account
+curl -X POST http://localhost:9000/api/v1/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username": "admin", "password": "admin123"}'
+```
+
+### Option 2: Local Development (Alternative)
 
 ```bash
 # Navigate to API directory
@@ -283,8 +305,8 @@ Response:
   "reached_patient_rationale": "Patient directly experienced the fall",
   "harm_level_check": "No",
   "harm_level_rationale": "No injuries reported",
-  "final_classification_code": "NHE",
-  "final_rationale": "No harm event - reached patient but no harm resulted.",
+  "final_classification_code": "PSE",
+  "final_rationale": "Precursor Safety Event - deviation reached the patient with no or minimal harm.",
   "status": "success",
   "timestamp": "2025-01-15T10:30:00Z"
 }

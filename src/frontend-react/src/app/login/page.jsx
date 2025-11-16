@@ -36,13 +36,18 @@ export default function LoginPage() {
     try {
       const response = await DataService.Auth.login(formData.username, formData.password);
       
-      // Store token and user data
+      // Store token
       setAuthToken(response.access_token);
+      
+      // Fetch full user data from /auth/verify endpoint
+      const userData = await DataService.Auth.verifyToken();
+      
+      // Store user data
       setUserData({
-        username: response.username,
-        email: response.email,
-        role: response.role,
-        department: response.department,
+        username: userData.username,
+        email: userData.email,
+        role: userData.role,
+        department: userData.department,
       });
 
       // Redirect to home

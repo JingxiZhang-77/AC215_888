@@ -126,18 +126,18 @@ class ClassificationService:
             result["harm_level_rationale"] = harm_rationale
             
             if harm_bool:
-                result["final_classification_code"] = "HE"
+                result["final_classification_code"] = "SSE"
                 result["final_rationale"] = (
-                    f"Harmful event - patient experienced harm. {harm_rationale}"
+                    f"Serious Safety Event - deviation reached the patient and caused moderate/severe harm or death. {harm_rationale}"
                 )
-                logger.info("Classification: HE (Harmful event)")
+                logger.info("Classification: SSE (Serious Safety Event)")
             else:
-                result["final_classification_code"] = "NHE"
+                result["final_classification_code"] = "PSE"
                 result["final_rationale"] = (
-                    f"No harm event - reached patient but no harm resulted. "
+                    f"Precursor Safety Event - deviation reached the patient with no or minimal harm. "
                     f"{harm_rationale}"
                 )
-                logger.info("Classification: NHE (No harm)")
+                logger.info("Classification: PSE (Precursor Safety Event)")
             
             return result
             
@@ -277,7 +277,7 @@ class ClassificationService:
             "reached_patient_rationale": "Mock rationale",
             "harm_level_check": "No",
             "harm_level_rationale": "Mock rationale",
-            "final_classification_code": "NHE",
+            "final_classification_code": "PSE",
             "final_rationale": "Mock classification result",
             "status": "success",
             "timestamp": datetime.utcnow().isoformat()

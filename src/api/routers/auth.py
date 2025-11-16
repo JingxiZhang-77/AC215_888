@@ -28,6 +28,31 @@ users_db: Dict[str, Dict[str, Any]] = {
         "email": "admin@hospital.com",
         "password_hash": hash_password("admin123"),
         "role": "admin",
+        "department": "internal_medicine",
+        "created_at": datetime.utcnow().isoformat()
+    },
+    "doctor1": {
+        "username": "doctor1",
+        "email": "doctor1@hospital.com",
+        "password_hash": hash_password("doctor123"),
+        "role": "doctor",
+        "department": "surgery",
+        "created_at": datetime.utcnow().isoformat()
+    },
+    "nurse1": {
+        "username": "nurse1",
+        "email": "nurse1@hospital.com",
+        "password_hash": hash_password("nurse123"),
+        "role": "nurse",
+        "department": "ob_gyn_nicu",
+        "created_at": datetime.utcnow().isoformat()
+    },
+    "viewer1": {
+        "username": "viewer1",
+        "email": "viewer1@hospital.com",
+        "password_hash": hash_password("viewer123"),
+        "role": "viewer",
+        "department": "radiology_imaging",
         "created_at": datetime.utcnow().isoformat()
     }
 }
@@ -81,6 +106,7 @@ async def register(user_data: UserRegister):
             "email": user_data.email,
             "password_hash": hash_password(user_data.password),
             "role": user_data.role.value,
+            "department": user_data.department.value if user_data.department else "unspecified",
             "created_at": datetime.utcnow().isoformat(),
             "last_login": None
         }

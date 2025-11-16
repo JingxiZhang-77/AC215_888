@@ -2,7 +2,36 @@
 
 ## 🚀 Getting Started
 
-### Option 1: Run Locally (Recommended for Development)
+### Option 1: Run with Docker (Recommended)
+
+This is the recommended approach as it provides a consistent environment.
+
+1. **Navigate to frontend directory**
+   ```bash
+   cd src/frontend-react
+   ```
+
+2. **Run docker shell script**
+   ```bash
+   ./docker-shell.sh
+   ```
+
+3. **Inside container, install dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Inside container, start dev server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open browser**
+   Navigate to http://localhost:3001
+
+### Option 2: Run Locally (Alternative)
+
+If you prefer to run without Docker:
 
 1. **Navigate to frontend directory**
    ```bash
@@ -15,26 +44,6 @@
    ```
 
 3. **Start development server**
-   ```bash
-   npm run dev
-   ```
-
-4. **Open browser**
-   Navigate to http://localhost:3001
-
-### Option 2: Run with Docker
-
-1. **Navigate to frontend directory**
-   ```bash
-   cd src/frontend-react
-   ```
-
-2. **Run docker shell script**
-   ```bash
-   ./docker-shell.sh
-   ```
-
-3. **Inside container, start dev server**
    ```bash
    npm run dev
    ```
@@ -58,15 +67,34 @@ Before running the frontend, ensure:
    - Usually comes with Node.js
    - Check with: `npm --version`
 
-## 🔐 Default Login Credentials
+## Prerequisites
 
-Use these credentials to test the application:
+Before running the frontend, ensure:
 
-```
-Username: admin
-Password: admin123
-Role: Admin (full access)
-```
+1. **Backend API is running**
+   - The FastAPI backend must be running on http://localhost:9000
+   - See `src/api/README.md` for backend setup instructions
+
+2. **Docker installed** (for Docker workflow)
+   - Docker Desktop for Mac/Windows
+   - Check with: `docker --version`
+
+3. **Node.js installed** (for local workflow)
+   - Version 18 or higher
+   - Check with: `node --version`
+
+## 🔐 Test Account Credentials
+
+Use these pre-configured test accounts:
+
+| Username | Password | Role | Department | Access Level |
+|----------|----------|------|------------|--------------|
+| admin | admin123 | Admin | Internal Medicine | Full system access |
+| doctor1 | doctor123 | Doctor | Surgery | Classify, batch, audio |
+| nurse1 | nurse123 | Nurse | OB/GYN/NICU | Classify, batch, audio |
+| viewer1 | viewer123 | Viewer | Radiology/Imaging | Read-only |
+
+**Note**: You can also register new accounts through the registration page.
 
 ## 📱 Available Pages
 

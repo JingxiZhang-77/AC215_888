@@ -79,10 +79,12 @@ export default function Home() {
         </p>
         <div className="flex items-center justify-center gap-2 mt-4">
           <span className="text-sm text-muted-foreground">Logged in as:</span>
-          <span className="font-semibold">{user.username}</span>
-          <span className={`role-badge role-${user.role}`}>
-            {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
-          </span>
+          <span className="font-semibold">{user?.username || 'User'}</span>
+          {user?.role && (
+            <span className={`role-badge role-${user.role}`}>
+              {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+            </span>
+          )}
         </div>
       </div>
 
@@ -175,20 +177,20 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 border rounded-lg">
-            <span className="classification-code code-NHE">NHE</span>
+            <span className="classification-code code-PSE">PSE</span>
             <div>
-              <h4 className="font-semibold">No Harm Event</h4>
+              <h4 className="font-semibold">Precursor Safety Event</h4>
               <p className="text-sm text-muted-foreground">
-                Incident reached the patient but no harm resulted
+                Deviation reached the patient with no or minimal harm
               </p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 border rounded-lg">
-            <span className="classification-code code-HE">HE</span>
+            <span className="classification-code code-SSE">SSE</span>
             <div>
-              <h4 className="font-semibold">Harmful Event</h4>
+              <h4 className="font-semibold">Serious Safety Event</h4>
               <p className="text-sm text-muted-foreground">
-                Patient experienced harm from the incident
+                Deviation reached the patient and caused moderate/severe harm or death
               </p>
             </div>
           </div>

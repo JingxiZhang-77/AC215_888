@@ -48,9 +48,10 @@ class UserLogin(BaseModel):
 class UserRegister(BaseModel):
     """User registration request"""
     username: str = Field(..., min_length=3, max_length=50)
-    email: str = Field(..., regex=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
+    email: str = Field(..., pattern=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
     password: str = Field(..., min_length=8)
     role: UserRole = Field(default=UserRole.VIEWER)
+    department: Optional[DepartmentEnum] = Field(default=None)
 
 
 class TokenResponse(BaseModel):
