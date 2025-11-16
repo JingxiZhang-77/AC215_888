@@ -7,6 +7,7 @@
 
 import axios from 'axios';
 import { BASE_API_URL, getAuthToken, removeAuthToken } from './Common';
+import { departmentSlugToApi } from './departments';
 
 // Create axios instance with base configuration
 const api = axios.create({
@@ -98,10 +99,11 @@ const DataService = {
      * Classify single incident
      */
     classifySingle: async function (description, department = null) {
-      const response = await api.post('/classify/', { 
-        description, 
-        department 
-      });
+      const payload = { description };
+      if (department) {
+        payload.department = departmentSlugToApi(department);
+      }
+      const response = await api.post('/classify/', payload);
       return response.data;
     },
 
@@ -127,7 +129,9 @@ const DataService = {
       const formData = new FormData();
       formData.append('file', audioFile);
       formData.append('language', language);
-      if (department) formData.append('department', department);
+      if (department) {
+        formData.append('department', departmentSlugToApi(department));
+      }
       formData.append('auto_translate', autoTranslate);
 
       const response = await api.post('/classify/audio', formData, {

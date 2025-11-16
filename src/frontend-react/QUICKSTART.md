@@ -85,16 +85,13 @@ Before running the frontend, ensure:
 
 ## 🔐 Test Account Credentials
 
-Use these pre-configured test accounts:
+Use the bundled admin account while the MVP keeps registration disabled:
 
 | Username | Password | Role | Department | Access Level |
 |----------|----------|------|------------|--------------|
 | admin | admin123 | Admin | Internal Medicine | Full system access |
-| doctor1 | doctor123 | Doctor | Surgery | Classify, batch, audio |
-| nurse1 | nurse123 | Nurse | OB/GYN/NICU | Classify, batch, audio |
-| viewer1 | viewer123 | Viewer | Radiology/Imaging | Read-only |
 
-**Note**: You can also register new accounts through the registration page.
+> If you need additional roles later, re-enable `/auth/register` in the API and restore the `/register` page.
 
 ## 📱 Available Pages
 
@@ -115,6 +112,7 @@ After logging in, you can access:
 
 ### 2. Batch Processing
 - Upload a CSV/Excel file with columns: `description`, `department`
+- Download the starter file from the Batch page (`/batch`) if you need an example (`public/batch-template.csv`)
 - View processing summary
 - Download results file
 

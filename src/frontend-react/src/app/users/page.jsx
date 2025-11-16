@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { isAuthenticated, hasRole, getUserData } from '@/lib/Common';
 import DataService from '@/lib/DataService';
+import { DEPARTMENTS, departmentApiToSlug, getDepartmentLabel } from '@/lib/departments';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -22,14 +23,6 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  const departments = [
-    { value: 'internal_medicine', label: 'Internal Medicine' },
-    { value: 'surgery', label: 'Surgery' },
-    { value: 'ob_gyn_nicu', label: 'OB/GYN/NICU' },
-    { value: 'radiology_imaging', label: 'Radiology/Imaging' },
-    { value: 'outpatient_er', label: 'Outpatient/ER' },
-  ];
 
   const roles = [
     { value: 'viewer', label: 'Viewer' },
@@ -76,7 +69,7 @@ export default function UsersPage() {
     setFormData({
       email: userToEdit.email,
       role: userToEdit.role,
-      department: userToEdit.department,
+      department: departmentApiToSlug(userToEdit.department) || userToEdit.department || '',
     });
     setError('');
     setSuccess('');
@@ -258,8 +251,8 @@ export default function UsersPage() {
                               <SelectValue />
                             </SelectTrigger>
                             <SelectContent>
-                              {departments.map((dept) => (
-                                <SelectItem key={dept.value} value={dept.value}>
+                              {DEPARTMENTS.map((dept) => (
+                                <SelectItem key={dept.slug} value={dept.slug}>
                                   {dept.label}
                                 </SelectItem>
                               ))}
@@ -302,7 +295,7 @@ export default function UsersPage() {
                           <div>
                             <span className="text-muted-foreground">Department: </span>
                             <span>
-                              {departments.find(d => d.value === u.department)?.label || u.department}
+                              {getDepartmentLabel(u.department)}
                             </span>
                           </div>
                         </div>

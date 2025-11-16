@@ -40,7 +40,7 @@ The Safety Event Classification API provides a comprehensive backend service for
 ### 🔐 Authentication & Authorization
 - JWT token-based authentication
 - Role-based access control (RBAC)
-- User registration and password reset
+- Password reset + token verification
 - Roles: Admin, Doctor, Nurse, Viewer
 
 ### 🎤 Audio Transcription
@@ -58,6 +58,8 @@ The Safety Event Classification API provides a comprehensive backend service for
 - **GAPS Deviation Check**: Identifies deviations from Generally Accepted Performance Standards
 - **Patient Reach Assessment**: Determines if incident reached patient
 - **Harm Level Evaluation**: Assesses actual patient harm
+- **Gemini Integration**: Each step calls Google Cloud Vertex AI (Gemini 2.5) through the shared `src/model/simple_prompt_utils.py` helpers for consistent reasoning
+- **Department Normalization**: Accepts both slugged (`internal_medicine`) and human-readable (`Internal Medicine`) department inputs and normalizes them before classification
 - **Classification Codes** (ranked by descending level of seriousness):
   - `SSE`: Serious Safety Event (moderate/severe harm or death)
   - `PSE`: Precursor Safety Event (reached patient, no/minimal harm)
@@ -70,6 +72,11 @@ The Safety Event Classification API provides a comprehensive backend service for
 - OB/GYN/NICU
 - Radiology/Imaging
 - Outpatient/ER
+
+### 📁 Batch Processing
+- Upload CSV or Excel files that contain at least `description` and (optionally normalized) `department` columns
+- Departments can be provided with spaces, underscores, or mixed casing—the backend normalizes them before invoking Gemini
+- A starter template is included in `src/frontend-react/public/batch-template.csv` for quick testing
 
 ---
 
@@ -115,16 +122,15 @@ src/api/
 - **Google Cloud credentials** (for LLM and audio services)
 - **Secrets**: `secrets/llm-service-account.json`
 
-### Test Accounts
+### Test Account
 
-The system comes pre-configured with 4 test accounts:
+To keep the MVP workflow predictable, only a single administrative account is shipped with the backend:
 
-| Username | Password | Role | Department | Access Level |
-|----------|----------|------|------------|--------------|
-| `admin` | `admin123` | Admin | Internal Medicine | Full access (all endpoints) |
-| `doctor1` | `doctor123` | Doctor | Surgery | Classification, batch, audio |
-| `nurse1` | `nurse123` | Nurse | OB/GYN/NICU | Classification, batch, audio |
-| `viewer1` | `viewer123` | Viewer | Radiology/Imaging | Read-only access |
+| Username | Password | Role | Department | Scope |
+|----------|----------|------|------------|-------|
+| `admin` | `admin123` | Admin | Internal Medicine | Access to every feature |
+
+> Registration endpoints are disabled for now. Use the admin credentials above to exercise the system end‑to‑end.
 
 ### Option 1: Docker (Recommended)
 
@@ -206,7 +212,6 @@ http://localhost:9000
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
 | **Authentication** ||||
-| POST | `/api/v1/auth/register` | Register new user | No |
 | POST | `/api/v1/auth/login` | User login (get JWT) | No |
 | POST | `/api/v1/auth/forgot-password` | Request password reset | No |
 | POST | `/api/v1/auth/reset-password` | Reset password with token | No |
@@ -229,18 +234,9 @@ http://localhost:9000
 
 ## 🔐 Authentication
 
-### Register User
+### Registration
 
-```bash
-curl -X POST http://localhost:9000/api/v1/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "jdoe",
-    "email": "jdoe@hospital.com",
-    "password": "password123",
-    "role": "doctor"
-  }'
-```
+User self-registration is intentionally disabled in this MVP build so that the single admin account remains the only way to access protected features during testing. Re‑enable `/auth/register` only when you are ready to support additional accounts.
 
 ### Login
 
@@ -248,8 +244,8 @@ curl -X POST http://localhost:9000/api/v1/auth/register \
 curl -X POST http://localhost:9000/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "jdoe",
-    "password": "password123"
+    "username": "admin",
+    "password": "admin123"
   }'
 ```
 
@@ -299,18 +295,28 @@ Response:
 {
   "incident": "Patient fell in hallway...",
   "department": "internal medicine",
-  "gaps_deviation_check": "Yes",
-  "gaps_rationale": "Fall indicates deviation from safety protocols",
-  "reached_patient_check": "Yes",
-  "reached_patient_rationale": "Patient directly experienced the fall",
+  "department_label": "Internal Medicine",
+  "department_slug": "internal_medicine",
+  "deviation_check": "Yes",
+  "deviation_rationale": "Environmental hazards and lack of escort indicate deviation from fall protocols.",
+  "patient_reach_check": "Yes",
+  "patient_reach_rationale": "The patient directly experienced the fall event.",
   "harm_level_check": "No",
-  "harm_level_rationale": "No injuries reported",
-  "final_classification_code": "PSE",
-  "final_rationale": "Precursor Safety Event - deviation reached the patient with no or minimal harm.",
+  "harm_level_rationale": "Only mild bruising reported; no further intervention required.",
+  "classification_code": "PSE",
+  "classification_label": "Precursor Safety Event",
+  "classification_rationale": "Deviation reached the patient but caused only minimal harm.",
   "status": "success",
-  "timestamp": "2025-01-15T10:30:00Z"
+  "timestamp": "2025-01-15T10:30:00Z",
+  "gaps_deviation_check": "Yes",
+  "gaps_rationale": "Environmental hazards and lack of escort indicate deviation from fall protocols.",
+  "reached_patient_check": "Yes",
+  "reached_patient_rationale": "The patient directly experienced the fall event.",
+  "final_classification_code": "PSE",
+  "final_rationale": "Deviation reached the patient but caused only minimal harm."
 }
 ```
+> The `classification_*` fields are the canonical outputs. Legacy fields such as `final_classification_code` remain for backward compatibility.
 
 ### 2. Batch Classification (CSV)
 

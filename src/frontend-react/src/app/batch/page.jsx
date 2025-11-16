@@ -116,11 +116,21 @@ export default function BatchPage() {
           </p>
           <ul className="list-disc list-inside space-y-1 text-sm">
             <li><strong>description</strong> - The safety incident description</li>
-            <li><strong>department</strong> - One of: internal_medicine, surgery, ob_gyn_nicu, radiology_imaging, outpatient_er</li>
+            <li>
+              <strong>department</strong> - One of: internal medicine, surgery, ob/gyn/nicu,
+              radiology/imaging, outpatient/ER (underscored formats are accepted)
+            </li>
           </ul>
           <p className="text-sm text-muted-foreground mt-3">
-            Supported file formats: CSV (.csv), Excel (.xlsx, .xls)
+            Supported file formats: CSV (.csv), Excel (.xlsx, .xls). Need a starting point?
+            Download the template below.
           </p>
+          <Button variant="outline" size="sm" className="mt-2" asChild>
+            <a href="/batch-template.csv" download>
+              <Download className="w-4 h-4 mr-2" />
+              Download Template
+            </a>
+          </Button>
         </CardContent>
       </Card>
 

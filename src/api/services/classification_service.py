@@ -7,7 +7,7 @@ Integrates with the model service for prompt-based classification.
 
 import sys
 import os
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List, Tuple, Optional
 import pandas as pd
 from datetime import datetime
 import traceback
@@ -42,8 +42,86 @@ class ClassificationService:
     
     def __init__(self):
         """Initialize classification service"""
-        self.valid_departments = settings.VALID_DEPARTMENTS
+        self.department_lookup = {
+            self._normalize_key(dept): dept
+            for dept in settings.VALID_DEPARTMENTS
+        }
+        # allow unspecified to pass through normalization
+        self.department_lookup["unspecified"] = "unspecified"
+        self.default_department = "unspecified"
+        self.department_labels = {
+            "internal medicine": "Internal Medicine",
+            "surgery": "Surgery",
+            "ob/gyn/nicu": "OB/GYN/NICU",
+            "radiology/imaging": "Radiology/Imaging",
+            "outpatient/ER": "Outpatient/ER",
+            "unspecified": "Unspecified"
+        }
+        self.department_slugs = {
+            "internal medicine": "internal_medicine",
+            "surgery": "surgery",
+            "ob/gyn/nicu": "ob_gyn_nicu",
+            "radiology/imaging": "radiology_imaging",
+            "outpatient/ER": "outpatient_er",
+            "unspecified": "unspecified"
+        }
+        self.classification_labels = {
+            "SSE": "Serious Safety Event",
+            "PSE": "Precursor Safety Event",
+            "NME": "Near Miss Event",
+            "NSE": "No Safety Event"
+        }
         logger.info("Classification service initialized")
+
+    @staticmethod
+    def _normalize_key(value: str) -> str:
+        """Normalize department identifiers for comparison"""
+        if not isinstance(value, str):
+            return ""
+        normalized = value.strip().lower()
+        for char in ['_', '-', '/']:
+            normalized = normalized.replace(char, ' ')
+        return ' '.join(normalized.split())
+
+    def _normalize_department(self, department: Optional[str]) -> str:
+        """
+        Convert user-provided department strings (slugged, spaced, etc.)
+        into canonical names expected by the LLM prompts.
+        """
+        if not department:
+            return self.default_department
+        normalized_key = self._normalize_key(department)
+        canonical = self.department_lookup.get(normalized_key)
+        if canonical:
+            return canonical
+        logger.warning(f"Invalid department: {department}. Defaulting to unspecified.")
+        return self.default_department
+
+    def _format_department_label(self, department: str) -> str:
+        return self.department_labels.get(department, department.title())
+
+    def _department_slug(self, department: str) -> Optional[str]:
+        return self.department_slugs.get(department)
+
+    def _build_base_result(self, description: str, department: str) -> Dict[str, Any]:
+        department_label = self._format_department_label(department)
+        return {
+            "incident": description,
+            "department": department,
+            "department_label": department_label,
+            "department_slug": self._department_slug(department),
+            "deviation_check": "N/A",
+            "deviation_rationale": "N/A",
+            "patient_reach_check": "N/A",
+            "patient_reach_rationale": "N/A",
+            "harm_level_check": "N/A",
+            "harm_level_rationale": "N/A",
+            "classification_code": "Unknown",
+            "classification_label": "Unknown",
+            "classification_rationale": "N/A",
+            "status": "success",
+            "timestamp": datetime.utcnow().isoformat()
+        }
     
     def classify_incident(
         self, 
@@ -64,88 +142,78 @@ class ClassificationService:
             return self._mock_classification(description, department)
         
         # Validate and normalize department
-        if department:
-            department = department.lower().strip()
-            if department not in self.valid_departments:
-                logger.warning(f"Invalid department: {department}, setting to unspecified")
-                department = "unspecified"
-        else:
-            department = "unspecified"
+        department = self._normalize_department(department)
         
         # Initialize result structure
-        result = {
-            "incident": description,
-            "department": department,
-            "gaps_deviation_check": 'N/A',
-            "gaps_rationale": 'N/A',
-            "reached_patient_check": 'N/A',
-            "reached_patient_rationale": 'N/A',
-            "harm_level_check": 'N/A',
-            "harm_level_rationale": 'N/A',
-            "final_classification_code": 'Unknown',
-            "final_rationale": 'N/A',
-            "status": "success",
-            "timestamp": datetime.utcnow().isoformat()
-        }
+        result = self._build_base_result(description, department)
+        prompt_department = result["department_label"] if department != self.default_department else None
         
         try:
             # Step 1: GAPS deviation check
             logger.info(f"Step 1: Checking GAPS deviation for incident")
-            gaps_deviation_bool, gaps_rationale = prompt1_single_incident(description)
-            result["gaps_deviation_check"] = "Yes" if gaps_deviation_bool else "No"
-            result["gaps_rationale"] = gaps_rationale
+            gaps_deviation_bool, gaps_rationale = prompt1_single_incident(description, prompt_department)
+            result["deviation_check"] = "Yes" if gaps_deviation_bool else "No"
+            result["deviation_rationale"] = gaps_rationale
             
             if not gaps_deviation_bool:
-                result["final_classification_code"] = "NSE"
-                result["final_rationale"] = (
+                result["classification_code"] = "NSE"
+                result["classification_label"] = self.classification_labels["NSE"]
+                result["classification_rationale"] = (
                     f"No deviation from Generally Accepted Performance Standards (GAPS). "
                     f"{gaps_rationale}"
                 )
                 logger.info("Classification: NSE (No deviation)")
+                self._attach_legacy_fields(result)
                 return result
             
             # Step 2: Reached patient check
             logger.info(f"Step 2: Checking if incident reached patient")
-            reached_patient_bool, reached_patient_rationale = prompt2_single_incident(description)
-            result["reached_patient_check"] = "Yes" if reached_patient_bool else "No"
-            result["reached_patient_rationale"] = reached_patient_rationale
+            reached_patient_bool, reached_patient_rationale = prompt2_single_incident(description, prompt_department)
+            result["patient_reach_check"] = "Yes" if reached_patient_bool else "No"
+            result["patient_reach_rationale"] = reached_patient_rationale
             
             if not reached_patient_bool:
-                result["final_classification_code"] = "NME"
-                result["final_rationale"] = (
+                result["classification_code"] = "NME"
+                result["classification_label"] = self.classification_labels["NME"]
+                result["classification_rationale"] = (
                     f"Deviation occurred but did not reach the patient. "
                     f"{reached_patient_rationale}"
                 )
                 logger.info("Classification: NME (No patient reach)")
+                self._attach_legacy_fields(result)
                 return result
             
             # Step 3: Harm level assessment
             logger.info(f"Step 3: Assessing harm level")
-            harm_bool, harm_rationale = prompt3_single_incident(description)
+            harm_bool, harm_rationale = prompt3_single_incident(description, prompt_department)
             result["harm_level_check"] = "Yes" if harm_bool else "No"
             result["harm_level_rationale"] = harm_rationale
             
             if harm_bool:
-                result["final_classification_code"] = "SSE"
-                result["final_rationale"] = (
+                result["classification_code"] = "SSE"
+                result["classification_label"] = self.classification_labels["SSE"]
+                result["classification_rationale"] = (
                     f"Serious Safety Event - deviation reached the patient and caused moderate/severe harm or death. {harm_rationale}"
                 )
                 logger.info("Classification: SSE (Serious Safety Event)")
             else:
-                result["final_classification_code"] = "PSE"
-                result["final_rationale"] = (
+                result["classification_code"] = "PSE"
+                result["classification_label"] = self.classification_labels["PSE"]
+                result["classification_rationale"] = (
                     f"Precursor Safety Event - deviation reached the patient with no or minimal harm. "
                     f"{harm_rationale}"
                 )
                 logger.info("Classification: PSE (Precursor Safety Event)")
             
+            self._attach_legacy_fields(result)
             return result
             
         except Exception as e:
             logger.error(f"Classification error: {e}")
             logger.error(traceback.format_exc())
             result["status"] = "error"
-            result["final_rationale"] = f"Error during classification: {type(e).__name__}: {str(e)}"
+            result["classification_rationale"] = f"Error during classification: {type(e).__name__}: {str(e)}"
+            self._attach_legacy_fields(result)
             return result
     
     def classify_batch(
@@ -268,20 +336,30 @@ class ClassificationService:
         Returns:
             Mock classification result
         """
-        return {
-            "incident": description,
-            "department": department or "unspecified",
-            "gaps_deviation_check": "Yes",
-            "gaps_rationale": "Mock rationale - prompt utils not available",
-            "reached_patient_check": "Yes",
-            "reached_patient_rationale": "Mock rationale",
-            "harm_level_check": "No",
-            "harm_level_rationale": "Mock rationale",
-            "final_classification_code": "PSE",
-            "final_rationale": "Mock classification result",
-            "status": "success",
-            "timestamp": datetime.utcnow().isoformat()
-        }
+        normalized_department = self._normalize_department(department)
+        result = self._build_base_result(description, normalized_department)
+        result["deviation_check"] = "Yes"
+        result["deviation_rationale"] = "Mock rationale - prompt utils not available"
+        result["patient_reach_check"] = "Yes"
+        result["patient_reach_rationale"] = "Mock rationale"
+        result["harm_level_check"] = "No"
+        result["harm_level_rationale"] = "Mock rationale"
+        result["classification_code"] = "PSE"
+        result["classification_label"] = self.classification_labels["PSE"]
+        result["classification_rationale"] = "Mock classification result"
+        self._attach_legacy_fields(result)
+        return result
+
+    def _attach_legacy_fields(self, result: Dict[str, Any]) -> None:
+        """
+        Populate the legacy response fields so older clients continue working.
+        """
+        result["gaps_deviation_check"] = result.get("deviation_check")
+        result["gaps_rationale"] = result.get("deviation_rationale")
+        result["reached_patient_check"] = result.get("patient_reach_check")
+        result["reached_patient_rationale"] = result.get("patient_reach_rationale")
+        result["final_classification_code"] = result.get("classification_code")
+        result["final_rationale"] = result.get("classification_rationale")
 
 
 # Global service instance

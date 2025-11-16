@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { isAuthenticated, hasRole, getUserData } from '@/lib/Common';
 import DataService from '@/lib/DataService';
+import { DEPARTMENTS, departmentApiToSlug } from '@/lib/departments';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
@@ -26,14 +27,6 @@ export default function AudioPage() {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('transcribe');
 
-  const departments = [
-    { value: 'internal_medicine', label: 'Internal Medicine' },
-    { value: 'surgery', label: 'Surgery' },
-    { value: 'ob_gyn_nicu', label: 'OB/GYN/NICU' },
-    { value: 'radiology_imaging', label: 'Radiology/Imaging' },
-    { value: 'outpatient_er', label: 'Outpatient/ER' },
-  ];
-
   useEffect(() => {
     if (!isAuthenticated() || !hasRole(['admin', 'doctor', 'nurse'])) {
       router.push('/');
@@ -41,7 +34,8 @@ export default function AudioPage() {
     }
     const userData = getUserData();
     setUser(userData);
-    setDepartment(userData.department || '');
+    const preferredDepartment = departmentApiToSlug(userData?.department) || userData?.department || '';
+    setDepartment(preferredDepartment);
     fetchSupportedLanguages();
   }, [router]);
 
@@ -306,8 +300,8 @@ export default function AudioPage() {
                         <SelectValue placeholder="Select department" />
                       </SelectTrigger>
                       <SelectContent>
-                        {departments.map((dept) => (
-                          <SelectItem key={dept.value} value={dept.value}>
+                        {DEPARTMENTS.map((dept) => (
+                          <SelectItem key={dept.slug} value={dept.slug}>
                             {dept.label}
                           </SelectItem>
                         ))}
@@ -438,27 +432,56 @@ export default function AudioPage() {
             <CardContent className="space-y-4">
               <div className="flex items-center gap-4">
                 <span className="text-sm text-muted-foreground">Classification:</span>
-                <span className={`classification-code code-${classificationResult.classification_code}`}>
-                  {classificationResult.classification_code}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span className={`classification-code code-${classificationResult.classification_code}`}>
+                    {classificationResult.classification_code}
+                  </span>
+                  <span className="text-sm font-medium">
+                    {classificationResult.classification_label}
+                  </span>
+                </div>
               </div>
+
+              {classificationResult.department_label && (
+                <div className="flex items-center gap-4">
+                  <span className="text-sm text-muted-foreground">Department:</span>
+                  <span className="font-medium">
+                    {classificationResult.department_label}
+                  </span>
+                </div>
+              )}
+
+              {classificationResult.classification_rationale && (
+                <div className="p-3 bg-muted rounded-md text-sm">
+                  {classificationResult.classification_rationale}
+                </div>
+              )}
 
               <div className="space-y-3 mt-4">
                 <h4 className="font-semibold text-sm">Classification Rationales:</h4>
                 
                 <div className="rationale-section">
                   <h5 className="font-medium text-sm mb-2">1. Deviation from GAPS</h5>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                    Decision: {classificationResult.deviation_check}
+                  </p>
                   <p className="text-sm">{classificationResult.deviation_rationale}</p>
                 </div>
 
                 <div className="rationale-section">
                   <h5 className="font-medium text-sm mb-2">2. Patient Reach</h5>
-                  <p className="text-sm">{classificationResult.reach_rationale}</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                    Decision: {classificationResult.patient_reach_check}
+                  </p>
+                  <p className="text-sm">{classificationResult.patient_reach_rationale}</p>
                 </div>
 
                 <div className="rationale-section">
                   <h5 className="font-medium text-sm mb-2">3. Harm Assessment</h5>
-                  <p className="text-sm">{classificationResult.harm_rationale}</p>
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                    Decision: {classificationResult.harm_level_check}
+                  </p>
+                  <p className="text-sm">{classificationResult.harm_level_rationale}</p>
                 </div>
               </div>
             </CardContent>

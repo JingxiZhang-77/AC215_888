@@ -8,7 +8,7 @@ A complete React/Next.js frontend application for the Safety Event Classificatio
 
 1. **Authentication System**
    - Login page with JWT token management
-   - Registration page with role and department selection
+   - Admin-only MVP flow (self-registration disabled)
    - Token storage in localStorage
    - Automatic token injection via axios interceptors
    - Redirect on unauthorized access (401 errors)
@@ -31,7 +31,7 @@ A complete React/Next.js frontend application for the Safety Event Classificatio
    - File format validation
    - Processing summary statistics
    - Classification breakdown by code
-   - Downloadable results
+   - Downloadable results + downloadable starter template (`public/batch-template.csv`)
 
 5. **Audio Transcription & Classification**
    - Audio file upload (WAV, MP3, OGG, FLAC)
@@ -58,7 +58,6 @@ src/frontend-react/
 │   │   ├── layout.jsx          # Root layout
 │   │   ├── page.jsx            # Home page
 │   │   ├── login/page.jsx
-│   │   ├── register/page.jsx
 │   │   ├── classify/page.jsx
 │   │   ├── batch/page.jsx
 │   │   ├── audio/page.jsx
@@ -79,6 +78,7 @@ src/frontend-react/
 │   └── lib/
 │       ├── Common.js           # Auth utilities
 │       ├── DataService.js      # API service
+│       ├── departments.js      # Department normalization helpers
 │       └── utils.js
 ├── public/
 ├── .env.development
@@ -105,9 +105,8 @@ src/frontend-react/
 - **class-variance-authority** - Component variant management
 
 #### API Integration
-All backend API endpoints integrated via `DataService.js`:
+All backend API endpoints are integrated via `DataService.js` with automatic department normalization handled in `departments.js`:
 - ✅ POST /auth/login
-- ✅ POST /auth/register
 - ✅ POST /auth/forgot-password
 - ✅ POST /auth/reset-password
 - ✅ POST /auth/verify-token
@@ -140,11 +139,10 @@ All backend API endpoints integrated via `DataService.js`:
 #### Page Components (6 pages)
 1. **Home** - Dashboard with feature cards
 2. **Login** - Authentication form
-3. **Register** - User registration form
-4. **Classify** - Single incident classification
-5. **Batch** - Bulk file processing
-6. **Audio** - Audio transcription/classification
-7. **Users** - User management (admin)
+3. **Classify** - Single incident classification
+4. **Batch** - Bulk file processing
+5. **Audio** - Audio transcription/classification
+6. **Users** - User management (admin)
 
 ### 🔐 Security Features
 

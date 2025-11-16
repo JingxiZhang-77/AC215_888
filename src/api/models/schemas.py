@@ -19,6 +19,28 @@ class DepartmentEnum(str, Enum):
     RADIOLOGY_IMAGING = "radiology/imaging"
     OUTPATIENT_ER = "outpatient/ER"
 
+    @staticmethod
+    def _normalize_value(value: str) -> str:
+        """Normalize department strings for matching"""
+        if not isinstance(value, str):
+            return ""
+        normalized = value.strip().lower()
+        for char in ['_', '-', '/']:
+            normalized = normalized.replace(char, ' ')
+        return ' '.join(normalized.split())
+
+    @classmethod
+    def _missing_(cls, value):
+        """
+        Allow alternate department spellings (e.g., internal_medicine)
+        by normalizing incoming values before matching Enum members.
+        """
+        normalized = cls._normalize_value(value)
+        for member in cls:
+            if cls._normalize_value(member.value) == normalized:
+                return member
+        return None
+
 
 class LanguageEnum(str, Enum):
     """Supported languages for audio transcription"""
@@ -93,16 +115,26 @@ class ClassificationResult(BaseModel):
     """Classification result with rationales"""
     incident: str
     department: str
-    gaps_deviation_check: str
-    gaps_rationale: str
-    reached_patient_check: str
-    reached_patient_rationale: str
+    department_label: Optional[str] = None
+    department_slug: Optional[str] = None
+    deviation_check: str
+    deviation_rationale: str
+    patient_reach_check: str
+    patient_reach_rationale: str
     harm_level_check: str
     harm_level_rationale: str
-    final_classification_code: str
-    final_rationale: str
+    classification_code: str
+    classification_label: str
+    classification_rationale: str
     status: str
     timestamp: Optional[datetime] = None
+    # Legacy fields for backward compatibility
+    gaps_deviation_check: Optional[str] = None
+    gaps_rationale: Optional[str] = None
+    reached_patient_check: Optional[str] = None
+    reached_patient_rationale: Optional[str] = None
+    final_classification_code: Optional[str] = None
+    final_rationale: Optional[str] = None
 
 
 class BatchClassificationResponse(BaseModel):

@@ -5,9 +5,9 @@ A modern React/Next.js frontend for the AI-powered healthcare safety incident cl
 ## Features
 
 - **Modern Tech Stack**: React 18, Next.js 15, Tailwind CSS
-- **Authentication**: JWT-based login/register with role-based access control (RBAC)
+- **Authentication**: JWT-based login with role-based access control (RBAC)
 - **Single Classification**: Interactive form for individual incident classification
-- **Batch Processing**: CSV/Excel file upload for bulk classification
+- **Batch Processing**: CSV/Excel file upload for bulk classification + downloadable template
 - **Audio Transcription**: 5-language audio-to-text with automatic translation
 - **User Management**: Admin interface for managing system users
 - **Responsive Design**: Mobile-first responsive UI with Radix UI components
@@ -33,7 +33,6 @@ src/frontend-react/
 │   │   ├── layout.jsx          # Root layout with Header/Footer
 │   │   ├── page.jsx            # Home page with feature cards
 │   │   ├── login/page.jsx      # Login page
-│   │   ├── register/page.jsx   # Registration page
 │   │   ├── classify/page.jsx   # Single incident classification
 │   │   ├── batch/page.jsx      # Batch CSV/Excel processing
 │   │   ├── audio/page.jsx      # Audio transcription & classification
@@ -54,8 +53,9 @@ src/frontend-react/
 │   └── lib/
 │       ├── Common.js           # Auth utilities, token management
 │       ├── DataService.js      # API service layer with axios
+│       └── departments.js      # Department normalization helpers
 │       └── utils.js            # Utility functions (cn)
-├── public/                     # Static assets
+├── public/                     # Static assets (includes batch-template.csv)
 ├── .env.development            # Development environment variables
 ├── .env.production             # Production environment variables
 ├── package.json                # Dependencies and scripts
@@ -123,18 +123,14 @@ src/frontend-react/
    
    The application will be available at http://localhost:3001
 
-## Test Accounts
+## MVP Access
 
-Pre-configured test accounts for immediate use:
+Self-registration is intentionally disabled for the MVP so testers can focus on the fully unlocked admin experience. Sign in with the credentials below after starting the frontend:
 
 | Username | Password | Role | Department | Access Level |
 |----------|----------|------|------------|--------------|
 | admin | admin123 | Admin | Internal Medicine | Full system access |
-| doctor1 | doctor123 | Doctor | Surgery | Classify, batch, audio |
-| nurse1 | nurse123 | Nurse | OB/GYN/NICU | Classify, batch, audio |
-| viewer1 | viewer123 | Viewer | Radiology/Imaging | Read-only |
-
-You can also create new accounts via the registration page.
+> Registration is disabled during testing; sign in with the admin credentials above.
 
 ## Development
 
@@ -159,8 +155,8 @@ You can also create new accounts via the registration page.
 - **Viewer**: Read-only access to home page
 
 #### 3. API Integration
-All API calls are centralized in `src/lib/DataService.js`:
-- **Auth**: login, register, password reset
+All API calls are centralized in `src/lib/DataService.js` (department slugs are normalized via `src/lib/departments.js` before requests):
+- **Auth**: login, password reset
 - **Classification**: single, batch, audio
 - **Audio**: transcribe, get supported languages
 - **Users**: list, get, update, delete (admin only)
@@ -184,7 +180,6 @@ Reusable components built with Radix UI primitives:
 
 ### Authentication
 - `POST /auth/login` - User login
-- `POST /auth/register` - User registration
 - `POST /auth/forgot-password` - Password reset request
 - `POST /auth/reset-password` - Reset password with token
 - `POST /auth/verify-token` - Verify JWT token

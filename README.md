@@ -220,25 +220,26 @@ python safety_event_classifier.py -f prompt_tests/prompt_chaining_test.xlsx
 **Output Example:**
 
 **`chaining_output.csv`**
-| incident | gaps_deviation_check | reached_patient_check | harm_level_check | final_classification_code | rationale |
-|-----------|----------------------|------------------------|------------------|----------------------------|------------|
-| A patient with tuberculosis ... | No | N/A | N/A | NSE | No deviation from Generally Accepted Performance Standards (GAPS). |
-| A patient was admitted to ... | Yes | Yes | Yes | SSE | Deviation reached the patient and caused moderate/severe harm or death. |
-| An anesthesiologist prepared syringes ... | Yes | No | N/A | NME | Deviation occurred but did not reach the patient. |
-| A 65-year-old man with COPD was receiving ... | Yes | Yes | Yes | SSE | Deviation reached the patient and caused moderate/severe harm or death. |
-| A 50-year-old man presented to the emergency department ... | Yes | Yes | No | PSE | Deviation reached the patient with no or minimal harm. |
-| A patient was receiving care in an OB Clinic ... | Yes | Yes | Yes | SSE | Deviation reached the patient and caused moderate/severe harm or death. |
+| incident | deviation_check | patient_reach_check | harm_level_check | classification_code | classification_label | classification_rationale |
+|-----------|-----------------|---------------------|------------------|---------------------|----------------------|--------------------------|
+| A patient with tuberculosis ... | No | N/A | N/A | NSE | No Safety Event | No deviation from Generally Accepted Performance Standards (GAPS). |
+| A patient was admitted to ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
+| An anesthesiologist prepared syringes ... | Yes | No | N/A | NME | Near Miss Event | Deviation occurred but did not reach the patient. |
+| A 65-year-old man with COPD was receiving ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
+| A 50-year-old man presented to the emergency department ... | Yes | Yes | No | PSE | Precursor Safety Event | Deviation reached the patient with no or minimal harm. |
+| A patient was receiving care in an OB Clinic ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
 
 
 **`final_report.json`**
 ```json
   {
     "incident": "A patient with tuberculosis receiving isoniazid therapy under directly observed treatment developed acute hepatitis after 3 months. Liver enzymes were monitored monthly and were normal until the week prior. The medication was discontinued immediately, but the patient developed hepatic failure requiring transfer for transplant evaluation.",
-    "gaps_deviation_check": "No",
-    "reached_patient_check": "N/A",
+    "deviation_check": "No",
+    "patient_reach_check": "N/A",
     "harm_level_check": "N/A",
-    "final_classification_code": "NSE",
-    "rationale": "No deviation from Generally Accepted Performance Standards (GAPS)."
+    "classification_code": "NSE",
+    "classification_label": "No Safety Event",
+    "classification_rationale": "No deviation from Generally Accepted Performance Standards (GAPS)."
   }
 ```
 
@@ -253,5 +254,4 @@ Our next step is to integrate this RAG component into the `prompt_utils.py`. Thi
 ## Screenshot of running instances 
 ![running file](sc1.png)
 ![running instances](sc2.png)
-
 

@@ -27,7 +27,7 @@ users_db: Dict[str, Dict[str, Any]] = {
         "email": "admin@hospital.com",
         "password_hash": hash_password("admin123"),
         "role": "admin",
-        "department": "internal_medicine",
+        "department": "internal medicine",
         "created_at": datetime.utcnow().isoformat()
     }
 }

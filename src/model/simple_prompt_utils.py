@@ -93,11 +93,21 @@ def _parse_yes_no_response(response_text: str) -> tuple[bool, str]:
     
     return decision, rationale
 
-def prompt1_single_incident(incident_text: str) -> tuple[bool, str]:
+def _format_incident_context(incident_text: str, department: str | None = None) -> str:
+    """
+    Attach department context to the incident description if available.
+    """
+    if department and department.lower() != "unspecified":
+        return f"Department Context: {department}\n\nIncident Description:\n{incident_text}"
+    return incident_text
+
+
+def prompt1_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
     """
     Step 1: Determine if there was a deviation from Generally Accepted Performance Standards (GAPS)
     Returns: tuple of (decision: bool, rationale: str)
     """
+    incident_block = _format_incident_context(incident_text, department)
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Was there a deviation from Generally Accepted Performance Standards (GAPS) in this incident?
@@ -108,8 +118,7 @@ A deviation from GAPS means a difference between expected and actual performance
 - Professional practice standards
 - Organization's obligation to protect patients from harm
 
-Incident Description:
-{incident_text}
+{incident_block}
 
 Answer with ONLY "Yes" or "No" as the first word of your response, followed by a brief 1-2 sentence explanation of your reasoning.
 
@@ -124,19 +133,19 @@ Answer:"""
         print(f"Error in prompt1: {e}")
         raise
 
-def prompt2_single_incident(incident_text: str) -> tuple[bool, str]:
+def prompt2_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
     """
     Step 2: Determine if the deviation reached the patient
     Returns: tuple of (decision: bool, rationale: str)
     """
+    incident_block = _format_incident_context(incident_text, department)
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Did the deviation/error reach the patient?
 
 This means the error actually affected or could have affected the patient directly, not just internal processes.
 
-Incident Description:
-{incident_text}
+{incident_block}
 
 Answer with ONLY "Yes" or "No" as the first word of your response, followed by a brief 1-2 sentence explanation of your reasoning.
 
@@ -151,11 +160,12 @@ Answer:"""
         print(f"Error in prompt2: {e}")
         raise
 
-def prompt3_single_incident(incident_text: str) -> tuple[bool, str]:
+def prompt3_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
     """
     Step 3: Determine if the incident caused moderate/severe harm or death
     Returns: tuple of (decision: bool, rationale: str)
     """
+    incident_block = _format_incident_context(incident_text, department)
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Did this incident cause moderate harm, severe harm, or death to the patient?
@@ -167,8 +177,7 @@ Consider:
 
 NO or MINIMAL harm means: No injury, or minor temporary discomfort that resolved quickly without intervention.
 
-Incident Description:
-{incident_text}
+{incident_block}
 
 Answer with ONLY "Yes" (for moderate/severe harm or death) or "No" (for no/minimal harm) as the first word of your response, followed by a brief 1-2 sentence explanation of your reasoning.
 

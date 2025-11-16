@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import DataService from '@/lib/DataService';
 import { setAuthToken, setUserData } from '@/lib/Common';
+import { departmentApiToSlug } from '@/lib/departments';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -45,7 +46,7 @@ export default function LoginPage() {
         username: profile.username || formData.username,
         email: profile.email || '',
         role: profile.role || 'viewer',
-        department: profile.department || '',
+        department: departmentApiToSlug(profile.department) || '',
       });
 
       // Redirect to home
