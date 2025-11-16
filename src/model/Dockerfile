@@ -39,7 +39,8 @@ COPY --chown=app:app . ./
 
 RUN uv sync
 
+# Make entrypoint script executable
+RUN chmod +x docker-entrypoint.sh
+
 # Entry point
-ENTRYPOINT ["/bin/bash"]
-# Get into the uv virtual environment shell
-CMD ["-c", "source /home/app/.venv/bin/activate && exec bash"]
+ENTRYPOINT ["/bin/bash", "docker-entrypoint.sh"]

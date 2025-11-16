@@ -1,7 +1,8 @@
 # misc
 .DS_Store
-/docker-volumes
-/outputs
-/secrets
-/_old
+lecture_tutorials/
+docker-volumes/
+outputs/
+secrets/
+_old/
 __pycache__

@@ -48,7 +48,9 @@ def generate_data(input_prompt):
     print("Sucessfully store the data at outputs folder")
 
 def main(args):
+
     print(f"Now the program will generate {args} data")
+
     prompt = f"""
         You are a medical safety analyst.
 
@@ -84,6 +86,7 @@ def main(args):
 
         Do NOT provide any explanation, examples, or extra words. Just provide the numbered list as specified.
         """
+    
     generate_data(prompt)
 
 
@@ -91,11 +94,11 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description="Generate medical incident examples.")
     parser.add_argument(
-        "--generate",
+        "--num_generate",
         type=int,
         default=5,
         help="Number of incident examples to generate (default: 5)",
     )
 
     args = parser.parse_args()
-    main(args.generate)
+    main(args.num_generate)

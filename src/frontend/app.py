@@ -122,13 +122,34 @@ def role_required(*roles):
         return decorated_function
     return decorator
 
-def classify_single_incident(description):
+def classify_single_incident(description, department=None):
     """
     Classify a single safety event incident
-    Returns: dict with classification results including rationales
+    
+    Args:
+        description: Incident description text
+        department: Department where incident occurred (optional)
+    
+    Returns: dict with classification results including rationales and department
     """
+    # Valid departments
+    valid_departments = [
+        "internal medicine",
+        "surgery", 
+        "ob/gyn/nicu",
+        "radiology/imaging",
+        "outpatient/ER"
+    ]
+    
+    # Validate and normalize department
+    if department:
+        department = department.lower().strip()
+        if department not in valid_departments:
+            department = "unspecified"
+    
     result = {
         "incident": description,
+        "department": department,
         "gaps_deviation_check": 'N/A',
         "gaps_rationale": 'N/A',
         "reached_patient_check": 'N/A',
@@ -230,11 +251,25 @@ def process_csv_file(file_path):
             # Use first column if no matching column found
             description_col = df.columns[0]
         
+        # Look for department column
+        department_col = None
+        for col in df.columns:
+            if 'department' in col.lower():
+                department_col = col
+                break
+        
         results = []
         for idx, row in df.iterrows():
             description = str(row[description_col])
             if description and description.strip() and description.lower() != 'nan':
-                result = classify_single_incident(description)
+                # Extract department if column exists
+                department = None
+                if department_col and department_col in row.index:
+                    dept_value = str(row[department_col])
+                    if dept_value and dept_value.strip() and dept_value.lower() != 'nan':
+                        department = dept_value.strip()
+                
+                result = classify_single_incident(description, department)
                 results.append(result)
         
         return results
@@ -526,7 +561,10 @@ def classify():
     if not description:
         return jsonify({"error": "Description cannot be empty"}), 400
     
-    result = classify_single_incident(description)
+    # Extract optional department parameter
+    department = data.get('department', None)
+    
+    result = classify_single_incident(description, department)
     return jsonify(result)
 
 @app.route('/api/classify-batch', methods=['POST'])

@@ -1,0 +1,18 @@
+[project]
+name = "audio-service"
+version = "0.1.0"
+description = "Audio-to-text transcription service for Safety Event Classification System"
+authors = [
+    { name = "Zilong Wang", email = "zilongwang@hsph.harvard.edu" },
+    { name = "Alice Zhang", email = "yue_zhang@hsph.harvard.edu" },
+    { name = "Bruce Zhou", email = "huiyuan_zhou@hsph.harvard.edu" },
+    { name = "Jingxi Zhang", email = "jingxizhang@hsph.harvard.edu" }
+]
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "google-genai>=1.43.0",
+    "google-cloud-speech>=2.28.0",
+    "pydub>=0.25.1",
+    "flask>=3.0.0",
+]

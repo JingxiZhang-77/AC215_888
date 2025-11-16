@@ -1,7 +1,7 @@
 # Use the official Debian-hosted Python image
 FROM python:3.11-slim-bookworm
 
-ARG DEBIAN_PACKAGES="build-essential"
+ARG DEBIAN_PACKAGES="build-essential ffmpeg libsndfile1"
 
 # Prevent apt from showing prompts
 ENV DEBIAN_FRONTEND=noninteractive
