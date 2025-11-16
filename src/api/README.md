@@ -135,15 +135,17 @@ To keep the MVP workflow predictable, only a single administrative account is sh
 ### Option 1: Docker (Recommended)
 
 ```bash
-# Navigate to API directory
-cd src/api
+# From the repository root (AC215_888)
+sh src/api/docker-shell.sh
 
-# Build and run container
-sh docker-shell.sh
-
-# Inside container, start API server
+# Inside the container shell, install secrets (if needed) and start the server
 uvicorn main:app --host 0.0.0.0 --port 9000 --reload
 ```
+
+This script now builds the API image **from the repo root** so that `src/model/simple_prompt_utils.py`
+and other shared assets are copied into the container. If you see the message
+`Warning: simple_prompt_utils not available`, rebuild using this script and ensure the secrets
+volume (`/secrets/llm-service-account.json`) is mounted.
 
 **Verify Installation:**
 ```bash
@@ -317,6 +319,13 @@ Response:
 }
 ```
 > The `classification_*` fields are the canonical outputs. Legacy fields such as `final_classification_code` remain for backward compatibility.
+
+## ⚙️ Troubleshooting
+
+- **Seeing “Mock rationale – prompt utils not available”**  
+  The API fell back to the mock classifier because it could not import `src/model/simple_prompt_utils.py`. Rebuild the Docker image from the **repo root** using `sh src/api/docker-shell.sh` (this copies `src/model` into the container) or, for local dev, run the server from the repo so `src/model` stays on `PYTHONPATH`. Also verify that `google-genai` is installed (`pip install -r pyproject.toml`) and that `GOOGLE_APPLICATION_CREDENTIALS`, `GCP_PROJECT`, and `GCP_REGION` are set.
+- **Credentials warning in entrypoint**  
+  Make sure `secrets/llm-service-account.json` exists and is mounted into the container (`/secrets`). The entrypoint prints a warning if the file is missing.
 
 ### 2. Batch Classification (CSV)
 

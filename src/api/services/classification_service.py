@@ -12,8 +12,20 @@ import pandas as pd
 from datetime import datetime
 import traceback
 
-# Add model directory to path
-sys.path.append(os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'model'))
+# Add model directory to path (supports running from repo root, src/api, or Docker)
+MODEL_DIR = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "..",
+        "model"
+    )
+)
+
+if os.path.isdir(MODEL_DIR) and MODEL_DIR not in sys.path:
+    sys.path.append(MODEL_DIR)
+else:
+    print(f"Warning: model directory not found at {MODEL_DIR}")
 
 try:
     from simple_prompt_utils import (
@@ -22,9 +34,9 @@ try:
         prompt3_single_incident
     )
     PROMPT_UTILS_AVAILABLE = True
-except ImportError:
+except ImportError as exc:
     PROMPT_UTILS_AVAILABLE = False
-    print("Warning: simple_prompt_utils not available")
+    print(f"Warning: simple_prompt_utils not available ({exc})")
 
 from utils.logger import logger
 from utils.config import settings
