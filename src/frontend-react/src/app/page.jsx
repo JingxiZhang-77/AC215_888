@@ -10,18 +10,26 @@ import { Activity, FileText, Mic, Users, BarChart3 } from 'lucide-react';
 export default function Home() {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    if (!isAuthenticated()) {
-      router.push('/login');
-      return;
-    }
-    
-    const userData = getUserData();
-    setUser(userData);
+    // Check authentication status
+    const checkAuth = async () => {
+      if (!isAuthenticated()) {
+        router.push('/login');
+        return;
+      }
+      
+      const userData = getUserData();
+      setUser(userData);
+      setIsChecking(false);
+    };
+
+    checkAuth();
   }, [router]);
 
-  if (!user) {
+  // Show loading only while checking auth
+  if (isChecking || !user) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center">

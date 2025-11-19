@@ -37,7 +37,8 @@ WORKDIR /app
 # Copy the source code
 COPY --chown=app:app . ./
 
-RUN uv sync
+# Dependencies will be installed manually with uv add or uv sync after container start
+# (Keeping image lean for development.)
 
 # Make entrypoint script executable
 RUN chmod +x docker-entrypoint.sh

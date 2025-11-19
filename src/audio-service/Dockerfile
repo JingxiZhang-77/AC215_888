@@ -41,7 +41,7 @@ WORKDIR /app
 # Copy the source code
 COPY --chown=app:app . ./
 
-RUN uv sync
+# Dependencies will be installed manually using uv add inside container (audio-service)
 
 # Make entrypoint script executable
 RUN chmod +x docker-entrypoint.sh

@@ -8,14 +8,15 @@ echo "Safety Event Classification API"
 echo "============================================"
 echo ""
 
-# Activate virtual environment
-source .venv/bin/activate
+# Activate virtual environment (absolute path)
+source /home/app/.venv/bin/activate
 
 # Display environment information
 echo "Environment Information:"
 echo "  Python: $(python --version)"
 echo "  UV: $(uv --version)"
 echo "  Working Directory: $(pwd)"
+echo "  Virtual Env: $(which python)"
 echo ""
 
 # Check for Google Cloud credentials
@@ -48,5 +49,9 @@ echo ""
 echo "============================================"
 echo ""
 
-# Keep container running
-exec /bin/bash
+# Execute passed command or keep container running
+if [ $# -eq 0 ]; then
+    exec /bin/bash
+else
+    exec "$@"
+fi
