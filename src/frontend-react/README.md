@@ -284,3 +284,19 @@ Ensure the backend API has CORS configured to allow requests from http://localho
 ## License
 
 Part of the AC215_888 Safety Event Classification System
+
+## New Feature: Pure Text Translation
+Route: /translate  
+Flow: Input non-English → Detect → Translate (calls /api/v1/translate if available, else local pseudo) → Classify.  
+Detection heuristic supports zh / es / fr / ja / ko. Local fallback adds “[EN][auto]” prefix.
+
+### Usage
+1. Open /translate page.
+2. Paste non-English text (e.g., Chinese).
+3. Click Detect Language → Translate to English.
+4. (Optional) Click Classify Translated Text to run standard classification.
+
+### Implementation Notes
+- Frontend performs naive language detection (regex-based).
+- If backend /translate exists it will be used automatically; else a placeholder “[EN][auto] …” prefix is applied.
+- Classification endpoint unchanged; receives already-English text.

@@ -231,6 +231,8 @@ http://localhost:9000
 | **Audio** ||||
 | POST | `/api/v1/audio/transcribe` | Transcribe audio only | Doctor/Nurse/Admin |
 | GET | `/api/v1/audio/languages` | List supported languages | Public |
+| **Translation** ||||
+| POST | `/api/v1/translate` | Detect language and return English pseudo translation | Public |
 
 ---
 
@@ -278,6 +280,46 @@ curl -X POST http://localhost:9000/api/v1/classify/ \
 
 ---
 
+### Translation Endpoint (Detailed)
+POST /api/v1/translate  
+Purpose: Detect language of arbitrary text and return pseudo English translation (MVP placeholder).  
+
+Request JSON:
+```json
+{
+  "text": "患者今天出现轻微头晕"
+}
+```
+
+Response JSON:
+```json
+{
+  "original_text": "患者今天出现轻微头晕",
+  "detected_lang": "zh",
+  "translated_text": "[EN][auto from Chinese] 患者今天出现轻微头晕",
+  "was_translated": true,
+  "engine": "pseudo"
+}
+```
+
+Field meanings:
+- original_text: Echo of submitted text.
+- detected_lang: Language code (en / zh / es / fr / ja / ko).
+- translated_text: English placeholder (replace with real MT service later).
+- was_translated: False if input already English.
+- engine: "pseudo" (placeholder) or "none".
+
+Curl example:
+```bash
+curl -X POST http://localhost:9000/api/v1/translate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"患者今天出现轻微头晕"}'
+```
+
+Integration note: Frontend /translate 页面优先调用该接口；失败则回退本地伪翻译。
+
+---
+
 ## 💡 Usage Examples
 
 ### 1. Classify Single Incident
@@ -319,13 +361,6 @@ Response:
 }
 ```
 > The `classification_*` fields are the canonical outputs. Legacy fields such as `final_classification_code` remain for backward compatibility.
-
-## ⚙️ Troubleshooting
-
-- **Seeing “Mock rationale – prompt utils not available”**  
-  The API fell back to the mock classifier because it could not import `src/model/simple_prompt_utils.py`. Rebuild the Docker image from the **repo root** using `sh src/api/docker-shell.sh` (this copies `src/model` into the container) or, for local dev, run the server from the repo so `src/model` stays on `PYTHONPATH`. Also verify that `google-genai` is installed (`pip install -r pyproject.toml`) and that `GOOGLE_APPLICATION_CREDENTIALS`, `GCP_PROJECT`, and `GCP_REGION` are set.
-- **Credentials warning in entrypoint**  
-  Make sure `secrets/llm-service-account.json` exists and is mounted into the container (`/secrets`). The entrypoint prints a warning if the file is missing.
 
 ### 2. Batch Classification (CSV)
 
@@ -394,6 +429,40 @@ Response:
   "duration_seconds": 22.1
 }
 ```
+
+### 5. Translation Endpoint
+
+| Method | Endpoint | Description | Auth |
+|--------|----------|-------------|------|
+| POST | /api/v1/translate | Detect language & pseudo-translate to English | Public |
+
+Example:
+```bash
+curl -X POST http://localhost:9000/api/v1/translate \
+  -H "Content-Type: application/json" \
+  -d '{"text":"患者今天出现轻微头晕"}'
+```
+Response:
+```json
+{
+  "original_text": "患者今天出现轻微头晕",
+  "detected_lang": "zh",
+  "translated_text": "[EN][auto from Chinese] 患者今天出现轻微头晕",
+  "was_translated": true,
+  "engine": "pseudo"
+}
+```
+
+Note: Replace pseudo logic with real translation provider in production.
+
+---
+
+## ⚙️ Troubleshooting
+
+- **Seeing “Mock rationale – prompt utils not available”**  
+  The API fell back to the mock classifier because it could not import `src/model/simple_prompt_utils.py`. Rebuild the Docker image from the **repo root** using `sh src/api/docker-shell.sh` (this copies `src/model` into the container) or, for local dev, run the server from the repo so `src/model` stays on `PYTHONPATH`. Also verify that `google-genai` is installed (`pip install -r pyproject.toml`) and that `GOOGLE_APPLICATION_CREDENTIALS`, `GCP_PROJECT`, and `GCP_REGION` are set.
+- **Credentials warning in entrypoint**  
+  Make sure `secrets/llm-service-account.json` exists and is mounted into the container (`/secrets`). The entrypoint prints a warning if the file is missing.
 
 ---
 

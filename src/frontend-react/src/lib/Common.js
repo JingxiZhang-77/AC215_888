@@ -91,3 +91,49 @@ export function uuid() {
     (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
   );
 }
+
+/* ---------- Pure Text Translation Helpers ---------- */
+export function detectLanguage(text = '') {
+  if (!text.trim()) return 'en';
+  if (/[\u4e00-\u9fff]/.test(text)) return 'zh';
+  if (/[\u3040-\u30ff]/.test(text)) return 'ja';
+  if (/[\uac00-\ud7af]/.test(text)) return 'ko';
+  if (/[áéíóúñü¿¡]/i.test(text)) return 'es';
+  if (/[àâçéèêëîïôùûüœ]/i.test(text)) return 'fr';
+  return 'en';
+}
+
+export function needsTranslation(lang) {
+  return lang && lang !== 'en';
+}
+
+export async function simpleTranslate(text) {
+  const lang = detectLanguage(text);
+  if (!needsTranslation(lang)) {
+    return { original: text, translated: text, detected: 'en', wasTranslated: false, source: 'none' };
+  }
+  try {
+    const resp = await fetch(`${BASE_API_URL.replace(/\/$/, '')}/translate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    });
+    if (resp.ok) {
+      const data = await resp.json();
+      return {
+        original: text,
+        translated: data.translated_text || text,
+        detected: data.detected_lang || lang,
+        wasTranslated: data.was_translated ?? true,
+        source: 'api'
+      };
+    }
+  } catch (_) {}
+  return {
+    original: text,
+    translated: `[EN][auto] ${text}`,
+    detected: lang,
+    wasTranslated: true,
+    source: 'local'
+  };
+}

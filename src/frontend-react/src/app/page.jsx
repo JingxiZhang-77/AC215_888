@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { isAuthenticated, getUserData } from '@/lib/Common';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Activity, FileText, Mic, Users, BarChart3 } from 'lucide-react';
+import { Activity, FileText, Mic, Users, BarChart3, Languages } from 'lucide-react';
 
 export default function Home() {
   const router = useRouter();
@@ -68,6 +68,13 @@ export default function Home() {
       icon: Users,
       href: '/users',
       roles: ['admin'],
+    },
+    {
+      title: 'Text Translation',
+      description: 'Translate non-English incident text to English before classification',
+      icon: Languages,
+      href: '/translate',
+      roles: ['admin', 'doctor', 'nurse', 'viewer'],
     },
   ];
 

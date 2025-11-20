@@ -48,6 +48,12 @@ A complete React/Next.js frontend application for the Safety Event Classificatio
    - Role-based access control
    - Real-time user count
 
+### Added: Pure Text Translation
+- /translate page for non-English incident input.
+- Regex language detection (zh/es/fr/ja/ko).
+- Backend /api/v1/translate usage with pseudo fallback.
+- One-click chain Detect → Translate → Classify.
+
 ### 🏗️ Technical Implementation
 
 #### Project Structure
@@ -136,13 +142,14 @@ All backend API endpoints are integrated via `DataService.js` with automatic dep
 6. **Select** - Dropdown with search and keyboard navigation
 7. **Tabs** - Tabbed interface for multi-mode pages
 
-#### Page Components (6 pages)
+#### Page Components (7 pages)
 1. **Home** - Dashboard with feature cards
 2. **Login** - Authentication form
 3. **Classify** - Single incident classification
 4. **Batch** - Bulk file processing
 5. **Audio** - Audio transcription/classification
 6. **Users** - User management (admin)
+7. **Translate** - Pure text translation
 
 ### 🔐 Security Features
 

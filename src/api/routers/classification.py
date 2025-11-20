@@ -130,13 +130,67 @@ async def classify_batch(
             results, dept_stats = classification_service.process_file(tmp_path)
             processing_time = time.time() - start_time
             
-            logger.info(f"Batch processing complete: {len(results)} incidents in {processing_time:.2f}s")
+            # Calculate statistics
+            total_incidents = len(results)
+            successful = sum(1 for r in results if r.get('status') == 'success')
+            failed = total_incidents - successful
+            
+            # Generate classification code summary
+            summary = {}
+            for result in results:
+                code = result.get('classification_code', 'Unknown')
+                summary[code] = summary.get(code, 0) + 1
+            
+            # Generate CSV content
+            import io
+            csv_buffer = io.StringIO()
+            import csv
+            
+            if results:
+                # CSV headers
+                headers = [
+                    'Description', 'Department', 'Deviation Check', 'Deviation Rationale',
+                    'Reached Patient', 'Patient Reach Rationale', 'Harm Level', 'Harm Level Rationale',
+                    'Classification Code', 'Classification Label', 'Classification Rationale', 'Status'
+                ]
+                
+                writer = csv.DictWriter(csv_buffer, fieldnames=headers)
+                writer.writeheader()
+                
+                for result in results:
+                    writer.writerow({
+                        'Description': result.get('incident', ''),
+                        'Department': result.get('department_label', ''),
+                        'Deviation Check': result.get('deviation_check', ''),
+                        'Deviation Rationale': result.get('deviation_rationale', ''),
+                        'Reached Patient': result.get('patient_reach_check', ''),
+                        'Patient Reach Rationale': result.get('patient_reach_rationale', ''),
+                        'Harm Level': result.get('harm_level_check', ''),
+                        'Harm Level Rationale': result.get('harm_level_rationale', ''),
+                        'Classification Code': result.get('classification_code', ''),
+                        'Classification Label': result.get('classification_label', ''),
+                        'Classification Rationale': result.get('classification_rationale', ''),
+                        'Status': result.get('status', 'error')
+                    })
+            
+            results_csv = csv_buffer.getvalue()
+            
+            # Generate output filename
+            from datetime import datetime
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            output_filename = f"classification_results_{timestamp}.csv"
+            
+            logger.info(f"Batch processing complete: {total_incidents} incidents in {processing_time:.2f}s")
             
             return BatchClassificationResponse(
-                results=results,
-                count=len(results),
+                total_incidents=total_incidents,
+                successful=successful,
+                failed=failed,
                 processing_time=processing_time,
-                department_statistics=dept_stats
+                summary=summary,
+                results_file=results_csv,
+                output_filename=output_filename,
+                results=results
             )
             
         finally:

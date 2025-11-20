@@ -139,10 +139,14 @@ class ClassificationResult(BaseModel):
 
 class BatchClassificationResponse(BaseModel):
     """Batch classification response"""
-    results: List[ClassificationResult]
-    count: int
-    processing_time: float
-    department_statistics: Optional[Dict[str, int]] = None
+    total_incidents: int = Field(description="Total number of incidents processed")
+    successful: int = Field(description="Number of successfully classified incidents")
+    failed: int = Field(description="Number of failed classifications")
+    processing_time: float = Field(description="Total processing time in seconds")
+    summary: Dict[str, int] = Field(description="Classification code breakdown")
+    results_file: str = Field(description="CSV content of results")
+    output_filename: str = Field(description="Suggested filename for download")
+    results: Optional[List[ClassificationResult]] = Field(default=None, description="Detailed results (optional)")
 
 
 # ============ Audio Models ============
