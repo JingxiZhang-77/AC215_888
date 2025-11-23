@@ -9,8 +9,9 @@ import time
 from semantic_splitter import SemanticChunker
 import chromadb
 import hashlib
-CHROMADB_HOST = "llm-rag-chromadb"
+CHROMADB_HOST = "localhost"
 CHROMADB_PORT = 8000
+
 gcp_project = "apcomp215-group88"
 bucket_name = "88-data"
 EMBEDDING_MODEL = "text-embedding-004"
@@ -21,8 +22,15 @@ EMBEDDING_DIMENSION = 256
 GENERATIVE_MODEL = "gemini-2.0-flash-001"
 chunk_file = "semantic-chunks-policy.jsonl"
 book_mappings = {
-    "policy": {"author": "LLM", "year": 2025},
+    "Medicine": {"author": "LLM", "year": 2025},
+    "Surgery": {"author": "LLM", "year": 2025},
+    "OB/GYN/NICU": {"author": "LLM", "year": 2025},
+    "Radiology/Imaging": {"author": "LLM", "year": 2025},
+    "Outpatient/ER": {"author": "LLM", "year": 2025},
 }
+
+
+EVENT_TYPE = ['Medicine', 'Surgery', "OB_GYN_NICU", "Radiology_Imaging", "Outpatient_ER"]
 
 
 #############################################################################
@@ -66,40 +74,11 @@ def generate_text_embeddings(chunks, dimensionality: int = 256, batch_size=250, 
 
     return all_embeddings
 
-def get_data_do_chunks():
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob("Mock_policy_RAG/policy.txt")
-    full_text = blob.download_as_text()
-
-    print("Performing semantic chunking...")
-    text_splitter = SemanticChunker(
-        embedding_function=generate_text_embeddings,
-        breakpoint_threshold_type="percentile",  
-        breakpoint_threshold_amount=90           # lower = more chunks
-    )
-
-    text_chunks = text_splitter.create_documents([full_text])
-    text_chunks = [doc.page_content for doc in text_chunks]
-    print("✅ Number of semantic chunks:", len(text_chunks))
-    
-    if text_chunks is not None:
-        # Save the chunks
-        data_df = pd.DataFrame(text_chunks, columns=["chunk"])
-        data_df["book"] = "policy.txt"
-        print("Shape:", data_df.shape)
-        print(data_df.head())
-
-        jsonl_filename = os.path.join(
-            OUTPUT_FOLDER, chunk_file)
-        os.makedirs(OUTPUT_FOLDER, exist_ok=True)
-        with open(jsonl_filename, "w") as json_file:
-            json_file.write(data_df.to_json(orient='records', lines=True))
-
 def embd():
     jsonl_files = glob.glob(os.path.join(
-    OUTPUT_FOLDER, chunk_file))
+        OUTPUT_FOLDER, f"chunks-*.jsonl"))
     print("Number of files to process:", len(jsonl_files))
-    # Process
+    
     for jsonl_file in jsonl_files:
         print("Processing file:", jsonl_file)
         data_df = pd.read_json(jsonl_file, lines=True)
@@ -115,7 +94,7 @@ def embd():
 
         time.sleep(5)
 
-        jsonl_filename = jsonl_file.replace("semantic-chunks-", "embeddings-")
+        jsonl_filename = jsonl_file.replace("chunks-", "embeddings-")
         with open(jsonl_filename, "w") as json_file:
             json_file.write(data_df.to_json(orient='records', lines=True))
 
@@ -185,7 +164,7 @@ def load(method="semantic-chunks"):
 
     # Get the list of embedding files
     jsonl_files = glob.glob(os.path.join(
-        OUTPUT_FOLDER, f"embeddings-policy.jsonl"))
+        OUTPUT_FOLDER, f"embeddings-*.jsonl"))
     print("Number of files to process:", len(jsonl_files))
 
     # Process
@@ -199,11 +178,57 @@ def load(method="semantic-chunks"):
         # Load data
         load_text_embeddings(data_df, collection)
 
+def generate_query_embedding(query):
+    kwargs = {
+        "output_dimensionality": EMBEDDING_DIMENSION
+    }
+    response = llm_client.models.embed_content(
+        model=EMBEDDING_MODEL,
+        contents=query,
+        config=types.EmbedContentConfig(**kwargs)
+    )
+    return response.embeddings[0].values
+
+def query(inputeType, query):
+    print("query()")
+
+    # Connect to chroma DB
+    client = chromadb.HttpClient(host=CHROMADB_HOST, port=CHROMADB_PORT)
+
+    # Construct collection name
+    collection_name = "semantic-chunks-collection"
+    print("Using collection:", collection_name)
+
+    # Load the collection
+    collection = client.get_collection(name=collection_name)
+
+    # 2. Convert query to embedding
+    query_embedding = generate_query_embedding(query)
+
+    RAG_result = "empty"
+    if inputeType in EVENT_TYPE:
+        book = f"{inputeType}.txt"
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=5,
+            where={"book":book}
+        )
+        print("current book=", book)
+        RAG_result = results
+        print(results)
+    
+    return RAG_result
+
 def main():
-    get_data_do_chunks()
     embd()
     load()
 
 
 if __name__ == "__main__":
     main()
+
+    event = "Outpatient_ER"  #put user selection here # choose from "Medicine": "Surgery", "OB_GYN_NICU", "Radiology_Imaging", "Outpatient_ER"
+    user_query = "How do we prevent patient safety errors?"  # put the user input here
+    LLM_input = query(event, user_query)
+
+    
