@@ -213,9 +213,7 @@ def query(inputeType, query):
             n_results=5,
             where={"book":book}
         )
-        print("current book=", book)
         RAG_result = results
-        print(results)
     
     return RAG_result
 
@@ -226,7 +224,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+    # no need to run below code here, import query() function to where front end data will be recored and pass the event and user input event txt in to query(). this function will generate some prompt from RAG database. Then put the result in to LLM so the out put will be closer to what we want.
     event = "Outpatient_ER"  #put user selection here # choose from "Medicine": "Surgery", "OB_GYN_NICU", "Radiology_Imaging", "Outpatient_ER"
     user_query = "How do we prevent patient safety errors?"  # put the user input here
     LLM_input = query(event, user_query)
