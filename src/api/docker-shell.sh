@@ -8,9 +8,8 @@ set -e
 
 # Configuration
 export IMAGE_NAME="safety-event-api"
-export REPO_ROOT=$(cd "$(dirname "$0")/../.." && pwd)
-export API_DIR="$REPO_ROOT/src/api"
-export SECRETS_DIR="$REPO_ROOT/secrets"
+export BASE_DIR=$(pwd)
+export SECRETS_DIR=$(pwd)/../../secrets/
 export GCP_PROJECT="apcomp215-group88"
 export GCP_REGION="us-central1"
 
@@ -23,12 +22,12 @@ fi
 
 # Build the image
 echo "Building Docker image: $IMAGE_NAME"
-docker build -t $IMAGE_NAME -f "$API_DIR/Dockerfile" "$REPO_ROOT"
+docker build -t $IMAGE_NAME -f Dockerfile .
 
 # Run the container
 echo "Starting API container..."
 docker run --rm --name $IMAGE_NAME -ti \
-    -v "$REPO_ROOT":/app \
+    -v "$BASE_DIR":/app \
     -v "$SECRETS_DIR":/secrets \
     -p 9000:9000 \
     -e GOOGLE_APPLICATION_CREDENTIALS=/secrets/llm-service-account.json \

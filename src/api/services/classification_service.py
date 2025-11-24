@@ -13,7 +13,17 @@ from datetime import datetime
 import traceback
 
 # Add model directory to path (supports running from repo root, src/api, or Docker)
-MODEL_DIR = os.path.abspath(
+# Try local model directory first (for Docker build from api dir)
+MODEL_DIR_LOCAL = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "model"
+    )
+)
+
+# Fallback to parent model directory (for running from repo root)
+MODEL_DIR_PARENT = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__),
         "..",
@@ -22,10 +32,17 @@ MODEL_DIR = os.path.abspath(
     )
 )
 
+# Use whichever exists
+if os.path.isdir(MODEL_DIR_LOCAL):
+    MODEL_DIR = MODEL_DIR_LOCAL
+elif os.path.isdir(MODEL_DIR_PARENT):
+    MODEL_DIR = MODEL_DIR_PARENT
+else:
+    MODEL_DIR = MODEL_DIR_LOCAL  # Default to local
+    print(f"Warning: model directory not found at {MODEL_DIR_LOCAL} or {MODEL_DIR_PARENT}")
+
 if os.path.isdir(MODEL_DIR) and MODEL_DIR not in sys.path:
     sys.path.append(MODEL_DIR)
-else:
-    print(f"Warning: model directory not found at {MODEL_DIR}")
 
 try:
     from simple_prompt_utils import (

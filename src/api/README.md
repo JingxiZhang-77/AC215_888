@@ -84,7 +84,7 @@ The Safety Event Classification API provides a comprehensive backend service for
 
 ```
 src/api/
-├── main.py                    # FastAPI application entry point
+├── service.py                 # FastAPI application entry point
 ├── routers/                   # API endpoint definitions
 │   ├── auth.py               # Authentication endpoints
 │   ├── users.py              # User management (admin)
@@ -135,17 +135,19 @@ To keep the MVP workflow predictable, only a single administrative account is sh
 ### Option 1: Docker (Recommended)
 
 ```bash
-# From the repository root (AC215_888)
-sh src/api/docker-shell.sh
+# Navigate to API directory
+cd src/api
 
-# Inside the container shell, install secrets (if needed) and start the server
-uvicorn main:app --host 0.0.0.0 --port 9000 --reload
+# Build and run container
+sh docker-shell.sh
+
+# Inside the container shell, start the development server
+uvicorn_server
 ```
 
-This script now builds the API image **from the repo root** so that `src/model/simple_prompt_utils.py`
-and other shared assets are copied into the container. If you see the message
-`Warning: simple_prompt_utils not available`, rebuild using this script and ensure the secrets
-volume (`/secrets/llm-service-account.json`) is mounted.
+**Note**: The `docker-shell.sh` script builds the Docker image from the current directory (`src/api`). The shared model files from `src/model/` are copied into the api directory before building to make them available in the container.
+
+If you see the message `Warning: simple_prompt_utils not available`, ensure the secrets volume (`/secrets/llm-service-account.json`) is mounted.
 
 **Verify Installation:**
 ```bash
@@ -186,7 +188,7 @@ export GCP_PROJECT=apcomp215-group88
 export GCP_REGION=us-central1
 
 # Run API server
-python main.py
+uvicorn service:app --host 0.0.0.0 --port 9000 --reload
 ```
 
 ### Verify Installation
@@ -535,7 +537,7 @@ mypy .
 1. Create router in `routers/`
 2. Define Pydantic models in `models/schemas.py`
 3. Implement business logic in `services/`
-4. Register router in `main.py`
+4. Register router in `service.py`
 
 Example:
 ```python
@@ -549,7 +551,7 @@ router = APIRouter()
 async def get_stats(user = Depends(require_role("admin"))):
     return {"total_incidents": 1234}
 
-# main.py
+# service.py
 from routers import analytics
 app.include_router(analytics.router, prefix="/api/v1/analytics", tags=["Analytics"])
 ```

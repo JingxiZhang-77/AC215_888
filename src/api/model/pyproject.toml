@@ -1,0 +1,20 @@
+[project]
+name = "medical-severity-classification"
+version = "0.1.0"
+description = "LLM-based classification of hospital safety incidents."
+authors = [
+    { name = "Zilong Wang", email = "zilongwang@hsph.harvard.edu" },
+    { name = "Alice Zhang", email = "yue_zhang@hsph.harvard.edu" },
+    { name = "Bruce Zhou", email = "huiyuan_zhou@hsph.harvard.edu" },
+    { name = "Jingxi Zhang", email = "jingxizhang@hsph.harvard.edu" }
+]
+requires-python = ">=3.11,<3.12"
+
+# === Core dependencies ===
+dependencies = [
+    "google-genai>=1.43.0",
+    "google-generativeai>=0.8.5",
+    "numpy>=2.3.4",
+    "openpyxl>=3.1.5",
+    "pandas>=2.3.3",
+]

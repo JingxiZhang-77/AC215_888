@@ -112,18 +112,6 @@ AC215_888/
 │   │   ├── Dockerfile
 │   │   └── requirements.txt
 │   │
-│   ├── model/                        # LLM classification logic
-│   │   ├── safety_event_classifier.py
-│   │   ├── simple_prompt_utils.py
-│   │   ├── prompt_utils.py
-│   │   ├── Dockerfile
-│   │   └── docker-shell.sh
-│   │
-│   ├── audio-service/                # Audio transcription
-│   │   ├── audio_transcriber.py
-│   │   ├── Dockerfile
-│   │   └── docker-shell.sh
-│   │
 │   └── datapipeline/                 # Data generation
 │       ├── data_generation.py
 │       ├── Dockerfile
@@ -292,23 +280,9 @@ sh docker-shell.sh
 python safety_event_classifier.py -f incidents.csv -d "surgery"
 ```
 
-### 4. Audio Service (`src/audio-service/`)
+**Note:** The standalone model and audio-service directories have been archived. Audio transcription is now integrated into the API service at `src/api/services/audio_service.py`, and model utilities are located at `src/api/model/`.
 
-**Standalone audio transcription** service.
-
-**Features:**
-- Google Speech-to-Text API
-- Medical dictation model
-- Multi-language support
-
-**Usage:**
-```bash
-cd src/audio-service
-sh docker-shell.sh
-python audio_transcriber.py audio_file.mp3 --language en-US
-```
-
-### 5. Data Pipeline (`src/datapipeline/`)
+### 4. Data Pipeline (`src/datapipeline/`)
 
 **Synthetic data generation** for training/testing.
 

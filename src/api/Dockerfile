@@ -31,10 +31,7 @@ USER app
 WORKDIR /app
 
 # Copy dependency files first for better layer caching
-COPY --chown=app:app src/api/pyproject.toml src/api/uv.lock* ./src/api/
-
-# Switch to API directory
-WORKDIR /app/src/api
+COPY --chown=app:app pyproject.toml uv.lock* ./
 
 # Create virtual environment and install dependencies
 RUN uv venv && uv sync --frozen
@@ -42,14 +39,8 @@ RUN uv venv && uv sync --frozen
 # Add venv to PATH so commands are available
 ENV PATH="/home/app/.venv/bin:${PATH}"
 
-# Copy rest of source code (api + model)
-COPY --chown=app:app src/api ./
-WORKDIR /app
-COPY --chown=app:app src/model ./src/model
-COPY --chown=app:app secrets ./secrets
-
-# Return to API directory for entrypoint
-WORKDIR /app/src/api
+# Copy rest of API source code
+COPY --chown=app:app . .
 
 # Make entrypoint executable
 RUN chmod +x docker-entrypoint.sh
