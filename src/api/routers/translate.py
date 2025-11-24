@@ -31,8 +31,16 @@ def fallback_translate(text: str, lang: str) -> str:
     """
     Fallback translation when Google Translate is not available
     Provides a clear indication that the text needs translation
+    
+    Supported languages:
+    - zh-CN: Simplified Chinese
+    - zh-TW: Traditional Chinese
+    - es: Spanish
+    - fr: French
     """
     lang_names = {
+        "zh-CN": "Simplified Chinese",
+        "zh-TW": "Traditional Chinese",
         "zh": "Chinese",
         "ja": "Japanese",
         "ko": "Korean",
@@ -82,9 +90,17 @@ def translate_text(req: TranslateRequest):
         logger.info(f"Translating from {lang} to English")
         
         try:
+            # Google Translate uses 'zh-CN' and 'zh-TW' for Chinese variants
+            # But also accepts 'zh' as simplified Chinese
+            source_lang = lang
+            if lang == "zh-CN":
+                source_lang = "zh-CN"  # Simplified Chinese
+            elif lang == "zh-TW":
+                source_lang = "zh-TW"  # Traditional Chinese
+            
             result = translate_client.translate(
                 req.text,
-                source_language=lang,
+                source_language=source_lang,
                 target_language='en'
             )
             

@@ -10,9 +10,7 @@ from typing import Dict, Any
 
 from models.schemas import (
     UserLogin,
-    TokenResponse,
-    PasswordResetRequest,
-    PasswordReset
+    TokenResponse
 )
 from utils.auth import hash_password, verify_password, create_access_token, require_role
 from utils.logger import logger
@@ -21,19 +19,20 @@ from utils.config import settings
 router = APIRouter()
 
 # In-memory user storage (replace with database in production)
-users_db: Dict[str, Dict[str, Any]] = {
-    "admin": {
-        "username": "admin",
-        "email": "admin@hospital.com",
-        "password_hash": hash_password("admin123"),
-        "role": "admin",
-        "department": "internal medicine",
-        "created_at": datetime.utcnow().isoformat()
-    }
-}
+# Lazy initialization to avoid hashing at import time
+users_db: Dict[str, Dict[str, Any]] = {}
 
-# Password reset tokens (replace with Redis/database in production)
-reset_tokens: Dict[str, Dict[str, Any]] = {}
+def _initialize_default_users():
+    """Initialize default users on first access"""
+    if not users_db:
+        users_db["admin"] = {
+            "username": "admin",
+            "email": "admin@hospital.com",
+            "password_hash": hash_password("admin123"),
+            "role": "admin",
+            "department": "internal medicine",
+            "created_at": datetime.utcnow().isoformat()
+        }
 
 
 @router.post(
@@ -54,6 +53,9 @@ async def login(credentials: UserLogin):
     ```
     """
     try:
+        # Initialize default users on first access
+        _initialize_default_users()
+        
         # Get user
         user = users_db.get(credentials.username)
         
@@ -103,126 +105,6 @@ async def login(credentials: UserLogin):
         raise HTTPException(
             status_code=500,
             detail="Login failed"
-        )
-
-
-@router.post(
-    "/forgot-password",
-    summary="Request password reset"
-)
-async def forgot_password(request: PasswordResetRequest):
-    """
-    Request password reset token
-    
-    Request body:
-    ```json
-    {
-        "username": "jdoe",
-        "email": "jdoe@hospital.com"
-    }
-    ```
-    
-    In production, this would send an email with reset link.
-    For development, returns the token in response.
-    """
-    try:
-        # Find user
-        user = users_db.get(request.username)
-        
-        if not user or user["email"] != request.email:
-            # Don't reveal if user exists
-            return {
-                "message": "If the credentials are correct, a reset token has been generated",
-                "dev_note": "Invalid credentials" if not user or user["email"] != request.email else None
-            }
-        
-        # Generate reset token
-        import secrets
-        reset_token = secrets.token_urlsafe(32)
-        
-        reset_tokens[reset_token] = {
-            "username": request.username,
-            "expires": (datetime.utcnow() + timedelta(hours=1)).isoformat()
-        }
-        
-        logger.info(f"Password reset requested for: {request.username}")
-        
-        # In production, send email here
-        # For development, return token
-        return {
-            "message": "Password reset token generated",
-            "dev_token": reset_token,  # Remove in production
-            "dev_note": "In production, this token would be emailed to the user"
-        }
-        
-    except Exception as e:
-        logger.error(f"Password reset error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Password reset failed"
-        )
-
-
-@router.post(
-    "/reset-password",
-    summary="Reset password with token"
-)
-async def reset_password(reset_data: PasswordReset):
-    """
-    Reset password using reset token
-    
-    Request body:
-    ```json
-    {
-        "token": "reset_token_here",
-        "new_password": "newpassword123"
-    }
-    ```
-    """
-    try:
-        # Validate token
-        if reset_data.token not in reset_tokens:
-            raise HTTPException(
-                status_code=400,
-                detail="Invalid or expired reset token"
-            )
-        
-        token_info = reset_tokens[reset_data.token]
-        
-        # Check expiration
-        expires = datetime.fromisoformat(token_info["expires"])
-        if datetime.utcnow() > expires:
-            del reset_tokens[reset_data.token]
-            raise HTTPException(
-                status_code=400,
-                detail="Reset token has expired"
-            )
-        
-        # Update password
-        username = token_info["username"]
-        if username in users_db:
-            users_db[username]["password_hash"] = hash_password(reset_data.new_password)
-            del reset_tokens[reset_data.token]
-            
-            logger.info(f"Password reset successful for: {username}")
-            
-            return {
-                "message": "Password reset successfully",
-                "username": username
-            }
-        else:
-            raise HTTPException(
-                status_code=404,
-                detail="User not found"
-            )
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Password reset error: {e}")
-        raise HTTPException(
-            status_code=500,
-            detail="Password reset failed"
         )
 
 

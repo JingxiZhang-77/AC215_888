@@ -31,10 +31,10 @@ USER app
 WORKDIR /app
 
 # Copy dependency files first for better layer caching
-COPY --chown=app:app pyproject.toml uv.lock* ./
+COPY --chown=app:app pyproject.toml ./
 
 # Create virtual environment and install dependencies
-RUN uv venv && uv sync --frozen
+RUN uv venv && uv sync
 
 # Add venv to PATH so commands are available
 ENV PATH="/home/app/.venv/bin:${PATH}"

@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Remove standalone output for dev - it's for production builds only
-  // output: 'standalone',
   
   // Ensure proper webpack configuration for Docker development
   webpack: (config, { dev, isServer }) => {
@@ -10,11 +8,25 @@ const nextConfig = {
     if (dev) {
       config.cache = false;
     }
+    
+    // Improve module resolution
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      net: false,
+      tls: false,
+    };
+    
     return config;
   },
   
-  // Set asset prefix to ensure chunks load correctly
-  assetPrefix: process.env.NODE_ENV === 'production' ? undefined : '',
+  // Optimize for Docker environment
+  swcMinify: true,
+  
+  // Set proper timeouts for chunk loading
+  experimental: {
+    optimizeCss: false,
+  },
 }
 
 module.exports = nextConfig
