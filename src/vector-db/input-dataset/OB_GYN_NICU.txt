@@ -1,0 +1,4917 @@
+1
+HPI SEC & 
+SSER
+Patient safety measurement 
+system for healthcare
+
+2
+The healthcare industry has continued 
+in recent years to focus more attentively 
+on patient safety. Specific actions of 
+necessity include the necessity to measure 
+improvement and identify performance 
+benchmarks.
+While healthcare holds healing without 
+harm as its core value, we still lack a 
+consistent nationally accepted method 
+to measure performance against this 
+promise. Several patient safety event 
+taxonomies have emerged in past years, 
+yet these category-based classifications 
+do not provide a universally recognized 
+means of consistently measuring the 
+harm that results from safety events. This 
+lack of a standard definition of patient 
+harm leads organizations to use disparate, 
+subjective determinations that require 
+significant interpretation which add to the 
+shortcomings already identified.1, 2, 3
+Concern about these issues was first 
+voiced at the 2006 HPI Safety Summit, 
+an annual gathering of organizations 
+engaged with Healthcare Performance 
+Improvement (HPI) in safety culture 
+improvement. These client organizations 
+expressed the need for a reliable 
+outcome measure for patient safety that 
+can be used to appropriately measure 
+performance within an individual site of 
+care in an organization and by comparing 
+progress to zero harm across an 
+organization or between organizations on 
+the same journey.
+In response, Safety Event Classification 
+(SECÂ®) and the Serious Safety Event Rate 
+(SSERÂ®) were developed. Safety Event 
+Classification provides common definitions 
+and an algorithm for the classification of 
+safety events. The classification is based 
+on the degree of harm that results from 
+a deviation from expected performance 
+standards. It serves as the foundation for 
+the calculation of the Serious Safety Event 
+Rate (SSERÂ®), a volume-adjusted measure 
+of events resulting in moderate to severe 
+harm, including death. 
+"As to diseases, make a habit 
+of two things: to help, or at 
+least to do no harm."
+Source: Hippocrates, Of the Epidemics, Book 1, 
+Section XI, 400 BC
+Executive Summary
+
+3
+Together, the SECÂ® and SSERÂ® provide a 
+consistent methodology for measuring 
+patient harm and improvement in reducing 
+harm. Thousands of hospitals, ambulatory, 
+and long-term care sites across the United 
+States, Canada and other countries are 
+currently using the SECÂ® and SSERÂ®.
+This revision encompasses refinements 
+from the 2019 release and also provides 
+further clarity and guidance in conducting 
+SECÂ® and using the SSERÂ® as a key 
+measure of patient harm. Updates include:
+â€¢	
+Changes to the Levels of Harm 
+(Appendix A) that provide more 
+guidance in applying the SECÂ® process 
+to alternative sites of care.
+â€¢	
+Working with common classification 
+challenges (Appendix C), additional 
+guidance in addressing questions of 
+causation, and applying the Known 
+Complications Test.
+â€¢	
+Focus on other frequently 
+encountered issues such as 
+Emotional Harm, Unconscious 
+Bias and Diagnostic Error.
+â€¢	
+Safety Event Classification 
+Process (Appendix H) guidance 
+for organizations to implement an 
+effective structure for conducting 
+safety classification and monitoring 
+of the SSERÂ® on an ongoing basis.
+The application of these concepts has 
+been expanded in this White Paper 
+with distinctions relevant to all sites of 
+care from acute to long term care, to 
+hospice, home care and ambulatory 
+care. The title we give to the person(s) 
+for whom we provide care is important. 
+When specifically discussing those post-
+acute situations, we have purposely and 
+respectfully used the term resident or 
+client. 
+But for efficiency, during the larger 
+narrative, the term patient is used to refer 
+to the person to whom we provide care 
+whatever the site of that care may be.
+Revision 5 - October 2022
+Revision 4 â€“ December 2020
+Revision 3 â€“ October 2019
+Revision 2 â€“ May 2011
+Revision  1 â€“ December 2009
+Revision 0 â€“ May 2009
+Executive Summary
+
+4
+Past History of Safety 
+Event Review and 
+Classification
+Development of 
+HPI Safety Event 
+Classification clear data
+Recent history of Safety 
+Event Review and 
+Classification 
+Table of contents
+High reliability principles 
+in Safety Event 
+Classification
+Assessing for deviations
+Assessing for causation
+Assessing Outcome to 
+the Patient
+Additional 
+considerations in Safety 
+Event Classification
+Choosing a 
+denominator
+Comprehensive capture 
+of events
+Consistent application 
+of the HPI SEC criteria
+Practices to support 
+Safety Event 
+Classification
+HPI Safety Event 
+Detection Assessment 
+survey for hospitals
+Application of SSER as a 
+safety metric
+1. 
+Event 
+classification 
+in healthcare
+3. 
+HPI Serious 
+Safety Event 
+Rate (SSERÂ®)
+2. 
+HPI Safety 
+Event 
+Classification 
+(SECÂ®)
+4. 
+Applying 
+Patient Safety 
+Measurement 
+System
+Contents
+
+5
+1 
+Event 
+Classification 
+in healthcare
+Past History of Safety 
+Event Review and 
+Classification
+Development of 
+HPI Safety Event 
+Classification clear data
+Recent history of Safety 
+Event Review and 
+Classification
+
+6
+Past History of Safety Event 
+Review and Classification
+Since the publication in November 1999 
+of the Institute of Medicine report on 
+patient safety, To Err is Human, national and 
+international organizations have focused 
+on mechanisms to describe and classify 
+events of harm. Some of these efforts have 
+used collaborative approaches to achieve 
+consensus on a universal, standardized 
+patient safety event classification system. 
+Numerous event classification systems have 
+emerged, and some organizations have 
+begun working together to harmonize, or 
+align, existing taxonomies and definitions. 
+The Joint Commission, the National 
+Quality Forum (NQF) and the World Health 
+Organization (WHO) led the initial efforts to 
+classify events that cause harm to patients. 
+
+The Joint Commission took the first step 
+in 1996 by defining a sentinel event as 
+the following:
+â€œany unexpected occurrence 
+involving death or serious 
+physical or psychological 
+injury, or the risk thereof. 
+Serious injury specifically 
+includes loss of limb or 
+function. The phrase, â€˜or the 
+risk thereofâ€™ includes any 
+process variation for which 
+a recurrence would carry a 
+significant chance of a serious 
+adverse outcome. Such events 
+are called "sentinel" because 
+they signal the need for 
+immediate investigation 
+and response.â€4
+In 2002, the National Quality Forum5 
+endorsed a set of 27 serious reportable 
+events in healthcare, or â€œnever events.â€ 
+To qualify for this core list of serious 
+reportable events, an event had to be 
+unambiguous, usually preventable, serious, 
+and one or more of the following: adverse, 
+indicative of a problem in a health care 
+facilityâ€™s safety systems, or important for 
+public credibility or public accountability.6 
+Requiring that an event be usually 
+preventable recognizes that some of these 
+events are not always avoidable, given the 
+complexity of healthcare. 
+The presence of an event on the list, 
+therefore, is not an a priori judgment either 
+of a systems failure or lack of 
+due care. With new evidence and 
+innovation, this initial list of serious 
+reportable events was expanded in 
+2006 to include 28 events.7
+1
+Event Classification in 
+healthcare
+
+7
+In early 2005, the Joint Commission 
+developed a Patient Safety Event Taxonomy 
+(PSETâ„¢).8 The PSET outlined terminology 
+and classification schema for near misses 
+and adverse events. The goal of the 
+Joint Commission PSET was to facilitate 
+a common approach for collecting and 
+organizing patient safety data. This 
+taxonomy was endorsed later that year by 
+the NQF as a framework for aggregating, 
+classifying, and reporting data for national 
+patient safety improvement.
+The World Health Organization (WHO) 
+established the World Alliance for Patient 
+Safety in October 2004. It was the first time 
+that health focused agencies, health policy-
+makers, and representatives or patients' 
+groups and the WHO came together to 
+advance the patient safety goal of "First 
+do no harmâ€. They recognized healthcareâ€™s 
+current inability to classify, aggregate, and 
+compare patient safety information across 
+organizations internationally. They began 
+working in 2005 on an event classification 
+structure. Their goal was to enable 
+categorization of patient safety information 
+using standardized sets of concepts with 
+agreed definitions and preferred terms. In 
+January 2009 the WHO published 
+the International Classification for Patient 
+Safety9 (ICPS). ICPS draws upon the work 
+of the Joint Commission's PSET as well as 
+other national safety event classifications 
+of the United Kingdom, Australia, and the 
+Netherlands.
+In December 2008, the Department of 
+Health and Human Services reported that 
+26 states had adverse event reporting 
+systems and another state had taken action 
+to develop one10. Eleven of the 26 states 
+adopted â€“ unaltered or with modifications 
+â€“ the NQF list of serious reportable events 
+as the foundation for their adverse event 
+reporting system, while 15 states use a 
+state-generated list.
+The Patient Safety and Quality Improvement 
+Act of 2005 guided the Department of 
+Health and Human Services (HHS) to begin 
+the process of creating structure and 
+guidance for Patient Safety Organizations 
+(PSOs) 11. By conferring privilege and 
+confidentiality protections on providers who 
+work with listed PSOs, the Act was intended 
+to promote shared learning to enhance 
+quality and safety nationally. The Agency 
+for Health Research and Quality (AHRQ) 
+completed this work in 2008 
+and organizations began to be 
+officially listed as PSOs.
+As part of the implementation of PSOs, 
+the AHRQ worked with the NQF, a Federal 
+Patient Safety Work Group and expert 
+panels to create an event reporting 
+taxonomy called Common Formats 
+for Event Reporting. 
+The first version of the Common Formats 
+was published in August 2008. Throughout 
+the years and with the support of expert 
+panels and PSO members, updates were 
+released including Version 1.0 in September 
+2009 and Version 1.1 in March 2010. Versions 
+for specific healthcare settings have been 
+subsequently released such as nursing 
+homes (2011), hospitals (2014), and 
+community pharmacies (2016). The most 
+recent release was the Hospital Version 
+2.0. in May 2017.12
+1
+Event Classification in 
+healthcare
+
+8
+Development of HPI Safety 
+Event Classification
+ As HPI began its work with healthcare 
+organizations around the country it was 
+recognized that there was no consistent 
+methodology for classification of all 
+types of events in all settings. In 2007, HPI 
+developed and implemented a standardized 
+process for safety event classification 
+for all of its client organizations. This 
+classification methodology, the Safety 
+Event ClassificationÂ® (SEC) provides 
+common definitions and an algorithm for 
+the classification of safety events. The 
+classification is based on the degree of 
+harm that results from a deviation from 
+expected performance standards. It serves 
+as the foundation for the calculation of 
+the Serious Safety Event Rate (SSER)Â®, 
+a volume-adjusted measure of events 
+resulting in moderate to severe harm, 
+including death. It blended the need to 
+standardize the organization of events 
+by the level of harm experienced by the 
+patient, but classifying them based on 
+whether they were indeed preventable 
+safety events. They also compiled a 
+nationally recognized and/or endorsed 
+safety event nomenclatures. The HPI 
+Taxonomy of Safety Events in Healthcare, 
+the results of examination of the 
+compilation, reflected an alignment, or 
+harmonization, of various classification 
+systems. The first White Paper, The HPI 
+SEC & SSER Patient Safety Measurement 
+System for Healthcare was published 
+May 2009.13
+In 2011, an extensive evaluation of the event 
+types was conducted and informed from 
+internal data analytics. A refined version 
+reflected the consequences, rather than 
+the causal factors that contributed to the 
+event. The refinement logic was based on 
+capturing the type of event that the patient 
+experienced. The event causal factors are 
+more appropriately captured as part of 
+the performance of cause analysis that is 
+intended to identify the high leverage areas 
+for targeted action. These changes and 
+others were reflected in an updated White 
+Paper in May 2011.14
+The SECÂ® process and the Safety Event 
+Taxonomy continues to be periodically 
+evaluated for possible updates to reflect 
+changes as nationally endorsed safety 
+event reporting standards and taxonomies 
+continue to evolve. Whenever there is 
+a revision, the harmonization, current 
+with the publication of this paper, is also 
+updated. With the listing of the HPI Press 
+Ganey PSO in December 2016, extensive 
+experience has also been gained from 
+organizations using the SEC.
+1
+Event Classification in 
+healthcare
+
+9
+1
+Event Classification in 
+healthcare
+Recent history of Safety 
+Event Review Classification 
+All of the above-mentioned organizations 
+have continued to focus on the subject 
+of patient safety event classification 
+and review. In some cases, updates 
+to taxonomies have occurred. AHRQ 
+continues to update their quality and safety 
+indicators. The most recent update in 2019 
+indicated that 21 Quality Indicators were 
+retired for various reasons.15 As part of the 
+implementation of the Patient Safety Act of 
+2005, AHRQ continues the analysis of their 
+Common Formats for hospitals, community 
+pharmacies and nursing homes. The most 
+recent update to the hospital data set 
+occurred in August 2018.16
+The Joint Commission continues to update 
+their Sentinel Event Policy every 2-3 years. 
+In 2016 they updated their definition of 
+severe temporary harm to reflect the HPI 
+definition of this level of harm.17
+In 2015, a diverse coalition of health 
+care leaders, the Core Quality Measures 
+Collaborative (CQMC) was convened by 
+Americaâ€™s Health Insurance Providers 
+(AHIP), the Centers for Medicare & Medicaid 
+Services (CMS) and the National Quality 
+Forum (NQF). They represent over 75 
+consumer groups, medical associations, 
+health insurance providers, purchasers 
+and other quality stakeholders. The 
+purpose of the CQMC was to develop and 
+recommend sets of core quality measures. 
+These measures cover more specific 
+clinical settings such as Accountable Care 
+Organizations, primary care and patient 
+centered medical homes and specific 
+clinical topics such as gastroenterology and 
+obstetrics and gynecology. They recently 
+published the first four of 10 anticipated 
+new measure sets.18 
+Finally, per a 2014 report, 28 states and the 
+District of Columbia now require adverse 
+event reporting.19 
+Since 2007 and 2016 respectively, HPI and 
+the HPI Press Ganey PSO has had extensive 
+experience with hundreds of healthcare 
+systems and thousands of healthcare 
+settings who have used the SEC and 
+the SSER as a core component of their 
+patient safety program. These experiences 
+have provided significant opportunities 
+to understand what issues should be 
+addressed during the journey to reliable and 
+safe patient care. This current White Paper 
+update is a reflection of the hard work, the 
+questions, and the struggles of all of these 
+organizations across the United States and 
+the world in the journey toward Zero Harm.
+
+10
+2 
+HPI Safety Event 
+Classification 
+(SEC)
+High reliability 
+principles in Safety 
+Event Classification
+Assessing for deviations
+Assessing for causation
+Assessing Outcome to 
+the Patient
+Additional 
+considerations in Safety 
+Event Classificatio
+
+11
+The goal of excellence in healthcare 
+focuses on reducing patient suffering. 
+Unfortunate outcomes in healthcare do 
+occur. Inherent or unavoidable suffering 
+includes the experience related to the 
+disease process itself. It can also include 
+the known complications of treatments 
+and procedures deemed â€œworth the riskâ€ 
+when considering the likely outcome if 
+the procedure is not performed. True 
+accidents, such as a slip and fall of a 
+patient, appropriately evaluated as low fall 
+risk, sometimes happen. And eventually, 
+the human body fails despite all efforts. The 
+reality is that not all bad outcomes result 
+from defects in care.
+Despite these truths, thousands of 
+healthcare leaders, clinicians and staff have 
+worked tirelessly toward a goal of reducing 
+harm. Many have set a goal of zero harm 
+because â€œZero is the only acceptable 
+number in safety.â€20 Avoidable suffering is 
+the focus of healthcare organizations as 
+they work toward this goal. Events of harm 
+are outcomes that do result from defects 
+in care. The healthcare industry has an 
+obligation to protect patients from harm â€“ 
+to keep them safe while under our care. To 
+be useful in measuring performance to this 
+obligation, a patient safety measurement 
+system must distinguish preventable harm 
+from bad outcomes through a reliable, 
+repeatable method.
+The Safety Event Classification (SEC) 
+system, shown in Figure 1, provides this 
+method and is the foundation for a 
+fundamental lagging measure of patient 
+safety outcomes.
+Most current event taxonomies are 
+structured within categorical classification 
+domains. Events are identified by event 
+type, such as a wrong site procedure, fall 
+with injury, or burn. In contrast, the SEC is 
+an outcome-based classification system 
+that takes event classification 3 steps 
+further:
+1.	
+the event is assessed for defects in 
+care, or deviations from generally 
+accepted performance standards 
+(GAPS);
+2.	
+a direct cause-and-effect relationship 
+between deviations and the outcome is 
+established, and
+3.	
+the safety event is classified according 
+to level of patient harm resulting from 
+the event.
+The SEC follows an algorithm based on 
+these three steps and is illustrated in 
+Figure 2. This algorithm should be 
+consistently applied when conducting 
+safety event classification that leads 
+to either determining that this is not a 
+preventable safety event or that it is a safety 
+event of one of three types â€“ a near miss, a 
+precursor event, or a serious safety event. 
+These classifications are further explained in 
+this narrative in the Assessing Outcome to 
+the Patient section.
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+12
+High Reliability Principles in 
+Safety Event Classification
+Notwithstanding all the details of the SECÂ® 
+described elsewhere, the primary goal of 
+any safety classification effort is to identify 
+opportunities for improvement and assure 
+that we have done all we can to best 
+protect a patient from harm.
+For almost two decades, healthcare 
+organizations have focused on applying 
+principles of high reliability in their work 
+to achieve safe outcomes for patients, 
+family, visitors, and the workforce in these 
+organizations. The five principles described 
+by Weick and Sutcliffe21 are all relevant to 
+the process of safety event classification 
+and ultimately the analysis of events to 
+identify root causes so that corrective 
+actions can be put in place.
+In particular, the principle of a 
+preoccupation with failure is important to 
+consider in the SEC process, both when 
+considering deviations from GAPS and the 
+level of harm. 
+The recognition that small, seemingly 
+inconsequential errors are 
+a symptom that something is wrong 
+enables an organization to pay attention 
+to deviations and what can be learned 
+from them, irrespective of the outcome 
+to the patient.
+One challenge in any event review 
+process is the realization that sometimes 
+the safety event is caused by an action 
+that is not taken rather than a wrong 
+action; an error of omission not 
+commission. Also, at times there can 
+be a reluctance to identify a case as a 
+preventable safety event because those 
+reviewing the case do not want to make 
+assumptions about the decisions made 
+or actions that are taken as they put 
+themselves in the shoes of the caregiver. 
+During a review of an event, it can be 
+difficult at times to recreate those 
+â€œin-the-momentâ€ decisions that are 
+made to determine if they were 
+correct or not correct. 
+When faced with this situation it is 
+recommended that an organization 
+do the following:
+1.	
+Ask the question â€œAre we holding 
+ourselves to the highest standard of 
+careâ€? The difference here is that we 
+are focusing on standards of reliability 
+and safety, not legality.
+2.	
+Incorporate other principles of high 
+reliability into the discussion as 
+relevant, in particular a â€œsensitivity to 
+operationsâ€ (paying attention to whatâ€™s 
+happening on the front line) and a 
+â€œreluctance to simplify interpretationsâ€ 
+(encouraging diversity in perspectives 
+to avoid quick decisions).
+2
+HPI Safety Event 
+Classification (SECÂ®)
+Â©2006 Healthcare Performance Improvement, LLC
+Was there a deviation from generally 
+accepted performance standards?
+Did the deviation reach the patient?
+Did the deviation cause moderate to severe 
+harm or death?
+SERIOUS SAFETY EVENT
+PRECURSOR SAFETY EVENT
+NEAR-MISS SAFETY EVENT
+NOT A SAFETY EVENT
+YES
+YES
+YES
+NO
+NO
+NO
+Figure 2
+Safety Event Decision Algorithm
+
+13
+Before addressing the extent of harm that 
+the patient experiences in an event, it is 
+critical to confirm that in fact the event was 
+avoidable or preventable. For this reason, 
+the first two of the defining considerations 
+of the SEC are 1) the presence of a deviation 
+from generally accepted performance 
+standards (GAPS) and 2) the extent to which 
+the deviation caused, contributed to or 
+otherwise worsened an already existing 
+condition.
+Types of deviations
+There are two predominant types of human 
+performance deviations: (1) human acts, 
+hereafter called human errors, and (2) 
+equipment, device, and technology failures, 
+hereafter called equipment failures. In 
+addition, although they are a relatively small 
+contributor, there is the potential for natural 
+disasters such as wildfires, hurricanes, 
+pandemics to place extreme pressures on 
+normal human performance.
+Human errors are the most common 
+deviations leading to safety events. Human 
+errors fall into five categories in the HPI 
+Taxonomy of Individual Failure Mechanisms 
+(Appendix F-1):
+â€¢	
+Competency of the individual
+â€¢	
+Consciousness of the task at hand
+â€¢	
+Communication of information
+â€¢	
+Critical thinking in decision making
+â€¢	
+Compliance with known procedures 
+and standards of care.
+A brief mention regarding equipment 
+failures as deviations is appropriate at this 
+time. At times, patient care equipment or 
+other mechanical tools in the organization 
+appear to be the proximate cause of an 
+event. The consideration regarding whether 
+these failures are entirely unpredictable and 
+therefore not a preventable failure should 
+take into consideration factors such as:
+â€¢	
+Confirmation that there was no user 
+error or technique failure
+â€¢	
+Was the equipment created or 
+manufactured in-house and not by 
+professional engineers
+â€¢	
+Was there an issue with preventive 
+maintenance of the equipment?
+â€¢	
+Did a failure occur at an earlier time 
+and not get reported or addressed 
+appropriately or in a timely manner?
+â€¢	
+Would an equipment failure have been 
+predictable if there was a sufficient 
+"preoccupation with failure" culture?
+While human errors are the most 
+proximate, or immediate, causes of safety 
+events, human performance, however, 
+is heavily influenced by conditions in 
+the organizationâ€™s systems. Failures in 
+the system might actually be the more 
+significant deviation or root cause that 
+leads to a patient safety event. This topic 
+is addressed in more detail in Appendix 
+C (Frequently Asked Questions in Using 
+Safety Event Classification).
+Assessing for deviations
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+14
+System weaknesses fall into five categories 
+in the HPI Taxonomy of System Failure 
+Mechanisms (Appendix F-2):
+â€¢	
+Organizational Structure
+â€¢	
+Organizational Culture
+â€¢	
+Work processes
+â€¢	
+Policies and protocol
+â€¢	
+Environment and technology.
+â€¢	
+Identifying Deviations.
+A deviation from GAPS is defined as any 
+time a difference is detected between 
+expected and actual performance. This 
+includes times that expected performance 
+may not be industry best practice. 
+Wherever a difference exists between 
+expected and actual performance, a 
+deviation from GAPS exists.
+Identifying deviations
+A deviation from GAPS is defined as any 
+time a difference is detected between 
+expected and actual performance. This 
+includes times that expected performance 
+may not be industry best practice. 
+Wherever a difference exists between 
+expected and actual performance, a 
+deviation from GAPS exists.
+There are two factors which should be 
+considered when identifying deviations. 
+First, organizational practice expectations 
+(written or unwritten) do not always reflect 
+national best practice performance 
+standards in protecting patients from 
+harm. When reflecting on whether 
+performance standards have been met, 
+consideration should include external as 
+well as internal sources of information 
+such as established policies, procedures, 
+and protocols; nationally recognized 
+best practices and standards of care; 
+industry-imposed practice mandates and 
+requirements; implied professional practice 
+standards; and objective clinical review by 
+other experts (e.g., peer review). And most 
+importantly it is important to confirm that 
+the organization met its obligation to best 
+protect the patient from harm.
+Second, is the fact that standards 
+continue to rise over time as a result of 
+process improvements, advancements in 
+technology, and clinical breakthroughs. 
+What is considered a â€œgenerally accepted 
+performance standardâ€ today may, in the 
+future, be assessed as a deficiency in care.
+Considering "known 
+complications"
+Clinical complications are a known risk of 
+certain procedures, treatments, or tests. 
+Yet the decision is made to continue with 
+the procedure, treatment, or test because 
+the potential benefit is thought to be worth 
+the risk associated with the intervention. 
+Known complications should be 
+distinguished from safety events resulting 
+from deviations from GAPS.
+Distinguishing between known 
+complications and safety events, however, 
+can be challenging. In order to support 
+this process HPI defined a Known 
+Complications â€œTestâ€ to help determine if 
+an event is a known complication and, if so, 
+whether providers did everything possible 
+to prevent the negative outcome. The 
+Known Complications Test consists of 4 
+questions that should be applied when an 
+organization is attempting
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+15
+2
+HPI Safety Event 
+Classification (SECÂ®)
+The known complication test
+Figure 3
+Known complication questions
+Considerations
+Was the procedure, treatment, or test 
+appropriate or warranted for the patient 
+based on nationally recognized standards 
+of care?
+Since the complication is a known 
+risk, was it anticipated before the test, 
+treatment or procedure and was the 
+standard of care employed to mitigate 
+that risk?
+Was the complication identified in 
+a timely manner?
+Was the complication treated according 
+to the standard of care?
+	â€“
+Was the planned test or procedural appropriate 
+given the condition and urgency at the time?
+	â€“
+Were there tests, treatments or procedures 
+available that had the potential to address the 
+identified problem with less risk?
+	â€“
+Was this an appropriate time for the procedure 
+to be performed, e.g. there were other medical 
+instability factors to consider, was it critical to do 
+the test or procedure at this time or could the 
+patient have been stabilized first?
+	â€“
+With knowledge of the potential risks or 
+complications, was sufficient effort made to avoid 
+any anticipated problems?
+	â€“
+These efforts could include type of equipment 
+used, expertise available to perform the 
+procedure, test or treatment, preparation of a 
+team to be aware of the risks and readiness to 
+address them quickly
+	â€“
+What was the earliest possible time that the 
+complication would have been expected to be 
+identified, e.g. during the procedure or treatment 
+itself or within a short period of time after the test 
+treatment or procedure is completed?
+	â€“
+Was monitoring or observation in place long 
+enough to detect the condition, and if so, was it 
+recognized as early as possible?
+	â€“
+If despite all efforts to prevent the complication, 
+and having recognized its presence as soon as 
+possible, was the appropriate or most effective 
+care provided to reverse the effects of the 
+complication?
+1
+2
+3
+4
+Table 1
+Known complications test
+When faced with the need to determine if there is 
+a deviation from GAPS and therefore a preventable 
+safety event in the case of a known or anticipated 
+complication, the review team should consider 
+four questions.
+â€¢	
+Answering â€˜Yesâ€ to each question in the table 
+suggests the outcome should be classified as 
+a â€œknown complicationâ€, therefore essentially 
+saying that there was no deviation from generally 
+accepted performance standards and for which 
+there was no organizational causation.
+â€¢	
+Answering â€œNoâ€ to any of the questions suggests 
+that there was a deviation from GAPS and the 
+event is classified as a preventable safety event.
+Identifying Deviations from GAPS
+Deviations from generally accepted performance standards 
+are determined by comparing actual performance to expected 
+performance. Internal practice expectations do not always reflect 
+industry practice expectations in protecting patients from harm. 
+Consideration of performance expectations should include external 
+as well as internal sources such as: Internal policies, procedures or 
+protocols
+â€¢	
+Nationally recognized best practices and standards of care
+â€¢	
+Industry-imposed practice mandates and requirements
+â€¢	
+Professional practice standards
+â€¢	
+Objective review by other experts
+â€¢	
+Organization's obligation to best protect the patient from 
+harm
+If any of the above are answered YES, proceed with safety events 
+classification
+
+16
+2
+HPI Safety Event 
+Classification (SECÂ®)
+Case Example: A patient had a procedure performed that involved a complex lysis of 
+adhesions for small bowel obstruction. Forty-eight hours post-operative, the patient 
+developed increasing abdominal pain and sepsis. A second operation showed a small 
+perforation of the small bowel wall which was repaired successfully. In reviewing this case, 
+the safety event classification team recognized that although a small bowel injury in such 
+a procedure was not unusual, they wanted to confirm that this was a preventable safety 
+event. They applied the Known Complication Test with the support of their Peer Review 
+Committee
+â€“ If the answer to ALL four questions is YES: The event is considered a Known    	       	
+   Complication and not a  Safety Event.
+â€“ If the answer to ANY question is NO: The event is a Safety Event.
+Q1: Was the procedure, treatment, or test appropriate or warranted for the patient based 
+on nationally recognized standards of care?
+There was agreement that this patientâ€™s condition required emergent surgery. While 
+there was a history of other medical conditions, none were felt to be significant with this 
+procedure. YES
+Q2: Was the complication a known risk and were standard of care steps taken to mitigate 
+it?
+The surgeon performing the surgery was very experienced in this procedure and before 
+they began the surgery, she informed the team that she needed to be able to concentrate 
+carefully as this patientâ€™s anatomy was potentially problematic to avoid lacerations or other 
+complications. YES
+Q3: Was the complication identified in a timely manner?
+The patientâ€™s symptoms of bowel pain, abdominal swelling and nausea began a couple 
+hours after surgery. The surgeon when notified believed that these were normal post-
+operative problems given the difficulties during the surgery and chose not to take the 
+patient back to surgery until the symptoms worsened almost 48 hours later. NO
+Q4: Was the complication treated according to standard of care and in a timely manner?
+The patient returned to surgery where a small bowel laceration was identified. It was 
+repaired successfully. YES
+Figure 4
+Example of the application of the HPI known complications test
+Based on this assessment using the 
+Known Complications Test, the safety 
+event classification team determined 
+that there was a deviation in GAPS 
+and this was a Safety Event
+To prevent inappropriately labeling true safety events 
+as known complications, conservative assessment 
+should be applied. As discussed later, the burden of 
+proof should rest in demonstrating that the outcome 
+was a known but also not preventable complication, 
+rather than demonstrating that the outcome was just a 
+known complication. The experience from the thousands 
+of healthcare settings who have to date used the SEC 
+process has shown that it isnâ€™t always easy to accurately 
+work through the Known Complications Test. 
+
+Further guidance is provided in Appendix H (Implementing 
+an On-Going Safety Event Classification Process), but 
+the primary recommendation is to have a group of well-
+respected medical and other clinical staff participate in 
+the discussion and keep in mind the previously identified 
+primary goal - to identify opportunities for improvement 
+and  assure that we have done all we can to best protect
+a patient from harm.
+
+17
+2
+HPI Safety Event 
+Classification (SECÂ®)
+A direct, or a possible to likely cause-and-
+effect relationship between the deviation 
+and the outcome to the patient is the 
+second consideration in the SEC. Did the 
+deviation cause, contribute to, or in some 
+way influence the resulting outcome to 
+the patient?
+While deviations from performance 
+standards may coincide with a serious 
+outcome, a direct cause and effect 
+relationship between deviations and 
+outcome may be difficult, and sometimes 
+impossible, to determine. This may be 
+the case when a patient is in critical 
+condition or has other complications or 
+co-morbidities (e.g., â€œthe patient would 
+have died anywayâ€). In such a case, the 
+organization may be reluctant to declare 
+a safety event or tend to downgrade the 
+safety event classification.
+Assessing for causation
+The Ultimate Goal...
+of safety event classification and subsequent 
+cause analysis of the event is the identification and 
+correction of root causes to prevent future events 
+of harm. The organization can safeguard against 
+safety event under-classification by considering 
+its obligation to do everything possible to provide 
+an uncompromised, safe experience. Did the 
+organization best protect the patient from harm, 
+regardless of the ability to definitively prove a direct 
+cause-and-effect relationship.
+
+18
+2
+HPI Safety Event 
+Classification (SECÂ®)
+During discussions within organizations as 
+they wrestle with this challenge, it is often 
+identified that if an unexpected patient 
+outcome is to be identified as a preventable 
+patient safety event, there needs to be 
+proof. Addressing this topic of the burden 
+of proof provides an insightful perspective 
+when causation is questioned and requires 
+shifting the assessment of an event from 
+â€œprove to me that this is a safety eventâ€ to 
+â€œprove to me that this is not a safety eventâ€.
+Figure 5 illustrates this different, and more 
+helpful perspective on a burden of proof 
+in any event discussion. This approach 
+puts the emphasis on our duty to protect 
+the patient from harm. The following 3 
+questions can support this approach. They 
+address the care that has been delivered 
+to the patient from a reliability lens and 
+encourage the identification of any 
+opportunity for improvement that is 
+not addressed: 
+
+
+
+
+1.	
+Were there conditions adverse 
+to quality? 
+2.	
+Did we do everything possible to 
+provide an uncompromised safe  
+experience?
+3.	
+Would we have expected or wanted 
+this level of care for ourselves or 
+loved one?
+The goal of event classification is to 
+drive urgency of response and the initiation 
+of the root cause analysis process. 
+As described previously, sometimes events 
+are not caused entirely or at all by direct 
+human error. 
+Organizational causation is often a factor 
+and may not be immediately apparent. 
+More evaluation, such as in medical staff 
+or nursing peer review, or conducting 
+a cause analysis may be necessary to 
+determine whether the organization 
+enabled the opportunity for a deviation 
+from performance standards and therefore 
+caused a preventable safety event. 
+Organizations are wise to be aware that if 
+there will be a delay in a final safety event 
+classification, that strategies are in place to 
+assure effective root cause analysis. 
+This can include the collection and/or 
+preservation of critical information 
+(e.g., statements from involved individuals, 
+physical evidence) and the initiation 
+of an RCA, based on what is known 
+to be adverse through the initial 
+evaluation process.
+Figure 5
+Shifting the burden of 
+proof in Safety Event 
+Assessment
+Prove that this IS NOT 
+a safety event
+Prove that this IS 
+a safety event
+
+19
+2
+HPI Safety Event 
+Classification (SECÂ®)
+Once a deviation from generally accepted 
+performance standards (GAPS) is identified, 
+and a causal connection is established, the 
+third level of assessment is focused on the 
+level of harm experienced by the patient 
+and determination of the safety event 
+classification. Figure 2 illustrating 
+the algorithm for SEC is displayed again 
+to the right.
+â€¢	
+A Serious Safety Event (SSE) results 
+in harm that ranges from moderate to 
+severe patient harm or death.
+â€¢	
+A Precursor Safety Event (PSE) results 
+in minor harm, no detectable harm, or 
+no harm.
+â€¢	
+In a Near Miss Safety Event (NME), 
+the initiating error is caught before 
+it reaches the patient by either 
+a detection barrier built into the 
+process or, sometimes, by chance. The 
+algorithm for determining safety event 
+classification is shown in Figure 2.
+Assessing Outcome to the Patient
+Â©2006 Healthcare Performance Improvement, LLC
+Was there a deviation from generally accepted 
+performance standards?
+Did the deviation reach the patient?
+Did the deviation cause moderate to severe harm or 
+death?
+SERIOUS SAFETY EVENT
+PRECURSOR SAFETY EVENT
+NEAR-MISS SAFETY EVENT
+NOT A SAFETY EVENT
+YES
+YES
+YES
+NO
+NO
+NO
+Figure 4
+Safety Event Decision Algorithm
+
+20
+2
+HPI Safety Event 
+Classification (SECÂ®)
+The SEC Levels of Harm are outlined in 
+Table 2 and detailed definitions and event 
+examples of each SEC level of harm are 
+provided in Appendix A. A harmonization 
+of the SEC and the National Coordinating 
+Council for Medication Error Reporting and 
+Prevention (NCC MERP) Severity Index is 
+found in Appendix B.
+Note that the Severe, Moderate and 
+Minor levels all have two designations â€“ 
+permanent or temporary. 
+Some classification approaches 
+differentiate levels of harm using the 
+difference between these two designations, 
+considering harm that is permanent to be 
+of a higher severity irrespective of how 
+significant the harm. The SEC levels of 
+harm do not take this approach but use 
+permanent and temporary as descriptors 
+of harm rather than differentiators.
+Table 2
+SERIOUS SAFETY EVENT
+HPI SEC
+CODE
+LEVEL OF HARM
+PRECURSOR SAFETY EVENT (PSE)
+SSE 1
+Death
+SSE 4
+Severe temporary harm
+SSE 5
+Moderate temporary harm
+PSE 1
+Minor permanent harm
+PSE 2
+Minor temporary harm
+PSE 3
+No detectable harm
+PSE 4
+No harm
+NME 1
+Unplanned catch
+NME 2
+Last strong barrier catch
+NME 3
+Early barrier catch
+SSE 2
+Severe permanent harm
+SSE 3
+Moderate permanent harm
+NEAR-MISS SAFETY EVENT (NME)
+
+21
+Serious Safety Event
+Classification
+Serious safety events range from death 
+to severe and moderate temporary harm. 
+The differentiation addresses unintended 
+outcomes for the patient due to deviations 
+in generally accepted performance standards 
+that range from the need for a higher level 
+of care, delays in discharge, readmissions, 
+additional procedures, or lost function in 
+activities of daily living up to death.
+Precursor Safety Event 
+Classification
+
+Precursor safety events focus on minor 
+harm or no harm. The term precursor 
+is a deliberate one because regarding 
+these events as potential â€œprecursorsâ€ 
+to more serious events reinforces that 
+they are equally important to address and 
+pay attention to. Recall the high reliability 
+principle of a â€œpreoccupation with failureâ€. 
+There is a wide range of outcomes that 
+are considered minor including the need 
+for additional medication or short-term 
+monitoring or simple procedures or 
+diagnostic tests. 
+In addition to an event that fortunately 
+results in no harm to the patient, there 
+is a level (PSE 3) in which the presence or 
+absence of harm canâ€™t be confirmed or 
+determined for various reasons including 
+the possibility that unintended outcomes 
+happen long after the patient is being 
+cared for or perhaps is lost to follow up 
+for various reasons.
+Erik Hollnagel in his book Safety-I and 
+Safety-II22 identified these â€œlessor eventsâ€ 
+as fertile soil for organizational learning. 
+His argument was that real learning comes 
+from the repetition of corrections to earlier 
+events. SSEs, by their nature are relatively 
+rare, usually complex sequences of events 
+that may never replicate themselves in the 
+future. Whereas PSEs and near miss events 
+are often instances of less-complex failure 
+sequences that are likely to be repeated 
+in the future before actually resulting in an 
+outcome that energizes the organization 
+to take action. Capturing, studying, and 
+communicating these lessor events is 
+at the essence of Safety-II.
+
+Near Miss Safety Event 
+Classification
+Although Near Miss Safety Events are 
+reported far less often, they are still 
+valuable in the understanding of human 
+error and the potential system issues that 
+allow error to happen. The classification 
+of Near Miss Safety Events is premised on 
+the strength of the detection barrier that 
+caught the error before it reached the 
+patient. Increases in NME reporting are to 
+be encouraged as they are an important 
+sign of an improving culture of reliability, 
+particularly reflected in this Preoccupation 
+with Failure.
+The most significant Near Miss Safety Event 
+is the Unplanned Catch. The error passes 
+through all detection barriers designed into 
+the process (or there may be no detection 
+barriers designed into the process at all), 
+and it is caught by chance. For example, 
+a patient recognizes that they are being 
+given a medication they are unfamiliar with 
+and they ask questions. There is much to 
+be learned by collecting and analyzing this 
+type of event in developing a strong high 
+reliability operating system.
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+22
+In a Last Strong Barrier Catch, the error 
+passes undetected through nearly all 
+defense-in-depth barriers designed into 
+the process and is caught by a last strong 
+barrier. As an example, consider an event 
+sequence set in motion when a physician, 
+acting quickly under time pressure to get 
+to the operating room to begin a surgical 
+case, writes an order for an unsafe dose of 
+Heparin. This is the active, initiating error. 
+The pharmacist who receives the order 
+thinks the dose is high but does not seek 
+clarification and fills the order. The order 
+entry system, designed with system alerts, 
+does not have an established alert for this 
+abnormally high dose. The patientâ€™s nurse, 
+a new graduate with 3 months of 
+experience, doesnâ€™t recognize the dose 
+as abnormally high. According to hospital 
+policy, the nurse calls upon another 
+nurse to verify this high-risk drug prior to 
+administration. The high dose is recognized 
+by a last strong detection barrier of the 
+independent verification by the second 
+nurse, and a call is placed to the ordering 
+physician to correct the dose
+The last strong detection barrier may reside 
+early in related processes and not at the 
+point of direct patient contact. Consider 
+as an example the blood administration 
+process which requires a type and- 
+crossmatch of patient blood and blood 
+product. Early in the process, a blood 
+sample is drawn from the patient and a 
+patient identification label is affixed to the 
+sample. A break down in a two-person 
+independent verification of the accuracy 
+of specimen identification results in 
+a switch of the labels of two patients 
+requiring the type and cross-match 
+process. Each label is affixed to the other 
+patientâ€™s blood sample. While the rest of 
+the process is performed accurately â€“ blood 
+type is determined, the blood product is 
+matched to the identified blood type, and 
+patient identification to ensure that the 
+identifiers on the blood product match 
+those of the patient and on the patient 
+armband â€“ it was performed accurately on 
+the wrong blood sample. In this case, the 
+last opportunity to detect the mislabeled 
+specimen occurs early in the process. The 
+error travels throughout the rest of the 
+flawlessly performed process unbeknownst 
+to the care providers processing the 
+specimen or administering the blood.
+Now replay the Heparin example. The 
+ordering physician writes an order for an 
+inappropriately high dose of Heparin. Yet 
+this time, the receiving pharmacist, who is 
+concerned by the dose, calls the ordering 
+physician to clarify the order. A correction 
+is made, and the error does not reach the 
+patient. This type of Near Miss Safety Event 
+is classified as an Early Barrier Catch. While 
+an error occurred, it is detected early within 
+a well-functioning safety net of detection 
+barriers. The Early Barrier Catch is the 
+least significant of the Near Miss Safety 
+Event categories.
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+23
+2
+HPI Safety Event 
+Classification (SECÂ®)
+Although the identification of a deviation 
+from GAPS is usually easy to identify, given 
+the complexities of patient situations, ever-
+changing care methods, organizational 
+systems and other factors, there are times 
+that reaching consensus that a deviation 
+exists may be difficult. As discussed 
+previously, there may also be difficulty 
+reaching consensus on whether that 
+deviation caused the unintended outcome. 
+Implementing an effective, collaborative 
+team process in an organization is an 
+important step in effective safety event 
+classification. This topic will be addressed 
+in more detail in Appendix H.
+The experience of the thousands 
+of organizations around the United States 
+and elsewhere in the world who have 
+implemented the SEC has helped to
+ identify some common dilemmas in the 
+process. In Appendix C are a list of FAQs 
+regarding classification and 
+recommended approaches. 
+In addition to these specific questions, 
+there are also broader topics that apply 
+to many different types of safety events. 
+These are discussed below.
+Emotional Harm
+While most of the harm examples in this 
+document focus on physical injury or 
+harm, there is no doubt that harm which 
+is emotional, yet without immediate 
+physical consequence, can be significant. 
+Emotional harm is distinct from physical 
+harm. It is harm experienced by a patient or 
+family member which may erode trust and 
+damage the patient-provider-healthcare 
+system relationship. While this type of 
+harm may be subjective in nature, it is 
+characterized as unnecessary suffering that 
+may not be physical. It is often based in a 
+failure to demonstrate adequate respect for 
+the patient or family member as a human 
+being, sometimes negatively impacting the 
+patientâ€™s or family memberâ€™s dignity.
+Unconscious Bias
+At times during the SEC process, safety 
+event classification teams find that there 
+are different opinions not based on specific 
+facts of the case, but other factors such 
+as the personâ€™s age (e.g. the patient was 
+98 so she didnâ€™t have much productive 
+life left anyway) or the patientâ€™s medical 
+history (a patient with reports of chest pain 
+isnâ€™t triaged quickly in the ED because the 
+nurse knew he came into the ED often with 
+pain to get more narcotics). In addition, 
+personal experiences with harm can affect 
+oneâ€™s perspective on the level of harm. This 
+problem is best thought of as bias â€“ usually 
+unconscious.
+Unconscious biases are learned stereotypes 
+that are automatic, unintentional, deeply 
+ingrained, universal, and able to influence 
+our behavior. Research has indicated that 
+our brain makes up its mind up to ten 
+seconds before we realize it. 
+Additional Considerations in Safety 
+Event Classification
+
+24
+There are a wide range of bias oriented 
+situations that can affect not only how we 
+provide care, but how we analyze events.
+Press Ganey has addressed the larger 
+subject of bias elsewhere, however, as it 
+relates to this topic of SEC, the following 
+may often be present during discussions 
+about safety events:
+1.	
+Hindsight Bias â€“ Take care as a safety 
+event classification team to avoid the 
+tendency to perceive events that have 
+already occurred as having been more 
+predictable than they actually were, 
+particularly knowing retrospectively 
+that the outcome was not a good one.
+2.	
+Confirmation Bias â€“ It is easy to favor 
+ideas that confirm our existing beliefs 
+and what we think we know and not be 
+able to see all sides of the situation
+3.	
+Attribution Bias â€“ At times we can 
+make judgments based only on the 
+information we have available at hand 
+that incorporates beliefs that include 
+gender, race, education, disability and 
+socioeconomic status.
+Safety event classification teams avoid 
+problems with biases that affect their 
+consistency by encouraging the following: 
+1.	
+Recognize stereotypical thinking and 
+replace biases and assumptions with 
+facts
+2.	
+Seek to understand the perspective of 
+the individual within a system that may 
+be flawed
+3.	
+Explore a new perspective and increase 
+opportunities for positive contact
+Diagnostic Error
+The topic of diagnostic error is both 
+significant and large. Since the 
+publication of the IOM report Improving 
+Diagnosis in Healthcare, published in 
+201523, there has been increasing attention 
+on the contribution of this source of error 
+in the occurrence of safety events. This 
+report defined diagnostic error as â€œThe 
+failure to (a) establish an accurate and 
+timely explanation of the patientâ€™s health 
+problem(s) or (b) communicate 
+that explanation to the patient.â€ Data from 
+HPI and the HPI Press Ganey PSO indicate 
+that the safety event type of Delay in 
+Diagnosis and Treatment is the greatest 
+in number out of the total of 40 event 
+types (Appendix D). 
+
+
+In addition, further analysis of these 
+events by HPI Press Ganey has shown 
+that variations on the issue of diagnostic 
+error are one of the major common cause 
+analysis themes of these event types.
+It is not the intent in this document to 
+focus on the topic of diagnostic error in 
+depth. However, it is an important source 
+of error that should be considered during 
+considerations of the SEC process, in 
+particular when identifying a deviation 
+in GAPS or when applying the Known 
+Complications Test. In particular a common 
+source of diagnostic error has been 
+identified as cognitive bias. This can be 
+defined as a predisposition to think in a 
+certain way, perhaps using known patterns 
+of thought or heuristics, that can at times 
+lead to a failure in judgment when applied 
+at the wrong time or incorrectly.
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+25
+Safety event classification teams can 
+incorporate key principles of diagnostic 
+error in their SEC process by the following 
+actions:
+1.	
+1) Educating the team (along with the 
+rest of the organization) on the topic 
+of diagnostic error. Excellent resources 
+are available from the Society to 
+Improve Diagnosis in Medicine.
+2.	
+2) Incorporate key principles of causes 
+of diagnostic error in the SEC process 
+when considering deviations in GAPS 
+or causation of event questions. These 
+can include issue of teamwork and 
+communication, system support for 
+effective decision making including 
+electronic tools, etc.
+3.	
+3) Focus efforts to support more 
+consistent and comprehensive 
+reporting of safety events that 
+could include causes related to 
+diagnostic error.
+2
+HPI Safety Event 
+Classification (SECÂ®)
+
+26
+3 
+HPI Serious 
+Safety Event 
+Rate (SSER) 
+Choosing a 
+denominator
+
+27
+SSER for Acute Care Settings
+Rolling 12-month rate of Serious Safety 
+Events per 10,000 adjusted patient days
+#SSE during past 12 months
+#APD for past 12 months
+SSER =
+ x 10K
+3
+HPI Serious Safety Event 
+Rate (SSERÂ®)
+
+
+In order to maintain a regular and quick 
+sense of the impact of embracing and 
+implementing a safety and high reliability 
+management system, organizations must 
+have the ability to clearly measure and 
+display their progress toward Zero Harm. 
+Therein lies the value of the Serious Safety 
+Event Rate (SSER). The SEC serves as the 
+foundation for the calculation of the SSER.
+The SSER is a volume- adjusted measure 
+of Serious Safety Events, those events 
+occurring from a deviation from generally 
+accepted performance standards that 
+result in moderate to severe patient harm 
+or death. The SSER is calculated monthly 
+as the number of Serious Safety Events for 
+the previous 12 months per 10,000 adjusted 
+patient days (or other volume measure) for 
+the same time period, as shown in Figure 6.
+The volume adjustment is important as it 
+helps to account for organizational size. 
+Consider the following example: A system 
+has two hospitals: a 300-bed facility that 
+has had fifteen (15) events in a 12-month 
+period and a 60-bed facility that had two 
+(2) events in the same twelve-month period. 
+The SSERâ€™s for the two facilities are 2.6 
+and 2.8, respectively, because they are 
+adjusted for volume. 
+Particularly within healthcare systems, 
+the volume adjustment helps to create 
+comparable SSER metrics for the various 
+facilities.
+Calculating the SSER as a 12-month rolling 
+rate provides two benefits. First, as Serious 
+Safety Events do not occur frequently, it 
+presents a clearer picture of an event rate 
+trend. Second, and most importantly, it 
+rewards sustained improvement, rather 
+than episodic improvement, in preventing 
+Serious Safety Events. To achieve a â€œzeroâ€ 
+SSER, the hospital must provide care that 
+results in 12 consecutive Serious Safety 
+Event-free months. The SSER can be used 
+to determine baseline safety performance 
+and to track effectiveness of efforts 
+to improve reliability in patient safety 
+performance.
+SSER for Ambulatory Care Settings
+Rolling 12-month rate of Serious Safety 
+Events per 100,000 visits
+#SSE during past 12 months
+#visits for past 12 months
+SSER =
+ x 100K
+Figure 6
+
+28
+3
+HPI Serious Safety Event 
+Rate (SSERÂ®)
+Choosing a denominator
+The identification of the numerator (the 
+number of SSEs) in the SSER is standard 
+across all sites of care. The denominator 
+however, while always a number 
+representing care volume, needs to reflect 
+the type of organization being represented 
+and should be repeatable, reliable, and 
+valid. In addition, it is important to know that 
+the denominator is not risk-adjusted. An 
+error or deviation from generally accepted 
+performance standards that reaches the 
+patient and has a negative effect is harm, 
+regardless of comorbidities or severity of 
+the patient condition. There is no risk-
+adjusting for preventable harm.
+For acute care facilities, the most 
+commonly chosen denominator is adjusted 
+or equivalent patient days. Adjusted 
+Patient Days (APD) is a standardized 
+metric developed by the American 
+Hospital Association and is calculated by 
+taking the weighted sum of â€œinpatient 
+daysâ€ and â€œoutpatient visitsâ€. The weights 
+are the proportion of revenue derived 
+from inpatient and outpatient activities, 
+respectively24. This number is generally 
+a metric that is readily available from an 
+organizationâ€™s finance department.
+One issue that is important to consider is 
+that the denominator should be inclusive 
+of all the facilities that contribute data 
+(events) to the numerator. For example: 
+A hospital operates a surgical center and
+two free- standing emergency care centers 
+in addition to their inpatient services. If 
+the numerator includes events from the 
+hospital, surgery center, and two ECCs 
+then the volume data in denominator 
+must include all of those facilities as well.
+While APDs may be an appropriate 
+denominator for hospitals, there are other 
+denominators that can be considered for 
+alternative care settings. Table 3 illustrates 
+these options. When the volume number is 
+particularly high, e.g. in ambulatory settings, 
+the SSER formula may be adjusted to â€œper 
+100,000â€ encounters/visits rather than the 
+10,000 used for inpatient settings.
+Physician offices, ambulatory 
+clinics or outpatient centers
+Patient visits or encounters
+Nursing Home Days
+Resident Days
+Patient visits or encounters
+Specially calculated patient days 
+(for Hospice settings)
+Nursing homes and assisted 
+living facilities
+Home health & hospice care
+Table 3
+SITE OF CARE
+VOLUME OPTIONS
+
+29
+3
+HPI Serious Safety Event 
+Rate (SSERÂ®)
+Due to variation in event detection and 
+capture, HPI-Press Ganey does not 
+recommend comparison of the actual 
+SSER between organizations, even facilities 
+within one organization. What is suggested, 
+however, is that a comparison of the 
+percent of SSER reduction following the 
+stabilization of the safety and reliability 
+culture interventions (i.e. establishing a 
+baseline) is a valuable comparative metric 
+within systems.
+Organizations may identify other particular 
+reasons to define a different denominator 
+from those mentioned above. This decision 
+should take into consideration a list of what 
+distinguishes a great denominator, such 
+as: being readily available, reproducible 
+over time, meaningful to operations, 
+and reflective of resource consumption 
+(volume).
+However, while the actual number might 
+be slightly different from organization to 
+organization, the important focus is not 
+the actual number, but the display or 
+â€œcurveâ€ of the rate line. The focus is the 
+percent decrease in serious safety events, 
+not the actual number.
+
+Comprehensive capture 
+of events
+Consistent application 
+of the HPI SEC criteria
+Practices to support 
+Safety Event 
+Classification
+HPI Safety Event 
+Detection Assessment 
+survey for hospitals
+Application of SSER as 
+a safety metric
+4
+Applying the 
+HPI SECÂ® & SSERÂ® 
+Patient Safety 
+Measurement 
+System
+30/42
+
+31
+4
+Comprehensive capture 
+of events
+The SEC and SSER complement the 
+tracking and reporting of Joint Commission-
+defined Sentinel Events, NQF Serious 
+Reportable Events, and other state-required 
+or industry-imposed reportable events. 
+They also serve to transcend variation in 
+different event taxonomies that exist in 
+healthcare today.
+To enable a reliable safety measurement 
+system that provides a valid measure of 
+safety performance over time, two factors 
+are important, 1) comprehensive capture of 
+events and 2) consistent application of the 
+SEC classification criteria.
+Comprehensive Capture 
+of Events
+Full knowledge of safety events ultimately 
+begins with a culture that encourages 
+reporting adverse outcomes and sharing 
+information about errors and mistakes that 
+are made in providing care and service. 
+While a reporting culture is not the focus 
+of this paper, brief comment is offered on 
+three factors that influence the health of 
+a successful reporting culture.
+First, leaders, staff, and medical staff 
+members must know what events are 
+expected to be reported. 
+Most individuals report events that result in 
+harm to the patient or have the significant 
+potential to result in harm. Many staff have 
+identified however that it is less clear, of the 
+need to report events that did not result in 
+harm or errors or mistakes that were caught 
+before they reached the patient.
+The second issue impacting reporting is the 
+fear employees have about error reporting. 
+When the organizational response to 
+reporting is perceived as punitive to those 
+involved in the event, rather than seeking to 
+understand the process and system factors 
+that influenced the individualâ€™s decision, 
+employees are less inclined to report an 
+event. Medical staff may believe that it 
+isnâ€™t expected that they participate in the 
+process of event reporting.
+Finally, the reporting process must be 
+as simple as possible. Everyone in the 
+organization needs to perceive that the 
+burden to report is worth the effort. 
+Building and sustaining a healthy reporting 
+culture is an ongoing process, yet it is 
+important to recognize this as a factor 
+that can influence the accuracy of SSER in 
+reflecting the safety performance of the 
+organization.
+Comprehensive capture of safety events 
+requires that the organization proactively 
+seek possible events that might qualify as a 
+safety event. Rather than waiting for events 
+to be â€œpushedâ€ for consideration, having a 
+clearly defined â€œpull systemâ€ is important. 
+While most healthcare organizations 
+have adopted centralized reporting and 
+data repository for error and events, 
+some have multiple reporting processes 
+and information systems particularly for 
+different sites of care or different types 
+of reporting (e.g. regulatory reporting 
+vs. complaints vs. patient experience or 
+emotional harm). Experience with event 
+reporting systems in recent years has also 
+shown that the easier it is for all staff (direct 
+and indirect caregivers) and members of 
+the medical staff to quickly and effectively 
+report an event, the more likely that the 
+collection of events will be 
+as comprehensive as possible.
+
+32
+4
+Consistent application of 
+the HPI SEC criteria
+There are multiple sources for the 
+identification of events. The following 
+can be considered as opportunities for 
+the reporting and collection of events for 
+assessment as Safety Events of any type:
+â€¢	
+Events qualifying as Joint Commission-
+defined sentinel events;
+â€¢	
+State-reportable safety events and/or 
+other regionally recognized reportable 
+event;
+â€¢	
+Clinical quality indicator incident and 
+surveillance data including, but not 
+limited to, nationally established NQF 
+Serious Reportable Events and AHRQ 
+Adult and Pediatric Patient Safety 
+Indicator variances such as falls with 
+injury, stage 3 and 4 pressure ulcers, 
+restraint use with injury, hospital-
+acquired infection, and resuscitation 
+codes (See Appendix E HPI Taxonomy 
+of Safety Events in Healthcare 
+Harmonization);
+â€¢	
+CMS defined Hospital Acquired 
+Conditions
+â€¢	
+Events reported through the medical 
+and nursing peer review process;
+
+â€¢	
+Global triggers or adverse drug events 
+classified by NCC MERP criteria B 
+through I
+â€¢	
+Patient concerns or reports; and
+â€¢	
+Claims and suits.
+Consistent Application of HPI 
+SEC Criteria
+Several factors may contribute to variation 
+in accuracy of event detection and thus 
+lead to an SSER numerator that does not 
+reflect the true number of Serious Safety 
+Events in the organization. The first factor is 
+deficiencies in event reporting, as discussed 
+above under â€œComprehensive Capture of 
+Events.â€ Second, the organization may 
+exclude, or omit, certain types of Serious 
+Safety Events (e.g., hospital acquired 
+infections, safety events classified as peer 
+review cases) from the SSER calculation.
+These may be deliberate exclusions, or 
+the exclusions may not be recognized 
+because these types of events have been 
+normalized and not perceived as a Serious 
+Safety Event. The third factor is inter-rater 
+variation in classification of safety events 
+with outcomes that fall at the border of 
+moderate to minimal harm.
+
+33
+4
+Practices to Support 
+Safety Event Classification
+Practices to Support Safety 
+Event Classification: 
+One of the more important strategies that 
+organizations using the SEC process have 
+identified is to implement a strong safety 
+event review process. Appendix H illustrates 
+further details for establishing this process.
+ingrained, universal, and able to influence 
+our behavior. Research has indicated that 
+our brain makes up its mind up to ten 
+seconds before we realize it. 
+Key practices for this process include:
+1.	
+Identify a consistent group of people 
+to serve as a â€œSEC Panel or Teamâ€ to 
+provide expertise, consistency, and 
+integrity in event classification. The 
+group should be a mix of clinicians, 
+non-clinicians, SEC methodology 
+experts and leadership senior enough 
+to gain organizational trust.
+2.	
+When deciding is difficult, use a 
+consensus scale such as the example 
+in Figure 7.
+3.	
+When classifying an event, always use 
+the SEC algorithm and always ask ALL 
+the questions: Was there a deviation? 
+Did the deviation reach the patient? 
+What was the level of harm?
+4.	
+Keep a record of challenging event 
+classification cases and classification 
+rationale. This record provides a 
+useful reference when assessing 
+similar future cases and enables the 
+group to look at changes in their own 
+perspectives in event classification. 
+This becomes your organizational 
+â€œcase lawâ€ that can be referred to when 
+ensuring organizational consistency in 
+classification.
+
+
+5.	
+Charge one person with the 
+responsibility for thinking/asking 
+about precedent, i.e. how has the 
+organization addressed a similar event 
+in the past â€“ your Case Law
+6.	
+What happens in the discussions, stays 
+in the discussions. Ensure that the 
+group speaks with one voice outside 
+the meetings.
+Accuracy to the SEC criteria is important, 
+but consistency is king
+A Consensus Scale
+We MUST -- Technically/Clinically & Emotionally
+We SHOULD -- Technically/Clinically & Emotionally
+Good Decision -- Technically/Clinically 
+Bo Strong Opinion -- Technically/Clinically - But I will support
+Not Best -- Technically/Clinically & Emotionally
+We SHOULD NOT -- Technically/Clinically & Emotionally
+We CAN'T -- Technically/Clinically & Emotionally
++3
++2
++1
+0
+-1
+-2
+-3
+We have consensus
+No 
+consensus
+If any person rates themselves as a -2 0r -3 then there is not consensus. 
+That person should provide an alternative to the group and then revote.
+
+34
+4
+HPI Safety Event 
+Detection Assessment 
+Survey for Hospitals
+HPI Safety Event Detection 
+Assessment Survey for 
+HospitalsÂ© 
+The stepwise approach for identifying 
+possible safety events, accurately 
+screening events to determine if they are 
+Serious Safety Events and calculating the 
+SSER has been described previously. HPI 
+developed the Safety Event Detection 
+Assessment Survey for HospitalsÂ© 
+to aid organizations in assessing the 
+comprehensiveness of safety event 
+detection capabilities and effectiveness 
+of event classification processes.
+Survey questions are designed to assess 
+the health of the organizationâ€™s reporting 
+culture, safety event reporting processes, 
+structures for â€œcasting a wide netâ€ to 
+ensure comprehensive identification of 
+potential safety events, and methods of 
+screening potential events to urgently 
+determine classification as a safety event. 
+Survey results assist the organization in 
+identifying strengths and gaps in safety 
+event detection and screening processes 
+for actionable improvement that are 
+informed from identified better practices. 
+In addition, the Survey assesses the degree 
+of transparency of lessons from the cause 
+analysis of internal/external events to 
+demonstrate the degree of reinforcement 
+of a commitment to learning from errors, 
+Results from the Survey administration can 
+be compared to organizations with more 
+SEC experience for benchmarking.
+Application of SSER as 
+a Safety Metric
+Due to variation in event capture across 
+organizations in the healthcare industry, 
+HPI does not recommend comparing 
+the actual, discrete SSER of one 
+organization, and including internally 
+across distinct facilities within a system, 
+with the SSER of another organization 
+for benchmark purposes. 
+Input
+Identify events from 
+various sources such as:
+SEC Process
+Screen events based on
+organization or individual
+culpability and level of 
+harm to the patient
+Output
+SEC classification 
+& SSER
+Serious sfety event
+Figure 7
+Peer review activities
+CMS hospital acquired conditions
+Claims management information
+Others
+Regulatory or state required reportin
+Internal event reporting systems
+Clinical quality reports
+Medication error reporting
+CMS HAC & HMI dataSpecific 
+event triggers
+Serious safety event detection & screening
+
+35
+4
+Application of SSER as a 
+safety metric
+However, within systems where there 
+is consistency in event classification 
+processes, comparisons of the percent of 
+SSER reduction following implementation 
+of safety/reliability culture improvement 
+efforts, is encouraged and may provide 
+valuable learning insights.
+Within and across organizations using 
+the SEC and SSER, HPI sees and expects 
+to continue to see a decrease in the 
+variation of SEC application. This occurs as 
+organizations strengthen event reporting, 
+increase awareness of system contribution 
+to safety events, and build consistency in 
+the determination of event classification. 
+Organizations have engaged in self-
+assessing their safety event detection 
+and screening capabilities, identifying 
+best practices in these areas, and refining 
+processes to reduce cross organization 
+variability in event detection and screening. 
+As hospitals work collaboratively to reduce 
+event capture variation and improve 
+inter-rater reliability of SEC, the SSER 
+has the potential to become a very useful 
+comparative indicator across organizations.
+
+36
+Sources
+1 Institute of Medicine. Patient Safety: Achieving a New 
+Standard for Care. Washington, DC: National Academy Press, 
+2003.
+2 2016 National Healthcare Quality and Safety Report. AHRQ: 
+https://www.ahrq.gov/research/findings/nhqrdr/nhqdr16/
+index.html. Accessed 2 November 2017.
+3 CMS Hospital Compare: https://www.medicare.gov/
+hospitalcompare/search.html. Accessed 2 November 2017.
+4 The Joint Commission is an independent, not-for-profit 
+organization that accredits and certifies healthcare 
+organizations and programs in the United States. The 
+definition of a sentinel event is found on the Joint 
+Commission website at www.jointcommission.org/
+sentinelevents. Accessed 1 March 2009.
+5 The National Quality Forum is a not-for profit public-
+private partnership working to promote common healthcare 
+measures.
+6 The National Quality Forum, â€œSerious Reportable Events in 
+Healthcare: A Consensus Report,â€ 2002. Available online at 
+http://www.qualityforum.org/pdf/reports/sre.pdf. Accessed 1 
+March 2009
+7 The National Quality Forum, â€œThe National Quality 
+Forum Updates Endorsement of Serious Reportable 
+Events in Healthcare,â€ Press Release, 16 October 2006. 
+Available online at http://www.qualityforum.org/pdf/news/
+prSeriousReportableEvents10-15-06.pdf. Accessed 1 March 
+2009.
+8 Chang, P. Schyve, R. Croteau, D. Oâ€™Leary, and J. Loeb, â€œThe 
+JCAHO Patient Safety Taxonomy: A Standardized Terminology 
+and Classification Schema for Near Misses and Adverse 
+Events,â€ International Journal for Quality in Health Care, 17 
+April 2005, 17(2):95-105.
+9 The World Health Organization, â€œThe Conceptual 
+Framework for the International Classification for Patient 
+Safety,â€ January 2009. Available online at http://www.who.int/
+patientsafety/taxonomy/en/. Accessed 1 March 2009.
+10 Department of Health & Human Services, â€œAdverse Events 
+in Hospitals: State Reporting Systems,â€ OIE -06-07-00471, 
+December 2008. Available online at http://www.oig.hhs.gov/
+oei/reports/oei-06-07-00471.pdf. Accessed on 1 March 2008.
+11 Patient Safety Organization (PSO) is a designation 
+established as part of the Patient Safety & Quality 
+Improvement Act of 2005 for qualified organizations to 
+collect, aggregate, and analyze information on medical errors 
+reported by healthcare providers.
+12 AHRQ Development of Common Formats. https://www.pso.
+ahrq.gov/common/development. Accessed on 5 October 
+2020.
+13 The HPI SEC & SSER Patient Safety Measurement 
+System for Healthcare (HPI 2009-100) Â©2009 Healthcare 
+Performance Improvement, LLC. ALL RIGHTS RESERVED.
+14 The HPI SEC & SSER Patient Safety Measurement System 
+for Healthcare Rev 2 (HPI 2009-001) Â©2009 Healthcare 
+Performance Improvement, LLC. ALL RIGHTS RESERVED.
+15 Retirement of Select AHRQ Quality Indicators, v2019 
+Software. May 23, 2019. https://www.qualityindicators.ahrq.
+gov/News/Default.aspx. Accessed on 28 September 2020.
+16 Common Formats for Event Reporting - Hospital Version 
+2.0. https://www.psoppc.org/psoppc_web/publicpages/
+commonFormatsHV2.0 Accessed on 28 September 2020.
+17 The Joint Commission Sentinel Event Policy CAMH Update 
+2, January 2016. www.jointcommission.org â€º camh_24_se_
+all_currentpdf-1.pdf
+18 CQMC Core Sets http://www.qualityforum.org/CQMC_
+Core_Sets.aspx Accessed on 28 September, 2020
+19 2014 Guide to State Adverse Event Reporting Systems from 
+the National Academy for State Health Policy. https://www.
+nashp.org/wp-content/uploads/2015/02/2014_Guide_to_
+State_Adverse_Event_Reporting_Systems.pdf/ Accessed on 
+28 September 2020.
+20 Clapper, C, et al. (2019) Zero Harm: How to Achieve Patient 
+and Workforce Safety in Healthcare. McGraw-Hill Education. 
+p 2.
+21 Weick, Karl E.; Sutcliffe, Kathleen M. (2007). Managing the 
+Unexpected. Hoboken, NJ: Jossey-Bass.
+22 Hollnagel, Erik. Safety-I and Safety-II: The Past and Future 
+of Safety Management. CRC Press; 1st edition (May 8, 2014)
+23 Balogh, E P et al. Improving Diagnosis in Healthcare. 
+National Academy of Sciences. 2015. https://www.ncbi.nlm.
+nih.gov/books/NBK338596/
+24Lindrooth, R. et al. The Effect of Changes in Hospital 
+Reimbursement on Nurse Staffing Decisions at Safety Net 
+and Nonsafety Net Hospitals Health Serv Res. 2006 June; 41(3 
+Pt 1): 701â€“720. doi: 10.1111/j.1475-6773.2006.00514.x.
+
+WP-P0000
+Â© Press Ganey, 2022. All rights reserved. 
+pressganey.com
+
+38
+ 
+Appendix
+
+39
+APPENDIX A
+The HPI safety event classification (SECÂ®) levels of harm
+1  An invasive procedure is one where purposeful/deliberate access to the body is gained via an incision, percutaneous puncture, where instrumentation is used in addition to the puncture needle, or instrumentation via a natural orifice. 
+Further details available at Sian Cousins, et al., â€œWhat is an invasive procedure? A definition to inform study design, evidence synthesis and research tracking,â€ British Medical Journal, 2019; 9(7): e028576. Published online 2019 Jul 30.
+CODE
+LEVEL 
+OF 
+HARM
+DESCRIPTION
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that causes, contributes to or 
+worsens an already existing condition and results in:
+EXAMPLES
+To be used as illustrations only; Specific patient or resident situation may vary
+Ambulatory care
+Acute care
+Post-acute care
+SERIOUS SAFETY EVENT
+SSE 1
+Death
+Death of the patient
+â€¢ Delay of several months in communicating 
+diagnostic tests that resulted in patient 
+dying from unrecognized lung cancer
+â€¢ Patient had symptoms of liver problems 
+that weren't followed or addressed in timely 
+manner over period of 18 months. Patient 
+eventually expired of liver cancer.
+â€¢ Delay in treating symptoms of sepsis 
+resulting in patient death
+â€¢ Patient complained of chest pain and 
+shortness of breath after triage that showed 
+worsening vital signs; went into cardiac 
+arrest and not able to be resuscitated.
+â€¢ Resident that was high risk to fall did not 
+have prevention measures in place, fell, 
+experienced subdural hematoma and died.
+â€¢ A Home Care Hospice client expired without 
+nursing support including necessary 
+medications. The patientâ€™s death was 
+imminent, but there was a significant gap in 
+comfort and standard hospice care resulting 
+in an unattended death.
+SSE 2
+Severe 
+Permanent 
+Harm
+Life-changing unintended outcomes or suffering. 
+This can include events resulting in permanent loss of 
+organ, limb, or vital physiologic or neurologic function. 
+There is no expected change in the patientâ€™s status 
+or condition.
+â€¢ Incorrect radiologic contrast dosing 
+in outpatient CT resulted in need for 
+permanent dialysis
+â€¢ Tissue specimen from two patients mixed 
+up resulted in a patient having a partial 
+pancreatectomy and splenectomy that 
+wasnâ€™t needed.
+â€¢ Wrong site procedure performed resulting in 
+removal of healthy limb
+â€¢ Missed diagnosis of stroke resulting in 
+permanent impairment
+â€¢ Compression wraps/stocking incorrectly 
+applied to resident resulting in limb ischemia 
+and partial amputation
+â€¢ Venous irritant, administered to client on 
+home care, undiluted by IV bolus through 
+peripheral IV; extravasation resulted in loss of 
+thumb & index finger
+SSE 3
+Moderate 
+Permanent 
+Harm
+Unintended outcomes or suffering that are significant 
+but not sufficiently severe to impact activities of daily 
+living or business functioning. This can include events 
+that result in permanent reduction in physiologic 
+reserve, disfigurement, or impaired or aided sense or 
+function. There is no expected change in the patientâ€™s 
+status or condition.
+â€¢ During outpatient ENT procedure a paralytic 
+was administered. Monitoring was ineffective 
+with nerve damage and resultant facial 
+paralysis.
+â€¢ Incorrect radiology contrast dosing 
+administered in outpatient CT resultingin 
+reduced renal function
+â€¢ Delay in treatment of limb ischemia post-
+surgery requiring fasciotomy with disfiguring 
+scars on leg
+â€¢ Patient inappropriately discharged from 
+ED and returned next day in worse shape 
+needing additional surgery for colon 
+resection.
+â€¢ Preventive maintenance of ventilator in 
+SNF not performed resulting in pulmonary 
+function changes in patient not recognized
+â€¢ Home Care Aide did not regularly adjust 
+clientâ€™s head band resulting in pressure ulcer 
+and permanent loss of hair on scalp
+SSE 4
+Severe 
+Temporary 
+Harm
+Critical, potentially life-threatening unintended 
+outcomes  or suffering. Response to this deviation 
+can include: a prolonged transfer to a higher level 
+of care/ monitoring; an additional major surgery, 
+procedure or substantial treatment to resolve the 
+condition; or an unnecessary significant treatment 
+or procedure. The unintended outcomes last for a 
+limited period of time with no permanent residual.
+â€¢ Urinalysis from regular PCP visit showed 
+abnormalities but no infection. Follow up not 
+done though patient called describing being 
+unwell. Patient admitted 2 days later with 
+pyelonephritis and sepsis.
+â€¢ Outpatient pharmacy incorrectly filled 
+patientâ€™s medication. After several days 
+of wrong doses, he became dizzy, fell and 
+fractured femur requiring surgery.
+â€¢ Patient had unrecognized fluid overload 
+progressing to pulmonary edema requiring 
+resuscitation and transfer to the ICU
+â€¢ Failure to diagnose respiratory insufficiency 
+resulting in temporary intubation; earlier 
+recognition would have avoided the 
+intubation
+â€¢ Patient in SNF had preventable fall with hip 
+fracture that requires surgical repair and 
+further rehabilitation
+â€¢ Nursing Home resident with wound vac not 
+correctly managed by nurse resulting in 
+serious infection and requiring multiple other 
+surgical procedures to address
+SSE 5
+Moderate 
+Temporary 
+Harm
+Significant unintended outcomes or suffering. 
+Response to the deviation can include: a higher level 
+of care or more extensive monitoring; an additional 
+invasive procedure1 or treatment to resolve the 
+condition; delay in discharge or readmission; or the 
+performance of an unnecessary invasive procedure. 
+The unintended outcomes last for a limited period 
+with no permanent residual.
+â€¢ Patient complained of respiratory problems 
+during Outpatient PT, wasnâ€™t referred for 
+assessment, and two days later transferred 
+to ED for acute care
+â€¢ Ordering and dispensing of incorrect infant 
+formula in Pediatric Clinic led to admission 
+for electrolyte imbalance
+â€¢ Incorrect dose of dilaudid for pain resulting 
+in over-sedation requiring transfer to ICU 
+for short period of time after Narcan was 
+ineffective in treating
+â€¢ Failure to routinely assess IV site results in 
+infection requiring extensive surgical incision 
+and drainage
+â€¢ Incorrect wound care technique at home 
+care visit leads to infected wound requiring 
+ED visit and IV antibiotics
+â€¢ High risk patient in SNF fell and sustained 
+hairline ankle fracture. Placed in splint for a 
+week affecting mobility and ADLs
+
+40
+APPENDIX A
+The HPI safety event classification (SECÂ®) levels of harm - continued
+CODE
+LEVEL 
+OF 
+HARM
+DESCRIPTION
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that causes, contributes to or 
+worsens an already existing condition and results in:
+EXAMPLES
+To be used as illustrations only; Specific patient or resident situation may vary
+Ambulatory care
+Acute care
+Post-acute care
+PRECOURSOR SAFETY EVENT
+PSE 1
+Minor  
+Permanent 
+Harm
+Unintended outcomes or suffering in which the 
+response to the event requires little or no intervention. 
+May also include performing an unnecessary minor 
+procedure. There is no expected change in the 
+patientâ€™s status or condition.
+â€¢ In outpatient surgery center, a knee 
+procedure initiated then stopped on wrong 
+side resulting in extra incision and small scar 
+on knee.
+â€¢ Excess outpatient radiation therapy received 
+resulting in skin color change in non-critical 
+cosmetic area.
+â€¢ Inadequate protection of ulnar nerve 
+during an operation resulting in permanent 
+numbness of 4th and 5th fingers
+â€¢ Rh-negative patient delivered without 
+getting Rh immune-globulin shot as ordered. 
+Future pregnancies will require higher 
+monitoring and potential interventions.
+â€¢ Lack of attention to skin care in a temporarily 
+bedbound resident of assisted living center 
+caused skin breakdown and scarring on hip
+â€¢ Home Care client on oxygen experienced 
+stage 2 pressure injury behind ear that 
+eventually healed but left marks and 
+tenderness
+PSE 2
+Minor 
+Temporary 
+Harm
+Unintended outcomes or suffering in which the 
+response to the event requires little or no intervention. 
+May also include performing an unnecessary minor 
+procedure. The unintended outcomes last for a 
+limited period of time with no permanent residual.
+â€¢ Results of breast biopsy specimen 
+obtained in outpatient surgery center 
+were inconclusive due to size of specimen 
+resulting in need for additional ultrasound 
+exams Physician in OB Clinic inserted an 
+expired IUD requiring removal and reinsertion 
+several months after procedure â€“ much 
+sooner than necessary.
+â€¢ Retained sponge in vaginal cavity post 
+C-Section found and removed during office 
+exam; although no sign of infection MD 
+orders prophylactic antibiotic
+â€¢ Incorrect dose of dilaudid for pain resulting 
+in over-sedation and Narcan resuscitation 
+with quick resolution of symptoms
+â€¢ Failure to assess IV site of patient on home 
+care resulting in infection requiring oral 
+antibiotics
+â€¢ Incorrect transfer of nursing home resident 
+to wheelchair resulting in laceration to toe 
+managed with steri- strips and dressing.
+PSE 3
+No 
+Detectable 
+Harm
+An event in which harm may exist, yet the ability to 
+determineor confirm the existence or fact of harm 
+is not possible. This can include events where the 
+onset of harm may occur later in time but canâ€™t be 
+confirmed.
+â€¢ Procedure performed in Outpatient Surgery 
+Center with un-sterile instruments with no 
+detectable post-procedure complications 
+or infection.
+â€¢ Pt came into PCP office with abdominal pain. 
+Initial UA showed positive for pregnancy. 
+After patient left, a second test done was 
+negative. No information regarding effect on 
+patient after informed as she switched PCPs.
+â€¢ Inappropriate technique resulting in 
+losing coronary artery stent into systemic 
+circulation with no evidence of limb or organ 
+ischemia
+â€¢ After a difficult Delivery an infantâ€™s Apgar 
+was 4 and improved to 6 and then 9. Infant 
+observed closely before discharge with no 
+problems but there was some concern for 
+possible difficulty in the future
+â€¢ Home care client not contacted in timely 
+concerning need for custom compression 
+stockings leading to delay in physical therapy
+â€¢ Single dose vial of lidocaine used with 
+multiple patients - multiple times. Several 
+dozen patients involved in event; some were 
+not able to be contacted for follow-up.
+PSE 4
+No Harm
+An event that results in no harm. There is sufficient 
+information available to determine that no harm 
+occurred.
+â€¢ During a procedure in Urgent Care clinic, MD 
+using cautery pin sparked a small fire but 
+there was no burn on patient.
+â€¢ HIM analyst for a large medical practice was 
+conducting research project and noticed in a 
+patientâ€™s electronic record that a physicianâ€™s 
+notes referred to a different patientâ€™s 
+name and lab results that didnâ€™t match the 
+patientâ€™s diagnosis. She brought it to the 
+physicianâ€™s attention who realized that he 
+had inadvertently been charting in the wrong 
+patientâ€™s record and the lab results had been 
+also mismatched. No harm occurred to 
+either patient.
+â€¢ Patient received blood transfusion intended 
+for another patient, but both had the same 
+blood type; no adverse reaction as a result
+â€¢ Administration of an adult dose of vitamin K 
+to full-term newborn infant with no effect on 
+infant clinical status
+â€¢ Significant delay in setting up homecare 
+equipment affected timeliness of discharge 
+to home
+â€¢ Resident in Assisted Living Center eloped 
+and was missing for 6 hours. Returned to 
+facility with no observed adverse effects
+
+41
+APPENDIX A
+The HPI safety event classification (SECÂ®) levels of harm - continued
+CODE
+LEVEL 
+OF 
+HARM
+DESCRIPTION
+A deviation in Generally Accepted Performance 
+Standards (GAPS) thatâ€¦
+EXAMPLES
+To be used as illustrations only; Specific patient or resident situation may vary
+Ambulatory care
+Acute care
+Post-acute care
+NEAR MISS EVENT
+NME 1
+Unplanned 
+Barrier 
+Catch
+Passes through one or more error detection barriers 
+but does not reach the patient because it is caught 
+by chance. May also involve a barrier not designed or 
+planned into the system.
+â€¢ During night shift Security officer notices 
+EVS worker starting to go into MRI suite with 
+metal bucket and stops him.
+â€¢ A clinicâ€™s Medical Assistant went out to the 
+waiting room to call for the next patient. 
+She didnâ€™t double check the patientâ€™s ID but 
+before care was provided the front desk 
+clerk came to tell her another patient had 
+come up to say that she thought the wrong 
+patient had come up because he had told 
+her his name as they chatted and it wasnâ€™t 
+the name the MA had called.
+â€¢ Family member who reminds of a known 
+medication allergy immediately before the 
+medication is to be administered to the 
+patient
+â€¢ Environment Services Associate points out 
+the need to perform a time out prior to a 
+bedside procedure resulting in awareness 
+that the procedure was about to be 
+performed on the incorrect limb.
+â€¢ Food Services associate notices pills in 
+waste basket, thrown away by the patient, 
+and alerts the residentâ€™s nurse who ensures 
+medication administration
+â€¢ Home Care Nurse Aide was helping family 
+prepare a clientâ€™s medications. One of the 
+meds appeared to require 5 pills for each 
+daily dose. She thought this was unusual 
+although the pill bottle said to give 5 pills. 
+She contacted the retail pharmacy who 
+realized a serious error had been made.
+NME 2
+Last Strong 
+Barrier 
+Catch
+Passes through all the possible early error detection 
+barriers and is caught by a last strong error detection 
+barrier designed in the system.
+â€¢ EVS worker questions colleagues regarding 
+new chemicals on her cart for cleaning. Still 
+not comfortable she contacts her supervisor 
+who says itâ€™s OK to mix the chemicals. 
+Still not comfortable she contacts the 
+manufacturer who says that the chemicals 
+should NOT be mixed
+â€¢ Patient presented to Urgent Care Center 
+with bleeding, nausea, and vomiting and 
+ready to deliver a pre-term fetus. The 
+resident was inexperienced and began 
+to have difficulty. A nurse in the next care 
+pod noticed the problem, stepped in and 
+reminded the team of their TeamSTEPPSÂ© 
+actions. Everyone relaxed and prevented 
+complications as they delivered the baby.
+â€¢ Medication error that started with incorrect 
+dose missed by MD and pharmacist but 
+caught by nurse performing â€œ5 Rightsâ€ prior 
+to administration
+â€¢ Wrong patient brought to the OR and 
+identified during the team time out
+â€¢ Nurse in SNF double checks on comatose 
+patientâ€™s record regarding latex allergy 
+(which patient had) prior to catheter insertion 
+even though son said that patient didnâ€™t have 
+the allergy
+â€¢ LPN at Assisted Living Center helped new 
+resident admitted from a nearby Rehab 
+Center organize her self- medications. 
+She thought the list was unusual as the 
+patient had nothing ordered for her 
+Diabetes. Though the orders had already 
+been checked by the pharmacist and the 
+admitting nurse, she pursued the problem 
+and it was discovered that the patient was 
+indeed missing an important medication.
+NME 3
+Early 
+Barrier 
+Catch
+Is caught by an error detection barrier that occurs 
+early in the process. This barrier is planned for or 
+designed into the systemâ€™s defense in depth.
+â€¢ Scheduling clerk uses phonetic and numeric 
+clarification when registering a patient for 
+colonoscopy and discovers that the wrong 
+information had been sent from the PCPâ€™s 
+office
+â€¢ Medical assistant who was last to leave Clinic 
+noticed back door that was normally locked 
+was unsecured and notified security officer 
+who took action to fix door.
+â€¢ Medication error identified when a 
+contraindication alert fires in the medication 
+electronic order entry system
+â€¢ During bedside shift change report, care 
+team identifies that multiple IV lines in a 
+complex ICU patient are not labeled and 
+makes the correction to minimize risk of 
+confusion
+â€¢ Equipment technician delivering oxygen 
+equipment to clientâ€™s home and during 
+standard checking process finds a heating 
+unit behind her chair that could cause 
+problem
+â€¢ NA at a SNF started to leave residentâ€™s 
+room after putting him to bed. She noticed 
+the STAR/Attention to Detail reminder and 
+went back to make sure she had taken all 
+necessary precautions to protect patient 
+from a fall.
+
+42
+APPENDIX B
+The HPI safety event classification (SECÂ®) levels of harm
+Harmonization with NCC MERP severity index coding
+1   NCC MERP Index for Categorizing Medication Errors Â© 2001. https://www.nccmerp.org/types-medication-errors. Accessed online 29 September, 2020.
+2   NCC MERP Index for Categorizing Medication Errors Algorithm Â© 2001. https://www.nccmerp.org/types-medication-errors. Accessed online 29 September, 2020.
+3  An invasive procedure is one where purposeful/deliberate access to the body is gained via an incision, percutaneous puncture, where instrumentation is used in addition to the puncture needle, or instrumentation via a natural orifice. 
+Further details available at Sian Cousins, et al., â€œWhat is an invasive procedure? A definition to inform study design, evidence synthesis and research tracking,â€ British Medical Journal, 2019; 9(7): e028576 . Published online 2019 Jul 30.
+HPI Safety Event Classification (SEC) Levels of Harm Harmonization with NCC MERP Severity Index Coding
+CODE
+LEVEL 
+OF 
+HARM
+DESCRIPTION
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that causes, contributes to or 
+worsens an already existing condition and results in:
+NCC MERP INDEX FOR CATEGORIZING MEDICATION ERRORS1,2
+National Coordinating Council for Medication Error Reporting and Prevention
+Code
+Description
+SERIOUS SAFETY EVENT
+SSE 1
+Death
+Death of the patient
+I
+An error occurred that may have contributed to or resulted in the patientâ€™s death
+SSE 2
+Severe 
+Permanent 
+Harm
+Life-changing unintended outcomes or suffering. 
+This can include events resulting in permanent loss of 
+organ, limb, or vital physiologic or neurologic function. 
+There is no expected change in the patientâ€™s status 
+or condition.
+H
+Also Consider 
+SSE 4
+An error occurred that required intervention necessary to sustain life
+G
+Also Consider 
+PSE 1
+An error occurred that may have contributed to or resulted in permanent patient harm
+SSE 3
+Moderate 
+Permanent 
+Harm
+Unintended outcomes or suffering that are significant 
+but not sufficiently severe to impact activities of daily 
+living or business functioning. This can include events 
+that result in permanent reduction in physiologic 
+reserve, disfigurement, or impaired or aided sense or 
+function. There is no expected change in the patientâ€™s 
+status or condition.
+G
+Also Consider 
+PSE 1
+An error occurred that may have contributed to or resulted in permanent patient harm
+SSE 4
+Severe 
+Temporary 
+Harm
+Critical, potentially life-threatening unintended 
+outcomes  or suffering. Response to this deviation 
+can include: a prolonged transfer to a higher level 
+of care/ monitoring; an additional major surgery, 
+procedure or substantial treatment to resolve the 
+condition; or an unnecessary significant treatment 
+or procedure. The unintended outcomes last for a 
+limited period of time with no permanent residual.
+H
+Also Consider 
+SSE 5
+An error occurred that required intervention necessary to sustain life
+SSE 5
+Moderate 
+Temporary 
+Harm
+Significant unintended outcomes or suffering. 
+Response to the deviation can include: a higher level 
+of care or more extensive monitoring; an additional 
+invasive procedure1 or treatment to resolve the 
+condition; delay in discharge or readmission; or the 
+performance of an unnecessary invasive procedure. 
+The unintended outcomes last for a limited period 
+with no permanent residual.
+F
+Also Consider 
+SSE 4
+An error occurred that may have contributed to or resulted in temporary harm to the patient 
+and required initial or prolonged hospitalization
+
+43
+APPENDIX B
+The HPI safety event classification (SECÂ®) levels of harm - continued
+Harmonization with NCC MERP severity index coding
+HPI Safety Event Classification (SEC) Levels of Harm Harmonization with NCC MERP Severity Index Coding
+CODE
+LEVEL 
+OF 
+HARM
+DESCRIPTION
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that causes, contributes to or 
+worsens an already existing condition and results in:
+NCC MERP INDEX FOR CATEGORIZING MEDICATION ERRORS
+National Coordinating Council for Medication Error Reporting and Prevention1
+Code
+Description
+PRECOURSOR SAFETY EVENT
+PSE 1
+Minor 
+Permanent 
+Harm
+Unintended outcomes or suffering in which the 
+response to the event requires little or no intervention. 
+May also include performing an unnecessary minor 
+procedure. There is no expected change in the 
+patientâ€™s status or condition.
+G
+Also Consider 
+SSE 2
+SSE 3
+An error occurred that may have contributed to or resulted in permanent patient harm
+PSE 2
+Minor 
+Temporary 
+Harm
+Unintended outcomes or suffering in which the 
+response to the event requires little or no intervention. 
+May also include performing an unnecessary minor 
+procedure. The unintended outcomes last for a 
+limited period of time with no permanent residual
+E
+Also Consider 
+SSE 5
+An error occurred that may have contributed to or resulted in temporary harm to the patient 
+and required intervention
+D
+Also Consider 
+PSE 3
+An error occurred that reached the patient and required monitoring to confirm that it resulted 
+in no harm to the patient and/or required intervention to preclude harm
+PSE 3
+No 
+Detectable 
+Harm
+An event in which harm may exist, yet the ability to 
+determine or confirm the existence or fact of harm 
+is not possible. This can include events where the 
+onset of harm may occur later in time but canâ€™t be 
+confirmed.
+C
+Also Consider 
+PSE 2
+An error occurred that reached the patient but did not cause patient harm
+PSE 4
+No Harm
+An event that results in no harm. There is sufficient 
+information available to determine that no harm 
+occurred.
+C
+An error occurred that reached the patient but did not cause patient harm
+NEAR MISS EVENT
+NME 1
+Unplanned 
+Barrier 
+Catch
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that passes through one or more 
+error detection barriers but does not reach the 
+patient because it is caught by chance. May also 
+involve a barrier not designed or planned into the 
+system.
+B
+Also Consider 
+NME 2
+NME 3
+An error occurred but the error did not reach the patient (an â€œerror of omissionâ€ does reach the 
+patient)
+NME 2
+Last 
+Strong 
+Barrier 
+Catch
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that passes through all the possible 
+early error detection barriers and is caught by a last 
+strong error detection barrier designed in the system.
+B
+Also Consider 
+NME 1
+NME 3
+An error occurred but the error did not reach the patient (an â€œerror of omissionâ€ does reach the 
+patient)
+NME 3
+Early  
+Barrier 
+Catch
+A deviation in Generally Accepted Performance 
+Standards (GAPS) that Is caught by an error detection 
+barrier that occurs early in the process. This barrier 
+is planned for or designed into the systemâ€™s defense 
+in depth.
+B
+Also Consider 
+NME 1
+NME 2
+An error occurred but the error did not reach the patient (an â€œerror of omissionâ€ does reach the 
+patient)
+
+44
+APPENDIX C
+Frequently asked questions in using safety event classification
+The experience of thousands of health care settings in using SECÂ® has highlighted some of the challenges in applying criteria to make an accurate, but internally 
+consistent classification decision. The issues described below are illustrative of common questions and are offered as guidance by experts in this process.
+FAQ
+CASE EXAMPLE
+KEY CONSIDERATIONS  (âœ”)  & SECÂ® APPROACHES
+KEY WORDS
+1
+What if an event occurs with 
+significant harm to a patient, 
+even up to death, but the 
+â€œerrorsâ€ on the part of the 
+individuals occurred because of 
+failings in the system of care? 
+Can we say there was a deviation 
+in GAPS and therefore it is a 
+safety event?
+Background: A patient was admitted to the hospital by a 
+neurosurgeon for a procedure using equipment and methods very 
+new to the surgical team. Major complications occurred during the 
+procedure.
+What Happened that shouldnâ€™t have happened? The surgeon was 
+very experienced in this procedure and with this equipment, but the 
+surgical team was not. The hospital had been anxious to bring this 
+physician on board to increase market share and didnâ€™t take sufficient 
+special action to prepare for this new surgery, assuming the surgical 
+team would learn the new process.
+Patient Outcome: There were several intraoperative complications 
+which the team had difficulty dealing with. The patient was transferred 
+to the ICU for two days rather than the expected surgical unit and was 
+ultimately discharged home.
+SEC Challenge: The real deviation wasnâ€™t really related to the lack of 
+preparation on the part of team when beginning a new procedure. Is 
+that still considered a deviation from GAPS?
+âœ” While most safety events involve some element of human error, at times the 
+deviation occurs because of problems within the organization or the system of care, 
+including unclear procedures, lack of education, ineffective monitoring to assure 
+individual accountability, or a culture enabling proceeding despite uncertainty.
+âœ” These situations meet the criteria for a â€œdeviation in GAPSâ€ even though it was not a 
+specific individual(s) who experience the deviation.
+âœ” High Reliability Organizing principles such as a preoccupation with failure and a 
+sensitivity to operations are important tools to prepare for and manage to safe 
+outcomes. A recognition that small, insignificant situations can lead to bigger 
+problems and that strong teamwork can overcome problems more quickly and 
+effectively enables the ability to manage for reliability and safety. Ask the question 
+â€œAre we holding ourselves to the highest standard of care?â€ The difference here is 
+that we are focusing on standards of reliability and safety, not legality. Complexity 
+is not an excuse for unsafe care. Tools such as a proactive risk analysis using FMEA 
+or other similar tools prior to beginning new processes or programs reinforces the 
+principle of a "preoccupation with failure'.
+Recommended SEC Approach:
+The team reached consensus that if the organization had prepared more effectively 
+for the arrival of this physician with new procedures and equipment the complications 
+would not have occurred or at least would have been less severe.
+Recommended Classification: SSE 4
+System Failures;
+Preoccupation with Failure;
+Sensitivity to Operations
+2
+How do we handle an event 
+involving patient suicide when 
+itâ€™s difficult to be certain that it is 
+a preventable safety event?
+Background: A patient was admitted to the Emergency Department 
+with suicidal ideation. The patient was admitted but the next day he 
+chose to leave AMA.
+What Happened that shouldnâ€™t have happened? The behavioral 
+health social work assessment was not completed prior to the patient 
+being discharged.
+Patient Outcome: Patient committed suicide two days after returning 
+home
+SEC Challenge: While the patient was classified as a suicide risk, 
+his primary care physician, who had known him for several years, 
+determined his risk was very low and the patient promised he would 
+seek care the next day. Was there a clear causation?
+âœ” Causation is at times difficult to confirm. The question to ask is, â€œDid we do 
+everything possible to provide an uncompromised, safe experience, regardless of the 
+ability to definitively prove a direct cause-and-effect relationship?â€
+âœ” Strategies that can assist the SEC decision process particularly in difficult psychiatric 
+situations include a good Task Analysis to confirm deviations in GAPS, assuring 
+that the standard of review isnâ€™t just a legal one and considering the â€œdo no harmâ€ 
+standard. In addition, consider the Burden of Proof mindset (above).
+Recommended SEC Approach:
+The team was concerned about looking at this event and building in hindsight bias 
+(See Unconscious Bias in White Paper Narrative). They agreed there was a deviation 
+involving the delay in the social work assessment. However, although his PCP was not 
+experienced in behavioral health evaluation factors, the team decided that they were 
+not able to establish a direct causation, although many lessons were learned from this 
+event.
+Recommended Classification: Not a Safety Event
+Suicide;
+Causation;
+Hindsight Bias
+
+45
+APPENDIX C
+Frequently asked questions in using safety event classification - continued
+FAQ
+CASE EXAMPLE
+KEY CONSIDERATIONS  (âœ”)  & SECÂ® APPROACHES
+KEY WORDS
+3
+Is it really a deviation from GAPS 
+if we do a procedure without 
+waiting for diagnostic tests that 
+turn out to demonstrate that the 
+procedure was unnecessary?
+Background: A patient was admitted with chest pain and SOB. 
+Diagnostic tests were ordered and performed, but results had not 
+been received before the physician decided to insert a chest tube. A 
+later review of the tests indicated that a chest tube was unnecessary.
+What Happened that shouldnâ€™t have happened? The ED physician 
+didnâ€™t wait for test results to confirm the necessity.
+Patient Outcome: The patient experienced an unnecessary invasive 
+procedure
+SEC Challenge: Was there really a deviation in GAPS?
+âœ” The importance of clinical judgment at the time should not be underestimated. But 
+when itâ€™s difficult to determine if there is a deviation in GAPS, using the tool of Task 
+Analysis can be effective.
+Task Analysis is an effective tool in situations where the event is more about what 
+action isnâ€™t taken, or is not taken effectively, during key processes, rather than actual 
+errors made. Task/process expectations are compared with what was done to 
+identify the deviations.
+Recommended SEC Approach:
+The SEC team focused on three questions in a simple task analysis:
+1  Did the physical assessment or other parameters justify intervention at the time (e.g., 
+appeared life threatening)? No, the patientâ€™s condition wasnâ€™t life threatening.
+2  Why did it make sense to the physician at that time to insert the chest tube? The ED 
+physician was very busy with several other patients and decided in his judgement it 
+wouldnâ€™t hurt to go ahead and have this patient taken care of just in case.
+3  What standards for chest tube insertion exist? Agreed that chest tube insertion 
+protocols needed to be clearer.
+Recommended Classification: SSE 5
+Task Analysis;
+Unnecessary Procedure;
+Chest Tube
+4
+Sometimes there are safety 
+events in which there clearly 
+is a deviation in GAPS in which 
+the outcome was a patient 
+death. But what if the patientâ€™s 
+clinical condition was such that 
+they were not expected to live? 
+Should these events be counted 
+as preventable patient deaths 
+and therefore an SSE 1?
+Example #1
+Background: A patient receiving Hospice care expires without nursing 
+support when it was known that death was imminent in the next 24 
+hours
+What Happened that shouldnâ€™t have happened? The team identified 
+a clear deviation from the hospiceâ€™s stated standard of care for a 
+patient close to death.
+SEC Challenge: Should this be considered an SSE 1 or some other 
+level of harm since death was expected?
+Example #2:
+Background: A patient was terminally ill and in the ICU. Death was 
+expected within the next couple of weeks.
+What Happened that shouldnâ€™t have happened? A patient received a 
+morphine overdose due to a medication error.
+Patient Outcome: The patient expired and his family was not able to 
+be with him at the time the event occurred.
+SEC Challenge: Would this be an SSE 1 since the patientâ€™s death was 
+expected?
+âœ” At times, a team reviewing an event has considered that the patient was terminally ill 
+and death was expected. But in the case that that death has been hastened because 
+of an error, most organizations reach the conclusion that the earlier death was 
+unnecessary and therefore is a preventable safety event.
+âœ” It is recommended that outcomes such as these be considered a preventable patient 
+death, i.e., an SSE 1, if the error or omission shortened the patientâ€™s life by even one 
+minute.
+Recommended SEC Approach:
+In Example #1, even though the patientâ€™s death was imminent, there was a significant 
+gap in comfort or other appropriate hospice care resulting in an unattended death, 
+Including the possibility of not receiving necessary comfort medications.
+In Example #2, aside from the death that occurred earlier and for a different reason 
+than the patientâ€™s health status there is also the significance of the emotional harm that 
+the family experienced.
+Recommended Classification: SSE 1 for both events
+Terminally ill;
+Expected death;
+Hospice;
+Emotional Harm
+
+46
+APPENDIX C
+Frequently asked questions in using safety event classification - continued
+FAQ
+CASE EXAMPLE
+KEY CONSIDERATIONS  (âœ”)  & SECÂ® APPROACHES
+KEY WORDS
+5
+In our healthcare system we 
+have been working for several 
+years, in both our ambulatory 
+and acute care sites, on reducing 
+healthcare acquired infections.
+We consider them â€œnever 
+eventsâ€, but sometimes we 
+arenâ€™t able to clearly identify a 
+â€œdeviation from GAPSâ€ so do we 
+still consider this a preventable 
+safety event, sometimes an SSE?
+Background: In an Outpatient Dialysis Center, a patient developed 
+an infection in his central venous catheter. It wasnâ€™t clear how this 
+infection occurred.
+What Happened that shouldnâ€™t have happened? It was suspected 
+that staff did not perform the Central Line Infection Prevention 
+Protocol correctly, but no one was certain or could identify who did 
+not.
+Patient Outcome: The patient required only a course of oral 
+antibiotics for two weeks,
+SEC Challenge: Can the event be classified if the department canâ€™t 
+identify the specific deviation from GAPS? Also do we even have to 
+classify this since it doesn't appear to have harm level of an SSE?
+âœ” It may not always be clear if there is a deviation in GAPS, what the specific deviation 
+was or which caregiver experienced the deviation when there is an unintended 
+outcome such as a Healthcare Acquired Infection or a Pressure Injury.
+âœ” At a minimum, consider if the organization did everything possible to protect the 
+patient from harm regardless of the ability to definitively prove a direct cause-and-
+effect relationship.
+âœ” Some organizations have decided that certain types of events are universally 
+preventable, irrespective of whether the specific deviation from GAPS is able to be 
+identified. This should be an organizational decision, but when making the decision 
+there should be:
+1  Clarity in how and when the decision is made that it is a safety event, e.g. if a HAI 
+meets the NHSN criteria for this event, and
+2  No event is automatically an SSE. The decision regarding level of harm is made 
+separately
+Recommended SEC Approach:
+The Infection Prevention Specialist suspected that the staff werenâ€™t consistent in the 
+standard protocol of â€œscrub the hubâ€ for 15 seconds even though most staff believed 
+they were doing this correctly. He separately asked each nurse to demonstrate how 
+they do the process. He didnâ€™t tell them he was actually timing them and discovered the 
+average time was actually 8 seconds not the required 15. The review team agreed there 
+was a deviation in GAPS.
+Recommended Classification: PSE 2
+Universally Preventable 
+Events;
+Difficult to Identify 
+Deviations;
+Organizational Case Law;
+Causation
+6
+How do we handle a safety event 
+that involves a patient fall? We 
+have a fall risk program that 
+includes bed alarms, but these 
+donâ€™t often actually â€œpreventâ€ 
+a fall.
+Background: A resident in a long-term care facility was identified as 
+high risk to fall. A volunteer had returned the resident to bed after 
+returning from a PCP visit outside the facility. She put the side rails up, 
+the call bell in reach and left the room. A half hour later the patient 
+got out of bed unassisted to go to the bathroom.
+What Happened that shouldnâ€™t have happened? The volunteer didnâ€™t 
+activate the bed alarm nor notify the nurse that the resident had 
+returned.
+Resident Outcome: The resident fell and fractured his arm. He was 
+taken to the ED for evaluation. No surgery was needed but a cast was 
+applied, and he stayed in the hospital overnight before returning to 
+the facility.
+SEC Challenge: Was this really a preventable event? Bed alarms donâ€™t 
+really stop the patient from falling. Some nursing homes donâ€™t even 
+use them any more thinking that they make things worse.
+âœ” Much has been written about the value of alarms in preventing falls. Other than 
+â€œalarm fatigueâ€ â€“ present in most care settings, other factors have been identified 
+in long term care facilities that support not using alarms, including that the alarms 
+sometimes confuse the residents, they donâ€™t like them turned on and staffing to 
+respond to alarms is lower than acute care.
+âœ” Research on this subject is often anecdotal, but recent meta-analysis1 has identified 
+that whatever fall prevention program is in place, that it should be a comprehensive 
+well thought out strategy relevant to the particular care setting.
+Recommended SEC Approach:
+The review team identified that some LTC facilities in their area were not using alarms. 
+However, it was also noted that irrespective of the presence of the alarm, notification 
+that the resident was back in his room would have been an important action that was 
+also missed. All agreed that a more deliberate and comprehensive research-based 
+approach to fall prevention was necessary.
+Recommended Classification: SSE 5
+Fall Prevention; Bed alarms; 
+long term care; alarm 
+fatigue
+
+47
+APPENDIX C
+Frequently asked questions in using safety event classification - continued
+FAQ
+CASE EXAMPLE
+KEY CONSIDERATIONS  (âœ”)  & SECÂ® APPROACHES
+KEY WORDS
+7
+What do we do when an event 
+occurs and the SEC team has 
+difficulty reaching a decision 
+about SEC because there is a 
+difference of opinion between 
+members of the team and the 
+input from a Medical Staff Peer 
+Review Committee?
+Background: A patient with a history of colon cancer arrived in the ED 
+with a fever and a possible rectal abscess.
+What Happened that shouldnâ€™t have happened? The order for the CT 
+scan did not include details of the patient's medical history and the CT 
+was incorrectly interpreted as a mass and not an abscess.
+Patient Outcome: The patient was discharged home but returned the 
+next day in septic shock and was admitted to the ICU and discharged 
+a week later.
+SEC Challenge: There wasn't a clear consensus in the SEC team on 
+the presence of a deviation. They asked the Medical Staff Peer Review 
+Committee for input and they had other physicians review the CT 
+scan. They were split on whether it was correctly read although most 
+believed if the correct patient history were known, it was more clearly 
+an abscess.
+âœ” Any professional peer review activity is a process that is designed to address 
+individual performance issues. While related to SEC, it is nevertheless a separate 
+activity that may be able to inform the SEC, but need not prescribe it.
+âœ” Waiting for a "decision" in a peer review committee may unnecessarily delay a 
+decision by the SEC team and cause a delay in effective event analysis.
+âœ” Even if the SEC team determines that there was a preventable serious safety event, 
+and subsequent in-depth analysis activities provide further information that changes 
+understanding of the event, it can be re-classified.
+âœ” An effective SEC team has membership representing an interdisciplinary team 
+including broad physician expertise and the ability to reference subject experts when 
+necessary in a timely fashion. (See Appendix H -Implementing an On-Going Safety 
+Event Classification Process)
+âœ” Organizations experienced in SEC have made improvements in their professional 
+peer review process including:
+â€¢  Incorporating the Known Complication questions into the process.
+â€¢  Separating the presence of human or system error from decisions regarding 
+performance management (see Just Culture).
+â€¢  A â€œNationally Recognized Standard of Careâ€ is intended to mean the â€œbestâ€ 
+standard of care and does not necessarily come from a national body or directive. 
+A best standard may be local.
+Recommended SEC Approach:
+The SEC team agreed that aside from the possibility of a "misread" of the CT Scan, 
+there clearly was a deviation in communication involving several care team members, 
+enabled in part by EHR system issues. The consensus was that they did not do their best 
+to â€œprotect the patient from harmâ€, enabling a series of individual and system errors. 
+Any other performance culpability decisions rested with the peer review committee and 
+other HR processes and was not a focus of SEC.
+Recommended Classification: SSE 4
+Medical Staff Peer Review;
+National Standards of Care;
+Medical Staff Just Culture;
+Burden of Proof;
+Best Practice
+8
+We had a potential safety event 
+that involved clear deviations 
+from GAPS with a resulting 
+patient death. However, the 
+autopsy report indicated 
+a different and apparently 
+unrelated cause of death. How 
+do we address the issue of 
+causation?
+Background: A patient is in the hospital for care related to various 
+medical and behavioral health issues. One evening the patient was 
+found non-responsive and attempts to revive him were unsuccessful.
+What Happened that shouldnâ€™t have happened? All agreed that there 
+was a delay in recognition of the patientâ€™s deterioration and getting a 
+Code Blue started.
+Patient Outcome: An autopsy was performed and indicated cause of 
+death as pneumonia, which was not part of his original diagnosis.
+SEC Challenge: The SEC team was concerned about calling this a 
+preventable safety event.
+âœ” Don't confuse autopsy results with the analysis of an unexpected death when 
+deviations are clearly present that at least contribute to the death.
+âœ” Studies have shown that autopsy results can be inaccurate and/or incomplete in 
+cases involving circulatory and respiratory disorders. 2,3
+Recommended SEC Approach:
+Even though the â€œcause of deathâ€ was reported as pneumonia, relying solely on the 
+medical examinerâ€™s report was unreliable as this organization doesnâ€™t typically have the 
+context of the circumstances surrounding the death and therefore the results can be 
+inaccurate and/or incomplete. In addition, if the cause of death actually was pneumonia, 
+then there was likely a missed diagnosis and treatment of the pneumonia.
+âœ” Recommended Classification: SSE 1
+Autopsy results;
+Pneumonia;
+Delay in Diagnosis
+1   CMileski, M et al. Alarming and/or Alerting Device Effectiveness in Reducing Falls in Long-Term Care (LTC) Facilities? A Systematic Review. Healthcare (Basel). 2019 Mar; 7(1): 51. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6473316/
+2   Kircher T, Nelson J, & Burdo H. (1985). The Autopsy as a Measure of Accuracy of the Death Certificate. New England Journal of Medicine, 313:1263-1269. https://www.nejm.org/doi/full/10.1056/NEJM198511143132005
+3   Mieno, M. N., Tanaka, N., Arai, T., Kawahara, T., Kuchiba, A., Ishikawa, S., & Sawabe, M. (2016). Accuracy of Death Certificates and Assessment of Factors for Misclassification of Underlying Cause of Death. Journal of Epidemiology, 26(4), 
+191â€“198. https://doi.org/10.2188/jea.JE20150010
+
+48
+APPENDIX D
+PATIENT
+PROTECTION
+CARE
+MANAGEMENT
+PRODUCT OR DEVICE
+CRIMINAL
+PROCEDURAL
+ENVIRONMENTAL
+Wrong Body Part
+Wrong Patient
+Wrong Procedure
+Other Procedural
+Post Procedure Death
+of a Healthy Patient
+Unintended Retention
+of a Foreign Object
+Electric Shock
+Burn / Smoke
+Inhalation
+Fall
+Restraint / Bedrail
+Event
+Other Environmental
+Gas Administration
+Event
+Patient
+Elopement
+Suicide or
+Attempted Suicide
+Inappropriate
+Discharge
+Medication Event
+Blood Product
+Administration Event
+Maternal/Perinatal 
+Death or Disability
+Pressure Injury
+Delay in Diagnosis
+or Treatment
+Healthcare Associated
+Infection (HAI)
+Other Care
+Management
+Contaminated Drugs,
+Devices, or Biologics
+Device Malfunction
+Intravascular
+Air Embolism
+Abduction
+Sexual Abuse
+Assault
+Physical Abuse
+Assault
+
+49
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ©
+Harmonization with other Nationally Recognized Safety Event Reporting Taxonomies and Related Indicator Sets
+This document is offered as a tool to complement other nationally recognized safety event taxonomies or 
+safety/quality indicator sets used in healthcare settings. It is not all-inclusive, but incorporates common 
+structures in use at this time in healthcare. Its intent is to provide guidance in mapping data collected with 
+the HPI safety data systems of SECÂ® and SSERÂ®.
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical 
+Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality Indicators (PQI); Inpatient Quality Indicators 
+(IQI) & Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+PR1: Wrong Body Part
+1A. Surgery or other invasive 
+procedure performed on the 
+wrong site
+Surgery or other Invasive 
+procedure performed at the 
+wrong site, on the wrong 
+patient, at the wrong site, or 
+that is the wrong (unintended) 
+procedure for a patient
+PR2: Wrong Patient
+1B. Surgery or other invasive 
+procedure performed on the 
+wrong patient
+Surgery or other Invasive 
+procedure performed at the 
+wrong site, on the wrong patient, 
+at the wrong site, or that is the 
+wrong (unintended) procedure 
+for a patient
+PR3: Wrong Procedure
+1C. Wrong surgical or other invasive 
+procedure performed on a patient
+Surgery or other Invasive 
+procedure performed at the 
+wrong site, on the wrong patient, 
+at the wrong site, or that is the 
+wrong (unintended) procedure 
+for a patient
+PSI 05: Retained Surgical Item or Unretrieved Device Fragment 
+Count
+PR4: Unintended 
+Retention of a Foreign 
+Object
+1D. Unintended retention of a 
+foreign object in a patient after 
+surgery or other invasive procedure
+Unintended retention of a 
+foreign object in a patient after 
+an invasive procedure, including 
+surgery
+PSI 02 Death Rate in Low Mortality DRGs; IQI 08 Esophageal 
+Resection Mortality Rate; IQI 09 Pancreatic Resection Mortality 
+Ratel;
+IQI 19 Hip Fracture Mortality Rate
+PR5: Post Procedure 
+Death of l Healthy 
+Patient
+1E. Intraoperative or immediately 
+postoperative/post procedure 
+death in an ASA Class 1 patient
+PSI 02 Death Rate in Low Mortality DRGs; IQI 08 Esophageal 
+Resection Mortality Rate;
+IQI 09 Pancreatic Resection Mortality Ratel;
+IQI 19 Hip Fracture Mortality Rate
+Clinical Care Domain:
+Total Hip or Total Knee 
+Arthroplasty Complication 
+Rate (COMP-HIP-KNEE)
+PR6: Other Procedural 
+accidental puncture, 
+laceration or other 
+issues in technique
+PR6.1 Puncture/
+Laceration
+PR6.2 Mislabeled/Lost 
+Specimen
+PSI 15: Abdominopelvic Accidental Puncture or Laceration & PDI 
+1: Accidental Puncture or Laceration
+PSI 06, & PDI 05: Iatrogenic pneumothorax rate
+PSI 14: Postoperative wound dehiscence rate
+PSI 09 & PDI 08: Perioperative hemorrhage or hematoma rate;
+IQI 11 AAA Repair Mortality Rate, IQI 12 CABG Mortality Rate,
+PDI 01 Accidental Puncture or Laceration Rate, Intervention Rate,
+IQI 30 Percutaneous Coronary
+IQI 31 Carotid Endarterectomy Mortality Rate
+ PR6: Other Procedural
+PROCEDURAL
+
+50
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical 
+Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality Indicators (PQI); Inpatient Quality Indicators 
+(IQI) & Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+EE1: Electric Shock
+5A. Patient or staff death or serious 
+injury associated with an electric 
+shock in the course of a patient 
+care process in a healthcare setting
+EE2: Burn/Smoke 
+Inhalation
+5C. Patient or staff death or serious 
+injury associated with a burn 
+incurred from any source in the 
+course of a patient care process in 
+a healthcare setting
+Fire, flame, or unanticipated 
+smoke, heat, or flashes 
+occurring during direct patient 
+care caused by equipment 
+operated and used by the 
+hospital
+EE3: Fall
+4E. Patient death or serious injury 
+associated with a fall while being 
+cared for in a healthcare setting
+Effectiveness of Care: Fall Risk Management; 
+Physical Activity in Older Adults
+PSI 08 In Hospital Fall with Hip 
+Fracture Rate
+EE4: Restraints/
+Bedrail Event
+5D. Patient death or serious injury 
+associated with the use of physical 
+restraints or bedrails while being 
+cared for in a healthcare setting
+EE5: Gas 
+Administration Event 
+(no gas, wrong gas, 
+contaminated gas)
+5B. Any incident in which systems 
+designated for oxygen or other 
+gas to be delivered to a patient 
+contains no gas, the wrong gas, 
+or are contaminated by toxic 
+substances
+EE6: Other 
+Environmental 
+electrical power loss; 
+fires; environment of 
+care issues
+6A. Death or serious injury of a 
+patient or staff associated with the 
+introduction of a metallic object 
+into the MRI area
+Fire, flame, or unanticipated 
+smoke, heat, or flashes occurring 
+during direct patient care caused 
+by equipment operated and used 
+by the hospital
+ PR6: Other Procedural
+accidental puncture, laceration or other issues in technique
+ENVIRONMENTAL
+
+51
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality Indicators (PQI); 
+Inpatient Quality Indicators (IQI) & Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+PP2: Patient Elopement
+3B. Patient death or serious injury 
+associated with patient elopement 
+(disappearance)
+Any elopement (that is, 
+unauthorized departure) 
+of a patient from a staffed 
+around the-clock care setting 
+(including the ED), leading to 
+death, permanent harm, or 
+severe temporary harm to the 
+patient
+PP3: Suicide or 
+Attempted Suicide
+3C. Patient suicide, attempted 
+suicide, or self-harm that results in 
+serious injury, while being cared for 
+in a healthcare setting
+Suicide of any patient receiving 
+care, treatment, and services 
+in a staffed around-the clock 
+care setting or within 72 hours 
+of discharge, including from 
+the hospitalâ€™s emergency 
+department (ED)
+Effectiveness of Care: Behavioral 
+Health â€“ Antidepressant Medication 
+Management; Follow-Up Care 
+measures for hospitalization or ED 
+Visit for Mental Illness, ED visit for 
+ETOH and Other Drug Dependence; 
+Adherence to Antipsychotic Meds 
+for patients with Schizophrenia
+PP4: Inappropriate 
+Discharge
+3A. Discharge or release of a 
+patient/ resident of any age, who is 
+unable to make decisions, to other 
+than an authorized person
+PP4.1: Infant 
+Discharged to Wrong 
+Person
+3A. Discharge or release of a 
+patient/resident of any age, who is 
+unable to make decisions, to other 
+than authorized person
+Discharge of an infant to the 
+wrong family
+PATIENT PROTECTION
+
+52
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention 
+Quality Indicators (PQI); Inpatient Quality 
+Indicators (IQI) & Pediatric (PDI) Indicators
+CMS Value-Based 
+Purchasing 
+Program5
+CM1: Medication Error 
+wrong drug, dose, 
+patient, time, rate, 
+preparation, or routek
+4A. Patient death or serious 
+injury associated with a 
+medication error (e.g., errors 
+involving the wrong drug, 
+wrong dose, wrong patient, 
+wrong time, wrong rate, wrong 
+preparation, or wrong route of 
+administration)
+Prolonged fluoroscopy with 
+cumulative dose >1,500 rads to 
+a single field or any delivery of 
+radiotherapy to the wrong body 
+region or >25% above the planned 
+radiotherapy dose
+Effectiveness of Care:
+Respiratory â€“ Pharmacotherapy Management of COPD 
+Exacerbation; Medication Management for People with Asthma 
+Cardiac â€“ Persistence of Beta Blocker Treatment after AMI; 
+Statin Therapy for Patients with Cardiovascular and Diabetes
+Musculoskeletal â€“ Anti-Rheumatic Drug Therapy for 
+Rheumatoid Arthritis
+Behavioral Health â€“ Antidepressant Medication Management; 
+Metabolic Monitoring for Children on Antipsychotics
+Medication Management â€“ Medication Reconciliation Post 
+Discharge; Transitions of Care; Follow-Up after ED Visit for 
+patients with Multiple Chronic Conditions
+Overuse/Appropriateness â€“ Avoidance of Antibiotics with 
+Acute Bronchitis; Medication Management in the Elderly; Use 
+of Opioids
+Utilization â€“ Antibiotic Utilization
+HCAHPS â€“ 
+Communication 
+About Medicines
+CM2: Blood Product 
+Administration Event
+4B. Patient death or serious 
+injury associated with unsafe 
+administration of blood 
+products
+Administration of blood products 
+having unintended ABO and 
+non-ABO (Rh, Duffy, Kell, Lewis, 
+and other clinically important 
+blood groups) incompatibilities, 
+Hemolytic transfusion reactions 
+or transfusions resulting in severe 
+temporary harm, permanent harm, 
+or death.
+CM3: Maternal/
+Perinatal Death or 
+CM3.1: Maternal 
+Death/ Serious Injury
+4C. Maternal death or serious 
+injury associated with labor or 
+delivery in a low-risk pregnancy 
+while being cared for in a 
+healthcare setting
+Any intrapartum (related to the 
+birth process) maternal death. 
+Severe maternal morbidity (not 
+primarily related to the natural 
+course of the patientâ€™s illness 
+or underlying condition) when 
+it reaches a patient and results 
+in permanent harm or severe 
+temporary harm
+PSI 18: Obstetric Trauma 
+â€“ Vaginal Delivery with 
+Instrument
+PSI 19: Obstetric Trauma 
+â€“ Vaginal Delivery Without 
+Instrument
+CARE MANAGEMENT
+
+53
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality 
+Indicators (PQI); Inpatient Quality Indicators (IQI) & 
+Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+CM3.2: Neonatal 
+Death/ Serious Injury
+4D. Death or serious injury of a 
+neonate associated with labor or 
+delivery in a low-risk pregnancy
+Unanticipated death of a full-term 
+infant
+PSI 17: Birth Trauma â€“ Injury to Neonate
+CM7: Pressure Injury
+4F. Any Stage 3, Stage 4, and 
+unstageable pressure ulcers 
+acquired after admission/
+presentation to a healthcare 
+setting
+PSI 3: Pressure Ulcer rate
+CM8: Delay in 
+Diagnosis or Treatment
+CM8.1 Wrong 
+Diagnosis
+CM8.2 Missed 
+Diagnosis
+CM8.3 Delayed 
+Diagnosis
+CM 8.4 Wrong 
+Treatment
+CM8.5 Missed 
+Treatment
+CM8.6 Delayed 
+Treatment
+4H. Patient death or serious 
+injury resulting from the 
+irretrievable loss of an 
+irreplaceable biological 
+specimen
+4I. Patient death or serious injury 
+resulting from failure to follow 
+up or communicate laboratory, 
+pathology, or radiology test 
+results
+Severe neonatal 
+hyperbilirubinemia (bilirubin >30 
+milligrams/deciliter)
+â€¢	
+Effectiveness of Care:
+All 10 Prevention and Screening 
+Measures â€“ Adult BMI, Nutrition 
+Assessment, Immunization, 
+Screening for Lead; Breast, Cervical 
+and Colorectal Cancer; Chlamydia 
+and Care for Older Adults
+â€¢	
+Respiratory Conditions â€“ Testing for 
+Children with Pharyngitis; Spirometry 
+Testing in Assessment & Diagnosis 
+of COPD
+â€¢	
+Cardiovascular â€“ Controlling High 
+Blood Pressure
+â€¢	
+Musculoskeletal â€“ Osteoporosis 
+Testing
+IQI 15 & IQI 32 Acute Myocardial 
+Infarction Mortality Rate; IQI 16 Heart 
+Failure Mortality Rate; IQI 17 Acute Stroke 
+Mortality Rate; IQI 18 Gastrointestinal 
+Hemorrhage Mortality Rate; IQI 20 
+Pneumonia Mortality Rate; IQI 90 
+Mortality for Selected Procedures; IQI 91 
+Mortality for Selected Conditions; PSI 04 
+Death Rate among Surgical Inpatients 
+with Serious Treatable Complications; 
+PSI 06 Iatrogenic Pneumothorax 
+Rate; PSI 09 & PDI 08: Perioperative 
+Hemorrhage or Hematoma Rate; PSI 11 & 
+PDI 09: Postoperative Respiratory Failure 
+Rate; PSI 12 Perioperative Pulmonary 
+Embolism or Deep Vein Thrombosis Rate;
+Clinical Care Domain:
+30 Day Mortality Rate for AMI 
+(MORT-30-AMI), Heart Failure 
+(MORT-30-HF), Pneumonia 
+(MORT-30-PN), Chronic 
+Obstructive Pulmonary Disease, 
+(MORT-30-COPD), Coronary 
+Artery Bypass Graft (MORT-30-
+CABG),
+CM10: Other Care 
+Management 
+(coordination or 
+continuity of care; 
+other event incidental 
+to general care)
+4C. Maternal death or serious 
+injury associated with labor or 
+delivery in a low-risk pregnancy 
+while being cared for in a 
+healthcare setting
+Effectiveness of Care:
+Diabetes â€“ Comprehensive Diabetes 
+Care
+Behavioral Health â€“ Follow-Up 
+Care for Children with ADHD 
+meds; Diabetes and Cardiovascular 
+Screening for patients with 
+Schizophrenia or Bipolar
+Risk Adjusted Utilization â€“ All Cause 
+Readmissions; Hospitalization for 
+Potentially Preventable Conditions.
+PSI 18: Obstetric Trauma â€“ Vaginal 
+Delivery with Instrument
+PSI 19: Obstetric Trauma â€“ Vaginal 
+Delivery Without Instrument
+HCAHPS â€“ Care Transition
+CARE MANAGEMENT
+
+54
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality 
+Indicators (PQI); Inpatient Quality Indicators (IQI) & 
+Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+CM11: Healthcare 
+Associated Infection 
+(HAI)
+Utilization & Risk Adjusted Utilization:
+â€¢	
+HAI Standard Infection Ratio
+â€¢	
+ Antibiotic Utilization
+NQI 03: Neonatal Blood Stream 
+Infection Rate
+PSI 13 & PDI 10: Postoperative 
+Sepsis Rate
+PSI 07, & PDI 12: Central venous 
+catheter-related blood stream 
+infection rate
+Catheter-Associated Urinary Tract 
+Infection (CAUTI);
+Central Line-Associated Blood 
+Stream Infection (CLABSI); 
+Clostridium difficile Infection (CDI)
+Methicillin-Resistant 
+Staphylococcus aureus 
+Bacteremia Infection (MRSA); 
+Surgical Site Infection (SSI)
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality 
+Indicators (PQI); Inpatient Quality Indicators (IQI) & 
+Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+PD1: Contaminated 
+Drugs, Devices or 
+Biologics
+2A. Patient death or serious 
+injury associated with use of 
+contaminated drugs, devices, 
+or biologics provided by the 
+healthcare setting
+PD2: Device 
+Malfunction
+2B. Patient death or serious 
+injury associated with use or 
+function of a device in patient 
+care, in which the device is 
+used or functions other than as 
+intended
+PD3: Intravascular Air 
+Embolism
+2C. Patient death or serious 
+injury associated with 
+intravascular air embolism that 
+occurs while being cared for in a 
+healthcare setting
+CARE MANAGEMENT
+PRODUCT OR DEVICE
+
+55
+APPENDIX E
+HPI Taxonomy of Safety Events in HealthcareÂ© - continued
+HPI Safety Event 
+Category
+National Quality Forum (NQF) 
+Serious Reportable Events1 (SREs)
+The Joint Commission Sentinel 
+Events2
+HEDISÂ® Clinical Measures3
+AHRQ Quality Indicators4:
+Patient Safety Indicators (PSI), Prevention Quality 
+Indicators (PQI); Inpatient Quality Indicators (IQI) & 
+Pediatric (PDI) Indicators
+CMS Value-Based Purchasing 
+Program5
+CE1: Abduction
+7B. Abduction of a patient/
+resident of any age
+Abduction of any patient receiving 
+care, treatment and services
+CE2: Sexual Abuse/
+Assault
+7C. Sexual abuse/assault on 
+a patient or staff member 
+within or on the grounds of a 
+healthcare setting
+Rape, assault (leading to death, 
+permanent harm, or severe 
+temporary harm), or homicide 
+of any patient receiving care, 
+treatment, and services while on 
+site at the healthcare setting
+CE3: Physical Abuse/
+Assault
+7A. Any instance of care ordered 
+by or provided by someone 
+impersonating a physician, 
+nurse, pharmacist, or other 
+licensed healthcare provider
+7D. Death or serious injury of a 
+patient resulting from a physical 
+assault (i.e., battery) that occurs 
+within or on the grounds of a 
+healthcare
+Rape, assault (leading to death, 
+permanent harm, or severe 
+temporary harm), or homicide 
+of any patient receiving care, 
+treatment, and services while on 
+site at the healthcare setting
+CRIMINAL
+
+56
+Sources
+1 National Quality Forum Endorsed Serious Reportable Events 
+in Healthcare: www.qualityforum.org. Last Accessed 23 
+September 2020
+2 The Joint Commission Sentinel Event Policy and Procedures: 
+https://www.jointcommission.org/resources/patient-
+safety-topics/sentinel-event/sentinel-event-policy-and-
+procedures/. Last accessed 24 September 2020
+3 The Healthcare Effectiveness Data and Information Set 
+(HEDIS) used to measure performance in Managed Care 
+settings. Used by to the National Committee for Quality 
+Assurance (NCQA) to rate quality of health plans. Only those 
+measures potentially related to safety events are included, 
+however all HEDIS measures have value when combining with 
+other safety measures of care. https://www.ncqa.org/hedis/
+measures/. Last Accessed 29 September 2020
+4 AHRQ Patient Safety and Quality Indicators Version 
+2020: https://www.qualityindicators.ahrq.gov/Modules/
+all_resources.aspx. Last Accessed 23 September 2020
+5 Hospital Value Based Purchasing (HVBP) Program FY 2018 - 
+2025 Measures. https://www.qualitynet.org/inpatient/hvbp/
+measures#tab1. Last Accessed 29 September 2020
+
+57
+APPENDIX G
+CASE # 1 - ACUTE
+CASE # 2 - ACUTE
+HPI Safety Event ClassificationÂ® (SEC) Case Studies
+These case studies are offered to provide examples in applying the Safety Event Classification process. Although cases are set in various sites of 
+care, with some adaptation the principles behind the classification decisions are adaptable to most care situations. Many health care organizations 
+have used these cases as an Interrater Reliability exercise with their safety event review team or others.
+Acute care examples
+A patient was admitted to the critical care unit with congestive heart failure and 
+later has a new complaint of chest pain persisting over several hours. Tylenol is 
+administered but does not decrease the patientâ€™s pain scale rating. The Resident 
+orders a laboratory work-up. An EKG shows that the patient is experiencing an 
+acute ST-elevation myocardial infarction. The attending cardiologist is called, but 
+does not respond to multiple pages. The nurse does not escalate the patientâ€™s 
+emergent condition to other physicians or the rapid response team. The patient 
+continues to decompensate, codes and expires.
+A patient presented to the Emergency Department complaining of chest pain 
+and is admitted to rule out myocardial infarction (MI). A CT scan is performed with 
+an incidental finding of a â€œquestionable atrial thrombusâ€. The ED physician and 
+admitting intern are notified. The ED physician includes this information in his 
+dictated report, but the intern does not include this information in the H&P. The 
+attending cardiologist misses this information. The patient is discharged after 
+an acute MI is ruled out. No assessment of the atrial thrombus was done. Two 
+weeks later, the patient presents to the ED complaining of right sided flank pain. 
+A CT scan shows a renal thrombus causing a right kidney infarction rendering the 
+kidney non-functional which is further confirmed by additional flow scans.
+Deviation from GAPS
+Yes. Although an adequate assessment indicating 
+the patientâ€™s need for immediate intervention for 
+acute myocardial infarction was performed, there 
+was a significant delay in initiating treatment.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 1: Death
+Taxonomy Event Type:
+CM8: Delay in Diagnosis or Treatment
+Deviation from GAPS
+Yes. The information needed to diagnose the 
+patient was available at the time of the initial 
+hospitalization, the condition was not adequately 
+assessed or appropriately treated.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 2: Severe Permanent Harm (delay in treatment 
+resulted in loss of function of one kidney)
+Taxonomy Event Type:
+CM8: Delay in Diagnosis or Treatment
+
+58
+APPENDIX G
+CASE # 3 - ACUTE
+CASE # 4 - ACUTE
+Patient â€˜Aâ€™ is admitted for treatment of pneumonia. Admitting orders for 
+â€œLorazepam 1mg PO three times dailyâ€ is intended for another patient â€˜Bâ€™ but 
+inadvertently entered on patient â€˜Aâ€™sâ€™ medical record. Patient A receives six doses 
+of Lorazepam. He requires a Foley catheter and due to his confusion, pulls it out 
+causing damage to his urethra. This required significant urological surgery to 
+correct the urethral damage an extension of hospital stay.
+A patient was admitted with congestive heart failure and received multiple 
+medications including sedative agents. A fall risk assessment was done and 
+the patient was identified as high risk to fall. The Fall Prevention interventions, 
+including use of bed alarm and rounding procedures were completed consistently. 
+However, family members who usually spent the whole day at the bedside werenâ€™t 
+educated about the importance of keeping the alarm on even if they were in the 
+room. One day they were standing just outside the room talking with the patientâ€™s 
+physician when the patient got out of bed to go to the bathroom. The family had 
+turned off the alarm because it kept going off and didnâ€™t think to put it back on 
+when they left the patient alone. The patient fell and complained of intense hip 
+and leg pain. Evaluation determines that that patient had a hip fracture as a result 
+of this fall, requiring surgical repair and rehabilitation therapy.
+Deviation from GAPS
+Yes. An order was written on the wrong patient. It 
+wasnâ€™t caught by the physician, the pharmacist or 
+the nurses administering the drug
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5: Severe Temporary Harm (serious medication 
+event leading to situation requiring significant 
+surgical intervention and extended hospitalization)
+Taxonomy Event Type:
+CM1: Medication Error
+Deviation from GAPS
+Yes. Although the protocol-defined interventions 
+were usually carried out by staff per protocol, in 
+this case other important prevention strategies 
+such as assuring that family members were clearly 
+educated on importance of prevention methods 
+were not implemented, enabling a situation where 
+the patient was able to get OOB unnoticed.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 4: Severe Temporary Harm (hip fracture 
+requiring surgical repair and rehabilitation)
+It is unknown at the time of discharge whether 
+there would be permanent lifestyle changes so the 
+harm was not determined to be an SSE2.
+Taxonomy Event Type:
+EE3: Fall
+
+59
+APPENDIX G
+CASE # 5 - ACUTE
+CASE # 6 - ACUTE
+A healthy Gravida 2 Para1 40-week gestation mother presents in active labor 
+requiring routine monitoring according to Labor & Delivery protocols. Labor 
+progresses to delivery of a healthy 6-pound infant with Apgar scores of 10 and 10. 
+Within 2 minutes post-delivery, the mother, who is still being monitored, begins 
+to develop extreme respiratory distress and signs of disseminated intravascular 
+clotting (DIC) syndrome. Despite all emergent efforts to reverse the situation, the 
+mother succumbs to what is later diagnosed as an amniotic fluid embolism.
+A patient was receiving treatment for rhabdomyosarcoma. The physician ordered 
+methadone for the post-surgical pain control. The nurse administering the 
+medication, double-checked the medication calculation with another RN but did 
+not request verification of the medication infusion pump setting as per hospital 
+policy. The patient subsequently receives a 10-fold dose. Shortly thereafter the 
+patient experienced signs of respiratory compromise and the nurse realized the 
+setting error and immediately stops the pump, contacted the physician, and 
+closely monitored the patient. A reversal agent was administered and appeared 
+successful. But the patient was moved to the ICU for 12 hours for further 
+monitoring in case of further problems.
+Deviation from GAPS
+No. Medical Staff Peer Review committee used 
+the Known Complication Questions. They focused 
+discussion primarily on questions 2 â€“ 4. The risk 
+of an amniotic fluid embolism occurring was 
+identified as an extremely rare and, in most cases, 
+unpredictable. This patient in particular had no 
+know risk factors. Once the complication began 
+the team recognized the problem quickly and took 
+action. Literature shows that there is a mortality 
+rate of 80% or greater with this condition and the 
+team and made all efforts to save the patient. They 
+answered â€œYesâ€ to all the questions and it was 
+determined not to be a safety event.
+Deviation reached the 
+patient?
+Yes, but the event was not preventable. Not 
+Applicable
+SEC Level of Harm
+-
+Taxonomy Event Type:
+-
+Deviation from GAPS
+Yes. The medication infusion pump setting was 
+not double-checked by another RN according to 
+hospital policy.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5: Moderate Temporary Harm (respiratory 
+compromise required a reversal agent and more 
+intense monitoring including a brief stay in a high 
+level of care)
+Taxonomy Event Type:
+CM1: Medication Error
+
+60
+APPENDIX G
+CASE # 7 - ACUTE
+CASE # 8 - ACUTE
+A patient was being treated in the Cardiac Progressive Care Unit and had a heparin 
+lock in place. As part of the routine hep-lock care, the nurse administered what 
+she thought was the usual hep-lock flush solution from an unlabeled syringe 
+she previously placed at the bedside. However, the syringe actually contained 
+Cardizem, which she administered to the patient. The patient experienced an 
+immediate hypotensive reaction, which quickly resolved without further incident.
+Patient #1, was admitted with severe anemia and required a blood transfusion. 
+Another patient, #2 was admitted to the same hematology unit with severe 
+anemia and also required a blood transfusion. Patient #1 had Type O blood; patient 
+2 had Type A+ blood. Per protocol, two nurses did a double check when blood was 
+administered to patient #1, but they didnâ€™t realize that the blood was an incorrect 
+type. Patient #1 received the wrong transfusion (patient #2â€™s transfusion) but 
+fortunately suffered no immediate blood reaction. However, over the long term, 
+this patient may have a suppressed reaction with another transfusion due to the 
+presence of A antigens.
+Deviation from GAPS
+Yes. The nurse did not follow medication labeling 
+requirements or medication verification procedures 
+prior to medication administration.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 2: Minor Temporary Harm (no apparent harm 
+beyond the initial hypotensive reaction)
+Taxonomy Event Type:
+CM1: Medication Error
+Deviation from GAPS
+Yes. All verifications prior to blood administration 
+were either not performed or not performed 
+effectively.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 3: No Detectable Harm (no apparent harm at 
+the time, though patient may have a suppressed 
+reaction with another transfusion)
+Taxonomy Event Type:
+CM1: Medication Error
+
+61
+APPENDIX G
+CASE # 9 - ACUTE
+CASE # 10 - ACUTE
+A patient had a laparoscopic hysterectomy and was discharged post-operatively 
+without complications. She had discharge instructions for a follow-up visit which 
+was scheduled for several days after discharge. During an examination at this 
+follow-up visit, the surgeon discovered and removed a surgical sponge which had 
+been placed in the vaginal space as part of the procedure. There was no infection 
+noted.
+A Sterile Processing Technician was cleaning three flexible endoscopes when he 
+was interrupted to do another task in the OR. He handed off the cleaning task to 
+second technician. In the hand-off, Tech #1 tells Tech #2 that enzymatic flush â€œwas 
+yet to be doneâ€, but Tech #2 hears this as the flush â€œhad been doneâ€. No repeat 
+back is performed. Tech #2 noted that this step in the cleaning checklist had not 
+been initialed by Tech #1, but does not ask clarifying questions. She completed 
+the task but left the checklist to be completed by the other Tech later that day. 
+All three endoscopes were returned to service and used that afternoon, having 
+manual brush cleaning only. When presented with the checklist the next day, Tech 
+#1 confirmed that he had not done the enzymatic cleaning. Patients and families 
+notified, and all started on prophylactic antibiotics as a precaution. No signs of 
+infection reported at time of contact.
+Deviation from GAPS
+Yes. The sponge count procedure was either not 
+performed or not performed effectively and was not 
+removed at the end of the procedure.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE4: No Harm (sponge was removed during a 
+routine examination with no additional required 
+intervention)
+Taxonomy Event Type:
+PR4: Unintended Retention of a Foreign 
+Object
+Deviation from GAPS
+Yes. An incomplete cleaning process for 
+instruments occurred, cascading from a series of 
+communication failures.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE3: No Detectable Harm Individual patient harm 
+and suffering: Each endoscopy patient, in this 
+scenario, is considered an individual event.
+It is possible that one or more of the patients 
+were extremely distressed and may have suffered 
+significant emotional harm and/or suffering 
+that required additional treatment or support. 
+The patientâ€™s experience is their reality. In these 
+situations where the patient has expressed 
+psychological harm, SSE 5 (moderate temporary 
+harm) is the appropriate classification).
+Taxonomy Event Type:
+PD1: Contaminated Drugs, Devices, or Biologics
+
+62
+APPENDIX G
+CASE # 1 - POSTâ€“ACUTE
+CASE # 2 - POSTâ€“ACUTE
+Post-acute care examples
+A client of a Home Care program who was recovering at home after a traumatic 
+brain injury. She was getting home therapy and during an OT appointment, the 
+therapist applied a wet heat pack for treatment. The pack was heated in the 
+microwave and had a washcloth rolled around it. The therapist thought the 
+temperature was fine but didnâ€™t notice that the patient winced when it was applied 
+to her wrist and hand. When she checked it about 15 minutes later, she discovered 
+that the patient had experienced a second-degree burn - red area and small 
+blister - to his hand and wrist. Ointment and a gauze bandage were applied and 
+the patient had no further problem.
+A client of a Home Care program was receiving care post hospitalization for a 
+leg injury that involved a wound vac. During an early wound case session, a nurse 
+packed the wound with a small amount of white foam covered by black foam 
+because there wasnâ€™t enough of the white foam. She didnâ€™t document the details 
+of this so subsequent wound care visits by a nurse and dressing changes by the 
+patient didnâ€™t focus on the white foam, just the black. It was during a procedure to 
+remove the wound vac the remaining white foam was discovered. The wound was 
+very infected and required hospitalization for a short time with IV antibiotics and 
+several procedures to address and resolve the problem.
+Deviation from GAPS
+Yes. The therapist should have confirmed that 
+the pack wasnâ€™t too hot and checked the patient 
+sooner to confirm all was well.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 2 Minor Temporary Harm (The effect on the 
+patient involved only minor treatment to heal the 
+burn. No scarring as a result)
+Taxonomy Event Type:
+EE2: Burn/Smoke Inhalation
+Deviation from GAPS
+Yes. Nurse#1 didnâ€™t handoff effectively in writing 
+and subsequent caregivers didnâ€™t probe wound 
+carefully because they knew patient was doing the 
+dressing changes and assumed it was OK.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 2 Severe Temporary Harm (While the 
+hospitalization and IV antibiotics alone might have 
+ended up as an SSE 5, the addition of several 
+procedures to fix the problem elevated the harm 
+to severe)
+Taxonomy Event Type:
+PR4: Unintended Retention of Foreign Object
+
+63
+APPENDIX G
+CASE # 3 - POSTâ€“ACUTE
+CASE # 4 - POSTâ€“ACUTE
+A resident of a SNF had recently been admitted from an acute care hospital. The 
+resident had been taking coumadin in the hospital, but the medication wasnâ€™t 
+included in the order list. It was included in the discharge summary problem list 
+and medications, but the admitting physician didnâ€™t order this medication. The 
+pharmacist at the SNF did a medication reconciliation but despite mentions of 
+the med in the discharge summary (which was not electronic) and recommended 
+blood work related to the mediation didnâ€™t pick up on the discrepancy to discover 
+the error. The resident missed the medication for 5 days when the error was 
+discovered. The resident didnâ€™t appear to experience any harm but there was 
+concern for problems later in their care.
+A resident in a long-term care facility with left sided weakness from a previous 
+stroke was identified as high risk to fall because of the weakness. A volunteer had 
+returned the resident to bed after returning from a PCP visit outside the facility. 
+She put the side rails up, the call bell in reach and left the room. A half hour later 
+the patient got out of bed unassisted to go to the bathroom, injuring his right 
+wrist requiring a splint to be placed for two weeks for stabilization while the injury 
+healed.
+Deviation from GAPS
+Yes. Both the physician and the pharmacist missed 
+opportunities to identify the need for the med 
+(albeit not clearly available in past documentation).
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 3 No Apparent Harm (although patient seemed 
+OK and current bloodwork was WNL, there was 
+concern that problems may occur in the future and 
+the patient should be monitored closely)
+Taxonomy Event Type:
+CM1: Medication Event
+Deviation from GAPS
+Yes. The deviation in this case was that the 
+volunteer didnâ€™t notify the nursing staff that the 
+resident had returned so that they could make sure 
+he was in a safe situation and possibly bring him out 
+to join other residents in the day room. This nursing 
+center does not use bed alarms as it was shown to 
+further confuse the residents.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm (While the 
+treatment for this resident wasnâ€™t significant in 
+itself, it hampered his ability to perform ADLs 
+without a level of assistance that wasnâ€™t needed 
+previously.
+Taxonomy Event Type:
+EE3: Fall
+
+64
+APPENDIX G
+CASE # 5 - POSTâ€“ACUTE
+CASE # 6 - POSTâ€“ACUTE
+A nurse in a health care systemsâ€™ float pool is assigned to work at the 
+organizationâ€™s Assisted Living Facility for several days. He begins passing out 
+medications to the residents and some of them arenâ€™t in their room but in the 
+facilityâ€™s Day Room. Most of the residentâ€™s donâ€™t wear arm bands but have pictures 
+inside their rooms for identification. The nurse depended on patientâ€™s self-
+identifying when passing meds in the Day Room. He had been introduced to the 
+patients earlier that day and thinking he knew the patients, did the identification 
+with saying the patientâ€™s name as it seemed quicker and he was behind in 
+this task. When the patient agreed, he gave the pill packet to them. Another 
+resident hearing what transpired walked up to tell the nurse that this patient was 
+responding to the wrong name. The nurse took the medications back and began 
+to perform the identification process correctly by asking the patient to state name 
+and DOB.
+A patient was discharged to home with trach and PEG tube. Home Care services 
+were ordered prior to discharge but the orders for the home care equipment 
+were written by the physician overseeing the Home Care Division. These orders 
+did not include details related to the respiratory needs including a nebulizer and 
+trach care kit. The nurse coordinator for the Home Care service assumed that 
+the previous DME company the patient had used would take care of this so didnâ€™t 
+take any action. That evening, the patient had respiratory problems that required 
+readmission back to the hospital for 2 days.
+Deviation from GAPS
+Yes. The nurse
+Deviation reached the 
+patient?
+No
+SEC Level of Harm
+NME 3 Unplanned Barrier Catch (It was fortunate 
+that another resident overheard the error and 
+stopped things before it was too late. Good 
+medication practices, adapted for the setting 
+shouldnâ€™t require that another person stops the 
+nurse from an error.
+Taxonomy Event Type:
+CM1: Medication Event
+Deviation from GAPS
+Yes (While there were errors on the part of the 
+hospital staff by not arranging for home DME, both 
+the physician and the nurse from the Home Care 
+Division involved in this event contributed to this 
+event, with an error in order writing (physician) and 
+a failure to validate and verify (nurse).
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm (The patient 
+required a return to a higher level of care)
+Taxonomy Event Type:
+CM10: Other Care Management
+
+65
+APPENDIX G
+CASE # 7 - POSTâ€“ACUTE
+A patient was admitted to a SNF after a long hospitalization for several medical 
+issues. The patient had a special catheter/IV in his hand that required that no 
+labs be drawn from that side. Because the dressing had been changed by the 
+Countyâ€™s ambulance staff during transport, the warning not to draw blood from 
+that side which was present in the hospital was missing. Information about this 
+was mentioned once in the patient record but not highlighted as an important care 
+notification. The nurse caring for the patient wanted to get the blood tests done 
+before she left for the day. Because the patient had a cast on his other arm, she 
+obtained the blood using this IV site and the pt ended up with a large hematoma 
+requiring readmission to the hospital overnight to manage.
+Deviation from GAPS
+No. The initial error was on the part of staff not 
+part of the facility or the organization. And while it 
+would have been possible to eventually find the one 
+mention of not using this IV to get blood, there was 
+no significant reason at that time for the nurse to 
+go looking for this information.
+Deviation reached the 
+patient?
+Yes. Although this was not a preventable event 
+from the perspective of the SNF, they did however 
+learn from the experience and instituted some new 
+practices to avoid this problem in the future.
+SEC Level of Harm
+-
+Taxonomy Event Type:
+-
+
+66
+APPENDIX G
+CASE # 8 - POSTâ€“ACUTE
+A patient (#1) of a Rehabilitation Center had been admitted after acute care 
+for a head injury. As part of the initial assessment he was identified as a low risk 
+for elopement. Several weeks after admission however, his mental cognition 
+began to change a bit. Some staff caring for him for the past two days noticed 
+the difference and began to talk about it. Also, another patient (#2) had told a 
+therapist that he (#1) had been talking about wanting to â€œget outâ€.
+
+Because he (#1) was within days of discharge, she assumed that what he meant 
+about â€œgetting outâ€. The therapist intended to discuss this at the team meeting 
+that day but it was canceled and she forgot. The next morning, he went outside 
+the facility but no one stopped him to check as he seemed to be OK. They realized 
+two hours later he had eloped. He was found about 6 hours after leaving and 
+seemed to have no apparent physical injury but was found comatose later that 
+evening. After admission to the hospital they discovered that he was experiences 
+some cranial rebleeding. If it had been discovered and addressed sooner, it was 
+likely they would have been able to prevent the more severe physical limitations 
+that resulted.
+Deviation from GAPS
+Yes. While it was not unusual for some patients 
+to ambulate outside the front entrance, the 
+expectation was that the security staff should keep 
+an eye on them and ask questions of clinical staff to 
+confirm it was OK.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 4 No Harm (for the elopement it seemed at the 
+time the resident was OK with no physical injuries)
+Taxonomy Event Type:
+PP2 Patient Elopement
+Deviation from GAPS
+Yes. There were signs that several team members 
+had noticed that indicated the patientâ€™s clinical 
+status was changing but they werenâ€™t followed 
+up for various reasons. While the symptoms were 
+subtle, the team in reviewing the case using the 
+Known Complication Questions concluded that 
+could have identified the problem sooner but better 
+team communication.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 2 Severe Permanent Harm (Although there 
+wasnâ€™t 100% certainty that they could have 
+prevented the residentâ€™s resulting left sided 
+paralysis, it was agreed that they didnâ€™t do 
+everything possible to reduce or eliminate this 
+outcome)
+Taxonomy Event Type:
+CM8 Delay in Diagnosis or Treatment - CM8.3 
+Delayed Diagnosis
+This is an example of two events occurring with one patient:
+1
+2
+
+67
+APPENDIX G
+CASE # 9 - POSTâ€“ACUTE
+CASE # 10 - POSTâ€“ACUTE
+A patient was admitted from the hospital to a Rehabilitation facility with a history 
+of a stroke and an AMI. A month after admission she was SOB but this was 
+attributed to seasonal allergies. It was also noted that she'd had 12 lb. weight gain 
+but most though it was because of her decreased activity. Clinical staff didn't put 
+together the weight gain and her respiratory issues and this was more difficult 
+to assess because the facility was not on the same EHR as the hospital so they 
+werenâ€™t able to confirm details of her past medical history. Several days later she 
+continued to have issues and was more SOB and wheezing but she told the NP it 
+was something she ate so the NP didn't do anything further. That night when she 
+began getting more SOB, the nurse contacted the MD who ordered a nebulizer 
+treatment. That seemed to help but the next morning she was more hypoxic with a 
+PO2 of 87%. She arrested shortly thereafter. The Code Blue was unsuccessful and 
+she expired.
+A patient was in the end stages of her illness from lung cancer and was receiving 
+Hospice care. The nurse caring for the patient recognized that the patient was 
+likely to expire within the next 24 hours. The programâ€™s care standards were that 
+patients without family or others who could stay with them at this stage (such as 
+this patient) should be provided in person care and support. The nurse contacted 
+the agency office because he was leaving for a trip that evening. Because it was a 
+major holiday the next day, they were unable to find any staff willing to care for this 
+patient. The patient expired the next day alone and likely in some pain.
+Deviation from GAPS
+Yes. There were multiple opportunities for various 
+members of the clinical care team to pursue 
+other options for this patientâ€™s symptoms. System 
+problems with the electronic record made this 
+more difficult, but not impossible.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 1 Death (Itâ€™s possible that this patient may 
+have expired anyway as she had a history of AMI, 
+but recognition of the possibility of other medical 
+problems was delayed too long to assure greater 
+chance of avoiding the unfortunate outcome)
+Taxonomy Event Type:
+CM8 Delay in Diagnosis or Treatment - CM8.2 
+Missed Diagnosis
+Deviation from GAPS
+YES. The Hospice staff did not follow their stated 
+policy not to allow a patient to die alone and in pain, 
+although it would have been difficult to do because 
+of the holiday situation.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 1 (Although death was the expected 
+outcome, it was agreed that the team did not do 
+everything that they could to assure the death 
+was not unattended and that the patient was not 
+uncomfortable or in pain.
+Taxonomy Event Type:
+CM10: Other Care Management
+
+68
+APPENDIX G
+CASE # 1 - AMBULATORY
+CASE # 2 - AMBULATORY
+Ambulatory care examples
+A physician was providing care via the TeleHealth service for a Primary Care 
+Clinic. A patient with a history of atrial fibrillation needed a new prescription for 
+coumadin. Blood work had been obtained and after talking with the patient, 
+the physician ordered the new prescription dose electronically. However, he 
+inadvertently ordered a much higher does than intended. It wasnâ€™t high enough 
+for the EHR alert to fire. The Pharmacy Tech prepared the medication for the 
+patient to pick up. When the pharmacist in the clinic reviewed the work the Tech 
+had done, he thought the dose seemed much higher than the patient (who he 
+was familiar with) had originally taken and checked the lab results. Realizing the 
+possibility of an error he contacted the physician who was able to correct the 
+error before the medication was dispensed.
+A patient presents for a surgical revision of a vascular shunt at an Ambulatory 
+Surgery Center. The patient had a documented history of MRSA. This 
+organizationâ€™s practice was to use Vancomycin for SSI prophylaxis particularly 
+in procedures such as these. The information concerning the MRSA was not 
+available to the surgical team preoperatively due to an unrecognized error in the 
+coding of a new electronic health record. The patient did not receive the correct 
+preoperative antibiotic and as a result developed a surgical site infection requiring 
+several returns to the OR for debridement/washout and prolonged intravenous 
+treatment with Vancomycin.
+Deviation from GAPS
+Yes. The physician didnâ€™t realize heâ€™d ordered a dose 
+of medication that was not what he intended.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+NME 2 Last Strong Barrier Catch (If the pharmacist 
+hadnâ€™t paid attention and used his questioning 
+attitude to validate and verify the incorrect 
+medication would have been provided to the 
+patient and he would have taken it.
+Taxonomy Event Type:
+CM1 Medication Event
+Deviation from GAPS
+Yes. Although the correct SSI prophylaxis was not 
+used, this was due less to a human error, but to a 
+system problem in the coding of information about 
+some elements of past medical history that didnâ€™t 
+always flow effectively to outpatient settings.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SE4: Severe Temporary Harm (multiple returns to 
+the OR and prolonged antibiotic therapy)
+Taxonomy Event Type:
+CM11 Healthcare Associated Infection (HAI)
+
+69
+APPENDIX G
+CASE # 3 - AMBULATORY
+CASE # 4 - AMBULATORY
+An OB patient was receiving Rhogam shots during her pregnancy. She was given 
+the 50 mcg dose instead of a 300 mcg dose. This was discovered the next day. In 
+total, three patients received the wrong dose and they all had to come back to the 
+clinic to receive the correct dose. The problem occurred because the pharmacy 
+tech inadvertently ordered wrong dose vials of drug and the CMA and LPN who 
+administered the doses didnâ€™t double check that they had the wrong amount 
+because the vials looked the same and this was the amount they always gave.
+A patient came to an Urgent Care Clinic with an ankle injury. The treatment for 
+the injury included a special â€œbootâ€ for stabilization of the joint. Over next couple 
+of weeks the patient came back to the clinic 3 more times complaining of pain 
+and swelling around her ankle. Xrayâ€™s taken didnâ€™t indicate and further ankle injury 
+and the caregivers (different each time) just determined the patient was using her 
+foot too much and not elevating as instructed. A day after her last visit she came 
+to the ED with complaints of chest pain and it was determined she had blood clots 
+in her lung that had originated from the ankle injury. The patient was hospitalized 
+for 3 days.
+Deviation from GAPS
+Yes. Errors included inadvertent ordering error and 
+not following medication administration policy.
+Deviation reached the 
+patient?
+Yes â€“ Actually 3 different patients (therefore three 
+different events)
+SEC Level of Harm
+PSE 2 Minor Temporary Harm (Patients had to come 
+back for another visit and get extra injections.
+Taxonomy Event Type:
+CM1 Medication Event
+Deviation from GAPS
+Yes. Staff may not have considered the need for 
+prophylactic anticoagulants, but primary error was 
+not assessing the situation further when there was 
+indications that something was wrong.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 4 Moderate Temporary Harm (Patient was 
+admitted for 3 days â€“ a higher level of care.
+Taxonomy Event Type:
+CM8 Delay in Diagnosis or Treatment - CM8.2 
+Missed Diagnosis
+
+70
+APPENDIX G
+CASE # 5 - AMBULATORY
+CASE # 6 - AMBULATORY
+While receiving care in an Outpatient Dialysis Center for approximately two weeks 
+a patient developed an infection in his central venous catheter. It wasnâ€™t clear how 
+this infection occurred. It was suspected that staff did not perform the central line 
+infection prevention protocol correctly or perhaps performed the correct actions 
+inconsistently. No one was certain or could identify where the error occurred. The 
+patient required IV antibiotics and was admitted to the hospital for several days.
+A patient was receiving care in an OB Clinic. This patient had a history of insulin 
+dependent gestational diabetes. Although the clinic did instruct the patient in how 
+to care for the problem, she was known to have some behavioral health and social 
+issues and was inconsistent in self-care and didnâ€™t always keep her visits. They 
+discussed options to more safely care for this patient but hadnâ€™t implemented a 
+plan of care. Ultimately the patient delivered the infant via c section, but there was 
+unfortunately a fetal demise.
+Deviation from GAPS
+Yes. Most organizations see infections such as 
+these as able to be prevented absent any specific 
+reason why this was not possible. In particular 
+when it is known that adherence to protocols is 
+inconsistent.
+Deviation reached the 
+patient?
+Yes â€“ Actually 3 different patients (therefore three 
+different events)
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm (patient required 
+hospitalization for the infection)
+Taxonomy Event Type:
+CM11 Healthcare Associated Infection (HAI)
+Deviation from GAPS
+Yes. The Known Complication Questions are useful 
+in this case. Question 2 â€“ knowing there was a risk 
+of a complication and taking steps to mitigate the 
+risk was the one in which the answer would be 
+No. Although the care team did consider how to 
+more effectively care for this patient with difficult 
+circumstances who also had the possibility of 
+behavioral health problems, they never actually 
+took the necessary steps.
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 1 Death
+Taxonomy Event Type:
+CM3.2: Neonatal death/serious injury
+
+71
+APPENDIX G
+CASE # 7 - AMBULATORY
+CASE # 8 - AMBULATORY
+A patient came to an Urgent Care Clinic after slamming a hammer on his finger at 
+a construction site. During the procedure to treat the serious injury, the MD made 
+an incision to drain hematoma using cautery pin. She had a dry gauze in her other 
+hand and it inadvertently came in contact with the cautery. This sparked a fire and 
+the patient received a second degree burn to his hand. They decided to admit the 
+patient overnight for IV antibiotics as an extra precaution.
+A Scheduling Clerk in a large Ambulatory Care Practice was scheduling an Xray 
+procedure for a patient. While doing this she inadvertently chose the wrong 
+patientâ€™s name in the list on the computer. It turned out that the two patients in 
+the list were actually a father and a son. They had the same name (except for a Jr 
+and a Sr) and the same month and year as a birthday. She chose the sonâ€™s name 
+instead of the father. The error was discovered when the father showed up for the 
+procedure and the Radiology Tech realized there was a problem because the birth 
+year was 2005 and this patient clearly wasnâ€™t 15 years old! The error was corrected 
+in the computer and the patient received the correct procedure.
+Deviation from GAPS
+Yes. There wasnâ€™t enough care taken in avoiding 
+sparking a fire with the instruments and materials 
+used in the procedure
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm Although itâ€™s 
+possible to determine that an overnight stay wasnâ€™t 
+critically necessary, given the circumstances, it was 
+the appropriate level of care.)
+Taxonomy Event Type:
+EE2 Burn
+Deviation from GAPS
+Yes. The clerk inadvertently chose the wrong name 
+to register a patient for a procedure. The fact that 
+most of the pertinent details were the same for 
+both contributed to the error. (This is a true story!)
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+PSE 4 No Harm (Although there wasnâ€™t a danger 
+that the wrong patient would have gotten 
+a procedure it was possible that the wrong 
+information/test results might have gone into the 
+wrong record.
+Taxonomy Event Type:
+CM10 Other Care Management
+
+72
+APPENDIX G
+CASE # 9 - AMBULATORY
+CASE # 10 - AMBULATORY
+A patient had a procedure for a breast biopsy in an Outpatient Womenâ€™s Center. 
+The information concerning the side intended for the procedure was unclear but 
+the patient said she believed it was going to be on the left side. The technician 
+prepared the patient for this side and the physician arrived and did the procedure. 
+When the physician got the results several days later, he realized that the incorrect 
+side had been done. Because of the concern for possible cancer diagnosis, the 
+patient had to return for another procedure the next day.
+A patient was at an ambulatory radiology department at a rural health clinic. In 
+order to have the procedure done, the patient needed to get up on the table. 
+While he was doing this he cut his leg on the edge of the table. This required 
+several stiches to repair the laceration. The problem was that the extension for 
+the table wasn't pulled out all the way because it was old and had some rust on 
+it. The table had to be replaced, but the Clinic hadnâ€™t yet done that despite some 
+complaints from the staff.
+Deviation from GAPS
+Yes. Both the caregivers involved (individually and 
+collectively did not take all necessary steps to 
+assure a procedure was done on the correct side)
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm. (The patient 
+required a second biopsy procedure)
+Taxonomy Event Type:
+PR1 Wrong Body Part
+Deviation from GAPS
+Yes. This error was on the part of the clinic 
+administration in not repairing or replacing the Xray 
+table before a patient was harmed
+Deviation reached the 
+patient?
+Yes
+SEC Level of Harm
+SSE 5 Moderate Temporary Harm (Laceration 
+severe enough to require several stitches.
+Taxonomy Event Type:
+PD2 Device Malfunction
+
+73
+APPENDIX H
+Implementing an On-Going Safety Event Classification Process
+In order to maintain regular and consistent safety event review using the SECÂ® process, healthcare organizations need to create a structure and 
+standard approach. The purpose of establishing a standard process is to ensure the appropriate response to events (more serious events warrant a 
+higher level of response) and to support the calculation of the organizationâ€™s serious safety event rate (SSERÂ®) and other safety metrics.
+Key steps in establishing an effective SEC process
+1.
+Cast a Wide Net to 
+Identify Safety Events 
+Data about safety events can be 
+found from a variety of sources. 
+When setting up event review 
+structures and processes be sure to 
+consider all of the relevant sources 
+of data for your organization.
+Event reporting system
+General safety event data,  Near misses
+Patient Relations
+Non-service-related patient complaints 
+(delays in treatment, med errors, etc.)
+Pharmacy
+Medication errors,  Adverse drug 
+reaction, Drug utilization reviews
+Case Management
+Returns to surgery
+Unplanned readmissions
+Unplanned extended LOS
+Peer Review (MD and Nursing)
+Mortality and morbidity reviews
+Department specific indicators
+Lab
+Transfusion errors/ Blood Use Review
+Mislabeled specimens
+Legal
+Claims/lawsuits
+Infection Control
+HAIâ€™s
+PI Teams
+Events/issues that led to process teams
+Other
+AHRQ PSI Indicators, CMS HACâ€™s
+ IHI Trigger tool
+
+74
+APPENDIX H
+2.
+Establish an Event 
+Classification Team 
+For consistent classification, it 
+is best to charter a small group 
+of knowledgeable and objective 
+individuals to determine the final 
+classification of safety events.
+Example of a Safety Event 
+Classification Team Membership
+	â€“
+Approximate an interdisciplinary clinical team 
+for broad input
+	â€“
+Assure different medical/ clinical perspectives 
+and invite others as needed
+	â€“
+In addition to standing members of the team, 
+invite leaders of departments where events 
+being discussed occurred.
+Membership of a Safety Event Classification Team:
+â€¢	
+Size and structure vary based on organization size and the types of care sites
+â€¢	
+Team led by classification subject expert, e.g. Risk, Quality or Safety leader
+â€¢	
+Incorporate owners of various data types, e.g. medications, HAIs, peer review etc.
+â€¢	
+Assure representative senior leadership
+â€¢	
+Include one or two non-clinical members that can ask the â€œdumb questionsâ€ that 
+ultimately focus the teamâ€™s effort
+â€¢	
+At System level, consider chartering an oversight team (with the chairpersons of 
+each facility event review team and others as members) to ensure classification 
+consistency across business units.
+
+75
+APPENDIX H
+3.
+Create a Charter for the 
+teamâ€™s functioning 
+Meeting Frequency
+â€¢	
+Start at least weekly
+â€¢	
+Focus efforts primarily on potential serious safety events with periodic confirmation of 
+precursor and near miss events for consistency
+â€¢	
+Establish a rapid review process for events that may need action to prevent further harm 
+before a regularly scheduled process. Confirm if necessary, at next meeting
+â€¢	
+When your SSER has sufficiently decreased, frequency can be adjusted, but no less frequently 
+than monthly
+Team Purpose and 
+Responsibilities
+1.	
+Review and make final SECÂ® determinations for safety events.
+2.	
+Maintain the organizationâ€™s SSERÂ® statistics and rate as well as tracking precursor and near 
+miss events
+3.	
+Monitor organization for effective event reporting and consistent classification.
+Decision Making
+1.	
+Classification decisions should be reached by consensus. If consensus not possible, then 
+majority.
+2.	
+Each member of the team has a responsibility to participate in full and complete discussion 
+about each case and to raise concerns if they disagree with the recommendations of the 
+group.
+3.	
+If consensus cannot be reached, a vote can be taken (majority rules).
+4.	
+The classification decisions of the team will be considered final, unless new information comes 
+to light that the team did not have available at the time the case was classified.
+5.	
+Members of the team are expected to support the full teamâ€™s decisions.
+Appeal Process
+In the event that an organizational leader disagrees with a safety event classification by the team, 
+a senior leader such as the Chief Medical Officer, Chief Safety Officer, Chief Nursing Officer is 
+designated as final arbitrator.
+
+76
+APPENDIX H
+4.
+Strive for Consistency 
+and Team Effectiveness 
+Organizations experienced in SECÂ® & SSERÂ® suggestâ€¦
+1.	
+When adding ad hoc team members avoid the individuals involved in the event. Their 
+participation is best used during cause analysis activities.
+2.	
+Defer the classification of events if there is insufficient information to make an informed 
+decision. Come prepared with answers.
+3.	
+Consider keeping a secured table or spreadsheet which can be pre-populated with events 
+and preliminary classifications by the data â€œownersâ€ for efficient team functioning
+4.	
+Keep an organizational â€œCase Lawâ€ list of difficult to classify cases and issues. Refer to Case 
+Law when considering similar cases. The HPI Press Ganey PSO can provide members a 
+template to record deliberations.
+â€¢	 Details on how classification decisions were reached for the â€œtrickyâ€ cases.
+â€¢	 Document the source of the disagreement and the different opinions and why they were held.
+â€¢	 Keep track of the type of disagreement, i.e. Deviation from GAPS; Causation; Level of Harm.
+â€¢	 Also include cases that were deemed â€œnot a safety eventâ€ 
+5.	
+Only with good event reporting statistics and team inter-rater reliability, can the percent of 
+SSER reduction become a comparative metric between system facilities over time.
+Donâ€™t forget that membership in the HPI Press Ganey PSO provides an excellent source for 
+support beyond your organization!!
+Â©2006 Healthcare Performance Improvement, LLC
+Was there a deviation from generally 
+accepted performance standards?
+Did the deviation reach the patient?
+Did the deviation cause moderate to severe 
+harm or death?
+SERIOUS SAFETY EVENT
+PRECURSOR SAFETY EVENT
+NEAR-MISS SAFETY EVENT
+NOT A SAFETY EVENT
+YES
+YES
+YES
+NO
+NO
+NO
+
+pressganey.com

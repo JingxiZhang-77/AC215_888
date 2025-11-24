@@ -102,12 +102,23 @@ def _format_incident_context(incident_text: str, department: str | None = None) 
     return incident_text
 
 
-def prompt1_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
+def prompt1_single_incident(incident_text: str, department: str | None = None, policy_context: str = "") -> tuple[bool, str]:
     """
     Step 1: Determine if there was a deviation from Generally Accepted Performance Standards (GAPS)
     Returns: tuple of (decision: bool, rationale: str)
     """
     incident_block = _format_incident_context(incident_text, department)
+    
+    policy_section = ""
+    if policy_context:
+        policy_section = f"""
+
+Relevant Department Policies and Guidelines:
+{policy_context}
+
+Use these policies to inform your analysis of whether there was a deviation from GAPS.
+"""
+    
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Was there a deviation from Generally Accepted Performance Standards (GAPS) in this incident?
@@ -116,7 +127,7 @@ A deviation from GAPS means a difference between expected and actual performance
 - Nationally recognized best practices and standards of care
 - Industry-imposed practice mandates and requirements
 - Professional practice standards
-- Organization's obligation to protect patients from harm
+- Organization's obligation to protect patients from harm{policy_section}
 
 {incident_block}
 
@@ -133,17 +144,28 @@ Answer:"""
         print(f"Error in prompt1: {e}")
         raise
 
-def prompt2_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
+def prompt2_single_incident(incident_text: str, department: str | None = None, policy_context: str = "") -> tuple[bool, str]:
     """
     Step 2: Determine if the deviation reached the patient
     Returns: tuple of (decision: bool, rationale: str)
     """
     incident_block = _format_incident_context(incident_text, department)
+    
+    policy_section = ""
+    if policy_context:
+        policy_section = f"""
+
+Relevant Department Policies:
+{policy_context}
+
+Consider these policies when determining if the deviation reached the patient.
+"""
+    
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Did the deviation/error reach the patient?
 
-This means the error actually affected or could have affected the patient directly, not just internal processes.
+This means the error actually affected or could have affected the patient directly, not just internal processes.{policy_section}
 
 {incident_block}
 
@@ -160,12 +182,23 @@ Answer:"""
         print(f"Error in prompt2: {e}")
         raise
 
-def prompt3_single_incident(incident_text: str, department: str | None = None) -> tuple[bool, str]:
+def prompt3_single_incident(incident_text: str, department: str | None = None, policy_context: str = "") -> tuple[bool, str]:
     """
     Step 3: Determine if the incident caused moderate/severe harm or death
     Returns: tuple of (decision: bool, rationale: str)
     """
     incident_block = _format_incident_context(incident_text, department)
+    
+    policy_section = ""
+    if policy_context:
+        policy_section = f"""
+
+Relevant Department Policies:
+{policy_context}
+
+Consider these policies when assessing the harm level.
+"""
+    
     prompt = f"""You are a hospital safety officer analyzing incidents.
 
 Question: Did this incident cause moderate harm, severe harm, or death to the patient?
@@ -175,7 +208,7 @@ Consider:
 - Severe harm: Permanent injury or significant temporary harm
 - Death: Patient died as a result of the incident
 
-NO or MINIMAL harm means: No injury, or minor temporary discomfort that resolved quickly without intervention.
+NO or MINIMAL harm means: No injury, or minor temporary discomfort that resolved quickly without intervention.{policy_section}
 
 {incident_block}
 
