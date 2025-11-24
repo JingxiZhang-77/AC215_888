@@ -41,9 +41,9 @@ Following the Hospital Patient Incident (HPI) methodology:
 
 **Classification Codes:**
 - `NSE`: No Safety Event (no deviation detected)
-- `NME`: No Medical Event (deviation didn't reach patient)
-- `NHE`: No Harm Event (reached patient, no harm)
-- `HE`: Harmful Event (patient experienced harm)
+- `NME`: Near Miss Event (deviation didn't reach patient)
+- `PSE`: Precursor Safety Event (reached patient, no harm)
+- `SSE`: Serious Safety Event (patient experienced harm)
 
 ---
 

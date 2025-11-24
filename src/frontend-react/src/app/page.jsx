@@ -185,7 +185,7 @@ export default function Home() {
           <div className="flex items-start gap-4 p-4 border rounded-lg">
             <span className="classification-code code-NME">NME</span>
             <div>
-              <h4 className="font-semibold">No Medical Event</h4>
+              <h4 className="font-semibold">Near Miss Event</h4>
               <p className="text-sm text-muted-foreground">
                 Deviation occurred but did not reach the patient
               </p>

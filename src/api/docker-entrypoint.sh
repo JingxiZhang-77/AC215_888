@@ -27,23 +27,36 @@ else
 fi
 echo ""
 
+# Define uvicorn_server command function
+uvicorn_server() {
+    uvicorn service:app --host 0.0.0.0 --port 9000 --log-level info --reload "$@"
+}
+
+uvicorn_server_production() {
+    uvicorn service:app --host 0.0.0.0 --port 9000 --lifespan on "$@"
+}
+
+export -f uvicorn_server
+export -f uvicorn_server_production
+
 # Display usage instructions
 echo "============================================"
 echo "Usage Instructions:"
 echo "============================================"
 echo ""
-echo "Start API Server:"
-echo "  uvicorn main:app --host 0.0.0.0 --port 9000 --reload"
+echo "Start API Server (Development):"
+echo "  uvicorn_server"
 echo ""
-echo "Or using Python:"
-echo "  python main.py"
+echo "Start API Server (Production):"
+echo "  uvicorn_server_production"
 echo ""
 echo "API Documentation:"
 echo "  http://localhost:9000/api/docs (Swagger UI)"
 echo "  http://localhost:9000/api/redoc (ReDoc)"
 echo ""
-echo "Available Scripts:"
-echo "  python main.py              - Start API server"
+echo "Available Commands:"
+echo "  uvicorn_server              - Start development server with auto-reload"
+echo "  uvicorn_server_production   - Start production server"
 echo "  pytest                      - Run tests"
 echo ""
 echo "============================================"

@@ -149,7 +149,10 @@ volume (`/secrets/llm-service-account.json`) is mounted.
 
 **Verify Installation:**
 ```bash
-# Check API health
+# Start the server
+uvicorn_server
+
+# In another terminal, check API health
 curl http://localhost:9000/api/health
 
 # Test login with admin account

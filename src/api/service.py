@@ -9,7 +9,7 @@ FastAPI backend service providing REST APIs for:
 - Department-specific incident tracking
 
 Author: AC215_888 Team
-Date: January 2025
+Date: November 2025
 """
 
 from fastapi import FastAPI, HTTPException, Depends, status
@@ -85,12 +85,3 @@ async def startup_event():
 async def shutdown_event():
     """Cleanup on shutdown"""
     logger.info("API shutdown")
-
-if __name__ == "__main__":
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=settings.PORT,
-        reload=settings.DEBUG,
-        log_level="info"
-    )
