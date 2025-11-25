@@ -277,3 +277,19 @@ In future iterations, we plan to explore:
 All datasets, prompts, and configuration files will continue to be versioned to ensure fully reproducible evaluation.
 
 
+## Frontend UI Preview
+
+<img width="1504" height="843" alt="Screenshot 2025-11-25 at 15 04 01" src="https://github.com/user-attachments/assets/277a1ddf-ce4c-4597-b1ec-3865fedf418f" />
+
+<img width="1506" height="823" alt="Screenshot 2025-11-25 at 15 04 24" src="https://github.com/user-attachments/assets/9489950c-10d5-4bda-a827-cd883f5f4427" />
+
+<img width="1484" height="855" alt="Screenshot 2025-11-25 at 15 04 51" src="https://github.com/user-attachments/assets/0b799647-953e-4cd0-8eac-73e11a04e1a9" />
+
+<img width="1506" height="851" alt="Screenshot 2025-11-25 at 15 05 11" src="https://github.com/user-attachments/assets/0842f3d6-a4af-4879-9eeb-a3b9bee665e0" />
+
+<img width="1500" height="844" alt="Screenshot 2025-11-25 at 15 05 22" src="https://github.com/user-attachments/assets/792c13d2-d406-49d6-9b48-131bee139b5e" />
+
+<img width="1510" height="848" alt="Screenshot 2025-11-25 at 15 05 34" src="https://github.com/user-attachments/assets/fef2cb74-cf86-4c1a-9e36-1e18a5feaaeb" />
+
+<img width="1510" height="848" alt="Screenshot 2025-11-25 at 15 05 54" src="https://github.com/user-attachments/assets/88e9b2c5-d10b-46e0-9156-6df613e4117f" />
+
