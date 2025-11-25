@@ -240,12 +240,24 @@ def embed(method="char-split"):
 def load(method="char-split"):
     """Load embeddings into ChromaDB"""
     print("=== Loading to ChromaDB ===")
+    print(f"Connecting to ChromaDB at {CHROMADB_HOST}:{CHROMADB_PORT}")
 
     # Clear cache
     chromadb.api.client.SharedSystemClient.clear_system_cache()
 
     # Connect to ChromaDB
-    client = chromadb.HttpClient(host=CHROMADB_HOST, port=CHROMADB_PORT)
+    try:
+        client = chromadb.HttpClient(host=CHROMADB_HOST, port=CHROMADB_PORT)
+        client.heartbeat()
+        print(f"✅ Successfully connected to ChromaDB")
+    except Exception as e:
+        print(f"❌ ERROR: Cannot connect to ChromaDB at {CHROMADB_HOST}:{CHROMADB_PORT}")
+        print(f"   Error: {e}")
+        print(f"\n💡 Make sure ChromaDB is running:")
+        print(f"   docker ps | grep chromadb")
+        print(f"\n   If not running, start it with:")
+        print(f"   cd src/vector-db && docker-compose up -d")
+        return
 
     collection_name = f"safety-policies-{method}"
     print(f"Creating collection: {collection_name}")

@@ -21,7 +21,8 @@ class RAGService:
     
     def __init__(self):
         """Initialize RAG service with ChromaDB connection"""
-        self.chromadb_host = os.environ.get("CHROMADB_HOST", "localhost")
+        # Get ChromaDB connection details from environment
+        self.chromadb_host = os.environ.get("CHROMADB_HOST", "safety-chromadb")
         self.chromadb_port = int(os.environ.get("CHROMADB_PORT", "8000"))
         self.collection_name = "safety-policies-char-split"
         self.embedding_model = "text-embedding-004"
@@ -37,8 +38,21 @@ class RAGService:
                 project=gcp_project, 
                 location=gcp_location
             )
-            self.rag_available = True
-            logger.info("RAG service initialized with ChromaDB connection")
+            
+            # Test ChromaDB connection on startup
+            try:
+                test_client = chromadb.HttpClient(
+                    host=self.chromadb_host,
+                    port=self.chromadb_port
+                )
+                test_client.heartbeat()
+                self.rag_available = True
+                logger.info(f"RAG service initialized. ChromaDB connected at {self.chromadb_host}:{self.chromadb_port}")
+            except Exception as chroma_error:
+                self.rag_available = False
+                logger.warning(f"ChromaDB not available at {self.chromadb_host}:{self.chromadb_port}: {chroma_error}")
+                logger.warning("RAG service will operate without policy context. Classification will still work.")
+                
         except Exception as e:
             self.rag_available = False
             logger.warning(f"RAG service initialization failed: {e}")
