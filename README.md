@@ -217,10 +217,47 @@ For detailed service documentation:
 
 ## Continuous Integration and Testing
 
+We have implemented a comprehensive CI/CD pipeline using **GitHub Actions** that automatically runs on every push and pull request to ensure code quality and system reliability.
+
+### 1. **Build and Lint**
+- **Automated Build**: Docker image is built with all dependencies and test suites
+- **Code Quality Checks**: 
+  - **Black**: Python code formatting validation (line length: 120 characters)
+  - **Flake8**: Linting for code quality and style consistency (PEP 8 compliance)
+
+### 2. **Run Tests**
+The pipeline executes three levels of automated testing:
+
+- **Unit Tests**: Test individual components in isolation (utils, models, services)
+- **Integration Tests**: Verify interactions between API components and external services
+- **System Tests (End-to-End)**: Full API testing with a running server instance
+
+All tests run inside Docker containers to ensure consistency across environments.
+
+### 3. **Report Coverage**
+- **Code Coverage Reports**: Generated using `pytest-cov`
+- **Minimum Coverage Threshold**: 50% (enforced in CI)
+- **Coverage Reports**: Available as artifacts in GitHub Actions
+  - Terminal output with line-by-line coverage
+  - HTML reports for detailed analysis
+  - XML format for integration with coverage tools
 
 <img width="1630" height="472" alt="24101764099681_ pic_hd" src="https://github.com/user-attachments/assets/e67a80f3-f391-4ce5-b524-7eb28f72c741" />
 
 
+## Test Structure
+
+```
+tests/
+├── unit/              # Unit tests for individual components
+│   ├── test_auth.py   # Authentication utility tests
+│   ├── test_config.py # Configuration tests
+│   └── test_lang.py   # Language detection tests
+├── integration/       # Integration tests for API endpoints
+│   └── test_api.py    # API integration tests
+└── system/            # End-to-end system tests
+    └── test_system_api.py  # Full system workflow tests
+```
 
 
 
