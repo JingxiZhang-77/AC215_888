@@ -14,6 +14,7 @@ import tempfile
 from typing import Tuple, Dict, Any
 from google.cloud import speech_v1p1beta1 as speech
 from google.cloud import translate_v2 as translate
+from google.api_core import exceptions as google_exceptions
 from pydub import AudioSegment
 import sys
 
@@ -41,9 +42,13 @@ class AudioService:
     
     def __init__(self):
         """Initialize Speech and Translation clients"""
+        # Set quota project for Google Cloud APIs
+        gcp_project = os.getenv('GCP_PROJECT', 'apcomp215-group88')
+        os.environ['GOOGLE_CLOUD_QUOTA_PROJECT'] = gcp_project
+        
         self.speech_client = speech.SpeechClient()
         self.translate_client = translate.Client()
-        logger.info("Audio service initialized")
+        logger.info(f"Audio service initialized with quota project: {gcp_project}")
     
     def validate_language(self, language_code: str) -> str:
         """
@@ -122,14 +127,25 @@ class AudioService:
             
             audio = speech.RecognitionAudio(content=audio_content)
             
+            # Select appropriate model based on language
+            # medical_dictation model only supports English
+            if language_code.startswith('en'):
+                model = "medical_dictation"  # Optimized for medical terminology
+                use_enhanced = True
+            else:
+                model = "default"  # Standard model supports all languages
+                use_enhanced = False
+            
             config = speech.RecognitionConfig(
                 encoding=speech.RecognitionConfig.AudioEncoding.LINEAR16,
                 sample_rate_hertz=16000,
                 language_code=language_code,
                 enable_automatic_punctuation=True,
-                model="medical_dictation",  # Optimized for medical terminology
-                use_enhanced=True,
+                model=model,
+                use_enhanced=use_enhanced,
             )
+            
+            logger.info(f"Using model: {model} for language: {language_code}")
             
             # Perform transcription
             response = self.speech_client.recognize(config=config, audio=audio)
@@ -150,6 +166,15 @@ class AudioService:
             logger.info(f"Transcription complete. Confidence: {avg_confidence:.2f}")
             return transcript, avg_confidence
             
+        except google_exceptions.Forbidden as e:
+            logger.error(f"Speech API forbidden: {e}")
+            raise Exception(
+                f"Error transcribing audio: 403 Cloud Speech-to-Text API has not been used in project "
+                f"{os.getenv('GCP_PROJECT', 'apcomp215-group88')} before or it is disabled. "
+                f"Enable it by visiting https://console.developers.google.com/apis/api/speech.googleapis.com/overview?project="
+                f"{os.getenv('GCP_PROJECT', 'apcomp215-group88')} then retry. "
+                f"If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry."
+            )
         except Exception as e:
             logger.error(f"Transcription error: {e}")
             raise Exception(f"Error transcribing audio: {str(e)}")

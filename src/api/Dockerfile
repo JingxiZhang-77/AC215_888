@@ -31,25 +31,20 @@ USER app
 WORKDIR /app
 
 # Copy dependency files first for better layer caching
-COPY --chown=app:app src/api/pyproject.toml src/api/uv.lock* ./src/api/
+COPY --chown=app:app pyproject.toml ./
 
-# Switch to API directory
-WORKDIR /app/src/api
-
-# Create virtual environment and install dependencies
-RUN uv venv && uv sync --frozen
+# Create virtual environment and install dependencies (includes test deps)
+RUN uv venv && uv sync
 
 # Add venv to PATH so commands are available
 ENV PATH="/home/app/.venv/bin:${PATH}"
 
-# Copy rest of source code (api + model)
-COPY --chown=app:app src/api ./
-WORKDIR /app
-COPY --chown=app:app src/model ./src/model
-COPY --chown=app:app secrets ./secrets
+# Copy API source code
+COPY --chown=app:app . .
 
-# Return to API directory for entrypoint
-WORKDIR /app/src/api
+# Copy tests and pytest.ini from root (when building from root context)
+# These will be copied via CI workflow or build script
+# Tests are expected at /app/tests/ after docker cp or volume mount
 
 # Make entrypoint executable
 RUN chmod +x docker-entrypoint.sh

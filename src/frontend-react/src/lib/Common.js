@@ -93,18 +93,37 @@ export function uuid() {
 }
 
 /* ---------- Pure Text Translation Helpers ---------- */
+/**
+ * Detect language from text
+ * Supported languages: 
+ * - zh-CN: Simplified Chinese
+ * - zh-TW: Traditional Chinese
+ * - es: Spanish
+ * - fr: French
+ */
 export function detectLanguage(text = '') {
   if (!text.trim()) return 'en';
-  if (/[\u4e00-\u9fff]/.test(text)) return 'zh';
-  if (/[\u3040-\u30ff]/.test(text)) return 'ja';
-  if (/[\uac00-\ud7af]/.test(text)) return 'ko';
+  
+  // Check for Chinese characters
+  if (/[\u4e00-\u9fff]/.test(text)) {
+    // Traditional Chinese specific character ranges and common traditional chars
+    const hasTraditional = /[\u3400-\u4DBF\uF900-\uFAFF]/.test(text) || 
+                          /[繁體為與國學專業東書長門開關電頭髮點黨龍龜]/.test(text);
+    return hasTraditional ? 'zh-TW' : 'zh-CN';
+  }
+  
+  // Spanish detection
   if (/[áéíóúñü¿¡]/i.test(text)) return 'es';
+  
+  // French detection
   if (/[àâçéèêëîïôùûüœ]/i.test(text)) return 'fr';
+  
   return 'en';
 }
 
 export function needsTranslation(lang) {
-  return lang && lang !== 'en';
+  const translatable = ['zh-CN', 'zh-TW', 'zh', 'es', 'fr'];
+  return lang && translatable.includes(lang);
 }
 
 export async function simpleTranslate(text) {

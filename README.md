@@ -1,4 +1,4 @@
-# AC215 - Milestone3
+# AC215 - Milestone4
 
 ## Team Members
 Zilong Wang, Jingxi Zhang, Bruce Zhou, Alice Zhang
@@ -10,248 +10,323 @@ AC215_888
 Design and build a web-based tool that uses large language models to help hospitals and healthcare staff efficiently and accurately classify safety incident reports following the HPI methodology.
 
 
-## Milestone 3
+## Milestone 4
 
-In this milestone, we focused on preparing our Milestone 3 presentation, consolidating the project materials, visualizations, and slides. All related files and deliverables have been organized under the `/reports/Milestone3_Presentation.pdf` directory for easy access and review.
+In Milestone 4, we combined the backend, frontend, and supporting services into a complete, locally testable system and prepared the entire application to run reliably and be packaged for future deployment.
 
+## Application Design Document
 
+<img width="591" height="331" alt="Screenshot 2025-11-25 at 14 56 31" src="https://github.com/user-attachments/assets/de02f3d4-2ac6-43cb-999d-e83e158bf457" />
 
-## Milestone 2
-In this milestone, we completed the implementation of two important components of our project:
-
-1. Data Generation
-2. Safety event classification
-
-## Data Generation
-
-The dataset contains 100 detailed examples of medical safety incidents and 100 Gemini simulate data. Each entry represents a realistic clinical incident across various hospital departments, including:
-- Internal Medicine
-- Surgery
-- OB/GYN & NICU
-- Radiology / Imaging
-- Outpatient / Emergency (ER)
-
-The dataset is designed to simulate real-world hospital safety events.
-
-After generation, each case is manually reviewed and labeled into one of four safety event levels:
-- SSE (Serious Safety Event)
-- PSE (Precursor Safety Event)
-- NME (Near Miss Event)
-- NSE (No Safety Event)
-
-These labeled data are then used to fine-tune LLMs, enabling hospitals to better identify, classify, and prevent safety incidents — ultimately helping healthcare systems reduce medical errors and improve patient outcomes.
-
-### Prerequisites:
-
-Before running the program, make sure you have:
-
-- Docker Desktop installed and running
-
-- A valid Google service account key (e.g. llm-service-account.json)
-
-- Your should change your working directory into `src/datapipeline` by typing the command line below in your terminal
-
-```bash
-cd src/datapipeline
-```
-
-### Step 1. Build the Docker Image
-
-Run this command from the folder containing your `Dockerfile`:
-
-```bash
-docker build -t data_generation -f Dockerfile .
-```
-
-### Step 2. Run the Docker Container
-You need to mount two folders into the container:
-- Project folder → contains your Python code. This is typically your currently working directory since we have asked you to `cd` into `src/datapipeline`.
-- Secrets folder → contains your credentials (e.g., llm-service-account.json). You can choose to store it anywhere you want but by default we assume you stored it under `AC215_888/secrets`.
-- For Windows use `${PWD}`
-```bash
-docker run --rm -ti \
-  -v "$(pwd):/app" \
-  -v "{Your secrets path}:/app/secrets" \
-  data_generation
-```
-
-### Step 3. Run the Python Script
-Inside the container, run the script with the default number of examples (5):
-```bash
-python data_generation.py
-```
-This will use Genimi to generate 5 medical incidents data
-
-Or
-
-You can specify how many incident examples to generate by using the --generate argument
-```bash
-python data_generation.py --generate 100
-```
-This will use Genimi to generate 100 medical incidents data
+<img width="589" height="333" alt="Screenshot 2025-11-25 at 14 56 51" src="https://github.com/user-attachments/assets/d52387e2-8f31-49f0-9272-c62bc646ee53" />
 
 
-## Safety Event Classification
+## APIs and Frontend Implementation (Quick Start Guide)
 
 ### Prerequisites
+- Docker and Docker Compose installed
+- Google Cloud Platform account with credentials
+- Service account key file: `secrets/llm-service-account.json`
 
-Before running the program, make sure you have:
+### Environment Setup
+1. Ensure your GCP credentials are in place:
+   ```bash
+   ls secrets/llm-service-account.json
+   ```
 
-- Docker Desktop installed and running
+2. Set required environment variables (already configured in docker-shell.sh scripts):
+   ```bash
+   export GCP_PROJECT="apcomp215-group88"
+   export GCP_REGION="us-central1"
+   export GOOGLE_APPLICATION_CREDENTIALS="/secrets/llm-service-account.json"
+   ```
 
-- A valid Google service account key (e.g. llm-service-account.json). This service account should at least have Vertex AI access.
+### Starting All Services
 
-- Your should change your working directory to `src/model` by typing the command line below in your terminal
+#### Option 1: First-Time Setup (with RAG)
+If you want to use the RAG (Retrieval-Augmented Generation) feature with policy documents:
 
+**Terminal 1 - Vector Database & ChromaDB:**
 ```bash
-cd src/model
+cd src/vector-db
+./docker-shell.sh
+
+# Inside container - process policy documents (one-time setup):
+python cli.py --chunk --chunk_type char-split
+python cli.py --embed --chunk_type char-split
+python cli.py --load --chunk_type char-split
+
+# Exit container after loading
+exit
+
+# Keep ChromaDB running in background:
+docker-compose up -d chromadb
 ```
 
-### Step 1. Build the Docker Image
-Run this command from the folder containing the `Dockerfile`:
-
+**Terminal 2 - API Backend:**
 ```bash
-docker build -t prompt_chaining -f Dockerfile .
+cd src/api
+./docker-shell.sh
+
+# Inside container:
+uvicorn_server
 ```
 
-This will:
-1. Install Python 3.11 + system dependencies  
-2. Create a non-root user (`app`)  
-3. Copy project files from  `/src/model`
-4. Install dependencies via `uv sync`
-
-### Step 2. Run the Docker Container
-You need to mount two folders into the container:
-- Project folder → contains your Python code. This is typically your currently working directory since we have asked you to `cd` into `src/model`.
-- Secrets folder → contains your credentials (e.g., llm-service-account.json). You can choose to store it anywhere you want but by default we assume you stored it under `AC215_888/secrets`.
-
-Example command lines:
-
+**Terminal 3 - Frontend:**
 ```bash
-docker run --rm -ti \
-  -v "$(pwd):/app" \
-  -v "$(pwd)/../../secrets:/secrets" \
-  prompt_chaining
+cd src/frontend-react
+./docker-shell.sh
+
+# Inside container:
+npm install  # First time only
+npm run dev
 ```
-### (Optional) Docker Build & Run in One Step
 
-Alternatively, you can simply run
+#### Option 2: Quick Start (without RAG)
+If you don't need policy retrieval, skip the vector-db setup:
 
+**Terminal 1 - API Backend:**
 ```bash
+cd src/api
+./docker-shell.sh
+
+# Inside container:
+uvicorn_server
+```
+
+**Terminal 2 - Frontend:**
+```bash
+cd src/frontend-react
+./docker-shell.sh
+
+# Inside container:
+npm install  # First time only
+npm run dev
+```
+
+### Accessing the Application
+
+- **Frontend UI**: http://localhost:3001
+- **API Documentation**: http://localhost:9000/api/docs
+- **API Health Check**: http://localhost:9000/api/v1/health
+- **ChromaDB** (if running): http://localhost:8000
+
+### Default Login Credentials
+
+```
+Username: admin
+Password: admin123
+```
+
+### Supported Features
+
+1. **Safety Event Classification**
+   - 3-step classification process (GAPS, Patient Reach, Harm)
+   - AI-powered decision rationales
+   - Department-specific analysis
+
+2. **Translation Support**
+   - Simplified Chinese (zh-CN)
+   - Traditional Chinese (zh-TW)
+   - Spanish (es)
+   - French (fr)
+   - Auto-detection and translation to English
+
+3. **Audio Transcription**
+   - Multi-language support
+   - Auto-translation to English
+   - Direct classification from audio
+
+4. **Batch Processing**
+   - CSV/Excel file upload
+   - Bulk incident classification
+   - Export results
+
+5. **RAG Integration** (Optional)
+   - Department-specific policy retrieval
+   - Enhanced classification with policy context
+   - 5 departments supported:
+     - Internal Medicine
+     - Surgery
+     - OB/GYN/NICU
+     - Radiology/Imaging
+     - Outpatient/ER
+
+### Troubleshooting
+
+**Frontend ChunkLoadError:**
+If you see chunk loading errors:
+```bash
+cd src/frontend-react
+rm -rf .next node_modules
+npm install
+npm run dev
+```
+
+**API Connection Issues:**
+Verify services are running:
+```bash
+# Check API
+curl http://localhost:9000/api/v1/health
+
+# Check ChromaDB (if using RAG)
+curl http://localhost:8000/api/v1/heartbeat
+```
+
+**Authentication Issues:**
+If login fails, rebuild the API container:
+```bash
+cd src/api
+docker build -t safety-event-api -f Dockerfile .
 ./docker-shell.sh
 ```
 
-in your terminal. However, this shell script by default also assumes that you have stored the secrets under `AC215_888/secrets`.
+### Stopping Services
 
-### Step 3. Run the Python Scripts
-In this milestone, we have implemented two features for the purpose of our project.
-
-#### **`prompt_utils.py`**
-
-This python script should have the following command line argument options
-
-```
-usage: prompt_utils.py [-h] [-p1] [-p2] [-p3] -f file_path [-n number_of_rows]
-
-Render LLM prompts
-
-options:
-  -h, --help            show this help message and exit
-  -p1, --prompt1        Render Prompt 1: Determine Deviation from GAPS
-  -p2, --prompt2        Render Prompt 2: Determine if Deviation Reached Patient
-  -p3, --prompt3        Render Prompt 3: Determine if Deviation Caused Harm
-  -f file_path, --file file_path
-                        Path to the input incident file (txt, csv, xlsx)
-  -n number_of_rows, --limit number_of_rows
-                        Number of incident rows to read from the file (defaults to all rows)
-```
-
-⚠️ **Required Arguments**
-
-- You **must** specify one of the prompt flags (`-p1`, `-p2`, or `-p3`)
-
-- You **must** also include the `-f / --file` argument to provide the input file path
-
-- The `-n / --limit` argument is optional
-
-**Example Usage**
-
+Stop all containers:
 ```bash
-# Run Prompt 1 on a prompt 1 test file
-python prompt_utils.py -p1 -f prompt_tests/prompt1_test.xlsx
+# In each terminal, press Ctrl+C to stop the service
 
-# Run Prompt 2 on a prompt 2 test file with only the first line
-python prompt_utils.py -p2 -f prompt_tests/prompt2_test.xlsx -n 1
+# Stop ChromaDB if running in background:
+cd src/vector-db
+docker-compose down
+```
+
+### Project Structure
+
+```
+AC215_888/
+├── src/
+│   ├── api/              # FastAPI backend
+│   ├── frontend-react/   # Next.js frontend
+│   ├── vector-db/        # RAG service & ChromaDB
+│   └── datapipeline/     # Data processing (not needed for demo)
+├── secrets/              # GCP credentials
+├── docs/                 # Documentation
+└── README.md            # This file
+```
+
+### Next Steps
+
+For detailed service documentation:
+- API: See `src/api/README.md`
+- Frontend: See `src/frontend-react/README.md`
+- RAG: See `src/vector-db/README.md`
+
+
+
+## Continuous Integration and Testing
+
+We have implemented a comprehensive CI/CD pipeline using **GitHub Actions** that automatically runs on every push and pull request to ensure code quality and system reliability.
+
+### 1. **Build and Lint**
+- **Automated Build**: Docker image is built with all dependencies and test suites
+- **Code Quality Checks**: 
+  - **Black**: Python code formatting validation (line length: 120 characters)
+  - **Flake8**: Linting for code quality and style consistency (PEP 8 compliance)
+
+### 2. **Run Tests**
+The pipeline executes three levels of automated testing:
+
+- **Unit Tests**: Test individual components in isolation (utils, models, services)
+- **Integration Tests**: Verify interactions between API components and external services
+- **System Tests (End-to-End)**: Full API testing with a running server instance
+
+All tests run inside Docker containers to ensure consistency across environments.
+
+### 3. **Report Coverage**
+- **Code Coverage Reports**: Generated using `pytest-cov`
+- **Minimum Coverage Threshold**: 50% (enforced in CI)
+- **Coverage Reports**: Available as artifacts in GitHub Actions
+  - Terminal output with line-by-line coverage
+  - HTML reports for detailed analysis
+  - XML format for integration with coverage tools
+
+<img width="1630" height="472" alt="24101764099681_ pic_hd" src="https://github.com/user-attachments/assets/e67a80f3-f391-4ce5-b524-7eb28f72c741" />
+
+
+## Test Structure
+
+```
+tests/
+├── unit/              # Unit tests for individual components
+│   ├── test_auth.py   # Authentication utility tests
+│   ├── test_config.py # Configuration tests
+│   └── test_lang.py   # Language detection tests
+├── integration/       # Integration tests for API endpoints
+│   └── test_api.py    # API integration tests
+└── system/            # End-to-end system tests
+    └── test_system_api.py  # Full system workflow tests
 ```
 
 
-**Output Example:**
+
+
+## Data Versioning and Reproducibility
+
+To ensure reproducibility and maintainability, we will implement a snapshot-based data versioning workflow tailored to hospital policy documents. All policy files used in retrieval (RAG), classification prompts, and decision logic are stored as timestamped snapshots in a Google Cloud Storage bucket.
+
+This approach fits our project because hospital policies are mostly static but may undergo major updates. Snapshot-based versioning allows us to:
+
+1. preserve historical policy states for auditing,
+
+2. reproduce earlier model outputs, and
+
+3. understand how policy revisions impact classification behavior.
+
+Snapshot naming scheme:
 
 ```
-Incident report 1: No deviation from GAPS occurred
-Incident report 2: Deviation from GAPS occurred
+policies_v1/   # initial policy set
+policies_v2/   # updated discharge rules
+policies_v3/   # new safety reporting guidelines
 ```
 
-#### **`safety_event_classifier.py`**
-
-This python script should have the following command line argument options
+Reproducing a past version:
 
 ```
-usage: safety_event_classifier.py [-h] [-f file_path]
-
-Run the safety event classifier prompt chain.
-
-options:
-  -h, --help  show this help message and exit
-  -f file_path, --file file_path  Path to the input incident file
+gsutil cp -r gs://ac215-888-artifacts/policies_v2/ data/policies/
 ```
 
-⚠️ **Required Arguments**
-
-- There is no required argument. By default, the script will run with `prompt_tests/prompt_chaining_test.xlsx` which contains 6 cases.
-
-**Example Usage**
-
-```bash
-# Run safety event classification on the test file
-python safety_event_classifier.py -f prompt_tests/prompt_chaining_test.xlsx
-```
-
-**Output Example:**
-
-**`chaining_output.csv`**
-| incident | deviation_check | patient_reach_check | harm_level_check | classification_code | classification_label | classification_rationale |
-|-----------|-----------------|---------------------|------------------|---------------------|----------------------|--------------------------|
-| A patient with tuberculosis ... | No | N/A | N/A | NSE | No Safety Event | No deviation from Generally Accepted Performance Standards (GAPS). |
-| A patient was admitted to ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
-| An anesthesiologist prepared syringes ... | Yes | No | N/A | NME | Near Miss Event | Deviation occurred but did not reach the patient. |
-| A 65-year-old man with COPD was receiving ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
-| A 50-year-old man presented to the emergency department ... | Yes | Yes | No | PSE | Precursor Safety Event | Deviation reached the patient with no or minimal harm. |
-| A patient was receiving care in an OB Clinic ... | Yes | Yes | Yes | SSE | Serious Safety Event | Deviation reached the patient and caused moderate/severe harm or death. |
+Our policy documents evolve infrequently and in large, discrete updates (a static-to-semi-static dataset), making snapshot-based versioning more appropriate than diff-based tools; this ensures that every model run is tied to an exact policy version, supporting full reproducibility across time.
 
 
-**`final_report.json`**
-```json
-  {
-    "incident": "A patient with tuberculosis receiving isoniazid therapy under directly observed treatment developed acute hepatitis after 3 months. Liver enzymes were monitored monthly and were normal until the week prior. The medication was discontinued immediately, but the patient developed hepatic failure requiring transfer for transplant evaluation.",
-    "deviation_check": "No",
-    "patient_reach_check": "N/A",
-    "harm_level_check": "N/A",
-    "classification_code": "NSE",
-    "classification_label": "No Safety Event",
-    "classification_rationale": "No deviation from Generally Accepted Performance Standards (GAPS)."
-  }
-```
+## Model Training or Fine-Tuning
 
-This file will appear automatically under `outputs/`.
+Our current system relies on prompt engineering and RAG for safety-event classification. Prompts encode our decision logic and incorporate relevant hospital policy excerpts. This approach enables rapid iteration, strong interpretability, and avoids the computational overhead of model training.
 
-## (TODO) RAG Pipeline
+In future iterations, we plan to explore:
 
-This project features a **Retrieval-Augmented Generation (RAG)** Data Pipeline designed to process the Press Ganey Handbook. The pipeline splits the document into semantic chunks, generates vector embeddings, and indexes them for real-time similarity search. The core data processing logic is implemented in the script: `src/datapipeline/experimental/guideline.py`.
+- Supervised fine-tuning using labeled safety-event datasets
 
-Our next step is to integrate this RAG component into the `prompt_utils.py`. This enhancement will allow the model to retrieve relevant mock hospital policies, clinical guidelines, and best-practice standards before generating its classification.
+- Parameter-efficient fine-tuning (e.g., LoRA) for hospital-specific reasoning
 
-## Screenshot of running instances 
-![running file](sc1.png)
-![running instances](sc2.png)
+- Comparisons between fine-tuned models and current prompt-based workflows, focusing on:
+
+  - Accuracy
+
+  - Robustness to policy updates
+
+  - Reproducibility under versioned datasets
+
+  - Cost and compute considerations
+
+All datasets, prompts, and configuration files will continue to be versioned to ensure fully reproducible evaluation.
+
+
+## Frontend UI Preview
+
+<img width="1504" height="843" alt="Screenshot 2025-11-25 at 15 04 01" src="https://github.com/user-attachments/assets/277a1ddf-ce4c-4597-b1ec-3865fedf418f" />
+
+<img width="1506" height="823" alt="Screenshot 2025-11-25 at 15 04 24" src="https://github.com/user-attachments/assets/9489950c-10d5-4bda-a827-cd883f5f4427" />
+
+<img width="1484" height="855" alt="Screenshot 2025-11-25 at 15 04 51" src="https://github.com/user-attachments/assets/0b799647-953e-4cd0-8eac-73e11a04e1a9" />
+
+<img width="1506" height="851" alt="Screenshot 2025-11-25 at 15 05 11" src="https://github.com/user-attachments/assets/0842f3d6-a4af-4879-9eeb-a3b9bee665e0" />
+
+<img width="1500" height="844" alt="Screenshot 2025-11-25 at 15 05 22" src="https://github.com/user-attachments/assets/792c13d2-d406-49d6-9b48-131bee139b5e" />
+
+<img width="1510" height="848" alt="Screenshot 2025-11-25 at 15 05 34" src="https://github.com/user-attachments/assets/fef2cb74-cf86-4c1a-9e36-1e18a5feaaeb" />
+
+<img width="1510" height="848" alt="Screenshot 2025-11-25 at 15 05 54" src="https://github.com/user-attachments/assets/88e9b2c5-d10b-46e0-9156-6df613e4117f" />
 

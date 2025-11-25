@@ -4,13 +4,18 @@ from google.cloud import translate_v2 as translate
 from google.api_core import exceptions as google_exceptions
 from utils.lang import detect_language
 from utils.logger import logger
+import os
 
 router = APIRouter()
 
 # Initialize Google Translate client
 try:
+    # Set quota project via environment variable
+    gcp_project = os.getenv('GCP_PROJECT', 'apcomp215-group88')
+    os.environ['GOOGLE_CLOUD_QUOTA_PROJECT'] = gcp_project
     translate_client = translate.Client()
     TRANSLATION_AVAILABLE = True
+    logger.info(f"Google Translate client initialized with quota project: {gcp_project}")
 except Exception as e:
     logger.warning(f"Google Translate client initialization failed: {e}")
     translate_client = None
@@ -31,8 +36,16 @@ def fallback_translate(text: str, lang: str) -> str:
     """
     Fallback translation when Google Translate is not available
     Provides a clear indication that the text needs translation
+    
+    Supported languages:
+    - zh-CN: Simplified Chinese
+    - zh-TW: Traditional Chinese
+    - es: Spanish
+    - fr: French
     """
     lang_names = {
+        "zh-CN": "Simplified Chinese",
+        "zh-TW": "Traditional Chinese",
         "zh": "Chinese",
         "ja": "Japanese",
         "ko": "Korean",
@@ -82,9 +95,17 @@ def translate_text(req: TranslateRequest):
         logger.info(f"Translating from {lang} to English")
         
         try:
+            # Google Translate uses 'zh-CN' and 'zh-TW' for Chinese variants
+            # But also accepts 'zh' as simplified Chinese
+            source_lang = lang
+            if lang == "zh-CN":
+                source_lang = "zh-CN"  # Simplified Chinese
+            elif lang == "zh-TW":
+                source_lang = "zh-TW"  # Traditional Chinese
+            
             result = translate_client.translate(
                 req.text,
-                source_language=lang,
+                source_language=source_lang,
                 target_language='en'
             )
             

@@ -13,7 +13,17 @@ from datetime import datetime
 import traceback
 
 # Add model directory to path (supports running from repo root, src/api, or Docker)
-MODEL_DIR = os.path.abspath(
+# Try local model directory first (for Docker build from api dir)
+MODEL_DIR_LOCAL = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        "..",
+        "model"
+    )
+)
+
+# Fallback to parent model directory (for running from repo root)
+MODEL_DIR_PARENT = os.path.abspath(
     os.path.join(
         os.path.dirname(__file__),
         "..",
@@ -22,10 +32,17 @@ MODEL_DIR = os.path.abspath(
     )
 )
 
+# Use whichever exists
+if os.path.isdir(MODEL_DIR_LOCAL):
+    MODEL_DIR = MODEL_DIR_LOCAL
+elif os.path.isdir(MODEL_DIR_PARENT):
+    MODEL_DIR = MODEL_DIR_PARENT
+else:
+    MODEL_DIR = MODEL_DIR_LOCAL  # Default to local
+    print(f"Warning: model directory not found at {MODEL_DIR_LOCAL} or {MODEL_DIR_PARENT}")
+
 if os.path.isdir(MODEL_DIR) and MODEL_DIR not in sys.path:
     sys.path.append(MODEL_DIR)
-else:
-    print(f"Warning: model directory not found at {MODEL_DIR}")
 
 try:
     from simple_prompt_utils import (
@@ -40,6 +57,15 @@ except ImportError as exc:
 
 from utils.logger import logger
 from utils.config import settings
+
+# Import RAG service
+try:
+    from services.rag_service import rag_service
+    RAG_AVAILABLE = True
+except ImportError as exc:
+    RAG_AVAILABLE = False
+    rag_service = None
+    logger.warning(f"RAG service not available: {exc}")
 
 
 class ClassificationService:
@@ -161,9 +187,33 @@ class ClassificationService:
         prompt_department = result["department_label"] if department != self.default_department else None
         
         try:
+            # Retrieve policy context from RAG if available
+            policy_context = ""
+            if RAG_AVAILABLE and rag_service:
+                logger.info(f"Retrieving policy context for department: {department}")
+                rag_result = rag_service.retrieve_policy_context(
+                    incident_description=description,
+                    department=department,
+                    n_results=3  # Retrieve top 3 most relevant policy chunks
+                )
+                if rag_result.get("retrieved"):
+                    policy_context = rag_result["context"]
+                    logger.info(f"Retrieved {rag_result.get('num_chunks', 0)} policy chunks")
+                    result["rag_context_retrieved"] = True
+                    result["rag_chunks_count"] = rag_result.get("num_chunks", 0)
+                else:
+                    logger.warning(f"Failed to retrieve RAG context: {rag_result.get('error', 'Unknown')}")
+                    result["rag_context_retrieved"] = False
+            else:
+                result["rag_context_retrieved"] = False
+            
             # Step 1: GAPS deviation check
             logger.info(f"Step 1: Checking GAPS deviation for incident")
-            gaps_deviation_bool, gaps_rationale = prompt1_single_incident(description, prompt_department)
+            gaps_deviation_bool, gaps_rationale = prompt1_single_incident(
+                description, 
+                prompt_department,
+                policy_context=policy_context
+            )
             result["deviation_check"] = "Yes" if gaps_deviation_bool else "No"
             result["deviation_rationale"] = gaps_rationale
             
@@ -180,7 +230,11 @@ class ClassificationService:
             
             # Step 2: Reached patient check
             logger.info(f"Step 2: Checking if incident reached patient")
-            reached_patient_bool, reached_patient_rationale = prompt2_single_incident(description, prompt_department)
+            reached_patient_bool, reached_patient_rationale = prompt2_single_incident(
+                description, 
+                prompt_department,
+                policy_context=policy_context
+            )
             result["patient_reach_check"] = "Yes" if reached_patient_bool else "No"
             result["patient_reach_rationale"] = reached_patient_rationale
             
@@ -197,7 +251,11 @@ class ClassificationService:
             
             # Step 3: Harm level assessment
             logger.info(f"Step 3: Assessing harm level")
-            harm_bool, harm_rationale = prompt3_single_incident(description, prompt_department)
+            harm_bool, harm_rationale = prompt3_single_incident(
+                description, 
+                prompt_department,
+                policy_context=policy_context
+            )
             result["harm_level_check"] = "Yes" if harm_bool else "No"
             result["harm_level_rationale"] = harm_rationale
             
