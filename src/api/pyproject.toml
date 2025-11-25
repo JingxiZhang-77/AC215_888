@@ -25,5 +25,10 @@ dependencies = [
 [tool.uv]
 dev-dependencies = [
     "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "pytest-asyncio>=0.23.3",
     "httpx>=0.26.0",
+    "requests>=2.31.0",
+    "flake8>=7.0.0",
+    "black>=24.1.1",
 ]

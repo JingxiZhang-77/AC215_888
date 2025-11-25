@@ -1,0 +1,332 @@
+# GitHub Actions CI/CD Pipeline for Safety Event Classification API
+# Runs on every push and pull request to main/develop branches
+# All tests run inside Docker container for consistency
+
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop, Milestone4]
+  pull_request:
+    branches: [main, develop, Milestone4]
+
+env:
+  DOCKER_IMAGE_NAME: safety-event-api
+
+jobs:
+  # Job 1: Build Docker image (shared across all jobs)
+  build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -f src/api/Dockerfile src/api/
+
+      - name: Save Docker image
+        run: |
+          docker save ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} -o /tmp/safety-event-api.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp/safety-event-api.tar
+          retention-days: 1
+
+  # Job 2: Run linting and formatting checks
+  lint-and-format:
+    name: Lint and Format Check
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load Docker image
+        run: |
+          docker load -i /tmp/safety-event-api.tar
+
+      - name: Run Black formatter check
+        run: |
+          docker run --rm ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} black --check --line-length 120 . --exclude='\.venv|__pycache__|model'
+        continue-on-error: false
+
+      - name: Run Flake8 linter
+        run: |
+          docker run --rm ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} flake8 --max-line-length=120 --extend-ignore=E203,W503,E501 . --exclude=.venv,__pycache__,model
+        continue-on-error: true
+
+  # Job 3: Run unit tests
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load Docker image
+        run: |
+          docker load -i /tmp/safety-event-api.tar
+
+      - name: Copy tests into container and run
+        run: |
+          # Create a container
+          docker create --name test-container ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} sleep infinity
+          
+          # Copy tests into container
+          docker cp src/tests test-container:/app/tests
+          
+          # Start container
+          docker start test-container
+          
+          # Run unit tests
+          docker exec test-container pytest tests/unit/ -v --tb=short
+          
+          # Stop and remove container
+          docker stop test-container
+          docker rm test-container
+
+      - name: Generate coverage report
+        run: |
+          # Create container for coverage
+          docker create --name coverage-container ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} sleep infinity
+          docker cp src/tests coverage-container:/app/tests
+          docker start coverage-container
+          
+          # Install pytest-cov and run with coverage
+          docker exec coverage-container pip install pytest-cov
+          docker exec coverage-container pytest tests/unit/ --cov=utils --cov=routers --cov-report=term --cov-report=xml:/app/coverage.xml --cov-fail-under=50 || true
+          
+          # Copy coverage report out
+          docker cp coverage-container:/app/coverage.xml ./coverage-unit.xml || true
+          
+          docker stop coverage-container
+          docker rm coverage-container
+        continue-on-error: true
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-unit
+          path: coverage-unit.xml
+        if: always()
+        continue-on-error: true
+
+  # Job 4: Run integration tests
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load Docker image
+        run: |
+          docker load -i /tmp/safety-event-api.tar
+
+      - name: Run integration tests
+        run: |
+          # Create container
+          docker create --name integration-container ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} sleep infinity
+          docker cp src/tests integration-container:/app/tests
+          docker start integration-container
+          
+          # Install test dependencies
+          docker exec integration-container pip install httpx pytest-asyncio
+          
+          # Run integration tests
+          docker exec integration-container pytest tests/integration/ -v --tb=short
+          
+          docker stop integration-container
+          docker rm integration-container
+
+  # Job 5: Run system tests (E2E)
+  system-tests:
+    name: System Tests (E2E)
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load Docker image
+        run: |
+          docker load -i /tmp/safety-event-api.tar
+
+      - name: Create secrets directory with dummy credentials
+        run: |
+          mkdir -p /tmp/secrets
+          echo '{"type": "service_account", "project_id": "test"}' > /tmp/secrets/llm-service-account.json
+
+      - name: Start API server container
+        run: |
+          docker run -d \
+            --name api-server \
+            -p 9000:9000 \
+            -v /tmp/secrets:/secrets:ro \
+            -e DEV=1 \
+            -e ENVIRONMENT=test \
+            ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Wait for server to be ready
+        run: |
+          echo "Waiting for server to start..."
+          for i in {1..30}; do
+            if curl -f http://localhost:9000/ 2>/dev/null; then
+              echo "Server is ready!"
+              break
+            fi
+            echo "Attempt $i: Server not ready yet..."
+            sleep 2
+          done
+          # Final check
+          curl -f http://localhost:9000/ || exit 1
+
+      - name: Run system tests
+        run: |
+          # Create test runner container on host network
+          docker create --name system-test-container --network host ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} sleep infinity
+          docker cp src/tests system-test-container:/app/tests
+          docker start system-test-container
+          
+          # Install test dependencies
+          docker exec system-test-container pip install requests httpx
+          
+          # Run system tests
+          docker exec system-test-container pytest tests/system/ -v --tb=short -x
+          
+          docker stop system-test-container
+          docker rm system-test-container
+
+      - name: Show server logs
+        if: always()
+        run: |
+          docker logs api-server
+
+      - name: Stop server container
+        if: always()
+        run: |
+          docker stop api-server || true
+          docker rm api-server || true
+
+  # Job 6: Combined coverage report
+  coverage-report:
+    name: Coverage Report
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests]
+    if: always()
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download Docker image
+        uses: actions/download-artifact@v4
+        with:
+          name: docker-image
+          path: /tmp
+
+      - name: Load Docker image
+        run: |
+          docker load -i /tmp/safety-event-api.tar
+
+      - name: Generate combined coverage report
+        run: |
+          # Create container
+          docker create --name coverage-container ${{ env.DOCKER_IMAGE_NAME }}:${{ github.sha }} sleep infinity
+          docker cp src/tests coverage-container:/app/tests
+          docker start coverage-container
+          
+          # Install test dependencies
+          docker exec coverage-container pip install pytest-cov httpx pytest-asyncio
+          
+          # Run all tests with coverage
+          docker exec coverage-container pytest tests/unit/ tests/integration/ \
+            --cov=utils --cov=routers --cov=services --cov=models \
+            --cov-report=term-missing \
+            --cov-report=html:/app/htmlcov \
+            --cov-fail-under=50 || true
+          
+          # Copy coverage report out
+          mkdir -p coverage-html
+          docker cp coverage-container:/app/htmlcov/. ./coverage-html/ || true
+          
+          docker stop coverage-container
+          docker rm coverage-container
+        continue-on-error: true
+
+      - name: Upload HTML coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report-html
+          path: coverage-html/
+        if: always()
+        continue-on-error: true
+
+  # Job 7: Test Summary
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, system-tests, coverage-report]
+    if: always()
+    steps:
+      - name: Check test results
+        id: test-results
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Type | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Unit Tests | ${{ needs.unit-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration Tests | ${{ needs.integration-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| System Tests | ${{ needs.system-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Coverage Report | ${{ needs.coverage-report.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ needs.unit-tests.result }}" != "success" ] || \
+             [ "${{ needs.integration-tests.result }}" != "success" ] || \
+             [ "${{ needs.system-tests.result }}" != "success" ]; then
+            echo "❌ Some tests failed!" >> $GITHUB_STEP_SUMMARY
+            echo "status=failure" >> $GITHUB_OUTPUT
+          else
+            echo "✅ All tests passed!" >> $GITHUB_STEP_SUMMARY
+            echo "status=success" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Fail if tests failed
+        if: steps.test-results.outputs.status == 'failure'
+        run: |
+          echo "Tests failed - see summary above"
+          exit 1
