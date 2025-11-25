@@ -14,6 +14,9 @@ Design and build a web-based tool that uses large language models to help hospit
 
 In Milestone 4, we combined the backend, frontend, and supporting services into a complete, locally testable system and prepared the entire application to run reliably and be packaged for future deployment.
 
+### Application Design Document
+
+
 
 ### Data Versioning and Reproducibility
 
