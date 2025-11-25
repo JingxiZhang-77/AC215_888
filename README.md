@@ -16,7 +16,7 @@ In Milestone 4, we combined the backend, frontend, and supporting services into 
 
 ### Application Design Document
 
-📄 [Click here to view the full Application Design Document (PDF)](docs/Application Design Document.pdf)
+📄 [Click here to view the full Application Design Document (PDF)](docs/Application_Design_Document.pdf)
 
 
 ### Data Versioning and Reproducibility
