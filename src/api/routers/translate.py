@@ -4,13 +4,18 @@ from google.cloud import translate_v2 as translate
 from google.api_core import exceptions as google_exceptions
 from utils.lang import detect_language
 from utils.logger import logger
+import os
 
 router = APIRouter()
 
 # Initialize Google Translate client
 try:
+    # Set quota project via environment variable
+    gcp_project = os.getenv('GCP_PROJECT', 'apcomp215-group88')
+    os.environ['GOOGLE_CLOUD_QUOTA_PROJECT'] = gcp_project
     translate_client = translate.Client()
     TRANSLATION_AVAILABLE = True
+    logger.info(f"Google Translate client initialized with quota project: {gcp_project}")
 except Exception as e:
     logger.warning(f"Google Translate client initialization failed: {e}")
     translate_client = None
