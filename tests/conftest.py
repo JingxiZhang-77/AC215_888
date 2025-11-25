@@ -2,14 +2,16 @@
 Shared pytest fixtures for Safety Event Classification API tests
 
 Provides common test utilities, mock data, and authentication helpers.
+Following cheese-app-ci-cd reference pattern.
 """
 
 import pytest
-import os
 import sys
+from pathlib import Path
 
-# Add API source to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "api"))
+# Add src/api to path for imports - this is the key difference from the old structure
+# Now tests/ is at root level, parallel to src/
+sys.path.insert(0, str(Path(__file__).parent.parent / "src" / "api"))
 
 
 @pytest.fixture

@@ -3,15 +3,11 @@ Unit tests for authentication utilities
 
 Tests password hashing, JWT token creation/validation in isolation.
 No external dependencies required - fast execution.
+Following cheese-app-ci-cd reference pattern.
 """
 
 import pytest
-import sys
-import os
 from datetime import timedelta
-
-# Add API source to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "api"))
 
 from utils.auth import (
     hash_password,

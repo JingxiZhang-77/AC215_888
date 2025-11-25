@@ -20,15 +20,18 @@ dependencies = [
     "python-jose[cryptography]>=3.5.0",
     "python-multipart>=0.0.20",
     "uvicorn>=0.38.0",
-]
-
-[tool.uv]
-dev-dependencies = [
+    # Testing dependencies (included for Docker-based testing)
     "pytest>=7.4.3",
     "pytest-cov>=4.1.0",
     "pytest-asyncio>=0.23.3",
     "httpx>=0.26.0",
     "requests>=2.31.0",
+    # Linting/formatting tools
     "flake8>=7.0.0",
     "black>=24.1.1",
+]
+
+[tool.uv]
+dev-dependencies = [
+    # Dev dependencies kept for local development convenience
 ]

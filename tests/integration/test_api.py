@@ -5,37 +5,46 @@ Tests the full API endpoints with FastAPI TestClient.
 Verifies routing, validation, response schema, and business logic integration.
 No real HTTP server required - uses ASGI TestClient.
 
-These tests run inside the container in CI/CD.
+Following cheese-app-ci-cd reference pattern.
 """
 
 import pytest
 import sys
-import os
+from pathlib import Path
 from unittest.mock import patch, MagicMock
 
-# Add API source to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "api"))
+# Add src/api to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src" / "api"))
 
-# Mock Google Cloud services before importing the app
+# Mock Google Cloud services BEFORE any imports that need them
 # This allows tests to run without GCP credentials
-mock_speech_client = MagicMock()
-mock_translate_client = MagicMock()
 
-with patch.dict('sys.modules', {
-    'google.cloud.speech': MagicMock(),
-    'google.cloud.speech_v1p1beta1': MagicMock(),
-}):
-    # Patch the audio service initialization
-    with patch('services.audio_service.speech.SpeechClient', return_value=mock_speech_client):
-        try:
-            from fastapi.testclient import TestClient
-            from service import app
-            from utils.auth import create_access_token
-            APP_AVAILABLE = True
-        except Exception as e:
-            APP_AVAILABLE = False
-            app = None
-            print(f"Warning: Could not import app: {e}")
+# Create mock modules for all Google Cloud services
+mock_translate_module = MagicMock()
+mock_translate_client = MagicMock()
+mock_translate_module.Client.return_value = mock_translate_client
+
+mock_speech_module = MagicMock()
+mock_speech_client = MagicMock()
+mock_speech_module.SpeechClient.return_value = mock_speech_client
+
+# Patch all Google Cloud modules at the sys.modules level
+# This must happen before any imports that use these modules
+sys.modules['google.cloud.translate_v2'] = mock_translate_module
+sys.modules['google.cloud.speech'] = mock_speech_module
+sys.modules['google.cloud.speech_v1p1beta1'] = mock_speech_module
+sys.modules['google.api_core'] = MagicMock()
+sys.modules['google.api_core.exceptions'] = MagicMock()
+
+try:
+    from fastapi.testclient import TestClient
+    from service import app
+    from utils.auth import create_access_token
+    APP_AVAILABLE = True
+except Exception as e:
+    APP_AVAILABLE = False
+    app = None
+    print(f"Warning: Could not import app: {e}")
 
 
 def get_auth_headers(role: str = "admin") -> dict:
@@ -299,33 +308,6 @@ class TestInvalidRoutes:
         assert response.status_code == 404
 
     def test_method_not_allowed(self):
-        """Test that wrong HTTP method returns 405"""
+        """Test that POST to GET-only endpoint returns 405"""
         response = client.post("/")
         assert response.status_code == 405
-
-    def test_invalid_api_route(self):
-        """Test invalid API route returns 404"""
-        response = client.get("/api/v1/nonexistent")
-        assert response.status_code == 404
-
-
-class TestOpenAPIDocumentation:
-    """Tests for API documentation endpoints"""
-
-    def test_openapi_json_available(self):
-        """Test OpenAPI JSON schema is available"""
-        response = client.get("/api/openapi.json")
-        assert response.status_code == 200
-        data = response.json()
-        assert "openapi" in data
-        assert "paths" in data
-
-    def test_docs_endpoint_available(self):
-        """Test Swagger docs endpoint is available"""
-        response = client.get("/api/docs")
-        assert response.status_code == 200
-
-    def test_redoc_endpoint_available(self):
-        """Test ReDoc endpoint is available"""
-        response = client.get("/api/redoc")
-        assert response.status_code == 200

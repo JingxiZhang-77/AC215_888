@@ -3,15 +3,10 @@ Unit tests for configuration settings
 
 Tests configuration loading and default values.
 No external dependencies required - fast execution.
+Following cheese-app-ci-cd reference pattern.
 """
 
 import pytest
-import sys
-import os
-
-# Add API source to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "api"))
-
 from utils.config import Settings, settings
 
 

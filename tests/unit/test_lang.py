@@ -3,19 +3,13 @@ Unit tests for utility functions
 
 Tests utility modules in isolation:
 - Language detection (lang.py)
-- Password hashing and verification (auth.py)
-- Configuration settings (config.py)
+- Pseudo translation function
 
 No external dependencies required - fast execution.
+Following cheese-app-ci-cd reference pattern.
 """
 
 import pytest
-import sys
-import os
-
-# Add API source to path for imports
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "api"))
-
 from utils.lang import detect_language, pseudo_translate
 
 
