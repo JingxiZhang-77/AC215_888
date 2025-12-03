@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  namespace: safety-event-system
+  labels:
+    app: safety-event-api
+    tier: backend
+spec:
+  replicas: 3  # Start with 3 replicas
+  selector:
+    matchLabels:
+      app: safety-event-api
+  template:
+    metadata:
+      labels:
+        app: safety-event-api
+        tier: backend
+    spec:
+      containers:
+      - name: api
+        image: gcr.io/apcomp215-group88/safety-event-api:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+          name: http
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: /secrets/llm-service-account.json
+        envFrom:
+        - configMapRef:
+            name: api-config
+        volumeMounts:
+        - name: gcp-credentials
+          mountPath: /secrets
+          readOnly: true
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 9000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 9000
+          initialDelaySeconds: 20
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 2
+      volumes:
+      - name: gcp-credentials
+        secret:
+          secretName: gcp-credentials
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+  namespace: safety-event-system
+  labels:
+    app: safety-event-api
+spec:
+  type: LoadBalancer
+  selector:
+    app: safety-event-api
+  ports:
+  - port: 9000
+    targetPort: 9000
+    protocol: TCP
+    name: http
+  sessionAffinity: ClientIP

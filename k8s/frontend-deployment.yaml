@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  namespace: safety-event-system
+  labels:
+    app: safety-event-frontend
+    tier: frontend
+spec:
+  replicas: 2  # Start with 2 replicas
+  selector:
+    matchLabels:
+      app: safety-event-frontend
+  template:
+    metadata:
+      labels:
+        app: safety-event-frontend
+        tier: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: gcr.io/apcomp215-group88/safety-event-frontend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3001
+          name: http
+        env:
+        - name: NEXT_PUBLIC_API_URL
+          value: "http://api-service:9000/api/v1"
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3001
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3001
+          initialDelaySeconds: 20
+          periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: safety-event-system
+  labels:
+    app: safety-event-frontend
+spec:
+  type: LoadBalancer
+  selector:
+    app: safety-event-frontend
+  ports:
+  - port: 80
+    targetPort: 3001
+    protocol: TCP
+    name: http
