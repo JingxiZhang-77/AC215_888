@@ -314,6 +314,95 @@ In future iterations, we plan to explore:
 All datasets, prompts, and configuration files will continue to be versioned to ensure fully reproducible evaluation.
 
 
+## Infrastructure as Code with Pulumi
+
+We use **Pulumi** to automate the complete provisioning and deployment of our infrastructure and application. This ensures reproducible, version-controlled, and auditable infrastructure management.
+
+### What Pulumi Automates
+
+Our Pulumi infrastructure code (`infra/`) provisions:
+
+1. **GKE Cluster**
+   - Fully configured Kubernetes cluster on Google Cloud
+   - Auto-scaling node pools with e2-standard-2 machines
+   - Multi-zone deployment for high availability
+
+2. **Networking**
+   - LoadBalancer services for external access
+   - Internal ClusterIP services for inter-pod communication
+   - Automatic IP allocation and DNS management
+
+3. **Storage**
+   - Persistent Volume Claims (PVC) for ChromaDB
+   - 10Gi storage with automatic provisioning
+
+4. **Security & Configuration**
+   - Kubernetes secrets for GCP credentials
+   - ConfigMaps for environment variables
+   - Namespace isolation
+
+5. **Application Deployment**
+   - API backend deployment (3-10 replicas with HPA)
+   - Frontend deployment (2-6 replicas with HPA)
+   - ChromaDB StatefulSet with persistent storage
+
+6. **Auto-scaling**
+   - Horizontal Pod Autoscalers (HPA) based on CPU/Memory
+   - Automatic scaling between min and max replicas
+
+### Using Pulumi
+
+**Quick Deploy**:
+```bash
+cd infra
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Initialize stack
+pulumi login --local  # or use Pulumi Cloud
+pulumi stack select dev
+
+# Deploy everything
+pulumi up
+```
+
+**View Outputs**:
+```bash
+# Get all infrastructure outputs
+pulumi stack output
+
+# Get specific URLs
+pulumi stack output frontend_url
+pulumi stack output api_url
+```
+
+**Update Infrastructure**:
+```bash
+# After code changes
+pulumi up
+
+# Preview changes first
+pulumi preview
+```
+
+**Destroy Infrastructure**:
+```bash
+pulumi destroy
+```
+
+### Benefits of IaC with Pulumi
+
+✅ **Reproducibility**: Entire infrastructure defined in code  
+✅ **Version Control**: Infrastructure changes tracked in Git  
+✅ **Automation**: One command deploys everything  
+✅ **State Management**: Pulumi tracks resource state automatically  
+✅ **Type Safety**: Python type hints catch errors before deployment  
+✅ **Multi-Cloud**: Can extend to AWS, Azure if needed  
+
+For detailed documentation, see [`infra/README.md`](infra/README.md).
+
+
 ## Kubernetes Deployment (Production)
 
 We have successfully deployed the entire application to **Google Kubernetes Engine (GKE)** for production-ready, scalable cloud hosting.

@@ -1,0 +1,14 @@
+name: safety-event-system-infra
+runtime: python
+description: Safety Event Classification System - Infrastructure as Code using Pulumi
+
+config:
+  gcp:project:
+    description: GCP Project ID
+    default: apcomp215-group88
+  gcp:region:
+    description: GCP Region
+    default: us-central1
+  safety-event-system-infra:gcpServiceAccountPath:
+    description: Path to GCP service account JSON key file
+    default: ../secrets/llm-service-account.json
