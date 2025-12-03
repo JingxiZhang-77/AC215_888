@@ -37,14 +37,14 @@ else
     echo -e "${GREEN}Creating GKE cluster ${CLUSTER_NAME}...${NC}"
     gcloud container clusters create ${CLUSTER_NAME} \
         --region=${REGION} \
-        --num-nodes=3 \
-        --machine-type=e2-standard-4 \
+        --num-nodes=2 \
+        --machine-type=e2-standard-2 \
         --enable-autoscaling \
-        --min-nodes=3 \
-        --max-nodes=10 \
+        --min-nodes=2 \
+        --max-nodes=6 \
         --enable-autorepair \
         --enable-autoupgrade \
-        --disk-size=50GB \
+        --disk-size=30GB \
         --disk-type=pd-standard
 fi
 

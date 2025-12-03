@@ -21,12 +21,17 @@ spec:
       - name: api
         image: gcr.io/apcomp215-group88/safety-event-api:latest
         imagePullPolicy: Always
+        command: ["/bin/bash", "-c"]
+        args: 
+          - |
+            source /home/app/.venv/bin/activate && \
+            uvicorn service:app --host 0.0.0.0 --port 9000
         ports:
         - containerPort: 9000
           name: http
         env:
         - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /secrets/llm-service-account.json
+          value: /secrets/key.json
         envFrom:
         - configMapRef:
             name: api-config

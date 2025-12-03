@@ -7,8 +7,20 @@ WORKDIR /app
 # Install bash for shell scripts
 RUN apk add --no-cache bash
 
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Build the application
+RUN npm run build
+
 # Expose port
 EXPOSE 3001
 
-# Keep container running for development
-CMD ["/bin/bash"]
+# Start the application
+CMD ["npm", "start"]

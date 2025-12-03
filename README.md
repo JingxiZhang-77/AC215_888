@@ -314,6 +314,258 @@ In future iterations, we plan to explore:
 All datasets, prompts, and configuration files will continue to be versioned to ensure fully reproducible evaluation.
 
 
+## Kubernetes Deployment (Production)
+
+We have successfully deployed the entire application to **Google Kubernetes Engine (GKE)** for production-ready, scalable cloud hosting.
+
+### Deployment Architecture
+
+**Cluster Configuration:**
+- **Platform**: Google Kubernetes Engine (GKE)
+- **Region**: us-central1
+- **Cluster Name**: safety-event-cluster
+- **Nodes**: 6 nodes (e2-standard-2, 2 CPUs each)
+- **Namespace**: safety-event-system
+
+**Deployed Services:**
+
+1. **API Backend Service** ✅
+   - **Access URL**: http://136.111.94.120:9000
+   - **API Documentation**: http://136.111.94.120:9000/api/docs
+   - **Deployment**: 3 replicas with auto-scaling (3-10 pods)
+   - **Service Type**: LoadBalancer
+   - **Health Check**: http://136.111.94.120:9000/api/v1/health
+
+2. **Frontend Service** ✅
+   - **Access URL**: http://34.136.237.225
+   - **Deployment**: 2 replicas with auto-scaling (2-6 pods)
+   - **Service Type**: LoadBalancer
+   - **Framework**: Next.js 15
+
+3. **ChromaDB (Vector Database)**
+   - **Type**: StatefulSet with persistent storage (10Gi)
+   - **Service Type**: ClusterIP (internal only)
+   - **Port**: 8000
+
+### Key Features
+
+**1. Auto-Scaling (HPA - Horizontal Pod Autoscaler)**
+- API: Scales from 3 to 10 pods based on CPU (70%) and Memory (80%) usage
+- Frontend: Scales from 2 to 6 pods based on load
+- Automatically handles traffic spikes and reduces costs during low usage
+
+**2. High Availability**
+- Multiple replicas ensure zero downtime
+- Automatic pod restart on failure
+- Load balancing across all replicas
+
+**3. Production-Ready Configuration**
+- Resource limits and requests defined
+- Liveness and readiness probes configured
+- Persistent storage for database
+- Environment-specific configurations via ConfigMaps
+
+### Accessing the Production Deployment
+
+**Live URLs (24/7 available):**
+- **Frontend Application**: http://34.136.237.225
+- **API Documentation**: http://136.111.94.120:9000/api/docs
+- **Health Check**: http://136.111.94.120:9000/api/v1/health
+
+**Default Credentials:**
+```
+Username: admin
+Password: admin123
+```
+
+### Deployment Files
+
+All Kubernetes configuration files are located in the `k8s/` directory:
+
+```
+k8s/
+├── deploy.sh                    # Automated deployment script
+├── namespace.yaml               # Namespace configuration
+├── configmap.yaml              # Environment variables
+├── secret.yaml                 # GCP credentials
+├── api-deployment.yaml         # API backend deployment
+├── frontend-deployment.yaml    # Frontend deployment
+├── chromadb-statefulset.yaml   # Vector database
+├── hpa.yaml                    # Auto-scaling configuration
+├── load-test.sh                # Load testing script
+├── VERIFICATION_CHECKLIST.md   # Deployment verification guide
+└── README.md                   # Kubernetes documentation
+```
+
+### Deploying to Kubernetes
+
+**Prerequisites:**
+```bash
+# Install gcloud CLI and kubectl
+gcloud components install kubectl gke-gcloud-auth-plugin
+
+# Configure GCP project
+gcloud config set project apcomp215-group88
+gcloud config set compute/region us-central1
+```
+
+**One-Command Deployment:**
+```bash
+cd k8s
+chmod +x deploy.sh
+./deploy.sh
+```
+
+This script will:
+1. Create GKE cluster (if not exists)
+2. Configure kubectl access
+3. Create namespace and secrets
+4. Deploy all services
+5. Set up auto-scaling
+6. Display access URLs
+
+**Manual Deployment Steps:**
+
+1. **Build and Push Docker Images:**
+```bash
+# Build for amd64 platform
+cd src/api
+docker buildx build --platform linux/amd64 \
+  -t gcr.io/apcomp215-group88/safety-event-api:latest --push .
+
+cd ../frontend-react
+docker buildx build --platform linux/amd64 \
+  -t gcr.io/apcomp215-group88/safety-event-frontend:latest --push .
+```
+
+2. **Deploy to Kubernetes:**
+```bash
+# Get cluster credentials
+gcloud container clusters get-credentials safety-event-cluster \
+  --region=us-central1
+
+# Create namespace and secrets
+kubectl apply -f k8s/namespace.yaml
+kubectl create secret generic gcp-credentials \
+  --from-file=key.json=secrets/llm-service-account.json \
+  -n safety-event-system
+
+# Deploy services
+kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/chromadb-statefulset.yaml
+kubectl apply -f k8s/api-deployment.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/hpa.yaml
+```
+
+3. **Verify Deployment:**
+```bash
+# Check all resources
+kubectl get all -n safety-event-system
+
+# Check pod status
+kubectl get pods -n safety-event-system
+
+# Get external IPs
+kubectl get services -n safety-event-system
+
+# View logs
+kubectl logs -l app=safety-event-api -n safety-event-system
+```
+
+### Monitoring and Management
+
+**View Deployment Status:**
+```bash
+export PATH="/opt/homebrew/share/google-cloud-sdk/bin:$PATH"
+
+# View all resources
+kubectl get all -n safety-event-system
+
+# Check auto-scaling status
+kubectl get hpa -n safety-event-system
+
+# View pod details
+kubectl describe pods -n safety-event-system
+```
+
+**Access Pod Shell:**
+```bash
+# API backend
+kubectl exec -it deployment/api-deployment -n safety-event-system -- /bin/bash
+
+# Frontend
+kubectl exec -it deployment/frontend-deployment -n safety-event-system -- /bin/bash
+```
+
+**View Logs:**
+```bash
+# API logs
+kubectl logs -f deployment/api-deployment -n safety-event-system
+
+# Frontend logs
+kubectl logs -f deployment/frontend-deployment -n safety-event-system
+```
+
+**Update Deployment:**
+```bash
+# After code changes, rebuild and push image
+docker buildx build --platform linux/amd64 \
+  -t gcr.io/apcomp215-group88/safety-event-api:latest --push .
+
+# Restart pods to pull new image
+kubectl rollout restart deployment/api-deployment -n safety-event-system
+```
+
+### Load Testing and Auto-Scaling Demonstration
+
+Test the auto-scaling capabilities:
+
+```bash
+cd k8s
+chmod +x load-test.sh
+./load-test.sh
+```
+
+This will:
+1. Generate baseline load
+2. Gradually increase to 50 concurrent users
+3. Spike to 100 users
+4. Sustain heavy load
+5. Monitor pod scaling in real-time
+
+**Expected Behavior:**
+- Start: 3 API pods, 2 Frontend pods
+- Under load: Scales up to 8-10 API pods, 4-6 Frontend pods
+- After load: Automatically scales back down
+
+### Cost Management
+
+**Current Estimated Costs:**
+- 6 nodes × e2-standard-2: ~$150/month
+- LoadBalancer IPs: ~$20/month
+- Persistent storage: ~$2/month
+- **Total**: ~$172/month
+
+**To Stop Services (Save Costs):**
+```bash
+# Delete namespace only (keep cluster)
+kubectl delete namespace safety-event-system
+
+# Or delete entire cluster
+gcloud container clusters delete safety-event-cluster --region=us-central1
+```
+
+### Advantages of Kubernetes Deployment
+
+1. **Production Ready**: 24/7 availability from anywhere
+2. **Auto-Scaling**: Handles traffic spikes automatically
+3. **High Availability**: Multiple replicas with automatic failover
+4. **Resource Efficiency**: Scales down during low usage
+5. **Professional Infrastructure**: Industry-standard deployment
+6. **Easy Updates**: Rolling updates with zero downtime
+7. **Monitoring**: Built-in health checks and logging
+
 ## Frontend UI Preview
 
 <img width="1504" height="843" alt="Screenshot 2025-11-25 at 15 04 01" src="https://github.com/user-attachments/assets/277a1ddf-ce4c-4597-b1ec-3865fedf418f" />
