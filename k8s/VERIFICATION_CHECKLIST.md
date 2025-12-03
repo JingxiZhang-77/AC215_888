@@ -1,85 +1,85 @@
-# Kubernetes 部署验证清单
+# Kubernetes Deployment Verification Checklist
 
-## 部署前检查 ✅
+## Pre-Deployment Checks ✅
 
-- [x] GCP 项目设置正确 (`apcomp215-group88`)
-- [x] Kubernetes Engine API 已启用
-- [x] 部署脚本可执行 (`chmod +x`)
-- [x] CPU 配额足够 (调整为 e2-standard-2, 2 nodes)
+- [x] GCP project configured correctly (`apcomp215-group88`)
+- [x] Kubernetes Engine API enabled
+- [x] Deployment scripts executable (`chmod +x`)
+- [x] CPU quota sufficient (adjusted to e2-standard-2, 2 nodes)
 
-## 集群创建验证
+## Cluster Creation Verification
 
-运行以下命令验证集群状态：
+Run the following commands to verify cluster status:
 
 ```bash
-# 查看集群信息
+# View cluster information
 gcloud container clusters describe safety-event-cluster --region=us-central1
 
-# 获取集群凭证
+# Get cluster credentials
 gcloud container clusters get-credentials safety-event-cluster --region=us-central1
 
-# 查看节点
+# View nodes
 kubectl get nodes
 
-# 验证节点规格
+# Verify node specifications
 kubectl describe nodes | grep -E "Name:|machine-type|cpu|memory"
 ```
 
-**预期结果：**
-- 6 个节点 (每个区域 2 个 × 3 区域)
-- 机器类型: e2-standard-2
-- 每个节点: 2 CPUs, 8GB RAM
+**Expected Results:**
+- 6 nodes (2 per zone × 3 zones)
+- Machine type: e2-standard-2
+- Each node: 2 CPUs, 8GB RAM
 
-## 应用部署验证
+## Application Deployment Verification
 
-### 1. 命名空间检查
+### 1. Namespace Checkace Check
 ```bash
 kubectl get namespace safety-event-system
 ```
-**预期:** `safety-event-system   Active   <time>`
+**Expected:** `safety-event-system   Active   <time>`
 
-### 2. ConfigMap 和 Secret 检查
+### 2. ConfigMap and Secret Check
 ```bash
 kubectl get configmap -n safety-event-system
 kubectl get secret -n safety-event-system
 ```
-**预期:** 看到 `app-config` 和 `gcp-credentials`
+**Expected:** See `app-config` and `gcp-credentials`
 
-### 3. 部署状态检查
+### 3. Deployment Status Checkment Status Check
 ```bash
 kubectl get deployments -n safety-event-system
 ```
-**预期输出：**
+**Expected Output:**
 ```
 NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
 api-deployment       3/3     3            3           <time>
 frontend-deployment  2/2     2            2           <time>
 ```
 
-### 4. StatefulSet 检查 (ChromaDB)
+### 4. StatefulSet Check (ChromaDB)DB)
 ```bash
 kubectl get statefulset -n safety-event-system
 ```
-**预期输出：**
+**Expected Output:**
 ```
 NAME       READY   AGE
 chromadb   1/1     <time>
 ```
 
-### 5. Pod 状态检查
+### 5. Pod Status Check
 ```bash
 kubectl get pods -n safety-event-system
 ```
-**预期:** 所有 Pod 状态为 `Running`
-- 3 个 API pods
-- 2 个 Frontend pods
-- 1 个 ChromaDB pod
+**Expected:** All Pods status `Running`
+- 3 API pods
+- 2 Frontend pods
+- 1 ChromaDB pod
 
-### 6. Service 检查
+### 6. Service Checkeck
 ```bash
 kubectl get services -n safety-event-system
 ```
-**预期输出：**
+**Expected Output:**
 ```
 NAME                TYPE           EXTERNAL-IP     PORT(S)
 api-service         LoadBalancer   <pending/IP>    9000:xxxxx/TCP
@@ -87,226 +87,226 @@ frontend-service    LoadBalancer   <pending/IP>    80:xxxxx/TCP
 chromadb-service    ClusterIP      <internal-IP>   8000/TCP
 ```
 
-### 7. HPA 检查
+### 7. HPA Checkeck
 ```bash
 kubectl get hpa -n safety-event-system
 ```
-**预期输出：**
+**Expected Output:**
 ```
 NAME            REFERENCE                   TARGETS         MINPODS   MAXPODS
 api-hpa         Deployment/api-deployment   <unknown>/70%   3         10
 frontend-hpa    Deployment/frontend-deployment <unknown>/70% 2        6
 ```
 
-**注意:** 初始 TARGETS 可能显示 `<unknown>`，等待 1-2 分钟后会显示实际 CPU/内存使用率
+**Note:** Initial TARGETS may show `<unknown>`, wait 1-2 minutes for actual CPU/memory usage to display
 
-## 健康检查验证
+## Health Check Verification
 
-### 1. Pod 日志检查
+### 1. Pod Log CheckCheck
 ```bash
-# API 日志
+# API logs
 kubectl logs -l app=safety-event-api -n safety-event-system --tail=50
 
-# Frontend 日志
+# Frontend logs
 kubectl logs -l app=safety-event-frontend -n safety-event-system --tail=50
 
-# ChromaDB 日志
+# ChromaDB logs
 kubectl logs statefulset/chromadb -n safety-event-system --tail=50
 ```
 
-**预期:** 没有 ERROR 或 FATAL 日志，应用正常启动
+**Expected:** No ERROR or FATAL logs, application starts normally
 
-### 2. 健康端点测试
+### 2. Health Endpoint Test Endpoint Test
 ```bash
-# 获取 API 外部 IP
+# Get API external IP
 API_IP=$(kubectl get service api-service -n safety-event-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-# 测试健康端点
+# Test health endpoint
 curl http://${API_IP}:9000/api/v1/health
 ```
-**预期输出:** `{"status":"healthy"}`
+**Expected Output:** `{"status":"healthy"}`
 
-### 3. Frontend 访问测试
+### 3. Frontend Access Testss Test
 ```bash
-# 获取 Frontend 外部 IP
+# Get Frontend external IP
 FRONTEND_IP=$(kubectl get service frontend-service -n safety-event-system -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 
-# 在浏览器中访问
+# Access in browser
 echo "Frontend URL: http://${FRONTEND_IP}"
 ```
-**预期:** 能够访问登录页面
+**Expected:** Able to access login page
 
-## 资源使用验证
+## Resource Usage Verification
 
-### 1. 节点资源使用
+### 1. Node Resource Usageesource Usage
 ```bash
 kubectl top nodes
 ```
-**预期:** 每个节点 CPU/内存使用率 < 80%
+**Expected:** Each node CPU/memory usage < 80%
 
-### 2. Pod 资源使用
+### 2. Pod Resource Usage
 ```bash
 kubectl top pods -n safety-event-system
 ```
-**预期:** 
+**Expected:** 
 - API pods: CPU < 250m, Memory < 512Mi
 - Frontend pods: CPU < 100m, Memory < 256Mi
 - ChromaDB: CPU < 500m, Memory < 1Gi
 
-### 3. PersistentVolume 检查
+### 3. PersistentVolume Checkeck
 ```bash
 kubectl get pv
 kubectl get pvc -n safety-event-system
 ```
-**预期:** ChromaDB 的 PVC 状态为 `Bound`，容量 10Gi
+**Expected:** ChromaDB PVC status is `Bound`, capacity 10Gi
 
-## 自动扩缩容验证
+## Auto-Scaling Verification
 
-### 1. 初始状态
+### 1. Initial Stateial State
 ```bash
 kubectl get pods -l app=safety-event-api -n safety-event-system
 ```
-**预期:** 正好 3 个 API pods (最小副本数)
+**Expected:** Exactly 3 API pods (minimum replicas)
 
-### 2. 运行负载测试
+### 2. Run Load Test
 ```bash
 ./k8s/load-test.sh
 ```
 
-### 3. 观察扩容
-在负载测试运行时，在另一个终端运行：
+### 3. Observe Scaling
+While the load test is running, run in another terminal:t is running, run in another terminal:
 ```bash
 watch -n 5 'kubectl get hpa -n safety-event-system && kubectl get pods -l app=safety-event-api -n safety-event-system'
 ```
 
-**预期行为：**
+**Expected Behavior:**
 
-| 时间 | 负载 | CPU 使用率 | Pod 数量 | 说明 |
-|------|------|-----------|---------|------|
-| 0-30s | 低 | <30% | 3 | 基线状态 |
-| 30s-2min | 中等 | 70-80% | 3→5-6 | 触发扩容 |
-| 2-4min | 高 | 85-95% | 6→8-10 | 扩到最大 |
-| 停止后 5-10min | 无 | <20% | 8-10→3 | 缩回最小 |
+| Time | Load | CPU Usage | Pod Count | Description |
+|------|------|-----------|-----------|-------------|
+| 0-30s | Low | <30% | 3 | Baseline |
+| 30s-2min | Medium | 70-80% | 3→5-6 | Scale up triggered |
+| 2-4min | High | 85-95% | 6→8-10 | Scale to maximum |
+| 5-10min after stop | None | <20% | 8-10→3 | Scale back to minimum |
 
-### 4. 验证扩容事件
+### 4. Verify Scaling Events Scaling Events
 ```bash
 kubectl get events -n safety-event-system --sort-by='.lastTimestamp' | grep -i scale
 ```
-**预期:** 看到 `ScaledUpReplica` 和 `ScaledDownReplica` 事件
+**Expected:** See `ScaledUpReplica` and `ScaledDownReplica` events
 
-## 网络连接验证
+## Network Connectivity Verification
 
-### 1. Pod 间通信测试
+### 1. Inter-Pod Communication Test Communication Test
 ```bash
-# 进入 API pod
+# Enter API pod
 kubectl exec -it deployment/api-deployment -n safety-event-system -- /bin/bash
 
-# 测试连接到 ChromaDB
+# Test connection to ChromaDB
 curl http://chromadb-service:8000/api/v1
 
-# 退出
+# Exit
 exit
 ```
 
-### 2. Frontend 到 API 连接
+### 2. Frontend to API Connectiononnection
 ```bash
-# 进入 Frontend pod
+# Enter Frontend pod
 kubectl exec -it deployment/frontend-deployment -n safety-event-system -- /bin/sh
 
-# 测试 API 连接
+# Test API connection
 curl http://api-service:9000/api/v1/health
 
-# 退出
+# Exit
 exit
 ```
 
-## 常见问题排查
+## Troubleshooting Common Issues
 
-### 问题 1: Pod 一直 Pending
+### Issue 1: Pod Stuck in Pendingn Pending
 ```bash
 kubectl describe pod <pod-name> -n safety-event-system
 ```
-**可能原因:**
-- 节点资源不足 → 调整节点数或资源限制
-- PVC 无法绑定 → 检查存储配置
+**Possible Causes:**
+- Insufficient node resources → Adjust node count or resource limits
+- PVC cannot bind → Check storage configuration
 
-### 问题 2: LoadBalancer 一直 Pending
+### Issue 2: LoadBalancer Stuck in Pendingn Pending
 ```bash
 kubectl describe service api-service -n safety-event-system
 ```
-**解决方案:** 等待 2-5 分钟，GCP 需要时间分配外部 IP
+**Solution:** Wait 2-5 minutes, GCP needs time to allocate external IP
 
-### 问题 3: HPA 显示 <unknown>
+### Issue 3: HPA Shows <unknown>known>
 ```bash
 kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 ```
-**解决方案:** 确认 metrics-server 正在运行
+**Solution:** Confirm metrics-server is running
 ```bash
 kubectl get deployment metrics-server -n kube-system
 ```
 
-### 问题 4: Image Pull 失败
+### Issue 4: Image Pull Failed Failed
 ```bash
 kubectl describe pod <pod-name> -n safety-event-system
 ```
-**解决方案:** 
-- 确认镜像已推送到 GCR
-- 检查 GCP 权限配置
+**Solution:** 
+- Confirm image is pushed to GCR
+- Check GCP permissions configuration
 
-## 完整验证脚本
+## Complete Verification Script
 
-创建并运行完整验证：
+Create and run complete verification: run complete verification:
 
 ```bash
 #!/bin/bash
-# 保存为 verify-deployment.sh
+# Save as verify-deployment.sh
 
-echo "=== Kubernetes 部署验证 ==="
+echo "=== Kubernetes Deployment Verification ==="
 echo ""
 
-echo "1. 集群信息:"
+echo "1. Cluster Information:"
 kubectl cluster-info
 echo ""
 
-echo "2. 节点状态:"
+echo "2. Node Status:"
 kubectl get nodes
 echo ""
 
-echo "3. 命名空间:"
+echo "3. Namespace:"
 kubectl get namespace safety-event-system
 echo ""
 
-echo "4. 所有资源:"
+echo "4. All Resources:"
 kubectl get all -n safety-event-system
 echo ""
 
-echo "5. HPA 状态:"
+echo "5. HPA Status:"
 kubectl get hpa -n safety-event-system
 echo ""
 
-echo "6. PVC 状态:"
+echo "6. PVC Status:"
 kubectl get pvc -n safety-event-system
 echo ""
 
-echo "7. 服务外部 IP:"
+echo "7. Service External IPs:"
 kubectl get services -n safety-event-system
 echo ""
 
-echo "8. Pod 资源使用:"
+echo "8. Pod Resource Usage:"
 kubectl top pods -n safety-event-system 2>/dev/null || echo "Metrics not ready yet"
 echo ""
 
-echo "=== 验证完成 ==="
+echo "=== Verification Complete ==="ion Complete ==="
 ```
 
-## 清理资源
+## Cleanup Resources
 
-如果需要删除部署：
+If you need to delete the deployment:
 
 ```bash
-# 删除应用（保留集群）
+# Delete application (keep cluster)
 kubectl delete namespace safety-event-system
 
-# 删除整个集群
+# Delete entire cluster
 gcloud container clusters delete safety-event-cluster --region=us-central1
 ```
