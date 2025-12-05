@@ -1,0 +1,191 @@
+Outpatient_ER
+Policy topic: Managing disruptive and threatening behavior by patients and family, covering acute and non-acute threats, security involvement, documentation, and team meetings.
+Hospital-Wide Core Policy
+Title: Management of Disruptive and Threatening Behavior by Patients, Families, and Visitors
+1. Purpose
+To establish a standardized, coordinated process for identifying, responding to, documenting, and reviewing disruptive and threatening behavior by patients, families, and visitors across the hospital. The policy aims to protect staff, patients, and visitors; maintain a safe care environment; and ensure appropriate escalation, communication, and follow-up.
+2. Scope
+This policy applies to:
+All clinical and non-clinical staff (employees, contractors, volunteers, trainees).
+All patients, families, care partners, and visitors in inpatient, outpatient, perioperative, emergency, diagnostic, and procedural areas.
+All forms of disruptive or threatening behavior occurring on hospital property or via hospital-managed communication channels (phone, portal, telehealth).
+3. Definitions
+Disruptive behavior
+Any action by a patient, family member, or visitor that interferes with the ability of staff to safely provide care, disrupts operations, or creates a hostile or unsafe environment. Examples include: repeated yelling or verbal abuse, refusal to follow safety rules, harassment, or intimidation.
+Threatening behavior
+Behavior that reasonably raises concern for imminent or potential harm to self or others, including verbal threats (â€œI will hurt youâ€), physical gestures (raising a fist), stalking, brandishing objects as weapons, or explicit threats to property.
+Acute threat
+A situation where there is an immediate or imminent risk of serious harm to staff, patients, or visitors (e.g., physical assault, active violence, weapon display, credible threats of immediate harm). These require urgent activation of security/rapid response and may involve law enforcement.
+Non-acute disruptive behavior
+Behavior that is disruptive, abusive, or escalating but does not pose an immediate risk of serious physical harm. Examples: repeated verbal abuse, refusal to comply with staff instructions, boundary violations, low-level intimidation.
+Support person / care partner
+A family member, friend, or designated individual who accompanies the patient and participates in their care or provides emotional support.
+Behavioral alert / safety flag
+An EHR or internal system notation used to indicate a patient or associated individual with a history of significant disruptive or threatening behavior requiring special precautions.
+Care agreement / behavior contract
+A written, time-limited agreement between the care team and patient/family outlining expected behaviors, boundaries, and consequences for non-adherence (e.g., restricted visitors, requirement for security presence).
+Escalation pathway
+The ordered sequence of individuals/services to be notified as behavior escalates (e.g., primary nurse â†’ charge nurse â†’ attending â†’ security â†’ administrative supervisor â†’ law enforcement).
+Interdisciplinary team meeting
+A structured meeting involving representatives from relevant disciplines (e.g., nursing, physician, social work, security, risk management, patient relations) to review complex or recurrent cases and agree on a unified behavior management plan.
+4. Guiding Principles
+Safety first â€“ Protection of staff, patients, and visitors is the highest priority.
+Early identification and de-escalation â€“ Address concerning behavior early to prevent escalation.
+Consistency and fairness â€“ Similar behaviors are managed using consistent processes across departments.
+Respect and trauma-informed care â€“ Staff use trauma-informed communication and avoid unnecessary escalation while maintaining boundaries.
+Non-retaliation â€“ Staff may not retaliate against patients/families for raising concerns or complaints; this policy addresses behavior, not the content of complaints.
+Documentation and transparency â€“ All significant disruptive or threatening incidents are documented in the medical record and appropriate institutional systems.
+Interdisciplinary problem-solving â€“ Complex or recurrent cases are managed via team-based planning and review.
+5. Risk Levels & Examples
+Low-risk disruptive behavior
+Examples: raised voice, mild verbal frustration, refusal to answer questions, non-compliance with minor processes (e.g., refusing a gown).
+Response: staff-level de-escalation, boundary setting, brief documentation as needed.
+Moderate-risk disruptive behavior
+Examples: repeated yelling or insults, targeted verbal harassment, refusal to comply with safety instructions, frequent boundary violations, threatening body language without explicit threats.
+Response: de-escalation plus involvement of charge nurse/attending; consider security standby; behavior plans and care agreements; clear documentation.
+High-risk / acute threatening behavior
+Examples: physical aggression (hitting, pushing, throwing objects), credible verbal threats of harm, weapon display, stalking, barricading, credible threats of self-harm in a way that endangers others.
+Response: immediate activation of security/rapid response or â€œcodeâ€ per hospital protocol, law enforcement as appropriate, possible limitation or termination of visitation, urgent interdisciplinary review.
+6. Required Safety Practices
+Standardized screening questions for agitation or violence risk at relevant points (triage, admission, transfer).
+Environmental safety â€“ remove or secure potential weapons when feasible; maintain accessible egress for staff.
+Buddy system â€“ staff do not enter rooms alone when high-risk behaviors are present or anticipated.
+Use of security â€“ proactively request security presence for known high-risk individuals or escalating scenarios.
+EHR safety alerts â€“ add or update behavioral alerts according to institutional criteria after significant events.
+Handoff communication â€“ disruptive or threatening behavior and associated plans are included in all relevant handoffs.
+Use of scripted language â€“ staff use concise, consistent phrases for setting limits (â€œI want to help you, but I cannot do that while you are yelling.â€).
+Post-incident debrief â€“ involved staff participate in brief, structured debriefs after serious incidents.
+7. Roles and Responsibilities
+Frontline clinical staff (nurses, physicians, techs, therapists)
+Identify and classify disruptive behavior.
+Use de-escalation techniques and set behavioral limits.
+Notify charge nurse/attending and security per escalation pathway.
+Document behaviors, interventions, and outcomes.
+Charge nurse / unit leader
+Oversee immediate response and ensure staff safety measures.
+Coordinate with physicians, social work, security, and supervisors.
+Determine need for care agreements or visitor restrictions.
+Ensure EHR alerts and handoff communication are updated.
+Attending physician / advanced practice provider
+Lead clinical decision-making regarding treatment and disposition.
+Participate in communication with the patient/family about behavior and consequences.
+Author or co-sign care agreements and behavior-related orders.
+Security services
+Respond promptly to calls for assistance.
+Assist with scene safety, patient/visitor removal from the area if necessary.
+Liaise with law enforcement when indicated.
+Document security incident reports per protocol.
+Social work / behavioral health
+Support de-escalation and crisis intervention.
+Address underlying social, psychiatric, or substance-related contributors.
+Participate in care planning and meetings.
+Administrative supervisor / manager-on-call
+Support units during acute incidents and complex cases.
+Authorize visitor restrictions, location changes, or other operational measures.
+Facilitate interdisciplinary case reviews.
+Risk Management / Patient Relations (as needed)
+Advise on complex or recurrent cases.
+Support communication with patients/families on rights and responsibilities.
+8. Step-by-Step Procedures
+8.1 Non-Acute Disruptive Behavior
+Recognition
+Staff identify behavior that is disruptive but not imminently dangerous.
+Initial staff-level response
+Use calm tone, non-threatening body language.
+Acknowledge concerns (â€œI hear that you are frustrated.â€).
+Clearly state expectations and limits.
+Offer problem-solving options
+Clarify delays, provide approximate timelines, or offer alternative solutions.
+Set boundaries
+Inform the individual that abusive or threatening behavior is not acceptable and will lead to escalation.
+Notify charge nurse/attending if behavior persists or escalates.
+Consider security standby for repeat or escalating behaviors.
+Document the incident, including specific behaviors, interventions, and response.
+Update handoffs to include behavior and current plan.
+8.2 Acute Threatening Behavior
+Immediate assessment of safety
+Staff remove themselves and others from immediate danger when possible.
+Activate emergency response
+Call designated security code or emergency number, and/or local law enforcement as per hospital protocol.
+Do not physically intervene unless trained and absolutely necessary to prevent imminent serious harm.
+Secure the area
+Restrict access, remove bystanders where safe.
+Clinical stabilization
+Once safe, provide necessary medical and psychiatric evaluation.
+Communication and notification
+Notify charge nurse, attending physician, administrative supervisor, and security leadership.
+Post-incident actions
+Determine need for visitor restriction, behavior contract, or transfer to higher security unit.
+Enter or update behavioral alerts in EHR.
+Complete incident reports and security reports.
+Conduct staff debrief.
+8.3 Care Agreements and Restrictions
+Indications
+Recurrent disruptive behavior, repeated boundary violations, or history of threats without adequate adherence to previous plans.
+Development
+Interdisciplinary team drafts agreement specifying acceptable behaviors, prohibited behaviors, communication expectations, and consequences.
+Communication
+Agreement is reviewed with patient and relevant family/support persons; questions addressed.
+Documentation
+Signed copy scanned/uploaded into EHR; summary placed in problem list or notes.
+Enforcement
+Staff consistently enforce consequences for non-adherence (e.g., end of visit, removal from waiting room, restriction of support persons).
+Review
+Periodic review to determine if agreement can be modified or discontinued.
+9. Escalation Pathway
+Frontline staff â†’ Charge nurse â†’ Attending physician â†’ Security (for moderate/high risk) â†’ Administrative supervisor â†’ Department leadership â†’ Law enforcement (via security) as needed.
+For recurrent or high-profile cases, Risk Management and Patient Relations must be notified.
+10. Documentation Requirements
+Specific description of behavior (objective, non-judgmental).
+Risk level (low, moderate, high/acute).
+De-escalation actions taken and patient/family response.
+Security involvement and outcome.
+Any injuries or property damage.
+Care agreements or restrictions created or updated.
+Behavioral alerts added or modified in EHR.
+Handoff notes summarizing ongoing plan.
+11. Meetings / Review Processes
+Triggering criteria for interdisciplinary case review
+â‰¥2 high-risk incidents involving the same individual.
+Any event involving physical harm or weapon.
+Any case where staff feel unable to provide safe ongoing care.
+Participants
+Unit leadership, charge nurse, attending physician, social work, security, risk management, and others as appropriate.
+Outputs
+Written behavior management plan, including environmental modifications, staffing needs, communication strategy, and clear roles.
+Updates to safety alerts and care agreements.
+Below are department-specific versions that overlay the core policy with each departmentâ€™s deviation patterns. Iâ€™ll keep them concise but operational.
+2.5 Outpatient / Emergency Department Policy
+Title: Outpatient & Emergency Department Policy for Managing Disruptive and Threatening Behavior
+Purpose
+To manage disruptive behavior in high-throughput outpatient clinics and the ED while reducing medication ordering errors without EHR safeguards, procedure/therapy verification failures, missed follow-up, and missed escalation of worsening symptoms.
+Scope
+Applies to all outpatient clinics and the Emergency Department, including triage, fast-track, urgent care pods, and observation units embedded in the ED.
+Department-Specific Risks & Behaviors
+Overcrowded waiting rooms with verbally abusive patients leading to rushed triage and medication orders.
+Aggressive behavior causing providers to skip procedure safety checks.
+High-volume, chaotic environment with disruptive patients leading to missed follow-up on abnormal labs/imaging or failure to recognize worsening symptoms.
+Operational Procedures (Outpatient/ED Focus)
+Triage and Medication Ordering under Disruption
+If triage nurse is being yelled at or threatened:
+The nurse calls for assistance from the security or charge nurse.
+Triage process is completed fully (including vital signs and screening) or clearly deferred with time-stamped documentation; no â€œshortcut triageâ€ allowed.
+Medication orders for disruptive patients must:
+Be entered via CPOE with decision support enabled.
+Avoid quick preset orders without review of dose and indication.
+Procedure / Therapy Safety Verification
+Before any outpatient/ED procedure (e.g., laceration repair, casting, minor surgery):
+Staff conduct a brief safety check, including identity, site, laterality, and allergies.
+If a patient is yelling or threatening but not acutely violent, the procedure is delayed until safety checks can be done calmly or with security presence.
+Follow-up on Abnormal Results
+For disruptive patients who leave abruptly (â€œelopementâ€) or refuse discharge instructions:
+Staff document their departure and reason if known.
+Abnormal results are routed through standard follow-up protocols (call, portal message, letter), regardless of behavior.
+Clinics and EDs maintain a daily list of pending critical results (e.g., radiology over-reads, labs) reviewed by designated clinician; disruptive behavior is not a reason to skip follow-up.
+Escalation of Worsening Symptoms
+If behavior masks or complicates assessment of deterioration (e.g., intoxicated, yelling patient with chest pain):
+Staff call security to maintain safety while continuing clinical assessment and vital signs.
+Providers use standard pathways (stroke alerts, STEMI alerts, sepsis pathways) regardless of behavioral status.
+Scenarios (Outpatient/ED)
+Patient verbally abuses staff in ED waiting room; triage is completed with security present, medication orders are carefully reviewed, and abnormal troponin results are followed up despite patient leaving prematurely.
+Outpatient clinic patient threatens front-desk staff and refuses to wait; staff notify clinician, document, and ensure abnormal lab results are still followed through standard process.
