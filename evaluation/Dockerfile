@@ -1,4 +1,3 @@
-# Use the official Debian-hosted Python image
 FROM python:3.11-slim-bookworm
 
 ARG DEBIAN_PACKAGES="build-essential curl"
@@ -28,7 +27,6 @@ RUN set -ex; \
     mkdir -p /secrets && chown app:app /secrets && \
     mkdir -p /home/app/.venv && chown app:app /home/app/.venv
 
-# Switch to the new user
 USER app
 WORKDIR /app
 
@@ -38,14 +36,13 @@ COPY --chown=app:app pyproject.toml ./
 # Create virtual environment and install dependencies
 RUN uv venv && uv sync
 
-# Add venv to PATH so commands are available
+# Add venv to PATH
 ENV PATH="/home/app/.venv/bin:${PATH}"
 
-# Copy the source code
+# Copy all evaluation source code (including api/ subdirectory)
 COPY --chown=app:app . .
 
-# Make entrypoint script executable
+# Make entrypoint executable
 RUN chmod +x docker-entrypoint.sh
 
-# Entry point
 ENTRYPOINT ["/bin/bash", "docker-entrypoint.sh"]
