@@ -28,22 +28,13 @@ def sample_incident_descriptions():
 @pytest.fixture
 def valid_departments():
     """List of valid department values"""
-    return [
-        "internal medicine",
-        "surgery",
-        "ob/gyn/nicu",
-        "radiology/imaging",
-        "outpatient/ER"
-    ]
+    return ["internal medicine", "surgery", "ob/gyn/nicu", "radiology/imaging", "outpatient/ER"]
 
 
 @pytest.fixture
 def test_user_credentials():
     """Test user credentials for authentication"""
-    return {
-        "username": "admin",
-        "password": "admin123"
-    }
+    return {"username": "admin", "password": "admin123"}
 
 
 @pytest.fixture
@@ -53,14 +44,16 @@ def auth_headers(test_user_credentials):
     Used in integration and system tests.
     """
     from utils.auth import create_access_token
-    
-    token = create_access_token({
-        "username": test_user_credentials["username"],
-        "role": "admin",
-        "email": "admin@hospital.com",
-        "department": "internal medicine"
-    })
-    
+
+    token = create_access_token(
+        {
+            "username": test_user_credentials["username"],
+            "role": "admin",
+            "email": "admin@hospital.com",
+            "department": "internal medicine",
+        }
+    )
+
     return {"Authorization": f"Bearer {token}"}
 
 

@@ -30,16 +30,17 @@ mock_speech_module.SpeechClient.return_value = mock_speech_client
 
 # Patch all Google Cloud modules at the sys.modules level
 # This must happen before any imports that use these modules
-sys.modules['google.cloud.translate_v2'] = mock_translate_module
-sys.modules['google.cloud.speech'] = mock_speech_module
-sys.modules['google.cloud.speech_v1p1beta1'] = mock_speech_module
-sys.modules['google.api_core'] = MagicMock()
-sys.modules['google.api_core.exceptions'] = MagicMock()
+sys.modules["google.cloud.translate_v2"] = mock_translate_module
+sys.modules["google.cloud.speech"] = mock_speech_module
+sys.modules["google.cloud.speech_v1p1beta1"] = mock_speech_module
+sys.modules["google.api_core"] = MagicMock()
+sys.modules["google.api_core.exceptions"] = MagicMock()
 
 try:
     from fastapi.testclient import TestClient
     from service import app
     from utils.auth import create_access_token
+
     APP_AVAILABLE = True
 except Exception as e:
     APP_AVAILABLE = False
@@ -51,12 +52,9 @@ def get_auth_headers(role: str = "admin") -> dict:
     """Generate auth headers with specified role"""
     if not APP_AVAILABLE:
         return {}
-    token = create_access_token({
-        "username": "testuser",
-        "role": role,
-        "email": "test@hospital.com",
-        "department": "internal medicine"
-    })
+    token = create_access_token(
+        {"username": "testuser", "role": role, "email": "test@hospital.com", "department": "internal medicine"}
+    )
     return {"Authorization": f"Bearer {token}"}
 
 
@@ -122,10 +120,7 @@ class TestAuthEndpoints:
 
     def test_login_success(self):
         """Test successful login with valid credentials"""
-        response = client.post(
-            "/api/v1/auth/login",
-            json={"username": "admin", "password": "admin123"}
-        )
+        response = client.post("/api/v1/auth/login", json={"username": "admin", "password": "admin123"})
         assert response.status_code == 200
         data = response.json()
         assert "access_token" in data
@@ -135,36 +130,24 @@ class TestAuthEndpoints:
 
     def test_login_invalid_username(self):
         """Test login with invalid username"""
-        response = client.post(
-            "/api/v1/auth/login",
-            json={"username": "nonexistent", "password": "password"}
-        )
+        response = client.post("/api/v1/auth/login", json={"username": "nonexistent", "password": "password"})
         assert response.status_code == 401
         data = response.json()
         assert "detail" in data
 
     def test_login_invalid_password(self):
         """Test login with invalid password"""
-        response = client.post(
-            "/api/v1/auth/login",
-            json={"username": "admin", "password": "wrongpassword"}
-        )
+        response = client.post("/api/v1/auth/login", json={"username": "admin", "password": "wrongpassword"})
         assert response.status_code == 401
 
     def test_login_missing_fields(self):
         """Test login with missing required fields"""
-        response = client.post(
-            "/api/v1/auth/login",
-            json={"username": "admin"}
-        )
+        response = client.post("/api/v1/auth/login", json={"username": "admin"})
         assert response.status_code == 422  # Validation error
 
     def test_login_returns_jwt_token(self):
         """Test login returns valid JWT token format"""
-        response = client.post(
-            "/api/v1/auth/login",
-            json={"username": "admin", "password": "admin123"}
-        )
+        response = client.post("/api/v1/auth/login", json={"username": "admin", "password": "admin123"})
         data = response.json()
         token = data["access_token"]
         # JWT tokens have 3 parts separated by dots
@@ -177,10 +160,7 @@ class TestTranslationEndpoints:
 
     def test_translate_english_no_change(self):
         """Test English text is returned unchanged"""
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": "Patient fell in the hallway"}
-        )
+        response = client.post("/api/v1/translate", json={"text": "Patient fell in the hallway"})
         assert response.status_code == 200
         data = response.json()
         assert data["detected_lang"] == "en"
@@ -189,20 +169,14 @@ class TestTranslationEndpoints:
 
     def test_translate_detects_chinese(self):
         """Test Chinese text is detected correctly"""
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": "患者在走廊摔倒"}
-        )
+        response = client.post("/api/v1/translate", json={"text": "患者在走廊摔倒"})
         assert response.status_code == 200
         data = response.json()
         assert data["detected_lang"] in ["zh-CN", "zh-TW", "zh"]
 
     def test_translate_detects_spanish(self):
         """Test Spanish text is detected correctly"""
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": "El paciente se cayó en el pasillo"}
-        )
+        response = client.post("/api/v1/translate", json={"text": "El paciente se cayó en el pasillo"})
         assert response.status_code == 200
         data = response.json()
         assert data["detected_lang"] == "es"
@@ -210,28 +184,19 @@ class TestTranslationEndpoints:
     def test_translate_detects_french(self):
         """Test French text is detected correctly"""
         # Use French-specific characters (ç, î, ô, etc.) that don't appear in Spanish
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": "Ça va bien, le dîner est prêt"}
-        )
+        response = client.post("/api/v1/translate", json={"text": "Ça va bien, le dîner est prêt"})
         assert response.status_code == 200
         data = response.json()
         assert data["detected_lang"] == "fr"
 
     def test_translate_empty_text_rejected(self):
         """Test empty text is rejected"""
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": ""}
-        )
+        response = client.post("/api/v1/translate", json={"text": ""})
         assert response.status_code == 422
 
     def test_translate_response_schema(self):
         """Test translation response has correct schema"""
-        response = client.post(
-            "/api/v1/translate",
-            json={"text": "Hello world"}
-        )
+        response = client.post("/api/v1/translate", json={"text": "Hello world"})
         data = response.json()
         assert "original_text" in data
         assert "detected_lang" in data
@@ -246,8 +211,7 @@ class TestClassificationEndpoints:
     def test_classify_requires_auth(self):
         """Test classification endpoint requires authentication"""
         response = client.post(
-            "/api/v1/classify/",
-            json={"description": "Patient fell", "department": "internal medicine"}
+            "/api/v1/classify/", json={"description": "Patient fell", "department": "internal medicine"}
         )
         # May return 401 (Unauthorized) or 403 (Forbidden) depending on auth middleware
         assert response.status_code in [401, 403]
@@ -258,7 +222,7 @@ class TestClassificationEndpoints:
         response = client.post(
             "/api/v1/classify/",
             json={"description": "Patient fell in the hallway", "department": "internal medicine"},
-            headers=headers
+            headers=headers,
         )
         # May be 200 or 500 depending on LLM availability
         assert response.status_code in [200, 500]
@@ -267,9 +231,7 @@ class TestClassificationEndpoints:
         """Test nurse role can access classification"""
         headers = get_auth_headers("nurse")
         response = client.post(
-            "/api/v1/classify/",
-            json={"description": "Patient fell", "department": "surgery"},
-            headers=headers
+            "/api/v1/classify/", json={"description": "Patient fell", "department": "surgery"}, headers=headers
         )
         assert response.status_code in [200, 500]
 
@@ -277,9 +239,7 @@ class TestClassificationEndpoints:
         """Test doctor role can access classification"""
         headers = get_auth_headers("doctor")
         response = client.post(
-            "/api/v1/classify/",
-            json={"description": "Patient fell", "department": "surgery"},
-            headers=headers
+            "/api/v1/classify/", json={"description": "Patient fell", "department": "surgery"}, headers=headers
         )
         assert response.status_code in [200, 500]
 

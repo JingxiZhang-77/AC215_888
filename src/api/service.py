@@ -33,7 +33,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",
-    openapi_url="/api/openapi.json"
+    openapi_url="/api/openapi.json",
 )
 
 # CORS configuration
@@ -48,12 +48,13 @@ app.add_middleware(
 )
 
 # Unified /api/v1 prefix for all routes (speech previously used /api)
-app.include_router(auth.router,          prefix="/api/v1/auth",        tags=["Authentication"])
-app.include_router(users.router,         prefix="/api/v1/users",       tags=["User Management"])
-app.include_router(classification.router,prefix="/api/v1/classify",    tags=["Classification"])
-app.include_router(audio.router,         prefix="/api/v1/audio",       tags=["Audio Transcription"])
-app.include_router(translate.router,     prefix="/api/v1",             tags=["Translation"])
-app.include_router(speech.router,        prefix="/api/v1/speech",      tags=["Speech Recognition"])
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
+app.include_router(users.router, prefix="/api/v1/users", tags=["User Management"])
+app.include_router(classification.router, prefix="/api/v1/classify", tags=["Classification"])
+app.include_router(audio.router, prefix="/api/v1/audio", tags=["Audio Transcription"])
+app.include_router(translate.router, prefix="/api/v1", tags=["Translation"])
+app.include_router(speech.router, prefix="/api/v1/speech", tags=["Speech Recognition"])
+
 
 @app.get("/")
 async def root():
@@ -62,24 +63,28 @@ async def root():
         "message": "Safety Event Classification API",
         "version": "1.0.0",
         "status": "operational",
-        "docs": "/api/docs"
+        "docs": "/api/docs",
     }
+
 
 @app.get("/api/v1/health")
 def health_v1():
     """Health check endpoint for monitoring"""
     return {"status": "ok", "version": "1.0.0"}
 
+
 # Backward compatibility for legacy health check path
 @app.get("/api/health")
 def health_legacy():
     return {"status": "ok", "deprecated": True}
+
 
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
     logger.info("API startup")
     logger.info(f"Environment: {settings.ENVIRONMENT}")
+
 
 @app.on_event("shutdown")
 async def shutdown_event():

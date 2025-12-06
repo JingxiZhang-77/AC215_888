@@ -37,13 +37,7 @@ class TestSettings:
 
     def test_valid_departments(self):
         """Test valid departments list"""
-        expected_departments = [
-            "internal medicine",
-            "surgery",
-            "ob/gyn/nicu",
-            "radiology/imaging",
-            "outpatient/ER"
-        ]
+        expected_departments = ["internal medicine", "surgery", "ob/gyn/nicu", "radiology/imaging", "outpatient/ER"]
         assert settings.VALID_DEPARTMENTS == expected_departments
 
     def test_supported_audio_formats(self):

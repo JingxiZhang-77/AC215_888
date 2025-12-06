@@ -9,12 +9,7 @@ Following cheese-app-ci-cd reference pattern.
 import pytest
 from datetime import timedelta
 
-from utils.auth import (
-    hash_password,
-    verify_password,
-    create_access_token,
-    decode_access_token
-)
+from utils.auth import hash_password, verify_password, create_access_token, decode_access_token
 
 
 class TestPasswordHashing:
@@ -104,10 +99,10 @@ class TestJWTTokens:
     def test_decode_invalid_token(self):
         """Test decoding invalid token raises exception"""
         from fastapi import HTTPException
-        
+
         with pytest.raises(HTTPException) as exc_info:
             decode_access_token("invalid.token.here")
-        
+
         assert exc_info.value.status_code == 401
 
     def test_token_preserves_complex_data(self):
@@ -116,11 +111,11 @@ class TestJWTTokens:
             "username": "testuser",
             "role": "nurse",
             "department": "internal medicine",
-            "email": "test@hospital.com"
+            "email": "test@hospital.com",
         }
         token = create_access_token(data)
         decoded = decode_access_token(token)
-        
+
         assert decoded["username"] == data["username"]
         assert decoded["role"] == data["role"]
         assert decoded["department"] == data["department"]
