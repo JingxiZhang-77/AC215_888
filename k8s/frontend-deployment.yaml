@@ -26,7 +26,7 @@ spec:
           name: http
         env:
         - name: NEXT_PUBLIC_API_URL
-          value: "http://136.111.94.120:9000/api/v1"
+          value: "http://136.111.32.69:9000/api/v1"
         resources:
           requests:
             memory: "256Mi"

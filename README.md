@@ -179,9 +179,9 @@ Our application is deployed on Google Kubernetes Engine:
 
 | Service | URL |
 |---------|-----|
-| Frontend | http://34.136.237.225 |
-| API Docs | http://136.111.94.120:9000/api/docs |
-| Health Check | http://136.111.94.120:9000/api/v1/health |
+| Frontend | http://34.134.124.249 |
+| API Docs | http://136.111.32.69:9000/api/docs |
+| Health Check | http://136.111.32.69:9000/api/v1/health |
 
 **Credentials:** `admin` / `admin123`
 
