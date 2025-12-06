@@ -1,26 +1,58 @@
 # Use Node.js 18 Alpine for smaller image size
-FROM node:18-alpine
+FROM node:18-alpine AS base
 
-# Set working directory
+# Install dependencies only when needed
+FROM base AS deps
 WORKDIR /app
 
 # Install bash for shell scripts
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash libc6-compat
 
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
-# Copy application code
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Set production environment
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
 
 # Build the application
 RUN npm run build
 
+# Production image, copy all the files and run next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV production
+ENV NEXT_TELEMETRY_DISABLED 1
+
+# Create a non-root user
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy necessary files
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
+# Set proper permissions
+RUN chown -R nextjs:nodejs /app
+
+USER nextjs
+
 # Expose port
 EXPOSE 3001
 
+ENV PORT 3001
+ENV HOSTNAME "0.0.0.0"
+
 # Start the application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

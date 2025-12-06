@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   
+  // Enable standalone output for optimized Docker builds
+  output: 'standalone',
+  
   // Ensure proper webpack configuration for Docker development
   webpack: (config, { dev, isServer }) => {
     // Disable webpack cache in development to prevent chunk loading issues
