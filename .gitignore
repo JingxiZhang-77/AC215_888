@@ -4,6 +4,7 @@ docker-volumes/
 outputs/
 secrets/
 references/
-**/secrets/
+secrets/
+_archive/
 _old/
 __pycache__
