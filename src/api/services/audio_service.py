@@ -46,9 +46,16 @@ class AudioService:
         gcp_project = os.getenv("GCP_PROJECT", "apcomp215-group88")
         os.environ["GOOGLE_CLOUD_QUOTA_PROJECT"] = gcp_project
 
-        self.speech_client = speech.SpeechClient()
-        self.translate_client = translate.Client()
-        logger.info(f"Audio service initialized with quota project: {gcp_project}")
+        # Skip Google Cloud initialization in test/CI environment
+        environment = os.getenv("ENVIRONMENT", "production")
+        if environment == "test":
+            logger.warning("Audio service running in TEST mode - Google Cloud clients disabled")
+            self.speech_client = None
+            self.translate_client = None
+        else:
+            self.speech_client = speech.SpeechClient()
+            self.translate_client = translate.Client()
+            logger.info(f"Audio service initialized with quota project: {gcp_project}")
 
     def validate_language(self, language_code: str) -> str:
         """
