@@ -7,9 +7,9 @@ name: CI Pipeline
 
 on:
   push:
-    branches: [main, develop, Milestone4]
+    branches: [main, develop, Milestone5]
   pull_request:
-    branches: [main, develop, Milestone4]
+    branches: [main, develop, Milestone5]
 
 env:
   DOCKER_IMAGE_NAME: safety-event-api

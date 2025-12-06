@@ -250,30 +250,194 @@ docker run --rm safety-event-api:local pytest tests/ -v --cov
 
 ```
 tests/
-├── unit/                  # Component isolation tests
-│   ├── test_auth.py       # Authentication utilities
-│   ├── test_config.py     # Configuration handling
-│   └── test_lang.py       # Language detection
-├── integration/           # API endpoint tests
-│   └── test_api.py        # Full API integration
+├── unit/                  # Component isolation tests (44 tests)
+│   ├── test_auth.py       # Password hashing, JWT tokens (14 tests)
+│   ├── test_config.py     # Configuration settings (17 tests)
+│   └── test_lang.py       # Language detection, translation (13 tests)
+├── integration/           # API endpoint tests (25 tests)
+│   └── test_api.py        # Full API integration with TestClient
 └── system/                # End-to-end workflows
-    └── test_system_api.py # Complete system tests
+    └── test_system_api.py # Complete system tests with real HTTP requests
+```
+
+**Total: 69 tests** (44 unit + 25 integration)
+
+### Run Tests Locally
+
+```bash
+# Build test container
+docker build -t safety-event-api:local -f Dockerfile.test .
+
+# Run all tests
+docker run --rm safety-event-api:local pytest tests/ -v
+
+# Run specific test types
+docker run --rm safety-event-api:local pytest tests/unit/ -v
+docker run --rm safety-event-api:local pytest tests/integration/ -v
+
+# Run with coverage
+docker run --rm safety-event-api:local pytest tests/ --cov=utils --cov=routers --cov=services --cov=models --cov-report=term-missing
+
+# Or use the convenience script
+./run-tests.sh          # Run all tests
+./run-tests.sh unit     # Run unit tests only
+./run-tests.sh coverage # Run with coverage report
 ```
 
 ### Coverage Report
 
-| Module | Coverage |
-|--------|----------|
-| utils/ | 91% |
-| models/ | 85% |
-| routers/ | 78% |
-| **Overall** | **91%** |
+| Module | Coverage | Details |
+|--------|----------|---------|
+| **utils/** | **98%** | auth.py (96%), config.py (100%), lang.py (100%), logger.py (100%) |
+| **models/** | **91%** | schemas.py (91%) - excludes optional validators |
+| **routers/** | **55%** | auth.py (88%), translate.py (79%), speech.py (89%)<br>Lower: classification.py (21%), audio.py (32%), users.py (21%) |
+| **services/** | **36%** | Lower due to LLM/RAG integration complexity |
+| **Overall** | **52%** | Exceeds 50% minimum threshold |
+
+### What's Tested
+
+✅ **Unit Tests** (Fast, no external dependencies):
+- Password hashing and verification
+- JWT token creation and validation
+- Configuration loading and defaults
+- Language detection (English, Chinese, Spanish, French, Japanese, Korean)
+- Pseudo-translation formatting
+
+✅ **Integration Tests** (FastAPI TestClient):
+- All API endpoints (root, health, auth, translation, classification)
+- Request/response schemas
+- Authentication and authorization
+- CORS configuration
+- Error handling and validation
+
+✅ **System Tests** (Real HTTP requests):
+- End-to-end workflows against running API
+- Complete authentication flow
+- Translation service integration
+- API response times and performance
+
+### Why Some Modules Have Lower Coverage
+
+- **Classification (21%)**: Requires live LLM connection, complex multi-step logic
+- **Audio Service (22%)**: Requires Google Speech API, file upload handling
+- **Users Service (21%)**: Database operations not yet implemented
+- **RAG Service (46%)**: Requires ChromaDB connection and embeddings
+
+These modules are tested via integration and system tests but are harder to unit test due to external service dependencies.
+
+### What Remains Untested
+
+**⚠️ Functionality Not Covered by Tests:**
+
+1. **LLM Classification Logic (79% untested)**
+   - Multi-step classification prompts (GAPS, Patient Reach, Harm)
+   - LLM response parsing and validation
+   - Error recovery from malformed LLM responses
+   - Department-specific classification variations
+   - **Why:** Requires live Vertex AI connection, non-deterministic outputs
+   - **Risk:** High - core functionality
+
+2. **Audio Processing (68-78% untested)**
+   - Audio file upload and validation
+   - Speech-to-text transcription (Google Speech API)
+   - Multi-language audio transcription
+   - Audio format conversions (mp3, wav, m4a, etc.)
+   - Streaming audio handling
+   - **Why:** Requires Google Speech API, large audio file fixtures
+   - **Risk:** Medium - optional feature
+
+3. **RAG Policy Retrieval (54% untested)**
+   - ChromaDB vector similarity search
+   - Policy document chunking and embedding
+   - Department-specific policy retrieval
+   - Context augmentation in classification
+   - **Why:** Requires ChromaDB connection, pre-computed embeddings
+   - **Risk:** Medium - optional enhancement feature
+
+4. **User Management (79% untested)**
+   - User creation and profile updates
+   - Role-based access control (beyond authentication)
+   - User listing and filtering
+   - Password reset functionality
+   - **Why:** Database operations not fully implemented
+   - **Risk:** Low - admin features, not core workflow
+
+5. **Batch Processing (Not tested)**
+   - CSV/Excel file upload and parsing
+   - Bulk incident classification
+   - Progress tracking for large batches
+   - Error handling in batch operations
+   - Results export and download
+   - **Why:** Complex file handling, not prioritized
+   - **Risk:** Medium - useful feature but not critical path
+
+6. **WebSocket Real-time Features (Not tested)**
+   - Real-time classification status updates
+   - Live progress notifications
+   - WebSocket connection management
+   - **Why:** Feature not implemented/used in production
+   - **Risk:** Low - not deployed
+
+7. **Edge Cases and Error Scenarios**
+   - Network timeouts and retries
+   - Rate limiting behavior
+   - Concurrent request handling
+   - Large input handling (>10KB descriptions)
+   - Special character and encoding edge cases
+   - **Why:** Difficult to simulate reliably in tests
+   - **Risk:** Medium - could cause production issues
+
+8. **Performance and Load**
+   - Response time under load (>50 concurrent users)
+   - Memory usage with large batches
+   - Database query performance
+   - API rate limiting effectiveness
+   - **Why:** Requires load testing infrastructure
+   - **Risk:** Medium - impacts scalability
+
+**Mitigation Strategies:**
+- Integration tests with mocks cover basic flows
+- Manual testing of critical paths
+- Production monitoring and alerting
+- Gradual rollout with limited users
+- Comprehensive error logging for debugging
 
 ---
 
 ## Evaluation
 
-The evaluation pipeline measures model classification performance.
+The evaluation pipeline measures model classification performance against ground truth labels.
+
+### Performance Results
+
+**Overall Accuracy: 67.57%** (75 correct out of 111 samples)
+
+| Metric | Macro Avg | Weighted Avg |
+|--------|-----------|--------------|
+| **Precision** | 75.83% | 72.78% |
+| **Recall** | 64.58% | 67.57% |
+| **F1-Score** | 65.64% | 65.27% |
+
+### Per-Class Performance
+
+| Classification | Precision | Recall | F1-Score | Support |
+|----------------|-----------|--------|----------|---------|
+| **SSE** (Serious Safety Event) | 57.58% | 100% | 73.08% | 38 |
+| **PSE** (Precursor Safety Event) | 69.23% | 31.03% | 42.86% | 29 |
+| **NME** (Near Miss Event) | 84.21% | 72.73% | 78.05% | 22 |
+| **NSE** (No Safety Event) | 92.31% | 54.55% | 68.57% | 22 |
+
+### Key Insights
+
+**Strengths:**
+- **Perfect recall on SSE**: Model correctly identifies all serious safety events (100% recall)
+- **High precision on NSE**: 92.31% precision on no-safety-event classification
+- **Strong NME performance**: Best balanced performance with 78.05% F1-score
+
+**Areas for Improvement:**
+- **PSE recall**: Only 31.03% of precursor safety events correctly identified (17 out of 29 misclassified as SSE)
+- **NSE recall**: 45.45% of no-safety-events misclassified (10 out of 22 classified as SSE)
+- **Overall misclassifications**: 36 errors total, primarily over-classifying incidents as more severe
 
 ### Run Evaluation
 
@@ -282,14 +446,14 @@ cd evaluation
 ./docker-shell.sh
 
 # Inside container:
-python evaluate.py --input_file data/test_data.xlsx --output_dir outputs/
+python evaluate.py --input_file data/performance_evaluation.csv --output_dir outputs/
 ```
 
-### Metrics Generated
-- Classification accuracy
-- Per-class precision, recall, F1
-- Confusion matrix visualization
-- Detailed classification report
+### Output Files
+- `evaluation_report_*.txt` - Detailed text report with misclassification analysis
+- `evaluation_results_*.csv` - Per-sample predictions and comparison
+- `metrics_*.json` - Machine-readable metrics
+- `confusion_matrix_*.png` - Confusion matrix visualization
 
 See [`evaluation/README.md`](evaluation/README.md) for details.
 

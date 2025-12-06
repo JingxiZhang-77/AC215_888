@@ -1,0 +1,172 @@
+======================================================================
+SAFETY EVENT CLASSIFICATION - MODEL EVALUATION REPORT
+======================================================================
+Generated: 20251206_061705
+
+----------------------------------------------------------------------
+OVERALL METRICS
+----------------------------------------------------------------------
+Total Samples:        111
+Valid Predictions:    111
+Error Predictions:    0
+
+Accuracy:             0.6757 (67.57%)
+
+Macro-Averaged Metrics:
+  Precision:          0.7583
+  Recall:             0.6458
+  F1-Score:           0.6564
+
+Weighted-Averaged Metrics:
+  Precision:          0.7278
+  Recall:             0.6757
+  F1-Score:           0.6527
+
+----------------------------------------------------------------------
+PER-CLASS PERFORMANCE
+----------------------------------------------------------------------
++--------+------------------------+-------------+----------+------------+-----------+
+| Code   | Classification         |   Precision |   Recall |   F1-Score |   Support |
++========+========================+=============+==========+============+===========+
+| SSE    | Serious Safety Event   |      0.5758 |   1      |     0.7308 |        38 |
++--------+------------------------+-------------+----------+------------+-----------+
+| PSE    | Precursor Safety Event |      0.6923 |   0.3103 |     0.4286 |        29 |
++--------+------------------------+-------------+----------+------------+-----------+
+| NME    | Near Miss Event        |      0.8421 |   0.7273 |     0.7805 |        22 |
++--------+------------------------+-------------+----------+------------+-----------+
+| NSE    | No Safety Event        |      0.9231 |   0.5455 |     0.6857 |        22 |
++--------+------------------------+-------------+----------+------------+-----------+
+
+----------------------------------------------------------------------
+CONFUSION MATRIX
+----------------------------------------------------------------------
+Rows: Ground Truth, Columns: Predictions
+
++-----+-------+-------+-------+-------+
+|     |   SSE |   PSE |   NME |   NSE |
++=====+=======+=======+=======+=======+
+| SSE |    38 |     0 |     0 |     0 |
++-----+-------+-------+-------+-------+
+| PSE |    17 |     9 |     3 |     0 |
++-----+-------+-------+-------+-------+
+| NME |     1 |     4 |    16 |     1 |
++-----+-------+-------+-------+-------+
+| NSE |    10 |     0 |     0 |    12 |
++-----+-------+-------+-------+-------+
+
+----------------------------------------------------------------------
+MISCLASSIFICATION ANALYSIS (36 errors)
+----------------------------------------------------------------------
+
+[Error 1]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   internal medicine
+  Description:  Patient #1, was admitted with severe anemia and required a blood transfusion.
+Another patient, #2 was admitted to the same hematology unit with severe...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 2]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   ob/gyn/nicu
+  Description:  A patient had a laparoscopic hysterectomy and was discharged post-operatively
+without complications. She had discharge instructions for a follow-up vi...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 3]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   radiology/imaging
+  Description:  A Sterile Processing Technician was cleaning three flexible endoscopes when he
+was interrupted to do another task in the OR. He handed off the cleanin...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 4]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   outpatient/er
+  Description:  A client of a Home Care program who was recovering at home after a traumatic
+brain injury. She was getting home therapy and during an OT appointment, ...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 5]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   internal medicine
+  Description:  A patient (#1) of a Rehabilitation Center had been admitted after acute care
+for a head injury. As part of the initial assessment he was identified as...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 6]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   ob/gyn/nicu
+  Description:  An OB patient was receiving Rhogam shots during her pregnancy. She was given
+the 50 mcg dose instead of a 300 mcg dose. This was discovered the next d...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 7]
+  Ground Truth: PSE
+  Prediction:   NME
+  Department:   radiology/imaging
+  Description:  A Scheduling Clerk in a large Ambulatory Care Practice was scheduling an Xray
+procedure for a patient. While doing this she inadvertently chose the wr...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     False
+    - Caused Harm:         None
+
+[Error 8]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   internal medicine
+  Description:  A 72-year-old man on diuretics had a morning potassium level of 2.9 mEq/L. The lab result was posted in the EHR at 08:45 AM but not reviewed until 3 P...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 9]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   internal medicine
+  Description:  A 60-year-old patient with dehydration was prescribed normal saline 125 mL/hr. The infusion pump was inadvertently set at 500 mL/hr due to a keypad er...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+[Error 10]
+  Ground Truth: PSE
+  Prediction:   SSE
+  Department:   internal medicine
+  Description:  A 74-year-old man with chronic obstructive pulmonary disease (COPD) was admitted for shortness of breath. He was prescribed supplemental oxygen via na...
+  Step Analysis:
+    - Deviation from GAPS: True
+    - Reached Patient:     True
+    - Caused Harm:         True
+
+  ... and 26 more errors (see detailed CSV)
+
+======================================================================
+END OF REPORT
+======================================================================
