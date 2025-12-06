@@ -1,0 +1,5 @@
+encryptionsalt: v1:FaZysHaKK9k=:v1:lWvnA9Iu+e0h3619:HCueM1OgiwxsxNOiDBsLZXyTYRDbAQ==
+config:
+  gcp:project: apcomp215-group88
+  security:ssh_user: "sa_107671925404038092202"
+  security:gcp_service_account_email: "project@apcomp215-group88.iam.gserviceaccount.com"

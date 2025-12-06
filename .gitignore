@@ -1,0 +1,9 @@
+# misc
+.DS_Store
+docker-volumes/
+outputs/
+secrets/
+references/
+**/secrets/
+_old/
+__pycache__

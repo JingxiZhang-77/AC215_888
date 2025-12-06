@@ -1,0 +1,30 @@
+networks:
+    default:
+        name: safety-event-network
+        external: true
+
+services:
+    safety-vector-db-cli:
+        image: safety-vector-db-cli
+        container_name: safety-vector-db-cli
+        volumes:
+            - ../../secrets:/secrets
+            - ../vector-db:/app
+        environment:
+            GOOGLE_APPLICATION_CREDENTIALS: $GOOGLE_APPLICATION_CREDENTIALS
+            GCP_PROJECT: $GCP_PROJECT
+            CHROMADB_HOST: safety-chromadb
+            CHROMADB_PORT: 8000
+        depends_on:
+            - chromadb
+    
+    chromadb:
+        image: chromadb/chroma:latest
+        container_name: safety-chromadb
+        ports:
+            - 8000:8000
+        volumes:
+            - ./docker-volumes/chromadb:/chroma/chroma
+        environment:
+            - IS_PERSISTENT=TRUE
+            - ANONYMIZED_TELEMETRY=FALSE

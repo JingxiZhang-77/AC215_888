@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: safety-event-system
+data:
+  GCP_PROJECT: "apcomp215-group88"
+  GCP_REGION: "us-central1"
+  ENVIRONMENT: "production"
+  DEBUG: "false"
+  PORT: "9000"
+  CHROMADB_HOST: "chromadb-service"
+  CHROMADB_PORT: "8000"
