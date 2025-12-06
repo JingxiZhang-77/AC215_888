@@ -26,10 +26,9 @@ echo -e "${GREEN}Step 1: Connecting to GKE cluster...${NC}"
 gcloud container clusters get-credentials ${CLUSTER_NAME} --region=${REGION}
 
 # Rebuild and push frontend image
-echo -e "${GREEN}Step 2: Rebuilding frontend image...${NC}"
+echo -e "${GREEN}Step 2: Rebuilding frontend image for AMD64 platform...${NC}"
 cd src/frontend-react
-docker build -t gcr.io/${PROJECT_ID}/safety-event-frontend:latest -f Dockerfile .
-docker push gcr.io/${PROJECT_ID}/safety-event-frontend:latest
+docker buildx build --platform linux/amd64 -t gcr.io/${PROJECT_ID}/safety-event-frontend:latest -f Dockerfile . --push
 cd ../..
 
 # Delete existing pods to force new image pull
