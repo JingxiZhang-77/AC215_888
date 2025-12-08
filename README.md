@@ -31,7 +31,8 @@ A web-based tool that uses large language models to help hospitals and healthcar
 7. [Evaluation](#evaluation)
 8. [Data Pipeline](#data-pipeline)
 9. [Infrastructure as Code](#infrastructure-as-code)
-10. [Frontend UI Preview](#frontend-ui-preview)
+10. [Known Issues and Limitations](#known-issues-and-limitations)
+11. [Frontend UI Preview](#frontend-ui-preview)
 
 ---
 
@@ -510,6 +511,36 @@ pulumi destroy
 - Secrets and ConfigMaps
 
 See [`infra/README.md`](infra/README.md) for details.
+
+
+
+---
+
+## Known Issues and Limitations
+
+- **Training Data**: Currently using prompt engineering, not fine-tuned model
+  - **Approach**: RAG + carefully crafted prompts
+  - **Limitation**: May not capture hospital-specific terminology
+  - **Future**: Explore supervised fine-tuning with labeled data
+
+- **Department Coverage**: RAG policies available for 5 departments only
+  - **Covered**: Internal Medicine, Surgery, OB/GYN/NICU, Radiology, Outpatient/ER
+  - **Others**: Fall back to general classification rules
+  - **Expansion**: Add more department-specific policies
+
+- **Language Detection**: Mixed-language incidents may misdetect primary language
+  - **Accuracy**: >95% for single-language text
+  - **Issue**: Detection relies on first 200 characters
+  - **Workaround**: Manual language selection available
+ 
+- **Classification Consistency**: Same incident may get slightly different results on repeated runs
+  - **Cause**: LLM temperature setting (0.1) allows some variability
+  - **Impact**: Usually consistent category, minor wording differences
+  - **Mitigation**: Set temperature to 0 for deterministic results (reduces reasoning quality)
+
+
+  
+
 
 ---
 
